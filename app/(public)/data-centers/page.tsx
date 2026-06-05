@@ -3,7 +3,8 @@ import { Section, SectionHeading } from "@/components/marketing/section";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { Card } from "@/components/ui/card";
 import { getLocations } from "@/lib/catalog";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Data Centers & Server Locations",
@@ -20,6 +21,7 @@ export default async function DataCentersPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Data Centers", path: "/data-centers" }])} />
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">

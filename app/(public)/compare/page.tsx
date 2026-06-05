@@ -5,7 +5,8 @@ import { Section, SectionHeading } from "@/components/marketing/section";
 import { ComparisonTable } from "@/components/pricing/comparison-table";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { Button } from "@/components/ui/button";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Compare Plans",
@@ -24,6 +25,7 @@ export default async function ComparePage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Compare Plans", path: "/compare" }])} />
       <section className="border-b py-16 text-center">
         <div className="container">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">Compare plans</h1>

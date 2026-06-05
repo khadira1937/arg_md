@@ -4,7 +4,8 @@ import { Section, SectionHeading } from "@/components/marketing/section";
 import { DomainSearch } from "@/components/marketing/domain-search";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { FaqSection } from "@/components/marketing/faq-section";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Domain Registration & Search",
@@ -15,6 +16,7 @@ export const metadata: Metadata = pageMetadata({
 export default function DomainsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Domains", path: "/domains" }])} />
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">

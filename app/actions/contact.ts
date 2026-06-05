@@ -27,6 +27,21 @@ export async function contactAction(_prev: ContactState, formData: FormData): Pr
   return { success: "Thanks! We've received your message and will reply by email soon." };
 }
 
+export async function reportAbuseAction(_prev: ContactState, formData: FormData): Promise<ContactState> {
+  if (!rateLimit(`abuse:${await ip()}`, 5, 60_000).success) return { error: "Too many reports. Please try again shortly." };
+
+  const parsed = contactSchema.safeParse({
+    name: formData.get("name") || "Anonymous reporter",
+    email: formData.get("email"),
+    subject: `Abuse report: ${formData.get("subject") || "unspecified"}`,
+    message: formData.get("message"),
+  });
+  if (!parsed.success) return { error: parsed.error.errors[0]?.message ?? "Please complete the form." };
+
+  await sendEmail({ to: brand.email.abuse, template: { type: "ticket_created", name: parsed.data.name, ticketNumber: "ABUSE", subject: `${parsed.data.subject} — from ${parsed.data.email}` } });
+  return { success: "Thank you. Our trust & safety team will investigate this report promptly." };
+}
+
 export async function inquiryAction(_prev: ContactState, formData: FormData): Promise<ContactState> {
   if (!rateLimit(`inquiry:${await ip()}`, 5, 60_000).success) return { error: "Too many requests. Please try again shortly." };
 

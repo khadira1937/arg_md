@@ -2,7 +2,7 @@ import { requireStaff } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PageHeader } from "@/components/dashboard/ui";
+import { PageHeader, TableEmpty } from "@/components/dashboard/ui";
 import { RoleSelect, BlockToggle } from "@/components/admin/controls";
 
 export default async function AdminUsersPage() {
@@ -32,6 +32,7 @@ export default async function AdminUsersPage() {
                 <td className="p-4"><BlockToggle userId={u.id} blocked={u.isBlocked} /></td>
               </tr>
             ))}
+            {users.length === 0 && <TableEmpty colSpan={6} label="No users yet." />}
           </tbody>
         </table>
       </Card>

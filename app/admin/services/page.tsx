@@ -1,7 +1,7 @@
 import { requireStaff } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { Card } from "@/components/ui/card";
-import { PageHeader, StatusBadge } from "@/components/dashboard/ui";
+import { PageHeader, StatusBadge, TableEmpty } from "@/components/dashboard/ui";
 import { ServiceOps } from "@/components/admin/controls";
 
 export default async function AdminServicesPage() {
@@ -29,6 +29,7 @@ export default async function AdminServicesPage() {
                 <td className="p-4"><ServiceOps serviceId={s.id} status={s.status} /></td>
               </tr>
             ))}
+            {services.length === 0 && <TableEmpty colSpan={5} label="No services have been provisioned yet." />}
           </tbody>
         </table>
       </Card>

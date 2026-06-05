@@ -3,7 +3,7 @@ import { requireStaff } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatMoney } from "@/lib/pricing";
 import { Card } from "@/components/ui/card";
-import { PageHeader, StatusBadge } from "@/components/dashboard/ui";
+import { PageHeader, StatusBadge, TableEmpty } from "@/components/dashboard/ui";
 
 export default async function AdminOrdersPage() {
   await requireStaff();
@@ -32,6 +32,7 @@ export default async function AdminOrdersPage() {
                 <td className="p-4 text-muted-foreground">{o.createdAt.toLocaleDateString()}</td>
               </tr>
             ))}
+            {orders.length === 0 && <TableEmpty colSpan={6} label="No orders yet." />}
           </tbody>
         </table>
       </Card>

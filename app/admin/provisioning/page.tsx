@@ -1,7 +1,7 @@
 import { requireStaff } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { Card } from "@/components/ui/card";
-import { PageHeader, StatusBadge } from "@/components/dashboard/ui";
+import { PageHeader, StatusBadge, TableEmpty } from "@/components/dashboard/ui";
 import { RetryButton } from "@/components/admin/controls";
 
 export default async function AdminProvisioningPage() {
@@ -31,6 +31,7 @@ export default async function AdminProvisioningPage() {
                 <td className="p-4">{(j.status === "FAILED" || j.status === "RETRYING") && <RetryButton jobId={j.id} />}</td>
               </tr>
             ))}
+            {jobs.length === 0 && <TableEmpty colSpan={6} label="No provisioning jobs yet." />}
           </tbody>
         </table>
       </Card>

@@ -2,7 +2,7 @@ import { requireStaff } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatMoney, CYCLE_LABEL } from "@/lib/pricing";
 import { Card } from "@/components/ui/card";
-import { PageHeader, StatusBadge } from "@/components/dashboard/ui";
+import { PageHeader, StatusBadge, TableEmpty } from "@/components/dashboard/ui";
 
 export default async function AdminSubscriptionsPage() {
   await requireStaff();
@@ -29,6 +29,7 @@ export default async function AdminSubscriptionsPage() {
                 <td className="p-4"><StatusBadge status={s.status} /></td>
               </tr>
             ))}
+            {subs.length === 0 && <TableEmpty colSpan={5} label="No subscriptions yet." />}
           </tbody>
         </table>
       </Card>

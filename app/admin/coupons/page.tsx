@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db";
 import { formatMoney } from "@/lib/pricing";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PageHeader } from "@/components/dashboard/ui";
+import { PageHeader, TableEmpty } from "@/components/dashboard/ui";
 import { NewCouponForm, CouponToggle } from "@/components/admin/controls";
 
 export default async function AdminCouponsPage() {
@@ -32,6 +32,7 @@ export default async function AdminCouponsPage() {
                 <td className="p-4"><CouponToggle couponId={c.id} active={c.isActive} /></td>
               </tr>
             ))}
+            {coupons.length === 0 && <TableEmpty colSpan={5} label="No coupons yet — create one above." />}
           </tbody>
         </table>
       </Card>

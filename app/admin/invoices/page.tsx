@@ -2,7 +2,7 @@ import { requireStaff } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatMoney } from "@/lib/pricing";
 import { Card } from "@/components/ui/card";
-import { PageHeader, StatusBadge } from "@/components/dashboard/ui";
+import { PageHeader, StatusBadge, TableEmpty } from "@/components/dashboard/ui";
 
 export default async function AdminInvoicesPage() {
   await requireStaff();
@@ -29,6 +29,7 @@ export default async function AdminInvoicesPage() {
                 <td className="p-4 text-muted-foreground">{(inv.paidAt ?? inv.createdAt).toLocaleDateString()}</td>
               </tr>
             ))}
+            {invoices.length === 0 && <TableEmpty colSpan={5} label="No invoices yet." />}
           </tbody>
         </table>
       </Card>

@@ -161,8 +161,9 @@ export const footerNav = {
     { title: "About", href: "/about" },
     { title: "Data Centers", href: "/data-centers" },
     { title: "Blog", href: "/blog" },
+    { title: "Affiliate Program", href: "/affiliate" },
+    { title: "System Status", href: "/status" },
     { title: "Contact", href: "/contact" },
-    { title: "Support", href: "/support" },
   ],
   Legal: [
     { title: "Terms of Service", href: "/terms" },
@@ -170,5 +171,6 @@ export const footerNav = {
     { title: "Refund Policy", href: "/refund-policy" },
     { title: "Acceptable Use", href: "/acceptable-use-policy" },
     { title: "SLA", href: "/sla" },
+    { title: "Report Abuse", href: "/abuse" },
   ],
 } as const;

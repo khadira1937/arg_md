@@ -61,6 +61,15 @@ const STATUS_STYLES: Record<string, string> = {
   VOID: "bg-muted text-muted-foreground",
 };
 
+/** Empty-row fallback for admin tables so they never render as a blank box. */
+export function TableEmpty({ colSpan, label }: { colSpan: number; label: string }) {
+  return (
+    <tr>
+      <td colSpan={colSpan} className="p-10 text-center text-sm text-muted-foreground">{label}</td>
+    </tr>
+  );
+}
+
 export function StatusBadge({ status }: { status: string }) {
   return (
     <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize", STATUS_STYLES[status] ?? "bg-muted text-muted-foreground")}>

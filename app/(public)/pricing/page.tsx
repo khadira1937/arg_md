@@ -6,7 +6,8 @@ import { ProductCard } from "@/components/marketing/product-card";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { Button } from "@/components/ui/button";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Pricing — Plans for every workload",
@@ -26,6 +27,7 @@ export default async function PricingPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-16 text-center sm:py-20">
