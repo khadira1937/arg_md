@@ -17,8 +17,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "prisma migrate reset --force",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
-    "stripe:sync": "tsx scripts/stripe-sync.ts",
-    "worker:tick": "tsx scripts/worker-tick.ts"
+    "stripe:sync": "NODE_OPTIONS=--conditions=react-server tsx scripts/stripe-sync.ts",
+    "worker:tick": "NODE_OPTIONS=--conditions=react-server tsx scripts/worker-tick.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -52,6 +52,7 @@
     "nodemailer": "^6.9.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "server-only": "^0.0.1",
     "stripe": "^17.5.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
