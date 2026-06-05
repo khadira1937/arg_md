@@ -2,17 +2,15 @@ import Link from "next/link";
 import { LogOut } from "lucide-react";
 import { Logo } from "@/components/marketing/logo";
 import { Button } from "@/components/ui/button";
-import { Sidebar, type SidebarLink } from "./sidebar";
+import { Sidebar, type SidebarVariant } from "./sidebar";
 import { logoutAction } from "@/app/actions/auth";
 
 export function DashboardShell({
-  links,
-  sidebarTitle,
+  variant,
   user,
   children,
 }: {
-  links: SidebarLink[];
-  sidebarTitle: string;
+  variant: SidebarVariant;
   user: { name?: string | null; email: string; role: string };
   children: React.ReactNode;
 }) {
@@ -43,7 +41,7 @@ export function DashboardShell({
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6 sm:px-6">
         <aside className="hidden w-56 shrink-0 lg:block">
           <div className="sticky top-24 space-y-6">
-            <Sidebar links={links} title={sidebarTitle} />
+            <Sidebar variant={variant} />
             <Link href="/" className="block px-3 text-xs text-muted-foreground hover:text-foreground">← Back to website</Link>
           </div>
         </aside>
