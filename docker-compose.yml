@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: aethon-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aethon
+      POSTGRES_PASSWORD: aethon
+      POSTGRES_DB: aethon
+    ports:
+      - "5432:5432"
+    volumes:
+      - aethon-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aethon -d aethon"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Optional local mail catcher for transactional email testing.
+  # UI at http://localhost:8025 , SMTP on 1025 (matches .env defaults).
+  mail:
+    image: axllent/mailpit:latest
+    container_name: aethon-mail
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  aethon-db-data:
