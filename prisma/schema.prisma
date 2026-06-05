@@ -1,0 +1,851 @@
+// Aethon Cloud — Prisma schema
+// Money is stored as integer minor units (cents). See docs/03-database-design.md.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------------------------------
+// Enums
+// ----------------------------------------------------------------------------
+
+enum Role {
+  CUSTOMER
+  SUPPORT
+  ADMIN
+}
+
+enum BillingCycle {
+  MONTHLY
+  QUARTERLY
+  SEMIANNUAL
+  ANNUAL
+  BIENNIAL
+}
+
+enum ProductType {
+  SHARED
+  WORDPRESS
+  WOOCOMMERCE
+  CLOUD
+  VPS
+  DEDICATED
+  STORAGE
+  BACKUP
+  GPU
+  EMAIL
+  DOMAIN
+  SSL
+  SECURITY
+  MIGRATION
+  AGENCY
+  MANAGED_CLOUD
+  DEVOPS
+  KUBERNETES
+  BUILDER
+  ADDON
+}
+
+enum AddonBillingType {
+  ONE_TIME
+  RECURRING
+}
+
+enum StockStatus {
+  IN_STOCK
+  LOW_STOCK
+  OUT_OF_STOCK
+  PREORDER
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  ACTIVE
+  CANCELLED
+  REFUNDED
+  FAILED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  VOID
+  UNCOLLECTIBLE
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  TRIALING
+  PAST_DUE
+  CANCELED
+  INCOMPLETE
+  UNPAID
+  PAUSED
+}
+
+enum ServiceStatus {
+  PENDING
+  PROVISIONING
+  ACTIVE
+  SUSPENDED
+  CANCELLED
+  FAILED
+  EXPIRED
+}
+
+enum ProvisioningType {
+  PROVISION
+  SUSPEND
+  RESUME
+  CANCEL
+  UPGRADE
+}
+
+enum ProvisioningStatus {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED
+  RETRYING
+}
+
+enum TicketStatus {
+  OPEN
+  PENDING
+  ANSWERED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum CouponType {
+  PERCENT
+  FIXED
+}
+
+enum DiscountScope {
+  ALL
+  CATEGORY
+  PRODUCT
+  PLAN
+}
+
+enum AnnouncementLevel {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+enum AnnouncementAudience {
+  ALL
+  CUSTOMERS
+  ADMINS
+}
+
+// ----------------------------------------------------------------------------
+// Identity / auth
+// ----------------------------------------------------------------------------
+
+model User {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  name             String?
+  hashedPassword   String?
+  role             Role      @default(CUSTOMER)
+  emailVerified    DateTime?
+  image            String?
+  twoFactorEnabled Boolean   @default(false)
+  stripeCustomerId String?   @unique
+  isBlocked        Boolean   @default(false)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  profile             UserProfile?
+  accounts            Account[]
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+  carts               Cart[]
+  orders              Order[]
+  invoices            Invoice[]
+  payments            Payment[]
+  subscriptions       Subscription[]
+  services            ServiceInstance[]
+  tickets             SupportTicket[]
+  assignedTickets     SupportTicket[]      @relation("AssignedAgent")
+  ticketMessages      TicketMessage[]
+  couponRedemptions   CouponRedemption[]
+  adminLogs           AdminLog[]
+  blogPosts           BlogPost[]
+
+  @@index([role])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expires   DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model UserProfile {
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  company    String?
+  phone      String?
+  address    String?
+  city       String?
+  state      String?
+  country    String?
+  postalCode String?
+  taxId      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  entityType String?
+  entityId   String?
+  metadata   Json?
+  ip         String?
+  createdAt  DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+// ----------------------------------------------------------------------------
+// Catalog
+// ----------------------------------------------------------------------------
+
+model ProductCategory {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  icon        String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  products Product[]
+}
+
+model Product {
+  id               String      @id @default(cuid())
+  name             String
+  slug             String      @unique
+  shortDescription String?
+  description      String?
+  categoryId       String
+  type             ProductType
+  providerKey      String      @default("mock")
+  isActive         Boolean     @default(true)
+  inquiryOnly      Boolean     @default(false)
+  featured         Boolean     @default(false)
+  sortOrder        Int         @default(0)
+  seoTitle         String?
+  seoDescription   String?
+  heroHeadline     String?
+  heroSubheadline  String?
+  specs            Json?
+  faq              Json?
+  stripeProductId  String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  category ProductCategory   @relation(fields: [categoryId], references: [id])
+  plans    Plan[]
+  orders   OrderItem[]
+  services ServiceInstance[]
+
+  @@index([categoryId])
+  @@index([type])
+}
+
+model Plan {
+  id           String      @id @default(cuid())
+  productId    String
+  name         String
+  slug         String
+  description  String?
+  supportLevel String?
+  isActive     Boolean     @default(true)
+  popular      Boolean     @default(false)
+  recommended  Boolean     @default(false)
+  onSale       Boolean     @default(false)
+  stockStatus  StockStatus @default(IN_STOCK)
+  sortOrder    Int         @default(0)
+  specs        Json?
+  configurable Json?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  product        Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  prices         PlanPrice[]
+  features       PlanFeature[]
+  planAddons     PlanAddon[]
+  locationPrices PlanLocationPrice[]
+  cartItems      CartItem[]
+  orderItems     OrderItem[]
+  subscriptions  Subscription[]
+  services       ServiceInstance[]
+
+  @@unique([productId, slug])
+  @@index([productId])
+}
+
+model PlanFeature {
+  id        String  @id @default(cuid())
+  planId    String
+  label     String
+  value     String?
+  included  Boolean @default(true)
+  highlight Boolean @default(false)
+  sortOrder Int     @default(0)
+
+  plan Plan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@index([planId])
+}
+
+model PlanPrice {
+  id                 String       @id @default(cuid())
+  planId             String
+  billingCycle       BillingCycle
+  currency           String       @default("USD")
+  amount             Int // promo/effective price for the cycle, in cents
+  renewalAmount      Int // post-term renewal price, in cents
+  setupFee           Int          @default(0)
+  discountPercentage Int          @default(0)
+  isActive           Boolean      @default(true)
+  stripePriceId      String?
+  stripeProductId    String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  plan Plan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@unique([planId, billingCycle, currency])
+  @@index([planId])
+}
+
+model ServerLocation {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  city        String
+  country     String
+  countryCode String
+  region      String
+  flagEmoji   String?
+  latitude    Float?
+  longitude   Float?
+  isActive    Boolean @default(true)
+  sortOrder   Int     @default(0)
+
+  planPrices PlanLocationPrice[]
+  cartItems  CartItem[]
+  services   ServiceInstance[]
+}
+
+model PlanLocationPrice {
+  id            String  @id @default(cuid())
+  planId        String
+  locationId    String
+  priceModifier Int     @default(0) // +/- cents applied to base price
+  isAvailable   Boolean @default(true)
+
+  plan     Plan           @relation(fields: [planId], references: [id], onDelete: Cascade)
+  location ServerLocation @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@unique([planId, locationId])
+}
+
+model Addon {
+  id              String           @id @default(cuid())
+  name            String
+  slug            String           @unique
+  description     String?
+  billingType     AddonBillingType @default(RECURRING)
+  billingCycle    BillingCycle?
+  currency        String           @default("USD")
+  amount          Int
+  renewalAmount   Int?
+  isActive        Boolean          @default(true)
+  stripePriceId   String?
+  stripeProductId String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  planAddons PlanAddon[]
+  orderItems OrderItem[]
+}
+
+model PlanAddon {
+  id              String  @id @default(cuid())
+  planId          String
+  addonId         String
+  required        Boolean @default(false)
+  defaultSelected Boolean @default(false)
+
+  plan  Plan  @relation(fields: [planId], references: [id], onDelete: Cascade)
+  addon Addon @relation(fields: [addonId], references: [id], onDelete: Cascade)
+
+  @@unique([planId, addonId])
+}
+
+// ----------------------------------------------------------------------------
+// Commerce
+// ----------------------------------------------------------------------------
+
+model Cart {
+  id           String   @id @default(cuid())
+  userId       String?
+  sessionToken String?  @unique
+  currency     String   @default("USD")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user  User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@index([userId])
+}
+
+model CartItem {
+  id              String       @id @default(cuid())
+  cartId          String
+  planId          String
+  billingCycle    BillingCycle
+  locationId      String?
+  quantity        Int          @default(1)
+  unitAmount      Int // snapshot of base unit price in cents
+  configSnapshot  Json?
+  selectedAddons  Json? // array of addon ids
+  couponCode      String?
+  createdAt       DateTime     @default(now())
+
+  cart     Cart            @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  plan     Plan            @relation(fields: [planId], references: [id])
+  location ServerLocation? @relation(fields: [locationId], references: [id])
+
+  @@index([cartId])
+}
+
+model Coupon {
+  id             String        @id @default(cuid())
+  code           String        @unique
+  description    String?
+  type           CouponType
+  value          Int // percent (0-100) or fixed cents
+  scope          DiscountScope @default(ALL)
+  targetId       String?
+  maxRedemptions Int?
+  timesRedeemed  Int           @default(0)
+  perUserLimit   Int           @default(1)
+  minSubtotal    Int?
+  startsAt       DateTime?
+  endsAt         DateTime?
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  redemptions CouponRedemption[]
+}
+
+model CouponRedemption {
+  id               String   @id @default(cuid())
+  couponId         String
+  userId           String
+  orderId          String?
+  amountDiscounted Int
+  createdAt        DateTime @default(now())
+
+  coupon Coupon @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([couponId])
+  @@index([userId])
+}
+
+model Order {
+  id                      String      @id @default(cuid())
+  number                  String      @unique
+  userId                  String
+  status                  OrderStatus @default(PENDING)
+  currency                String      @default("USD")
+  subtotal                Int         @default(0)
+  discountTotal           Int         @default(0)
+  setupTotal              Int         @default(0)
+  taxTotal                Int         @default(0)
+  total                   Int         @default(0)
+  couponCode              String?
+  stripeCheckoutSessionId String?     @unique
+  notes                   String?
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items         OrderItem[]
+  invoices      Invoice[]
+  payments      Payment[]
+  subscriptions Subscription[]
+  services      ServiceInstance[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model OrderItem {
+  id             String        @id @default(cuid())
+  orderId        String
+  productId      String?
+  planId         String?
+  addonId        String?
+  description    String
+  billingCycle   BillingCycle?
+  locationId     String?
+  quantity       Int           @default(1)
+  unitAmount     Int
+  setupFee       Int           @default(0)
+  lineTotal      Int
+  configSnapshot Json?
+
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id])
+  plan    Plan?    @relation(fields: [planId], references: [id])
+  addon   Addon?   @relation(fields: [addonId], references: [id])
+
+  @@index([orderId])
+}
+
+model Invoice {
+  id              String        @id @default(cuid())
+  number          String        @unique
+  userId          String
+  orderId         String?
+  subscriptionId  String?
+  status          InvoiceStatus @default(OPEN)
+  currency        String        @default("USD")
+  subtotal        Int           @default(0)
+  discountTotal   Int           @default(0)
+  taxTotal        Int           @default(0)
+  total           Int           @default(0)
+  amountPaid      Int           @default(0)
+  dueAt           DateTime?
+  paidAt          DateTime?
+  stripeInvoiceId String?       @unique
+  hostedInvoiceUrl String?
+  pdfUrl          String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order        Order?        @relation(fields: [orderId], references: [id])
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+  items        InvoiceItem[]
+  payments     Payment[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model InvoiceItem {
+  id          String @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Int    @default(1)
+  unitAmount  Int
+  lineTotal   Int
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  userId                String
+  invoiceId             String?
+  orderId               String?
+  status                PaymentStatus @default(PENDING)
+  currency              String        @default("USD")
+  amount                Int
+  method                String        @default("card")
+  stripePaymentIntentId String?
+  stripeChargeId        String?
+  failureReason         String?
+  createdAt             DateTime      @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoice Invoice? @relation(fields: [invoiceId], references: [id])
+  order   Order?   @relation(fields: [orderId], references: [id])
+
+  @@index([userId])
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String
+  orderId              String?
+  planId               String
+  status               SubscriptionStatus @default(INCOMPLETE)
+  billingCycle         BillingCycle
+  currency             String             @default("USD")
+  amount               Int
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  canceledAt           DateTime?
+  stripeSubscriptionId String?            @unique
+  stripePriceId        String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  user     User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order    Order?            @relation(fields: [orderId], references: [id])
+  plan     Plan              @relation(fields: [planId], references: [id])
+  invoices Invoice[]
+  services ServiceInstance[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+// ----------------------------------------------------------------------------
+// Provisioning / services
+// ----------------------------------------------------------------------------
+
+model ServiceInstance {
+  id                   String        @id @default(cuid())
+  userId               String
+  orderId              String?
+  subscriptionId       String?
+  productId            String
+  planId               String
+  locationId           String?
+  label                String
+  status               ServiceStatus @default(PENDING)
+  providerKey          String        @default("mock")
+  providerRef          String?
+  primaryIp            String?
+  hostname             String?
+  credentialsEncrypted String?
+  specsSnapshot        Json?
+  addonsSnapshot       Json?
+  renewsAt             DateTime?
+  suspendedAt          DateTime?
+  cancelledAt          DateTime?
+  expiresAt            DateTime?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order        Order?            @relation(fields: [orderId], references: [id])
+  subscription Subscription?     @relation(fields: [subscriptionId], references: [id])
+  product      Product           @relation(fields: [productId], references: [id])
+  plan         Plan              @relation(fields: [planId], references: [id])
+  location     ServerLocation?   @relation(fields: [locationId], references: [id])
+  jobs         ProvisioningJob[]
+  tickets      SupportTicket[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model ProvisioningJob {
+  id                String             @id @default(cuid())
+  serviceInstanceId String
+  type              ProvisioningType   @default(PROVISION)
+  status            ProvisioningStatus @default(QUEUED)
+  attempts          Int                @default(0)
+  maxAttempts       Int                @default(3)
+  lastError         String?
+  payload           Json?
+  result            Json?
+  scheduledAt       DateTime           @default(now())
+  startedAt         DateTime?
+  finishedAt        DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  serviceInstance ServiceInstance @relation(fields: [serviceInstanceId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([serviceInstanceId])
+}
+
+// ----------------------------------------------------------------------------
+// Support / content
+// ----------------------------------------------------------------------------
+
+model SupportTicket {
+  id                String         @id @default(cuid())
+  number            String         @unique
+  userId            String
+  serviceInstanceId String?
+  subject           String
+  status            TicketStatus   @default(OPEN)
+  priority          TicketPriority @default(NORMAL)
+  category          String         @default("general")
+  assignedToId      String?
+  lastReplyAt       DateTime       @default(now())
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignedTo      User?            @relation("AssignedAgent", fields: [assignedToId], references: [id])
+  serviceInstance ServiceInstance? @relation(fields: [serviceInstanceId], references: [id])
+  messages        TicketMessage[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model TicketMessage {
+  id          String   @id @default(cuid())
+  ticketId    String
+  authorId    String
+  body        String
+  isStaff     Boolean  @default(false)
+  attachments Json?
+  createdAt   DateTime @default(now())
+
+  ticket SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  author User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([ticketId])
+}
+
+model KnowledgeBaseCategory {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String?
+  icon        String?
+  sortOrder   Int     @default(0)
+
+  articles KnowledgeBaseArticle[]
+}
+
+model KnowledgeBaseArticle {
+  id             String   @id @default(cuid())
+  categoryId     String
+  title          String
+  slug           String   @unique
+  excerpt        String?
+  body           String
+  tags           Json?
+  published      Boolean  @default(true)
+  views          Int      @default(0)
+  seoTitle       String?
+  seoDescription String?
+  publishedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  category KnowledgeBaseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+}
+
+model BlogPost {
+  id             String    @id @default(cuid())
+  title          String
+  slug           String    @unique
+  excerpt        String?
+  body           String
+  coverImage     String?
+  authorId       String?
+  tags           Json?
+  published      Boolean   @default(false)
+  views          Int       @default(0)
+  seoTitle       String?
+  seoDescription String?
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  author User? @relation(fields: [authorId], references: [id], onDelete: SetNull)
+}
+
+model Announcement {
+  id        String               @id @default(cuid())
+  title     String
+  body      String
+  level     AnnouncementLevel    @default(INFO)
+  audience  AnnouncementAudience @default(ALL)
+  startsAt  DateTime             @default(now())
+  endsAt    DateTime?
+  isActive  Boolean              @default(true)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+}
