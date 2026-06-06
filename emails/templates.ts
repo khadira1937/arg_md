@@ -10,6 +10,7 @@ export type EmailTemplate =
   | { type: "invoice_paid"; name: string; invoiceNumber: string; amount: string }
   | { type: "service_provisioning"; name: string; serviceLabel: string }
   | { type: "service_activated"; name: string; serviceLabel: string; url: string }
+  | { type: "service_delivered"; name: string; serviceLabel: string; manageUrl: string; providerName?: string; instructions?: string }
   | { type: "service_suspended"; name: string; serviceLabel: string; reason?: string }
   | { type: "renewal_reminder"; name: string; serviceLabel: string; renewsAt: string }
   | { type: "ticket_created"; name: string; ticketNumber: string; subject: string }
@@ -112,6 +113,19 @@ export function renderEmail(t: EmailTemplate): Rendered {
             button("Open service", t.url),
         ),
         text: `${t.serviceLabel} is active: ${t.url}`,
+      };
+    case "service_delivered":
+      return {
+        subject: `${t.serviceLabel} is ready 🎉`,
+        html: layout(
+          "Your service is ready",
+          p(`Hi ${t.name}, your service <b>${t.serviceLabel}</b> has been set up${t.providerName ? ` on <b>${t.providerName}</b>` : ""} and is ready to use.`) +
+            button("Manage your service", t.manageUrl) +
+            (t.instructions ? p(`<b>Getting started:</b><br/>${t.instructions.replace(/\n/g, "<br/>")}`) : "") +
+            p(`For your security we never send passwords by email. Use the button above to access your management portal, where you can sign in or set your credentials.`) +
+            p(`You can always find this link in your <a href="${absoluteUrl("/dashboard/services")}">dashboard</a>.`),
+        ),
+        text: `${t.serviceLabel} is ready. Manage it here: ${t.manageUrl}`,
       };
     case "service_suspended":
       return {

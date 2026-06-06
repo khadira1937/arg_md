@@ -10,6 +10,7 @@ import { syncCatalogToStripe } from "@/lib/stripe/sync";
 import { enqueueJob, processPendingJobs } from "@/lib/provisioning";
 import { sendEmail } from "@/lib/email";
 import { shortId } from "@/lib/utils";
+import { z } from "zod";
 
 export type AdminResult = { ok: boolean; error?: string; message?: string };
 
@@ -100,6 +101,93 @@ export async function retryJobAction(jobId: string): Promise<AdminResult> {
   await audit({ actorId: g.id, action: "job.retry", entityType: "ProvisioningJob", entityId: jobId });
   revalidatePath("/admin/provisioning");
   return { ok: true };
+}
+
+// ---- Manual fulfillment / delivery ----
+const deliverySchema = z.object({
+  externalManagementUrl: z.string().url("Enter a valid management URL (https://…)"),
+  externalProviderName: z.string().max(120).optional().or(z.literal("")),
+  externalServiceId: z.string().max(160).optional().or(z.literal("")),
+  externalUsername: z.string().max(160).optional().or(z.literal("")),
+  customerInstructions: z.string().max(4000).optional().or(z.literal("")),
+  internalAdminNotes: z.string().max(4000).optional().or(z.literal("")),
+});
+
+/** Mark a service as delivered: store the external management link, activate it,
+ *  and email the customer the link (never a password). */
+export async function deliverServiceAction(formData: FormData): Promise<AdminResult> {
+  const g = await guard();
+  if ("error" in g) return { ok: false, error: g.error };
+  const me = await getCurrentUser();
+
+  const serviceId = String(formData.get("serviceId") || "");
+  const parsed = deliverySchema.safeParse({
+    externalManagementUrl: formData.get("externalManagementUrl"),
+    externalProviderName: formData.get("externalProviderName") ?? "",
+    externalServiceId: formData.get("externalServiceId") ?? "",
+    externalUsername: formData.get("externalUsername") ?? "",
+    customerInstructions: formData.get("customerInstructions") ?? "",
+    internalAdminNotes: formData.get("internalAdminNotes") ?? "",
+  });
+  if (!parsed.success) return { ok: false, error: parsed.error.errors[0]?.message ?? "Invalid input" };
+
+  const service = await prisma.serviceInstance.findUnique({ where: { id: serviceId }, include: { user: true } });
+  if (!service) return { ok: false, error: "Service not found" };
+
+  await prisma.serviceInstance.update({
+    where: { id: serviceId },
+    data: {
+      status: "ACTIVE",
+      externalManagementUrl: parsed.data.externalManagementUrl,
+      externalProviderName: parsed.data.externalProviderName || null,
+      externalServiceId: parsed.data.externalServiceId || null,
+      externalUsername: parsed.data.externalUsername || null,
+      customerInstructions: parsed.data.customerInstructions || null,
+      internalAdminNotes: parsed.data.internalAdminNotes || null,
+      deliveredAt: new Date(),
+      deliveredBy: me?.email ?? "admin",
+    },
+  });
+
+  await sendEmail({
+    to: service.user.email,
+    template: {
+      type: "service_delivered",
+      name: service.user.name ?? "there",
+      serviceLabel: service.label,
+      manageUrl: parsed.data.externalManagementUrl,
+      providerName: parsed.data.externalProviderName || undefined,
+      instructions: parsed.data.customerInstructions || undefined,
+    },
+  });
+
+  await audit({ actorId: g.id, action: "service.delivered", entityType: "ServiceInstance", entityId: serviceId, metadata: { provider: parsed.data.externalProviderName } });
+  revalidatePath(`/admin/services/${serviceId}`);
+  revalidatePath("/admin/services");
+  return { ok: true, message: "Service delivered and the customer has been notified." };
+}
+
+/** Re-send the delivery email for an already-delivered service. */
+export async function resendDeliveryEmailAction(serviceId: string): Promise<AdminResult> {
+  const g = await guard();
+  if ("error" in g) return { ok: false, error: g.error };
+  const service = await prisma.serviceInstance.findUnique({ where: { id: serviceId }, include: { user: true } });
+  if (!service) return { ok: false, error: "Service not found" };
+  if (!service.externalManagementUrl) return { ok: false, error: "Deliver the service first — no management link to send yet." };
+
+  await sendEmail({
+    to: service.user.email,
+    template: {
+      type: "service_delivered",
+      name: service.user.name ?? "there",
+      serviceLabel: service.label,
+      manageUrl: service.externalManagementUrl,
+      providerName: service.externalProviderName ?? undefined,
+      instructions: service.customerInstructions ?? undefined,
+    },
+  });
+  await audit({ actorId: g.id, action: "service.delivery_resent", entityType: "ServiceInstance", entityId: serviceId });
+  return { ok: true, message: "Delivery email re-sent to the customer." };
 }
 
 // ---- Orders ----

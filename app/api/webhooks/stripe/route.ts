@@ -69,6 +69,13 @@ export async function POST(req: Request) {
         break;
     }
   } catch (err) {
+    // A unique-constraint violation means a concurrent/duplicate delivery already
+    // wrote the rows. Treat it as idempotent success so Stripe stops retrying.
+    const code = (err as { code?: string })?.code;
+    if (code === "P2002") {
+      console.log(`[stripe] duplicate delivery for ${event.type} (${event.id}) — already processed, returning 200.`);
+      return NextResponse.json({ received: true, duplicate: true });
+    }
     console.error(`[stripe] handler error for ${event.type}`, err);
     return NextResponse.json({ error: "Handler error" }, { status: 500 });
   }

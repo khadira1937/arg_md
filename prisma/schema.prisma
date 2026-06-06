@@ -101,6 +101,7 @@ enum SubscriptionStatus {
 
 enum ServiceStatus {
   PENDING
+  AWAITING_SETUP
   PROVISIONING
   ACTIVE
   SUSPENDED
@@ -705,6 +706,18 @@ model ServiceInstance {
   suspendedAt          DateTime?
   cancelledAt          DateTime?
   expiresAt            DateTime?
+
+  // Manual fulfillment (v1): admin prepares the service externally and delivers a
+  // management link to the customer. Passwords are never stored or emailed here.
+  externalManagementUrl String?
+  externalProviderName  String?
+  externalServiceId     String?
+  externalUsername      String?
+  customerInstructions  String?
+  internalAdminNotes    String?
+  deliveredAt           DateTime?
+  deliveredBy           String?
+
   createdAt            DateTime      @default(now())
   updatedAt            DateTime      @updatedAt
 

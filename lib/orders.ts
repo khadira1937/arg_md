@@ -151,13 +151,27 @@ export async function fulfillOrder(
     where: { id: orderId },
     include: { items: { include: { plan: true, product: true, addon: true } }, user: true, invoices: true },
   });
-  if (!order) return;
-  if (order.invoices.length > 0 && order.status !== "PENDING") return; // already fulfilled
+  if (!order) {
+    console.warn(`[fulfillOrder] Order ${orderId} not found.`);
+    return;
+  }
+
+  // Fast idempotency path: a duplicate Stripe delivery for an already-processed
+  // order is a no-op so the webhook still returns 200 (Stripe retries on non-2xx).
+  if (order.status !== "PENDING") {
+    console.log(`[fulfillOrder] Order ${order.number} already fulfilled (status=${order.status}), skipping duplicate webhook.`);
+    return;
+  }
 
   const now = new Date();
+  let claimed = false;
 
   await prisma.$transaction(async (tx) => {
-    await tx.order.update({ where: { id: order.id }, data: { status: "PAID" } });
+    // Atomic optimistic lock: only the first delivery flips PENDING -> PROCESSING.
+    // Concurrent/duplicate deliveries see count 0 and skip — no duplicate rows.
+    const claim = await tx.order.updateMany({ where: { id: order.id, status: "PENDING" }, data: { status: "PROCESSING" } });
+    if (claim.count === 0) return;
+    claimed = true;
 
     const invoice = await tx.invoice.create({
       data: {
@@ -207,8 +221,12 @@ export async function fulfillOrder(
       }
     }
 
-    // One subscription + service per plan line (non-addon).
-    for (const item of order.items.filter((i) => i.planId && !i.addonId)) {
+    // One subscription + service per plan line (non-addon). Only the first
+    // subscription carries the Stripe subscription id (one Stripe subscription per
+    // checkout session) to respect the unique constraint on multi-item orders.
+    const planLines = order.items.filter((i) => i.planId && !i.addonId);
+    let lineIndex = 0;
+    for (const item of planLines) {
       const cycle = item.billingCycle ?? "MONTHLY";
       const end = periodEnd(now, cycle);
       const config = (item.configSnapshot as Record<string, unknown> | null) ?? {};
@@ -224,11 +242,13 @@ export async function fulfillOrder(
           amount: item.unitAmount,
           currentPeriodStart: now,
           currentPeriodEnd: end,
-          stripeSubscriptionId: opts.stripeSubscriptionId,
+          stripeSubscriptionId: lineIndex === 0 ? (opts.stripeSubscriptionId ?? null) : null,
         },
       });
+      lineIndex++;
 
-      const service = await tx.serviceInstance.create({
+      // Manual fulfillment (v1): the service awaits admin setup. No auto-provisioning.
+      await tx.serviceInstance.create({
         data: {
           userId: order.userId,
           orderId: order.id,
@@ -237,23 +257,26 @@ export async function fulfillOrder(
           planId: item.planId!,
           locationId: item.locationId ?? null,
           label: `${item.product?.name ?? "Service"} · ${item.plan?.name ?? ""}`.trim(),
-          status: "PENDING",
+          status: "AWAITING_SETUP",
           providerKey: item.product?.providerKey ?? "mock",
           specsSnapshot: (config.specs as object) ?? undefined,
           addonsSnapshot: (config.addons as object) ?? undefined,
           renewsAt: end,
         },
       });
-
-      await tx.provisioningJob.create({
-        data: { serviceInstanceId: service.id, type: "PROVISION", status: "QUEUED" },
-      });
     }
 
-    // Empty the cart.
+    // Empty the cart and finalize the order.
     const cart = await tx.cart.findFirst({ where: { userId: order.userId } });
     if (cart) await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
+
+    await tx.order.update({ where: { id: order.id }, data: { status: "PAID" } });
   });
+
+  if (!claimed) {
+    console.log(`[fulfillOrder] Order ${order.number} already being fulfilled, skipping duplicate webhook.`);
+    return;
+  }
 
   await audit({ actorId: order.userId, action: "order.fulfilled", entityType: "Order", entityId: order.id, metadata: { total: order.total } });
 
@@ -264,7 +287,7 @@ export async function fulfillOrder(
   await sendEmail({ to: order.user.email, template: { type: "payment_confirmation", name, amount: total, invoiceNumber: "your invoice" } });
   await sendEmail({ to: brand.email.sales, template: { type: "admin_new_order", orderNumber: order.number, customer: order.user.email, total } });
 
-  // Kick off provisioning immediately (local). In production a worker/queue does this.
-  const { processPendingJobs } = await import("@/lib/provisioning");
-  await processPendingJobs();
+  // Manual fulfillment (v1): services are now AWAITING_SETUP. An admin prepares each
+  // service externally and clicks "Mark as delivered", which sends the activation
+  // email with the management link.
 }
