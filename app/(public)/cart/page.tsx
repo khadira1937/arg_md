@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { removeCartItemForm } from "@/app/actions/cart";
+import { TrustBar } from "@/components/marketing/trust-bar";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({ title: "Your cart", path: "/cart", noIndex: true });
@@ -79,6 +80,8 @@ export default async function CartPage() {
           </Card>
         </div>
       </div>
+
+      <TrustBar className="mt-10" />
     </div>
   );
 }

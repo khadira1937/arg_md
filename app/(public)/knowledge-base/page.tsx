@@ -4,7 +4,8 @@ import { BookOpen, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/marketing/section";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({ title: "Knowledge Base", description: "Guides, tutorials and documentation for getting the most out of your services.", path: "/knowledge-base" });
 
@@ -16,6 +17,7 @@ export default async function KnowledgeBasePage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Knowledge Base", path: "/knowledge-base" }])} />
       <section className="border-b py-16 text-center">
         <div className="container">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">Knowledge Base</h1>

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/marketing/section";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({ title: "Blog", description: "Product news, guides and engineering insights from our team.", path: "/blog" });
 
@@ -12,6 +13,7 @@ export default async function BlogPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }])} />
       <section className="border-b py-16 text-center">
         <div className="container">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">The Aethon Blog</h1>

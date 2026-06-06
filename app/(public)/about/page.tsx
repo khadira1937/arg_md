@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Rocket, Globe, ShieldCheck, Heart } from "lucide-react";
 import { Section, SectionHeading } from "@/components/marketing/section";
 import { CtaSection } from "@/components/marketing/cta-section";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 
 export const metadata: Metadata = pageMetadata({ title: "About", description: `Learn about ${brand.name} and our mission.`, path: "/about" });
@@ -17,6 +18,7 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])} />
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">

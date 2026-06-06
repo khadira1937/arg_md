@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Mail, MessageSquare, LifeBuoy } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ContactForm } from "@/components/marketing/contact-form";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 
 export const metadata: Metadata = pageMetadata({ title: "Contact", description: `Get in touch with ${brand.name}.`, path: "/contact" });
@@ -10,6 +11,7 @@ export const metadata: Metadata = pageMetadata({ title: "Contact", description: 
 export default function ContactPage() {
   return (
     <div className="container py-16">
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])} />
       <div className="mx-auto max-w-2xl text-center">
         <h1 className="font-display text-4xl font-bold tracking-tight">Talk to us</h1>
         <p className="mt-4 text-lg text-muted-foreground">Questions about plans, migrations or custom infrastructure? We&apos;d love to help.</p>

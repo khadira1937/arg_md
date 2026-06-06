@@ -4,7 +4,8 @@ import { BookOpen, MessageSquare, LifeBuoy, Activity, ArrowRight } from "lucide-
 import { prisma } from "@/lib/db";
 import { Card } from "@/components/ui/card";
 import { Section, SectionHeading } from "@/components/marketing/section";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 
 export const metadata: Metadata = pageMetadata({ title: "Support", description: `Get help from ${brand.name} — knowledge base, tickets and 24/7 expert support.`, path: "/support" });
@@ -14,6 +15,7 @@ export default async function SupportPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Support", path: "/support" }])} />
       <section className="border-b py-16 text-center" id="monitoring">
         <div className="container">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">How can we help?</h1>

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
+import { TrustBar } from "@/components/marketing/trust-bar";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({ title: "Checkout", path: "/checkout", noIndex: true });
@@ -80,6 +81,8 @@ export default async function CheckoutPage() {
           </Card>
         </div>
       </div>
+
+      <TrustBar className="mt-10" />
     </div>
   );
 }
