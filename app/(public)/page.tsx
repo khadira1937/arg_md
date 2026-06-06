@@ -37,8 +37,10 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-grid" />
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-secondary/20 blur-3xl" />
+        <div className="pointer-events-none absolute -top-32 left-1/4 h-80 w-80 animate-aurora rounded-full bg-primary/20 blur-3xl" />
+        <div className="pointer-events-none absolute -top-20 right-1/4 h-72 w-72 animate-aurora rounded-full bg-accent/20 blur-3xl [animation-delay:-7s]" />
         <div className="container relative py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
@@ -79,17 +81,60 @@ export default async function HomePage() {
             </Reveal>
           </div>
 
-          {/* Stats strip */}
+          {/* Product preview mockup */}
           <Reveal delay={0.25}>
-            <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="mx-auto mt-16 max-w-4xl">
+              <div className="overflow-hidden rounded-2xl border bg-card/80 shadow-premium glass">
+                <div className="flex items-center gap-2 border-b bg-muted/40 px-4 py-3">
+                  <span className="h-3 w-3 rounded-full bg-destructive/60" />
+                  <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+                  <span className="h-3 w-3 rounded-full bg-success/60" />
+                  <span className="ml-3 flex-1 truncate rounded-md bg-background/70 px-3 py-1 text-xs text-muted-foreground">
+                    {brand.domain}/dashboard
+                  </span>
+                </div>
+                <div className="grid gap-4 p-5 sm:grid-cols-3">
+                  {[
+                    { k: "Active services", v: "12", c: "text-primary" },
+                    { k: "Uptime (30d)", v: brand.stats.uptime, c: "text-success" },
+                    { k: "Open tickets", v: "0", c: "text-foreground" },
+                  ].map((m) => (
+                    <div key={m.k} className="rounded-xl border bg-background/60 p-4">
+                      <p className="text-xs text-muted-foreground">{m.k}</p>
+                      <p className={`mt-1 font-display text-2xl font-bold ${m.c}`}>{m.v}</p>
+                    </div>
+                  ))}
+                  <div className="sm:col-span-3">
+                    <div className="space-y-2.5">
+                      {[
+                        { name: "production-web-01", region: "🇺🇸 Ashburn", status: "Active" },
+                        { name: "eu-postgres-db", region: "🇩🇪 Frankfurt", status: "Active" },
+                        { name: "gpu-inference-node", region: "🇸🇬 Singapore", status: "Active" },
+                      ].map((row) => (
+                        <div key={row.name} className="flex items-center justify-between rounded-lg border bg-background/40 px-3 py-2.5 text-sm">
+                          <span className="flex items-center gap-2 font-medium"><span className="h-2 w-2 rounded-full bg-success" />{row.name}</span>
+                          <span className="hidden text-xs text-muted-foreground sm:inline">{row.region}</span>
+                          <span className="rounded-full bg-success/15 px-2 py-0.5 text-xs font-medium text-success">{row.status}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Stats strip */}
+          <Reveal delay={0.3}>
+            <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
               {[
                 { label: "Uptime SLA", value: brand.stats.uptime },
                 { label: "Customers", value: brand.stats.customers },
                 { label: "Global regions", value: brand.stats.dataCenters },
                 { label: "Support", value: brand.stats.support },
               ].map((s) => (
-                <div key={s.label} className="rounded-2xl border bg-card/60 p-5 text-center backdrop-blur">
-                  <p className="font-display text-2xl font-bold sm:text-3xl">{s.value}</p>
+                <div key={s.label} className="rounded-2xl border bg-card/60 p-5 text-center backdrop-blur transition-colors hover:border-primary/40">
+                  <p className="font-display text-2xl font-bold text-gradient sm:text-3xl">{s.value}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
                 </div>
               ))}

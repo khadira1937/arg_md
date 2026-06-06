@@ -24,9 +24,12 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
     : null;
 
   return (
-    <div className="container max-w-2xl py-16">
-      <Card className="p-8 text-center">
-        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-success/15 text-success">
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-brand-glow" />
+      <div className="container relative max-w-2xl py-16">
+      <Card className="relative overflow-hidden p-8 text-center shadow-premium">
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-brand-gradient" />
+        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-success/15 text-success ring-8 ring-success/5">
           <CheckCircle2 className="h-9 w-9" />
         </span>
         <h1 className="mt-6 font-display text-3xl font-bold">Thank you for your order!</h1>
@@ -60,6 +63,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
           <Button asChild variant="outline"><Link href="/dashboard">Go to dashboard</Link></Button>
         </div>
       </Card>
+      </div>
     </div>
   );
 }

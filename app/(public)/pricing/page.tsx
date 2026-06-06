@@ -29,7 +29,9 @@ export default async function PricingPage() {
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <section className="relative overflow-hidden border-b">
+        <div className="pointer-events-none absolute inset-0 bg-grid" />
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 animate-aurora rounded-full bg-secondary/15 blur-3xl" />
         <div className="container relative py-16 text-center sm:py-20">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
             Simple, <span className="text-gradient">transparent pricing</span>

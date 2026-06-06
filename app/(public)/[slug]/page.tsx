@@ -95,7 +95,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b">
+        <div className="pointer-events-none absolute inset-0 bg-grid" />
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
+        <div className="pointer-events-none absolute -top-20 right-0 h-72 w-72 animate-aurora rounded-full bg-accent/15 blur-3xl" />
         <div className="container relative py-16 sm:py-20">
           <Reveal>
             <Badge variant="muted" className="mb-4">{product.category.name}</Badge>

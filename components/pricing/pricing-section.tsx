@@ -132,12 +132,17 @@ export function PricingSection({
             <div
               key={plan.id}
               className={cn(
-                "relative flex flex-col rounded-2xl border bg-card p-6 shadow-sm transition-all",
-                plan.popular ? "border-primary/50 shadow-lg shadow-primary/10 ring-1 ring-primary/20" : "hover:border-primary/30",
+                "hover-lift relative flex flex-col rounded-2xl border bg-card p-6",
+                plan.popular
+                  ? "border-primary/40 ring-glow lg:-my-1 lg:scale-[1.03]"
+                  : "shadow-sm hover:border-primary/30",
               )}
             >
               {plan.popular && (
-                <Badge variant="gradient" className="absolute -top-3 left-1/2 -translate-x-1/2 gap-1">
+                <span className="pointer-events-none absolute inset-x-0 -top-px h-0.5 bg-brand-gradient" />
+              )}
+              {plan.popular && (
+                <Badge variant="gradient" className="absolute -top-3 left-1/2 -translate-x-1/2 gap-1 shadow-md shadow-primary/30">
                   <Sparkles className="h-3 w-3" /> Most popular
                 </Badge>
               )}

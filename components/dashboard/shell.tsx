@@ -15,8 +15,9 @@ export function DashboardShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-muted/20">
-      <header className="sticky top-0 z-30 border-b bg-background/90 backdrop-blur">
+    <div className="relative flex min-h-screen flex-col bg-muted/20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-primary/[0.06] to-transparent" />
+      <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur-md">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-3">
             <Logo />
@@ -39,7 +40,7 @@ export function DashboardShell({
         <MobileNav variant={variant} />
       </header>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6 sm:px-6">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6 sm:px-6">
         <aside className="hidden w-56 shrink-0 lg:block">
           <div className="sticky top-24 space-y-6">
             <Sidebar variant={variant} />

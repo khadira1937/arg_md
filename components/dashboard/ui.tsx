@@ -19,12 +19,14 @@ export function PageHeader({ title, description, action }: { title: string; desc
 
 export function StatCard({ label, value, icon: Icon, hint }: { label: string; value: string | number; icon: LucideIcon; hint?: string }) {
   return (
-    <Card className="p-5">
+    <Card className="hover-lift relative overflow-hidden p-5">
+      <span className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-brand-gradient opacity-60" />
+      <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-primary/5 blur-2xl" />
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">{label}</p>
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="h-4 w-4" /></span>
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-gradient text-white shadow-sm shadow-primary/30"><Icon className="h-4 w-4" /></span>
       </div>
-      <p className="mt-3 font-display text-3xl font-bold">{value}</p>
+      <p className="mt-3 font-display text-3xl font-bold tracking-tight">{value}</p>
       {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
     </Card>
   );

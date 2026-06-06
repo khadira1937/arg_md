@@ -16,8 +16,9 @@ type Props = {
 export function ProductCard({ name, slug, shortDescription, fromPrice, inquiryOnly, badge }: Props) {
   return (
     <Link href={`/${slug}`} className="group">
-      <Card className="relative h-full overflow-hidden p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
-        <div className="absolute inset-x-0 -top-px h-px bg-brand-gradient opacity-0 transition-opacity group-hover:opacity-100" />
+      <Card className="hover-lift relative h-full overflow-hidden p-6 hover:border-primary/40">
+        <div className="absolute inset-x-0 -top-px h-0.5 bg-brand-gradient opacity-0 transition-opacity group-hover:opacity-100" />
+        <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/5 opacity-0 blur-2xl transition-opacity group-hover:opacity-100" />
         {badge && (
           <Badge variant="gradient" className="mb-3">
             {badge}
