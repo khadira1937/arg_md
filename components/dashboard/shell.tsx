@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LogOut } from "lucide-react";
 import { Logo } from "@/components/marketing/logo";
 import { Button } from "@/components/ui/button";
-import { Sidebar, type SidebarVariant } from "./sidebar";
+import { Sidebar, MobileNav, type SidebarVariant } from "./sidebar";
 import { logoutAction } from "@/app/actions/auth";
 
 export function DashboardShell({
@@ -36,6 +36,7 @@ export function DashboardShell({
             </form>
           </div>
         </div>
+        <MobileNav variant={variant} />
       </header>
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6 sm:px-6">

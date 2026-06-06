@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { CheckCircle2, ArrowRight, Server } from "lucide-react";
+import { CheckCircle2, ArrowRight, Server, Clock } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { formatMoney } from "@/lib/pricing";
@@ -32,7 +32,10 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
         <h1 className="mt-6 font-display text-3xl font-bold">Thank you for your order!</h1>
         <p className="mt-2 text-muted-foreground">
           {order ? <>Order <span className="font-medium text-foreground">{order.number}</span> is confirmed</> : "Your order is confirmed"}
-          {order ? ` · ${formatMoney(order.total)}` : ""}. We're provisioning your services now.
+          {order ? ` · ${formatMoney(order.total)}` : ""}. Our team is preparing your service — you&apos;ll get an email with your management link as soon as it&apos;s ready.
+        </p>
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-700">
+          <Clock className="h-3.5 w-3.5" /> Typical setup time: a few minutes to a few hours
         </p>
 
         {order && order.services.length > 0 && (

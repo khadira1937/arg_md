@@ -42,11 +42,46 @@ const ADMIN_LINKS: Item[] = [
   { title: "Audit log", href: "/admin/audit", icon: ScrollText },
 ];
 
+function linksFor(variant: SidebarVariant) {
+  return variant === "admin" ? ADMIN_LINKS : DASHBOARD_LINKS;
+}
+
+const ROOTS = ["/dashboard", "/admin"];
+
+/** Horizontal, scrollable nav shown on mobile where the sidebar is hidden. */
+export function MobileNav({ variant }: { variant: SidebarVariant }) {
+  const pathname = usePathname();
+  const links = linksFor(variant);
+  return (
+    <div className="-mx-4 overflow-x-auto border-b bg-background/95 px-4 lg:hidden">
+      <div className="flex gap-1 py-2">
+        {links.map((link) => {
+          const active = pathname === link.href || (!ROOTS.includes(link.href) && pathname.startsWith(link.href));
+          const Icon = link.icon;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
+                active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted",
+              )}
+            >
+              <Icon className="h-4 w-4" />
+              {link.title}
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function Sidebar({ variant }: { variant: SidebarVariant }) {
   const pathname = usePathname();
-  const links = variant === "admin" ? ADMIN_LINKS : DASHBOARD_LINKS;
+  const links = linksFor(variant);
   const title = variant === "admin" ? "Admin" : "Customer";
-  const roots = ["/dashboard", "/admin"];
+  const roots = ROOTS;
 
   return (
     <nav className="space-y-1">

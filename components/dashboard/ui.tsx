@@ -48,6 +48,7 @@ const STATUS_STYLES: Record<string, string> = {
   PAID: "bg-success/15 text-success",
   SUCCEEDED: "bg-success/15 text-success",
   PENDING: "bg-amber-500/15 text-amber-600",
+  AWAITING_SETUP: "bg-amber-500/15 text-amber-600",
   PROVISIONING: "bg-amber-500/15 text-amber-600",
   OPEN: "bg-amber-500/15 text-amber-600",
   PROCESSING: "bg-blue-500/15 text-blue-600",
@@ -73,7 +74,7 @@ export function TableEmpty({ colSpan, label }: { colSpan: number; label: string 
 export function StatusBadge({ status }: { status: string }) {
   return (
     <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize", STATUS_STYLES[status] ?? "bg-muted text-muted-foreground")}>
-      {status.toLowerCase()}
+      {status.toLowerCase().replace(/_/g, " ")}
     </span>
   );
 }

@@ -22,7 +22,7 @@ export default async function AdminServicesPage() {
           <tbody>
             {services.map((s) => (
               <tr key={s.id} className="border-b last:border-0">
-                <td className="p-4"><p className="font-medium">{s.label}</p><p className="text-xs text-muted-foreground">{s.plan.name}</p></td>
+                <td className="p-4"><a href={`/admin/services/${s.id}`} className="font-medium hover:text-primary">{s.label}</a><p className="text-xs text-muted-foreground">{s.plan.name}</p></td>
                 <td className="p-4 text-muted-foreground">{s.user.email}</td>
                 <td className="p-4 font-mono text-xs text-muted-foreground">{s.primaryIp ?? "—"}</td>
                 <td className="p-4"><StatusBadge status={s.status} /></td>
