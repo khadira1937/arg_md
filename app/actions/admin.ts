@@ -8,7 +8,7 @@ import { isStaff, isAdmin } from "@/lib/permissions";
 import { audit } from "@/lib/audit";
 import { syncCatalogToStripe } from "@/lib/stripe/sync";
 import { enqueueJob, processPendingJobs } from "@/lib/provisioning";
-import { sendEmail } from "@/lib/email";
+import { sendEmail, sendTestEmail, transportLabel } from "@/lib/email";
 import { shortId } from "@/lib/utils";
 import { z } from "zod";
 
@@ -188,6 +188,20 @@ export async function resendDeliveryEmailAction(serviceId: string): Promise<Admi
   });
   await audit({ actorId: g.id, action: "service.delivery_resent", entityType: "ServiceInstance", entityId: serviceId });
   return { ok: true, message: "Delivery email re-sent to the customer." };
+}
+
+// ---- Email diagnostics ----
+export async function sendTestEmailAction(formData: FormData): Promise<AdminResult> {
+  const g = await guard();
+  if ("error" in g) return { ok: false, error: g.error };
+  const to = String(formData.get("to") || "").trim();
+  if (!z.string().email().safeParse(to).success) return { ok: false, error: "Enter a valid email address." };
+
+  const result = await sendTestEmail(to);
+  await audit({ actorId: g.id, action: "email.test", metadata: { to, transport: result.transport, ok: result.ok } });
+  return result.ok
+    ? { ok: true, message: `Test email sent to ${to} via ${transportLabel()}.` }
+    : { ok: false, error: `Could not send via ${transportLabel()}: ${result.error}` };
 }
 
 // ---- Orders ----

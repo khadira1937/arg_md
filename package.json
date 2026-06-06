@@ -18,7 +18,8 @@
     "db:reset": "prisma migrate reset --force",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
     "stripe:sync": "NODE_OPTIONS=--conditions=react-server tsx scripts/stripe-sync.ts",
-    "worker:tick": "NODE_OPTIONS=--conditions=react-server tsx scripts/worker-tick.ts"
+    "worker:tick": "NODE_OPTIONS=--conditions=react-server tsx scripts/worker-tick.ts",
+    "email:test": "NODE_OPTIONS=--conditions=react-server tsx scripts/email-test.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

@@ -10,6 +10,7 @@ import {
   syncStripeAction, toggleProductFlag, togglePlanFlag, updatePlanPriceAction,
   adminServiceAction, retryJobAction, updateOrderStatusAction, updateUserRoleAction,
   toggleUserBlockedAction, createCouponAction, toggleCouponAction, closeTicketAction,
+  sendTestEmailAction,
   type AdminResult,
 } from "@/app/actions/admin";
 
@@ -123,6 +124,32 @@ export function CouponToggle({ couponId, active }: { couponId: string; active: b
 export function CloseTicketButton({ ticketId }: { ticketId: string }) {
   const { pending, run } = useRun();
   return <Button size="sm" variant="outline" disabled={pending} onClick={() => run(() => closeTicketAction(ticketId))}>Close ticket</Button>;
+}
+
+export function TestEmailForm({ defaultTo }: { defaultTo?: string }) {
+  const [pending, setPending] = React.useState(false);
+  const [msg, setMsg] = React.useState<{ ok: boolean; text: string } | null>(null);
+  async function submit(formData: FormData) {
+    setPending(true);
+    setMsg(null);
+    const res = await sendTestEmailAction(formData);
+    setPending(false);
+    setMsg({ ok: res.ok, text: res.ok ? res.message ?? "Sent." : res.error ?? "Failed." });
+  }
+  return (
+    <form action={submit} className="space-y-3">
+      <div className="flex flex-wrap items-end gap-2">
+        <div className="flex-1">
+          <label className="mb-1 block text-xs text-muted-foreground">Send a test email to</label>
+          <Input name="to" type="email" required defaultValue={defaultTo} placeholder="you@example.com" className="h-9" />
+        </div>
+        <Button type="submit" variant="gradient" disabled={pending}>
+          {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send test"}
+        </Button>
+      </div>
+      {msg && <p className={`text-sm ${msg.ok ? "text-success" : "text-destructive"}`}>{msg.text}</p>}
+    </form>
+  );
 }
 
 export function NewCouponForm() {

@@ -96,7 +96,41 @@ DigitalOcean, Vultr, WHM/cPanel, domain registrar, email hosting) are stubbed in
 | `npm run db:reset` | Drop, re-migrate and re-seed |
 | `npm run prisma:studio` | Browse the database |
 | `npm run stripe:sync` | Sync DB catalog → Stripe products/prices |
+| `npm run email:test [addr]` | Send a test email via the active transport |
 | `npm run typecheck` | `tsc --noEmit` |
+
+## Transactional email
+
+Email works with **either Resend or SMTP** — Resend is used automatically when
+`RESEND_API_KEY` is set, otherwise SMTP. The active transport, a config checklist
+and a "send test email" button are available to staff at **`/admin/email`**.
+
+**Local development (default):** `docker compose up -d` starts **Mailpit**. All
+email is captured at **http://localhost:8025** — nothing leaves your machine and
+no credentials are required.
+
+**Production — Resend (recommended):**
+```bash
+RESEND_API_KEY=re_xxx
+EMAIL_FROM="Aethon Cloud <no-reply@yourdomain.com>"   # domain verified in Resend
+```
+
+**Production — SMTP (Postmark / SES / Mailgun / etc.):**
+```bash
+SMTP_HOST=smtp.yourprovider.com
+SMTP_PORT=587            # 465 if using TLS
+SMTP_USER=...
+SMTP_PASS=...
+SMTP_SECURE=false        # true for port 465
+EMAIL_FROM="Aethon Cloud <no-reply@yourdomain.com>"
+```
+
+Verify delivery any time with `npm run email:test you@example.com` or from `/admin/email`.
+
+**Events sent:** email verification, password reset, order confirmation, payment
+confirmation, invoice paid, admin new-order notification, support ticket
+created/replied, and **service delivered** (manual fulfillment — sends the
+management link only). Emails **never** contain passwords or internal admin notes.
 
 ## Project structure
 

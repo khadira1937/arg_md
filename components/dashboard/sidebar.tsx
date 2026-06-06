@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Server, ShoppingBag, FileText, RefreshCw, LifeBuoy, User,
-  Package, Tags, Cpu, Users, Ticket, Newspaper, CreditCard, ScrollText,
+  Package, Tags, Cpu, Users, Ticket, Newspaper, CreditCard, ScrollText, Mail,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -39,6 +39,7 @@ const ADMIN_LINKS: Item[] = [
   { title: "Tickets", href: "/admin/tickets", icon: LifeBuoy },
   { title: "Content", href: "/admin/content", icon: Newspaper },
   { title: "Stripe", href: "/admin/stripe", icon: CreditCard },
+  { title: "Email", href: "/admin/email", icon: Mail },
   { title: "Audit log", href: "/admin/audit", icon: ScrollText },
 ];
 
