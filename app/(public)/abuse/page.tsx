@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ShieldAlert, Mail, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ContactForm } from "@/components/marketing/contact-form";
@@ -23,7 +24,7 @@ export default function AbusePage() {
           <h1 className="mt-6 font-display text-4xl font-bold tracking-tight">Report abuse</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             We take abuse seriously. Use this form to report spam, phishing, malware, network attacks, copyright infringement or other violations of our{" "}
-            <a href="/acceptable-use-policy" className="text-primary hover:underline">Acceptable Use Policy</a>.
+            <Link href="/acceptable-use-policy" className="text-primary hover:underline">Acceptable Use Policy</Link>.
           </p>
         </div>
 

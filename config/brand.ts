@@ -3,30 +3,32 @@
  * Nothing in the UI hardcodes the brand name — it all reads from this file.
  */
 export const brand = {
-  name: "Aethon Cloud",
-  shortName: "Aethon",
-  domain: "aethon.cloud",
-  legalName: "Aethon Cloud, Inc.",
-  tagline: "Infrastructure that lifts your business.",
+  name: "CloudynHost",
+  shortName: "CloudynHost",
+  domain: "cloudynhost.com",
+  legalName: "CloudynHost",
+  tagline: "Cloud hosting built for builders.",
   description:
-    "Premium cloud hosting, VPS, dedicated servers, GPU compute and managed infrastructure — engineered for speed, reliability and scale.",
+    "Fast, reliable cloud hosting, VPS and dedicated servers with transparent pricing, secure Stripe checkout and support-focused service — built for developers, startups and growing businesses.",
   email: {
-    support: "support@aethon.cloud",
-    sales: "sales@aethon.cloud",
-    billing: "billing@aethon.cloud",
-    abuse: "abuse@aethon.cloud",
+    support: "support@cloudynhost.com",
+    sales: "sales@cloudynhost.com",
+    billing: "billing@cloudynhost.com",
+    abuse: "abuse@cloudynhost.com",
   },
+  // Social links. Leave a value as "" to hide that link everywhere.
+  // TODO: replace with real data source — your actual profile URLs.
   social: {
-    twitter: "https://twitter.com/aethoncloud",
-    github: "https://github.com/aethoncloud",
-    linkedin: "https://www.linkedin.com/company/aethoncloud",
+    x: "https://x.com/cloudynhost",
+    github: "https://github.com/cloudynhost",
+    linkedin: "https://www.linkedin.com/company/cloudynhost",
   },
-  // Marketing trust stats (display-only).
+  // Honest, verifiable highlights only — no invented customer counts or reviews.
   stats: {
-    uptime: "99.99%",
-    customers: "40,000+",
-    dataCenters: "8",
-    support: "24/7/365",
+    uptime: "99.9%",
+    regions: "8",
+    setup: "Fast",
+    support: "24/7",
   },
 } as const;
 

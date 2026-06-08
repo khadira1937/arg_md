@@ -37,7 +37,7 @@ export const catalog: SeedProduct[] = [
     heroHeadline: "Web hosting that feels instant",
     heroSubheadline:
       "NVMe storage, free SSL, free CDN and a control panel anyone can use — from your first site to your hundredth.",
-    seoTitle: "Web Hosting — Fast NVMe Shared Hosting | Aethon Cloud",
+    seoTitle: "Web Hosting — Fast NVMe Shared Hosting",
     seoDescription:
       "Affordable, lightning-fast web hosting on NVMe SSD with free SSL, CDN and 24/7 support. Plans from $2.79/mo.",
     faq: genericFaq("Web Hosting"),
@@ -79,7 +79,7 @@ export const catalog: SeedProduct[] = [
     heroHeadline: "WordPress, fully managed and blazing fast",
     heroSubheadline:
       "Automatic updates, one-click staging, object caching and expert WP support on NVMe infrastructure.",
-    seoTitle: "Managed WordPress Hosting | Aethon Cloud",
+    seoTitle: "Managed WordPress Hosting",
     seoDescription:
       "Managed WordPress hosting with staging, caching, auto-updates and WP-CLI. Plans from $3.49/mo.",
     faq: genericFaq("WordPress Hosting"),
@@ -119,7 +119,7 @@ export const catalog: SeedProduct[] = [
       "A WooCommerce-optimized stack with dedicated resources, full-page caching and PCI-ready SSL so your store stays fast during peak sales.",
     heroHeadline: "Sell more with a store that never slows down",
     heroSubheadline: "WooCommerce-tuned performance, dedicated resources and free SSL out of the box.",
-    seoTitle: "WooCommerce Hosting | Aethon Cloud",
+    seoTitle: "WooCommerce Hosting",
     seoDescription: "Fast, store-ready WooCommerce hosting with dedicated resources and caching. From $4.49/mo.",
     faq: genericFaq("WooCommerce Hosting"),
     plans: [
@@ -141,7 +141,7 @@ export const catalog: SeedProduct[] = [
       "Managed cloud hosting with dedicated CPU/RAM, a dedicated IP and isolated resources — the power of a VPS with the simplicity of a control panel.",
     heroHeadline: "Dedicated cloud power, zero server management",
     heroSubheadline: "Isolated resources, dedicated IP and instant scaling — fully managed for you.",
-    seoTitle: "Managed Cloud Hosting | Aethon Cloud",
+    seoTitle: "Managed Cloud Hosting",
     seoDescription: "Managed cloud hosting with dedicated resources and dedicated IP. From $9.99/mo.",
     faq: genericFaq("Cloud Hosting"),
     plans: [
@@ -162,13 +162,13 @@ export const catalog: SeedProduct[] = [
       "Built for agencies and freelancers: manage dozens of client sites, white-label the panel, and bill clients — all from one dashboard.",
     heroHeadline: "Run your agency on one powerful dashboard",
     heroSubheadline: "White-label hosting, client billing and bulk site management built for teams.",
-    seoTitle: "Agency Hosting | Aethon Cloud",
+    seoTitle: "Agency Hosting",
     seoDescription: "White-label agency hosting with client management and seats. From $24.99/mo.",
     faq: genericFaq("Agency Hosting"),
     plans: [
       { name: "Agency 10", slug: "agency-10", supportLevel: "Priority", specs: { websites: "10 client sites", storage: "200 GB NVMe", ssl: "Free SSL", backups: "Daily" }, prices: priceRows(24.99, 44.99, "managed"), addons: ["priority-support", "cdn", "daily-backups"], features: featuresFromSpecs({ websites: "10 client sites", storage: "200 GB NVMe", ssl: "Free SSL" }, [{ label: "Client billing", included: true }, { label: "Team seats", included: true }]) },
       { name: "Agency 25", slug: "agency-25", popular: true, supportLevel: "Priority", specs: { websites: "25 client sites", storage: "400 GB NVMe", ssl: "Free SSL", backups: "Daily" }, prices: priceRows(49.99, 79.99, "managed"), addons: ["priority-support", "cdn", "daily-backups"], features: featuresFromSpecs({ websites: "25 client sites", storage: "400 GB NVMe", ssl: "Free SSL" }, [{ label: "White-label panel", included: true, highlight: true }]) },
-      { name: "Agency Unlimited", slug: "agency-unlimited", recommended: true, supportLevel: "Dedicated", specs: { websites: "Unlimited sites", storage: "1 TB NVMe", ssl: "Free SSL", backups: "Daily" }, prices: priceRows(99.99, 149.99, "managed"), addons: ["priority-support", "cdn", "daily-backups", "server-management"], features: featuresFromSpecs({ websites: "Unlimited sites", storage: "1 TB NVMe", ssl: "Free SSL" }, [{ label: "Dedicated account manager", included: true }]) },
+      { name: "Agency Unlimited", slug: "agency-unlimited", recommended: true, supportLevel: "Dedicated", specs: { websites: "Unlimited sites (fair-use)", storage: "1 TB NVMe", ssl: "Free SSL", backups: "Daily" }, prices: priceRows(99.99, 149.99, "managed"), addons: ["priority-support", "cdn", "daily-backups", "server-management"], features: featuresFromSpecs({ websites: "Unlimited sites (fair-use)", storage: "1 TB NVMe", ssl: "Free SSL" }, [{ label: "Dedicated account manager", included: true }]) },
     ],
   },
   // ------------------------------------------------------------ Node.js (display under cloud category)
@@ -183,7 +183,7 @@ export const catalog: SeedProduct[] = [
       "Git-push deploys, automatic builds, environment variables and instant rollbacks for Node.js, Next.js and Express apps on managed cloud containers.",
     heroHeadline: "Ship Node.js apps in seconds",
     heroSubheadline: "Git-push deploys, autoscaling containers and managed runtimes for modern JavaScript.",
-    seoTitle: "Node.js App Hosting | Aethon Cloud",
+    seoTitle: "Node.js App Hosting",
     seoDescription: "Deploy Node.js, Next.js and Express apps with git-push builds and autoscaling. From $7.99/mo.",
     faq: genericFaq("Node.js Hosting"),
     plans: [
@@ -205,7 +205,7 @@ export const catalog: SeedProduct[] = [
       "High-performance KVM VPS with dedicated vCPU, NVMe storage, full root access and multiple OS templates. Scale resources whenever you need.",
     heroHeadline: "KVM VPS built for performance",
     heroSubheadline: "Dedicated vCPU, NVMe storage and full root access across 8 global regions.",
-    seoTitle: "VPS Hosting — KVM Virtual Servers | Aethon Cloud",
+    seoTitle: "VPS Hosting — KVM Virtual Servers",
     seoDescription: "Fast KVM VPS with dedicated vCPU, NVMe storage and full root access. From $4.99/mo.",
     faq: genericFaq("VPS Hosting"),
     plans: [
@@ -227,7 +227,7 @@ export const catalog: SeedProduct[] = [
       "Enterprise bare-metal servers with the latest Xeon CPUs, ECC memory and NVMe storage. Full hardware isolation, IPMI access and 1–10 Gbps uplinks.",
     heroHeadline: "Raw bare-metal power, all yours",
     heroSubheadline: "Latest-gen Xeon CPUs, ECC RAM and NVMe storage with full hardware isolation.",
-    seoTitle: "Dedicated Servers — Bare Metal | Aethon Cloud",
+    seoTitle: "Dedicated Servers — Bare Metal",
     seoDescription: "Single-tenant dedicated bare-metal servers with Xeon CPUs and NVMe. From $89/mo.",
     faq: genericFaq("Dedicated Servers"),
     plans: [
@@ -248,7 +248,7 @@ export const catalog: SeedProduct[] = [
       "Low-latency dedicated servers hosted in Ashburn and Los Angeles, with up to 10 Gbps uplinks — ideal for North American audiences.",
     heroHeadline: "US-based bare metal, low latency coast to coast",
     heroSubheadline: "Ashburn & Los Angeles data centers with up to 10 Gbps uplinks.",
-    seoTitle: "USA Dedicated Servers | Aethon Cloud",
+    seoTitle: "USA Dedicated Servers",
     seoDescription: "US dedicated servers in Ashburn and Los Angeles with up to 10 Gbps. From $99/mo.",
     faq: genericFaq("USA Dedicated Servers"),
     plans: [
@@ -269,7 +269,7 @@ export const catalog: SeedProduct[] = [
       "Dedicated servers in Frankfurt and Amsterdam with EU data residency and GDPR-aligned operations for European audiences.",
     heroHeadline: "European bare metal, GDPR-ready",
     heroSubheadline: "Frankfurt & Amsterdam data centers with EU data residency.",
-    seoTitle: "Europe Dedicated Servers | Aethon Cloud",
+    seoTitle: "Europe Dedicated Servers",
     seoDescription: "EU dedicated servers in Frankfurt and Amsterdam, GDPR-ready. From $89/mo.",
     faq: genericFaq("Europe Dedicated Servers"),
     plans: [
@@ -291,7 +291,7 @@ export const catalog: SeedProduct[] = [
       "Dedicated GPU servers for training, inference, rendering and simulation, with high-core CPUs, large memory and fast NVMe scratch storage.",
     heroHeadline: "GPU compute for AI at scale",
     heroSubheadline: "Dedicated GPUs, high-core CPUs and NVMe scratch for training, inference and rendering.",
-    seoTitle: "GPU Servers for AI & Rendering | Aethon Cloud",
+    seoTitle: "GPU Servers for AI & Rendering",
     seoDescription: "Dedicated GPU servers for AI/ML training, inference and rendering. From $349/mo.",
     faq: genericFaq("GPU Servers"),
     plans: [
@@ -312,7 +312,7 @@ export const catalog: SeedProduct[] = [
       "Dense HDD storage servers for backups, media libraries and archives — up to ~96 TB raw with great cost efficiency.",
     heroHeadline: "Massive storage, tiny price per terabyte",
     heroSubheadline: "Dense HDD arrays for backups, media and archives — up to ~96 TB raw.",
-    seoTitle: "Storage Servers — High Capacity | Aethon Cloud",
+    seoTitle: "Storage Servers — High Capacity",
     seoDescription: "High-capacity storage servers for backup and media. From $49/mo.",
     faq: genericFaq("Storage Servers"),
     plans: [
@@ -334,7 +334,7 @@ export const catalog: SeedProduct[] = [
       "Dedicated servers with 10 Gbps uplinks for streaming, CDN edge, large file delivery and high-throughput workloads.",
     heroHeadline: "10 Gbps of unstoppable throughput",
     heroSubheadline: "Premium high-bandwidth servers for streaming, CDN and large-scale delivery.",
-    seoTitle: "10Gbps Dedicated Servers | Aethon Cloud",
+    seoTitle: "10Gbps Dedicated Servers",
     seoDescription: "High-bandwidth 10 Gbps dedicated servers for streaming and CDN. From $199/mo.",
     faq: genericFaq("10Gbps Servers"),
     plans: [
@@ -356,7 +356,7 @@ export const catalog: SeedProduct[] = [
       "Secure, ad-free business email with your domain, generous storage, spam filtering and mobile sync. Priced per mailbox.",
     heroHeadline: "Professional email that builds trust",
     heroSubheadline: "Ad-free mailboxes on your domain with spam filtering and mobile sync.",
-    seoTitle: "Business Email Hosting | Aethon Cloud",
+    seoTitle: "Business Email Hosting",
     seoDescription: "Professional business email on your domain. From $0.99/mailbox/mo.",
     faq: genericFaq("Business Email"),
     plans: [
@@ -378,7 +378,7 @@ export const catalog: SeedProduct[] = [
       "Register the perfect domain with free WHOIS privacy, easy DNS management and one-click connection to your hosting.",
     heroHeadline: "Find the domain your idea deserves",
     heroSubheadline: "Hundreds of TLDs, free WHOIS privacy and instant DNS management.",
-    seoTitle: "Domain Registration & Transfer | Aethon Cloud",
+    seoTitle: "Domain Registration & Transfer",
     seoDescription: "Search and register domains with free WHOIS privacy. .com from $9.99/yr.",
     faq: genericFaq("Domains"),
     plans: [
@@ -397,7 +397,7 @@ export const catalog: SeedProduct[] = [
       "From free domain-validated certificates to wildcard and EV, secure your sites with trusted SSL and automatic renewal.",
     heroHeadline: "Trusted SSL for every site",
     heroSubheadline: "Free DV, wildcard and EV certificates with automatic installation and renewal.",
-    seoTitle: "SSL Certificates | Aethon Cloud",
+    seoTitle: "SSL Certificates",
     seoDescription: "Free and premium SSL certificates with auto-renewal. Wildcard from $59/yr.",
     faq: genericFaq("SSL Certificates"),
     plans: [
@@ -418,7 +418,7 @@ export const catalog: SeedProduct[] = [
       "Multi-layer DDoS protection that filters volumetric and application attacks at the edge, keeping your services online under pressure.",
     heroHeadline: "Stay online through any attack",
     heroSubheadline: "Always-on L3/L4/L7 mitigation with automatic traffic scrubbing.",
-    seoTitle: "DDoS Protection | Aethon Cloud",
+    seoTitle: "DDoS Protection",
     seoDescription: "Always-on DDoS protection with L3/L4/L7 mitigation. From $19/mo.",
     faq: genericFaq("DDoS Protection"),
     plans: [
@@ -439,7 +439,7 @@ export const catalog: SeedProduct[] = [
       "Secure offsite backup storage with encryption at rest, flexible retention and S3-compatible access. Flat, predictable pricing per terabyte.",
     heroHeadline: "Backups you can actually count on",
     heroSubheadline: "Encrypted, offsite, S3-compatible backup storage at a flat price per TB.",
-    seoTitle: "Backup Storage | Aethon Cloud",
+    seoTitle: "Backup Storage",
     seoDescription: "Encrypted offsite backup storage, S3-compatible. From $5/TB/mo.",
     faq: genericFaq("Backup Storage"),
     plans: [
@@ -458,10 +458,10 @@ export const catalog: SeedProduct[] = [
     sortOrder: 1,
     shortDescription: "Free, done-for-you website migration.",
     description:
-      "Our engineers move your sites, databases and email to Aethon with zero downtime — free with annual plans, or as a standalone service.",
-    heroHeadline: "Switch to Aethon with zero downtime",
+      "Our engineers move your sites, databases and email to CloudynHost with zero downtime — free with annual plans, or as a standalone service.",
+    heroHeadline: "Switch to CloudynHost with zero downtime",
     heroSubheadline: "Our team migrates your sites, databases and email for you — for free on annual plans.",
-    seoTitle: "Free Website Migration | Aethon Cloud",
+    seoTitle: "Free Website Migration",
     seoDescription: "Free, expert website migration with zero downtime. Standalone from $29.",
     faq: genericFaq("Website Migration"),
     plans: [
@@ -481,7 +481,7 @@ export const catalog: SeedProduct[] = [
       "A private cloud built for your workloads — dedicated hypervisors, custom networking, and a fully managed operations team. Quote-based.",
     heroHeadline: "Your own cloud, run by our engineers",
     heroSubheadline: "Dedicated hypervisors, custom networking and 24/7 managed operations.",
-    seoTitle: "Managed Private Cloud | Aethon Cloud",
+    seoTitle: "Managed Private Cloud",
     seoDescription: "Fully managed private cloud with dedicated virtualization. Contact sales for a quote.",
     faq: genericFaq("Managed Private Cloud"),
     plans: [
@@ -501,7 +501,7 @@ export const catalog: SeedProduct[] = [
       "CI/CD pipelines, infrastructure-as-code, observability and on-call — our DevOps engineers extend your team on a flexible retainer.",
     heroHeadline: "DevOps muscle without the hiring",
     heroSubheadline: "CI/CD, IaC, observability and on-call from senior engineers on a flexible retainer.",
-    seoTitle: "DevOps Services | Aethon Cloud",
+    seoTitle: "DevOps Services",
     seoDescription: "Senior DevOps engineering on a flexible retainer. From $1,500/mo. Contact sales.",
     faq: genericFaq("DevOps Services"),
     plans: [
@@ -521,7 +521,7 @@ export const catalog: SeedProduct[] = [
       "Production-grade managed Kubernetes with autoscaling node pools, managed control plane, ingress, observability and GitOps delivery.",
     heroHeadline: "Managed Kubernetes, production-ready",
     heroSubheadline: "Autoscaling node pools, managed control plane and GitOps delivery.",
-    seoTitle: "Managed Kubernetes Hosting | Aethon Cloud",
+    seoTitle: "Managed Kubernetes Hosting",
     seoDescription: "Production-grade managed Kubernetes clusters. From $99/node. Contact sales.",
     faq: genericFaq("Kubernetes Solutions"),
     plans: [
@@ -540,7 +540,7 @@ export const catalog: SeedProduct[] = [
       "Build a professional website without code — drag-and-drop sections, AI copy, templates and hosting, all in one place.",
     heroHeadline: "Build a beautiful site, no code required",
     heroSubheadline: "Drag-and-drop builder, AI copywriting and hosting included.",
-    seoTitle: "Website Builder | Aethon Cloud",
+    seoTitle: "Website Builder",
     seoDescription: "Drag-and-drop website builder with hosting included. From $2.99/mo.",
     faq: genericFaq("Website Builder"),
     plans: [

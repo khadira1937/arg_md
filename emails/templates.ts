@@ -22,20 +22,20 @@ type Rendered = { subject: string; html: string; text: string };
 function layout(title: string, bodyHtml: string): string {
   return `<!doctype html><html><body style="margin:0;background:#f4f5fb;font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0f172a">
   <div style="max-width:560px;margin:0 auto;padding:32px 16px">
-    <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#4f46e5,#7c3aed,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:24px">${brand.name}</div>
+    <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#06b6d4,#0ea5e9,#6366f1);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:24px">${brand.name}</div>
     <div style="background:#fff;border-radius:16px;padding:32px;box-shadow:0 1px 3px rgba(15,23,42,.08)">
       <h1 style="font-size:20px;margin:0 0 16px">${title}</h1>
       ${bodyHtml}
     </div>
     <p style="color:#64748b;font-size:12px;text-align:center;margin-top:24px">
       ${brand.legalName} · ${brand.tagline}<br/>
-      Need help? <a href="${absoluteUrl("/support")}" style="color:#4f46e5">Contact support</a>
+      Need help? <a href="${absoluteUrl("/support")}" style="color:#0284c7">Contact support</a>
     </p>
   </div></body></html>`;
 }
 
 function button(label: string, url: string): string {
-  return `<a href="${url}" style="display:inline-block;background:#4f46e5;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;margin:8px 0">${label}</a>`;
+  return `<a href="${url}" style="display:inline-block;background:#0284c7;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;margin:8px 0">${label}</a>`;
 }
 
 function p(text: string): string {

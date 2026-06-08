@@ -5,7 +5,7 @@ import type { BillingCycle } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { readSession } from "@/lib/auth/session";
 
-const CART_COOKIE = "aethon_cart";
+const CART_COOKIE = "cloudyn_cart";
 
 /** Resolve the cart cookie token, creating one if needed (guest carts). */
 async function getCartToken(create = false): Promise<string | null> {

@@ -53,7 +53,7 @@ export function organizationJsonLd() {
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
     description: brand.description,
-    sameAs: Object.values(brand.social),
+    sameAs: Object.values(brand.social).filter(Boolean),
     contactPoint: [
       {
         "@type": "ContactPoint",

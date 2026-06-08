@@ -1,4 +1,4 @@
-# Aethon Cloud — Architecture Plan
+# CloudynHost — Architecture Plan
 
 ## 1. Stack
 

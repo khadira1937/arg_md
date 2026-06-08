@@ -3,72 +3,74 @@
 @tailwind utilities;
 
 @layer base {
+  /* CloudynHost identity — a cyan → blue → indigo "cloud" system.
+     Cooler, more distinctive and more trustworthy than a generic violet SaaS theme. */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71% 4%;
+    --background: 210 40% 99%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 243 75% 59%;
+    --primary: 201 96% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 262 83% 58%;
+    --secondary: 224 76% 55%;
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 199 89% 48%;
+    --accent: 187 92% 40%;
     --accent-foreground: 0 0% 100%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 210 25% 96%;
+    --muted-foreground: 215 16% 47%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 69% 40%;
+    --success: 152 69% 38%;
     --success-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 243 75% 59%;
+    --border: 214 24% 90%;
+    --input: 214 24% 90%;
+    --ring: 201 96% 42%;
 
     --radius: 0.85rem;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 20% 98%;
+    --background: 222 47% 5%;
+    --foreground: 210 30% 98%;
 
-    --card: 224 50% 7%;
-    --card-foreground: 210 20% 98%;
+    --card: 222 44% 8%;
+    --card-foreground: 210 30% 98%;
 
-    --popover: 224 50% 7%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 222 44% 8%;
+    --popover-foreground: 210 30% 98%;
 
-    --primary: 243 75% 66%;
-    --primary-foreground: 224 71% 4%;
+    --primary: 199 95% 52%;
+    --primary-foreground: 222 47% 6%;
 
-    --secondary: 262 83% 66%;
-    --secondary-foreground: 224 71% 4%;
+    --secondary: 224 82% 66%;
+    --secondary-foreground: 222 47% 6%;
 
-    --accent: 199 89% 55%;
-    --accent-foreground: 224 71% 4%;
+    --accent: 187 88% 48%;
+    --accent-foreground: 222 47% 6%;
 
-    --muted: 223 30% 14%;
-    --muted-foreground: 217 15% 65%;
+    --muted: 222 32% 14%;
+    --muted-foreground: 216 18% 66%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 210 30% 98%;
 
-    --success: 152 60% 45%;
-    --success-foreground: 224 71% 4%;
+    --success: 152 60% 46%;
+    --success-foreground: 222 47% 6%;
 
-    --border: 223 25% 16%;
-    --input: 223 25% 16%;
-    --ring: 243 75% 66%;
+    --border: 222 28% 17%;
+    --input: 222 28% 17%;
+    --ring: 199 95% 52%;
   }
 }
 
@@ -88,6 +90,17 @@
   }
   .container-tight {
     @apply mx-auto w-full max-w-5xl px-5;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Soft conic/mesh wash for hero + section backdrops. */
+  .bg-mesh {
+    background-image:
+      radial-gradient(40% 50% at 15% 10%, hsl(187 92% 50% / 0.10), transparent 70%),
+      radial-gradient(45% 55% at 85% 5%, hsl(244 80% 64% / 0.10), transparent 70%),
+      radial-gradient(50% 50% at 50% 100%, hsl(201 96% 50% / 0.08), transparent 70%);
   }
 
   /* Faint grid, masked so it fades toward the edges — premium SaaS backdrop. */
@@ -121,9 +134,9 @@
   /* Premium elevation + lift-on-hover. */
   .shadow-premium {
     box-shadow:
-      0 1px 2px hsl(224 71% 4% / 0.04),
-      0 8px 24px -8px hsl(243 75% 59% / 0.12),
-      0 24px 48px -24px hsl(243 75% 59% / 0.12);
+      0 1px 2px hsl(222 47% 11% / 0.04),
+      0 8px 24px -8px hsl(201 96% 42% / 0.14),
+      0 24px 48px -24px hsl(224 76% 48% / 0.16);
   }
   .hover-lift {
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -131,13 +144,13 @@
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow:
-      0 1px 2px hsl(224 71% 4% / 0.06),
-      0 16px 40px -12px hsl(243 75% 59% / 0.22);
+      0 1px 2px hsl(222 47% 11% / 0.06),
+      0 16px 40px -12px hsl(201 96% 42% / 0.24);
   }
 
   /* Animated gradient border for highlighted cards. */
   .ring-glow {
-    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.25), 0 18px 50px -20px hsl(243 75% 59% / 0.45);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.30), 0 18px 50px -20px hsl(201 96% 45% / 0.50);
   }
 
   .animate-aurora {

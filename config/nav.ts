@@ -170,6 +170,8 @@ export const footerNav = {
     { title: "Privacy Policy", href: "/privacy" },
     { title: "Refund Policy", href: "/refund-policy" },
     { title: "Acceptable Use", href: "/acceptable-use-policy" },
+    { title: "DMCA", href: "/dmca" },
+    { title: "Security", href: "/security" },
     { title: "SLA", href: "/sla" },
     { title: "Report Abuse", href: "/abuse" },
   ],

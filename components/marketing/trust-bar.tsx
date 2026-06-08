@@ -1,19 +1,22 @@
-import { ShieldCheck, RefreshCcw, Headphones, Lock } from "lucide-react";
+import { ShieldCheck, CreditCard, Zap, LifeBuoy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** Honest, defensible trust signals for conversion points (cart, checkout). */
 const ITEMS = [
-  { icon: Lock, title: "Secure payment", body: "256-bit encrypted checkout via Stripe" },
-  { icon: RefreshCcw, title: "30-day guarantee", body: "Money-back on eligible plans" },
-  { icon: ShieldCheck, title: "No setup fees", body: "Transparent, all-in pricing" },
-  { icon: Headphones, title: "24/7 support", body: "Real engineers, any time" },
+  { icon: CreditCard, title: "Secure checkout", body: "Payments processed by Stripe" },
+  { icon: Zap, title: "Fast setup", body: "Service details after payment" },
+  { icon: ShieldCheck, title: "Transparent pricing", body: "Renewal price shown upfront" },
+  { icon: LifeBuoy, title: "Support when you need it", body: "Help via tickets, any time" },
 ];
 
-/** Compact trust signals for conversion points (cart, checkout). */
 export function TrustBar({ className }: { className?: string }) {
   return (
     <div className={cn("grid gap-3 sm:grid-cols-2 lg:grid-cols-4", className)}>
       {ITEMS.map((i) => (
-        <div key={i.title} className="flex items-start gap-3 rounded-xl border bg-card p-3">
+        <div
+          key={i.title}
+          className="flex items-start gap-3 rounded-xl border bg-card p-3.5 transition-colors hover:border-primary/30"
+        >
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <i.icon className="h-4 w-4" />
           </span>

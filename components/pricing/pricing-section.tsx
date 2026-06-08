@@ -127,6 +127,7 @@ export function PricingSection({
           const save = savingsPercent(perMonth, renewalMonth);
           const isOpen = expanded[plan.id];
           const planAddons = plan.addons;
+          const hasFairUse = plan.features.some((f) => /fair-use/i.test(f.value ?? ""));
 
           return (
             <div
@@ -160,17 +161,20 @@ export function PricingSection({
                   <>
                     <div className="flex items-baseline gap-1">
                       <span className="font-display text-4xl font-bold">{formatMoney(perMonth)}</span>
-                      <span className="text-sm text-muted-foreground">/mo</span>
+                      <span className="text-sm text-muted-foreground">USD/mo</span>
                     </div>
                     {save > 0 && (
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        <span className="text-success font-semibold">Save {save}%</span> · renews at{" "}
-                        {formatMoney(renewalMonth)}/mo
+                      <p className="mt-1 text-xs">
+                        <span className="text-success font-semibold">Save {save}%</span>
+                        <span className="text-muted-foreground"> off the renewal rate</span>
                       </p>
                     )}
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Billed {formatMoney(price.amount)} {CYCLE_LABEL[price.billingCycle].toLowerCase()}
-                      {price.setupFee > 0 && ` · ${formatMoney(price.setupFee)} setup`}
+                      Renews at {formatMoney(renewalMonth)} USD/mo
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Billed {formatMoney(price.amount)} USD {CYCLE_LABEL[price.billingCycle].toLowerCase()}
+                      {price.setupFee > 0 && ` · ${formatMoney(price.setupFee)} USD setup`}
                     </p>
                   </>
                 )}
@@ -201,6 +205,13 @@ export function PricingSection({
                   </li>
                 ))}
               </ul>
+
+              {hasFairUse && (
+                <p className="mt-3 text-xs text-muted-foreground">
+                  &ldquo;Unlimited&rdquo; is subject to fair-use limits — see our{" "}
+                  <Link href="/acceptable-use-policy" className="text-primary hover:underline">Acceptable Use Policy</Link>.
+                </p>
+              )}
 
               {planAddons.length > 0 && !inquiryOnly && (
                 <div className="mt-5 border-t pt-4">

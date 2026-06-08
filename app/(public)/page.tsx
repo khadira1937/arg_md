@@ -1,33 +1,48 @@
 import Link from "next/link";
 import {
   Server, Cloud, Cpu, Gauge, Globe, Rocket,
-  Zap, Lock, Headphones, GitBranch, CheckCircle2, ArrowRight,
+  Zap, Lock, ShieldCheck, GitBranch, CheckCircle2, ArrowRight,
+  CreditCard, PackageCheck, MousePointerClick, Code2, Building2, Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Section, SectionHeading } from "@/components/marketing/section";
 import { Reveal } from "@/components/marketing/reveal";
 import { ProductCard } from "@/components/marketing/product-card";
-import { Testimonials } from "@/components/marketing/testimonials";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { getFeaturedProducts, getLocations, lowestPrice } from "@/lib/catalog";
 import { brand } from "@/config/brand";
+import { infrastructure, regionLatency } from "@/config/infrastructure";
+import { marketingStats } from "@/config/stats";
+import { StatsStrip } from "@/components/marketing/stats-strip";
 
 const WHY = [
-  { icon: Zap, title: "NVMe everywhere", body: "Every plan runs on NVMe SSD storage for dramatically faster reads and writes." },
-  { icon: Lock, title: "Free SSL & security", body: "Automatic SSL, DDoS filtering and isolated resources keep you protected by default." },
-  { icon: Gauge, title: "99.99% uptime SLA", body: "Redundant power, network and storage backed by a financially-guaranteed SLA." },
-  { icon: Headphones, title: "24/7 expert support", body: "Real engineers, not scripts — available any time of day, every day of the year." },
-  { icon: GitBranch, title: "Scale on demand", body: "Upgrade CPU, RAM and storage instantly as your traffic grows. No migrations." },
-  { icon: Rocket, title: "Deploy in minutes", body: "Shared and cloud plans go live within minutes of checkout. No waiting around." },
+  { icon: Zap, title: "NVMe-backed performance", body: "Plans run on fast NVMe SSD storage and tuned stacks for snappy reads, writes and page loads." },
+  { icon: Lock, title: "Secure by default", body: "Free SSL, isolated resources and encrypted credential storage come standard — not paid upsells." },
+  { icon: Gauge, title: "99.9% uptime SLA", body: "Production services are backed by a clear, published availability commitment. See our SLA." },
+  { icon: ShieldCheck, title: "Honest, transparent pricing", body: "The renewal price is shown before you buy. No surprise hikes, no hidden setup fees on most plans." },
+  { icon: GitBranch, title: "Room to scale", body: "Start small and move up as you grow — from shared hosting to VPS, dedicated and GPU servers." },
+  { icon: Cloud, title: "Support-focused service", body: "Open a ticket any time. Real people read it, and we keep you posted until it's resolved." },
+];
+
+const HOW = [
+  { icon: MousePointerClick, title: "1 · Choose your plan", body: "Pick the product and term that fit. Configure location and add-ons, then add it to your cart." },
+  { icon: CreditCard, title: "2 · Pay securely", body: "Check out with Stripe. Your card details never touch our servers — payment is fully encrypted." },
+  { icon: PackageCheck, title: "3 · We set it up", body: "We provision and deliver your service, then send the management link and details to your dashboard." },
+];
+
+const AUDIENCE = [
+  { icon: Code2, title: "Developers", body: "Full root VPS, Node.js hosting and dedicated servers with the control you need to ship." },
+  { icon: Rocket, title: "Startups", body: "Affordable, scalable hosting that grows with you — without enterprise lock-in or surprise bills." },
+  { icon: Building2, title: "Businesses", body: "Reliable web, WordPress and WooCommerce hosting with secure checkout and clear invoicing." },
 ];
 
 const HOME_FAQ = [
-  { question: "Do you offer a money-back guarantee?", answer: "Yes — eligible plans include a 30-day money-back guarantee. See our Refund Policy for details." },
-  { question: "Can I upgrade my plan later?", answer: "Absolutely. Upgrade or downgrade any time from your dashboard; we prorate the difference automatically." },
-  { question: "Where are your data centers?", answer: "We operate in 8 regions across North America, Europe, Asia-Pacific and South America, with more on the way." },
-  { question: "Is migration really free?", answer: "Our team migrates your sites and databases for free on annual plans, with zero downtime." },
+  { question: "How fast is my service ready after I pay?", answer: "Most services are set up quickly after checkout. You'll receive an email and a management link in your dashboard as soon as it's ready — typically within a few hours." },
+  { question: "What payment methods do you accept?", answer: "All major credit and debit cards through Stripe's secure, encrypted checkout. We never see or store your full card details." },
+  { question: "Can I upgrade or cancel later?", answer: "Yes. You can manage and cancel your services from your dashboard at any time. Renewal prices are always shown before you buy." },
+  { question: "Where are your data centers?", answer: `We offer ${brand.stats.regions} regions across North America, Europe, Asia-Pacific and South America, so you can host close to your users.` },
 ];
 
 export default async function HomePage() {
@@ -38,26 +53,26 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-grid" />
-        <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
+        <div className="pointer-events-none absolute inset-0 bg-mesh" />
         <div className="pointer-events-none absolute -top-32 left-1/4 h-80 w-80 animate-aurora rounded-full bg-primary/20 blur-3xl" />
-        <div className="pointer-events-none absolute -top-20 right-1/4 h-72 w-72 animate-aurora rounded-full bg-accent/20 blur-3xl [animation-delay:-7s]" />
+        <div className="pointer-events-none absolute -top-20 right-1/4 h-72 w-72 animate-aurora rounded-full bg-secondary/20 blur-3xl [animation-delay:-7s]" />
         <div className="container relative py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <Badge variant="muted" className="mb-5 gap-1.5 px-3 py-1">
                 <span className="flex h-2 w-2 rounded-full bg-success" />
-                {brand.stats.uptime} uptime · {brand.stats.dataCenters} global regions
+                {brand.stats.uptime} uptime target · {brand.stats.regions} global regions
               </Badge>
             </Reveal>
             <Reveal delay={0.05}>
-              <h1 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
-                Cloud hosting that <span className="text-gradient">lifts your business</span>
+              <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-6xl">
+                Cloud hosting <span className="text-gradient">built for builders</span>
               </h1>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-                Web hosting, VPS, dedicated and GPU servers, managed cloud and more — engineered for
-                speed, reliability and scale, backed by 24/7 expert support.
+              <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
+                Web hosting, VPS, dedicated and GPU servers with transparent pricing, secure Stripe
+                checkout and support-focused service — for developers, startups and growing businesses.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -72,7 +87,7 @@ export default async function HomePage() {
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                {["No setup fees", "30-day guarantee", "Free migration", "Cancel anytime"].map((t) => (
+                {["No setup fees on most plans", "Secure Stripe checkout", "Cancel anytime"].map((t) => (
                   <span key={t} className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-4 w-4 text-success" /> {t}
                   </span>
@@ -90,12 +105,13 @@ export default async function HomePage() {
                   <span className="h-3 w-3 rounded-full bg-amber-400/70" />
                   <span className="h-3 w-3 rounded-full bg-success/60" />
                   <span className="ml-3 flex-1 truncate rounded-md bg-background/70 px-3 py-1 text-xs text-muted-foreground">
-                    {brand.domain}/dashboard
+                    app.{brand.domain}/dashboard
                   </span>
+                  <span className="hidden text-[10px] uppercase tracking-wide text-muted-foreground sm:inline">Dashboard preview</span>
                 </div>
                 <div className="grid gap-4 p-5 sm:grid-cols-3">
                   {[
-                    { k: "Active services", v: "12", c: "text-primary" },
+                    { k: "Active services", v: "3", c: "text-primary" },
                     { k: "Uptime (30d)", v: brand.stats.uptime, c: "text-success" },
                     { k: "Open tickets", v: "0", c: "text-foreground" },
                   ].map((m) => (
@@ -124,21 +140,9 @@ export default async function HomePage() {
             </div>
           </Reveal>
 
-          {/* Stats strip */}
+          {/* Stats strip — specific figures; uptime framed as a target (see SLA) */}
           <Reveal delay={0.3}>
-            <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
-              {[
-                { label: "Uptime SLA", value: brand.stats.uptime },
-                { label: "Customers", value: brand.stats.customers },
-                { label: "Global regions", value: brand.stats.dataCenters },
-                { label: "Support", value: brand.stats.support },
-              ].map((s) => (
-                <div key={s.label} className="rounded-2xl border bg-card/60 p-5 text-center backdrop-blur transition-colors hover:border-primary/40">
-                  <p className="font-display text-2xl font-bold text-gradient sm:text-3xl">{s.value}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
-                </div>
-              ))}
-            </div>
+            <StatsStrip stats={marketingStats} className="mx-auto mt-10 max-w-4xl" />
           </Reveal>
         </div>
       </section>
@@ -148,7 +152,7 @@ export default async function HomePage() {
         <SectionHeading
           eyebrow="Products"
           title="Everything you need to run online"
-          description="From your first website to GPU clusters — pick the infrastructure that fits, and scale when you're ready."
+          description="From your first website to GPU compute — pick the infrastructure that fits, and scale when you're ready."
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p, i) => (
@@ -178,10 +182,10 @@ export default async function HomePage() {
             { icon: Globe, title: "Web & WordPress", href: "/web-hosting", desc: "Fast managed hosting" },
             { icon: Server, title: "VPS & Dedicated", href: "/vps-hosting", desc: "Full root performance" },
             { icon: Cpu, title: "GPU Servers", href: "/gpu-servers", desc: "AI & rendering compute" },
-            { icon: Cloud, title: "Managed Cloud", href: "/managed-private-cloud", desc: "Enterprise platforms" },
+            { icon: Layers, title: "Managed Cloud", href: "/managed-private-cloud", desc: "Dedicated platforms" },
           ].map((c) => (
-            <Link key={c.href} href={c.href} className="group rounded-2xl border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-md">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <Link key={c.href} href={c.href} className="group rounded-2xl border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <c.icon className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-semibold">{c.title}</h3>
@@ -193,16 +197,56 @@ export default async function HomePage() {
 
       {/* Why us */}
       <Section className="bg-muted/30">
-        <SectionHeading eyebrow="Why Aethon" title="Built for performance and peace of mind" />
+        <SectionHeading eyebrow="Why CloudynHost" title="Built for performance and peace of mind" />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {WHY.map((w, i) => (
             <Reveal key={w.title} delay={i * 0.04}>
-              <div className="rounded-2xl border bg-card p-6">
+              <div className="h-full rounded-2xl border bg-card p-6 transition-colors hover:border-primary/30">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white">
                   <w.icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-semibold">{w.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{w.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* How it works */}
+      <Section>
+        <SectionHeading
+          eyebrow="How it works"
+          title="From checkout to live in three steps"
+          description="No confusing setup. You buy, we provision, and your service details land in your dashboard."
+        />
+        <div className="relative mt-12 grid gap-6 md:grid-cols-3">
+          {HOW.map((s, i) => (
+            <Reveal key={s.title} delay={i * 0.06}>
+              <div className="relative h-full rounded-2xl border bg-card p-7">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <s.icon className="h-6 w-6" />
+                </span>
+                <h3 className="mt-5 font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* Built for */}
+      <Section className="bg-muted/30">
+        <SectionHeading eyebrow="Who it's for" title="Hosting that fits how you build" />
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {AUDIENCE.map((a, i) => (
+            <Reveal key={a.title} delay={i * 0.05}>
+              <div className="h-full rounded-2xl border bg-card p-7">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                  <a.icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 font-semibold">{a.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
               </div>
             </Reveal>
           ))}
@@ -211,31 +255,28 @@ export default async function HomePage() {
 
       {/* Data centers */}
       <Section>
-        <SectionHeading eyebrow="Global network" title="Deploy close to your users" description="Choose from data centers across four continents for low-latency performance worldwide." />
+        <SectionHeading eyebrow="Global network" title="Deploy close to your users" description={infrastructure.summary} />
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {locations.map((l) => (
-            <div key={l.id} className="flex items-center gap-3 rounded-xl border bg-card p-4">
-              <span className="text-2xl">{l.flagEmoji}</span>
-              <div>
-                <p className="text-sm font-medium">{l.city}</p>
-                <p className="text-xs text-muted-foreground">{l.region}</p>
+          {locations.map((l) => {
+            const latency = regionLatency(l.city);
+            return (
+              <div key={l.id} className="flex items-center gap-3 rounded-xl border bg-card p-4 transition-colors hover:border-primary/30">
+                <span className="text-2xl">{l.flagEmoji}</span>
+                <div>
+                  <p className="text-sm font-medium">{l.city}</p>
+                  <p className="text-xs text-muted-foreground">{l.region}{latency != null && ` · ~${latency} ms`}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="mt-8 text-center">
           <Button asChild variant="link"><Link href="/data-centers">View all data centers <ArrowRight className="h-4 w-4" /></Link></Button>
         </div>
       </Section>
 
-      {/* Testimonials */}
-      <Section className="bg-muted/30">
-        <SectionHeading eyebrow="Loved by builders" title="Trusted by thousands of teams" />
-        <div className="mt-12"><Testimonials /></div>
-      </Section>
-
       {/* FAQ */}
-      <Section>
+      <Section className="bg-muted/30">
         <SectionHeading eyebrow="FAQ" title="Questions, answered" />
         <div className="mt-10"><FaqSection faqs={HOME_FAQ} /></div>
       </Section>

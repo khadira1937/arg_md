@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LegalShell } from "@/components/marketing/legal";
 import { pageMetadata } from "@/lib/seo";
 import { brand } from "@/config/brand";
+import { cookieList } from "@/config/cookies";
 
 export const metadata: Metadata = pageMetadata({ title: "Privacy Policy", path: "/privacy" });
 
@@ -24,7 +25,20 @@ export default function PrivacyPage() {
       <h2>Your rights</h2>
       <p>Subject to applicable law (including GDPR/CCPA), you may access, correct, export or delete your personal data by contacting {brand.email.support}.</p>
       <h2>International transfers</h2>
-      <p>We may process data in regions where our data centers operate, using appropriate safeguards for cross-border transfers.</p>
+      <p>We may process data in regions where our partner data centers operate, using appropriate safeguards for cross-border transfers.</p>
+      <h2>Cookies</h2>
+      <p>
+        Essential cookies are required to run the site and are always active. Analytics and affiliate
+        (tracking) cookies load only after you accept them in our cookie banner; you can decline without
+        affecting core functionality.
+      </p>
+      <ul>
+        {cookieList.map((c) => (
+          <li key={c.name}>
+            <strong>{c.name}</strong> — {c.purpose} <em>({c.provider}, {c.duration}, {c.category})</em>
+          </li>
+        ))}
+      </ul>
     </LegalShell>
   );
 }

@@ -1,23 +1,41 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { brand } from "@/config/brand";
 
-export function Logo({ className, href = "/" }: { className?: string; href?: string }) {
+/** CloudynHost wordmark: a cloud + upward "scale" spark in a gradient tile. */
+export function Logo({
+  className,
+  href = "/",
+  showText = true,
+}: {
+  className?: string;
+  href?: string;
+  showText?: boolean;
+}) {
   return (
-    <Link href={href} className={cn("flex items-center gap-2 font-display", className)}>
-      <span className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-white shadow-md shadow-primary/30">
+    <Link href={href} className={cn("group flex items-center gap-2.5 font-display", className)}>
+      <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-md shadow-primary/30 ring-1 ring-white/20 transition-transform group-hover:scale-105">
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
           <path
-            d="M6 16.5A4.5 4.5 0 0 1 6.7 7.6 6 6 0 0 1 18 9a3.5 3.5 0 0 1-.5 7H6.5"
+            d="M7 17.5a4 4 0 0 1 .5-7.96A5.5 5.5 0 0 1 18 9.2a3.3 3.3 0 0 1 .2 6.3"
             stroke="currentColor"
-            strokeWidth="1.8"
+            strokeWidth="1.7"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <circle cx="12" cy="12.5" r="1.4" fill="currentColor" />
+          <path
+            d="M12 8.5l-2.4 4.2h2.1l-1 3.3 3.6-4.6h-2.2l1.1-2.9z"
+            fill="currentColor"
+            stroke="currentColor"
+            strokeWidth="0.6"
+            strokeLinejoin="round"
+          />
         </svg>
       </span>
-      <span className="text-lg font-bold tracking-tight">{brand.shortName}</span>
+      {showText && (
+        <span className="text-lg font-bold tracking-tight">
+          Cloudyn<span className="text-primary">Host</span>
+        </span>
+      )}
     </Link>
   );
 }

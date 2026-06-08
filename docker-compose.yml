@@ -1,18 +1,18 @@
 services:
   db:
     image: postgres:16-alpine
-    container_name: aethon-db
+    container_name: cloudynhost-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: aethon
-      POSTGRES_PASSWORD: aethon
-      POSTGRES_DB: aethon
+      POSTGRES_USER: cloudynhost
+      POSTGRES_PASSWORD: cloudynhost
+      POSTGRES_DB: cloudynhost
     ports:
       - "5432:5432"
     volumes:
-      - aethon-db-data:/var/lib/postgresql/data
+      - cloudynhost-db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U aethon -d aethon"]
+      test: ["CMD-SHELL", "pg_isready -U cloudynhost -d cloudynhost"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -21,11 +21,11 @@ services:
   # UI at http://localhost:8025 , SMTP on 1025 (matches .env defaults).
   mail:
     image: axllent/mailpit:latest
-    container_name: aethon-mail
+    container_name: cloudynhost-mail
     restart: unless-stopped
     ports:
       - "1025:1025"
       - "8025:8025"
 
 volumes:
-  aethon-db-data:
+  cloudynhost-db-data:

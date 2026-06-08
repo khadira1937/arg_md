@@ -75,7 +75,7 @@ export function RegisterForm() {
     <form action={action} className="space-y-4">
       <div>
         <h1 className="text-xl font-bold">Create your account</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Start deploying in minutes.</p>
+        <p className="mt-1 text-sm text-muted-foreground">It only takes a minute to get started.</p>
       </div>
       <Alert state={state} />
       <div className="space-y-2">

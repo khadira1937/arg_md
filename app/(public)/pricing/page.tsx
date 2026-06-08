@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/marketing/product-card";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { Button } from "@/components/ui/button";
+import { TrustBar } from "@/components/marketing/trust-bar";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -30,18 +31,19 @@ export default async function PricingPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-grid" />
-        <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
+        <div className="pointer-events-none absolute inset-0 bg-mesh" />
         <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 animate-aurora rounded-full bg-secondary/15 blur-3xl" />
         <div className="container relative py-16 text-center sm:py-20">
-          <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl">
             Simple, <span className="text-gradient">transparent pricing</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-            Pick a product to see live plans and configure exactly what you need. No hidden fees, cancel any time.
+          <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
+            Pick a product to see live plans and configure exactly what you need. Renewal prices are shown upfront — no hidden fees, cancel any time.
           </p>
           <div className="mt-7">
             <Button asChild variant="outline"><Link href="/compare">Compare plans side by side</Link></Button>
           </div>
+          <TrustBar className="mx-auto mt-12 max-w-4xl text-left" />
         </div>
       </section>
 

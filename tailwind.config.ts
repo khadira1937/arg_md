@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: ["class"],
@@ -67,9 +68,14 @@ const config: Config = {
       },
       backgroundImage: {
         "brand-gradient":
-          "linear-gradient(135deg, hsl(243 75% 59%) 0%, hsl(262 83% 58%) 50%, hsl(199 89% 48%) 100%)",
+          "linear-gradient(135deg, hsl(187 92% 44%) 0%, hsl(201 96% 47%) 45%, hsl(244 80% 63%) 100%)",
+        "brand-gradient-soft":
+          "linear-gradient(135deg, hsl(187 92% 44% / 0.12) 0%, hsl(244 80% 63% / 0.12) 100%)",
         "brand-glow":
-          "radial-gradient(60% 60% at 50% 0%, hsl(262 83% 58% / 0.18) 0%, transparent 100%)",
+          "radial-gradient(60% 60% at 50% 0%, hsl(201 96% 50% / 0.16) 0%, transparent 100%)",
+      },
+      boxShadow: {
+        glow: "0 0 0 1px hsl(201 96% 45% / 0.18), 0 20px 60px -24px hsl(201 96% 45% / 0.45)",
       },
       keyframes: {
         "accordion-down": {
@@ -97,7 +103,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 };
 
 export default config;

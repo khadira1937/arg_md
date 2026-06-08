@@ -1,4 +1,4 @@
-# Aethon Cloud — Original Product Catalog & Pricing Plan
+# CloudynHost — Original Product Catalog & Pricing Plan
 
 Original brand, names, and copy. Pricing **mirrors competitor structure/positioning** (tier
 gaps, term discounts, renewal uplift, setup fees, inquiry-only enterprise) without copying

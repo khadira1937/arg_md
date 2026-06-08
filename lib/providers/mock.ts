@@ -21,7 +21,7 @@ function randomPassword(len = 18): string {
  */
 export class MockProvider implements CloudProvider {
   readonly id = "mock";
-  readonly label = "Aethon Mock Cloud (local)";
+  readonly label = "CloudynHost Mock Cloud (local)";
 
   async provision(input: ProvisionInput): Promise<ProvisionResult> {
     // Simulate brief work without blocking too long in dev.
@@ -29,7 +29,7 @@ export class MockProvider implements CloudProvider {
 
     const ref = `mock-${crypto.randomBytes(6).toString("hex")}`;
     const region = input.locationSlug ?? "us-east";
-    const hostname = `${input.hostnameHint}.${region}.aethon-mock.cloud`.toLowerCase();
+    const hostname = `${input.hostnameHint}.${region}.cloudynhost-mock.com`.toLowerCase();
     const ip = randomIp();
 
     const isPanel = ["SHARED", "WORDPRESS", "WOOCOMMERCE", "CLOUD", "AGENCY"].includes(

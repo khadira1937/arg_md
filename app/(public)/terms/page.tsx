@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalShell } from "@/components/marketing/legal";
 import { pageMetadata } from "@/lib/seo";
 import { brand } from "@/config/brand";
@@ -14,11 +15,11 @@ export default function TermsPage() {
       <h2>2. Subscriptions & billing</h2>
       <p>Paid Services are billed in advance on the billing cycle you select and renew automatically at the then-current renewal price until cancelled. You authorize us to charge your payment method via our payment processor, Stripe.</p>
       <h2>3. Acceptable use</h2>
-      <p>Your use of the Services must comply with our <a href="/acceptable-use-policy">Acceptable Use Policy</a>. We may suspend or terminate Services that violate it.</p>
+      <p>Your use of the Services must comply with our <Link href="/acceptable-use-policy">Acceptable Use Policy</Link>. We may suspend or terminate Services that violate it.</p>
       <h2>4. Cancellation & refunds</h2>
-      <p>You may cancel at any time from your dashboard. Refund eligibility is described in our <a href="/refund-policy">Refund Policy</a>.</p>
+      <p>You may cancel at any time from your dashboard. Refund eligibility is described in our <Link href="/refund-policy">Refund Policy</Link>.</p>
       <h2>5. Service levels</h2>
-      <p>Availability commitments are described in our <a href="/sla">SLA</a>. Except as expressly stated there, the Services are provided &quot;as is&quot;.</p>
+      <p>Availability commitments are described in our <Link href="/sla">SLA</Link>. Except as expressly stated there, the Services are provided &quot;as is&quot;.</p>
       <h2>6. Limitation of liability</h2>
       <p>To the maximum extent permitted by law, {brand.name} will not be liable for indirect, incidental or consequential damages, and our aggregate liability is limited to the amounts you paid in the prior twelve months.</p>
       <h2>7. Changes</h2>
