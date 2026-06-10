@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Section, SectionHeading } from "@/components/marketing/section";
 import { Reveal } from "@/components/marketing/reveal";
 import { ProductCard } from "@/components/marketing/product-card";
+import { DashboardPreview } from "@/components/marketing/dashboard-preview";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { getFeaturedProducts, getLocations, lowestPrice } from "@/lib/catalog";
@@ -96,49 +97,8 @@ export default async function HomePage() {
             </Reveal>
           </div>
 
-          {/* Product preview mockup */}
-          <Reveal delay={0.25}>
-            <div className="mx-auto mt-16 max-w-4xl">
-              <div className="overflow-hidden rounded-2xl border bg-card/80 shadow-premium glass">
-                <div className="flex items-center gap-2 border-b bg-muted/40 px-4 py-3">
-                  <span className="h-3 w-3 rounded-full bg-destructive/60" />
-                  <span className="h-3 w-3 rounded-full bg-amber-400/70" />
-                  <span className="h-3 w-3 rounded-full bg-success/60" />
-                  <span className="ml-3 flex-1 truncate rounded-md bg-background/70 px-3 py-1 text-xs text-muted-foreground">
-                    app.{brand.domain}/dashboard
-                  </span>
-                  <span className="hidden text-[10px] uppercase tracking-wide text-muted-foreground sm:inline">Dashboard preview</span>
-                </div>
-                <div className="grid gap-4 p-5 sm:grid-cols-3">
-                  {[
-                    { k: "Active services", v: "3", c: "text-primary" },
-                    { k: "Uptime (30d)", v: brand.stats.uptime, c: "text-success" },
-                    { k: "Open tickets", v: "0", c: "text-foreground" },
-                  ].map((m) => (
-                    <div key={m.k} className="rounded-xl border bg-background/60 p-4">
-                      <p className="text-xs text-muted-foreground">{m.k}</p>
-                      <p className={`mt-1 font-display text-2xl font-bold ${m.c}`}>{m.v}</p>
-                    </div>
-                  ))}
-                  <div className="sm:col-span-3">
-                    <div className="space-y-2.5">
-                      {[
-                        { name: "production-web-01", region: "🇺🇸 Ashburn", status: "Active" },
-                        { name: "eu-postgres-db", region: "🇩🇪 Frankfurt", status: "Active" },
-                        { name: "gpu-inference-node", region: "🇸🇬 Singapore", status: "Active" },
-                      ].map((row) => (
-                        <div key={row.name} className="flex items-center justify-between rounded-lg border bg-background/40 px-3 py-2.5 text-sm">
-                          <span className="flex items-center gap-2 font-medium"><span className="h-2 w-2 rounded-full bg-success" />{row.name}</span>
-                          <span className="hidden text-xs text-muted-foreground sm:inline">{row.region}</span>
-                          <span className="rounded-full bg-success/15 px-2 py-0.5 text-xs font-medium text-success">{row.status}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
+          {/* Product preview — live-feeling dashboard console (see DashboardPreview) */}
+          <DashboardPreview className="mx-auto mt-16 max-w-4xl" />
 
           {/* Stats strip — specific figures; uptime framed as a target (see SLA) */}
           <Reveal delay={0.3}>
