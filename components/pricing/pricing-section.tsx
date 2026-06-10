@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { BillingCycle } from "@prisma/client";
-import { Check, Loader2, Sparkles, MapPin, Plus, Minus } from "lucide-react";
+import { Check, Loader2, Sparkles, MapPin, Plus, Minus, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -43,8 +43,26 @@ export function PricingSection({
   );
   const [locationId, setLocationId] = React.useState<string | undefined>(locations[0]?.id);
   const [pending, setPending] = React.useState<string | null>(null);
+  const [cartError, setCartError] = React.useState<string | null>(null);
   const [selectedAddons, setSelectedAddons] = React.useState<Record<string, Set<string>>>({});
   const [expanded, setExpanded] = React.useState<Record<string, boolean>>({});
+
+  /** Honest term discount vs. the monthly cycle, derived from real prices. */
+  const cycleDiscount = React.useCallback(
+    (c: BillingCycle) => {
+      if (CYCLE_MONTHS[c] < 12) return 0;
+      for (const plan of plans) {
+        const m = plan.prices.find((p) => p.billingCycle === "MONTHLY");
+        const t = plan.prices.find((p) => p.billingCycle === c);
+        if (m && t) {
+          const d = savingsPercent(effectiveMonthly(t.amount, c), effectiveMonthly(m.amount, "MONTHLY"));
+          if (d > 0) return d;
+        }
+      }
+      return 0;
+    },
+    [plans],
+  );
 
   const toggleAddon = (planId: string, addonId: string) => {
     setSelectedAddons((prev) => {
@@ -55,6 +73,7 @@ export function PricingSection({
   };
 
   async function handleAdd(plan: ClientPlan) {
+    setCartError(null);
     setPending(plan.id);
     const res = await addToCartAction({
       planId: plan.id,
@@ -65,28 +84,44 @@ export function PricingSection({
     });
     setPending(null);
     if (res.ok) router.push("/cart");
-    else alert(res.error);
+    else setCartError(res.error ?? "Something went wrong. Please try again.");
   }
 
   return (
     <div>
       {/* Controls */}
       <div className="flex flex-col items-center gap-5">
-        <div className="inline-flex flex-wrap items-center justify-center gap-1 rounded-full border bg-muted/50 p-1">
+        <div
+          role="group"
+          aria-label="Billing term"
+          className="inline-flex flex-wrap items-center justify-center gap-1 rounded-full border bg-muted/50 p-1"
+        >
           {availableCycles.map((c) => {
-            const isAnnualPlus = CYCLE_MONTHS[c] >= 12;
+            const discount = cycleDiscount(c);
+            const active = cycle === c;
             return (
               <button
                 key={c}
+                type="button"
+                aria-pressed={active}
                 onClick={() => setCycle(c)}
                 className={cn(
-                  "relative rounded-full px-4 py-1.5 text-sm font-medium transition-all",
-                  cycle === c ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
+                  "relative flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
+                  active
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {CYCLE_LABEL[c]}
-                {isAnnualPlus && cycle !== c && (
-                  <span className="ml-1 hidden text-[10px] font-bold text-success sm:inline">save</span>
+                {discount > 0 && (
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 py-0.5 text-[10px] font-bold leading-none",
+                      active ? "bg-success/15 text-success" : "bg-success/10 text-success",
+                    )}
+                  >
+                    −{discount}%
+                  </span>
                 )}
               </button>
             );
@@ -95,11 +130,15 @@ export function PricingSection({
 
         {locations.length > 0 && (
           <div className="flex items-center gap-2 text-sm">
-            <MapPin className="h-4 w-4 text-muted-foreground" />
+            <MapPin className="h-4 w-4 text-muted-foreground" aria-hidden />
+            <label htmlFor="pricing-location" className="sr-only">
+              Data center location
+            </label>
             <select
+              id="pricing-location"
               value={locationId}
               onChange={(e) => setLocationId(e.target.value)}
-              className="rounded-lg border bg-background px-3 py-1.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              className="cursor-pointer rounded-lg border bg-background px-3 py-1.5 text-sm shadow-sm transition-colors hover:border-primary/40 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1"
             >
               {locations.map((l) => (
                 <option key={l.id} value={l.id}>
@@ -110,6 +149,17 @@ export function PricingSection({
           </div>
         )}
       </div>
+
+      {/* Inline cart error (replaces a blocking alert) */}
+      {cartError && (
+        <div
+          role="alert"
+          className="mx-auto mt-6 flex max-w-md items-center gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        >
+          <AlertCircle className="h-4 w-4 shrink-0" />
+          {cartError}
+        </div>
+      )}
 
       {/* Cards */}
       <div
@@ -160,7 +210,7 @@ export function PricingSection({
                 ) : (
                   <>
                     <div className="flex items-baseline gap-1">
-                      <span className="font-display text-4xl font-bold">{formatMoney(perMonth)}</span>
+                      <span className="font-display text-4xl font-bold tabular-nums">{formatMoney(perMonth)}</span>
                       <span className="text-sm text-muted-foreground">USD/mo</span>
                     </div>
                     {save > 0 && (

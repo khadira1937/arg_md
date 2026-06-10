@@ -40,8 +40,15 @@ export default async function PricingPage() {
           <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
             Pick a product to see live plans and configure exactly what you need. Renewal prices are shown upfront — no hidden fees, cancel any time.
           </p>
-          <div className="mt-7">
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild variant="outline"><Link href="/compare">Compare plans side by side</Link></Button>
+            <p className="text-sm text-muted-foreground">
+              Eligible hosting plans include a{" "}
+              <Link href="/refund-policy" className="font-medium text-primary hover:underline">
+                30-day money-back guarantee
+              </Link>
+              .
+            </p>
           </div>
           <TrustBar className="mx-auto mt-12 max-w-4xl text-left" />
         </div>

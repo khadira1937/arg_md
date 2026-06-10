@@ -3,7 +3,7 @@ import { priceRows, featuresFromSpecs, type SeedProduct } from "./seed-data";
 const genericFaq = (name: string) => [
   {
     question: `What makes ${name} different?`,
-    answer: `Every ${name} plan runs on NVMe-backed infrastructure with free SSL, automated backups options, DDoS filtering and 24/7 expert support, all backed by our 99.99% uptime SLA.`,
+    answer: `Every ${name} plan runs on NVMe-backed infrastructure with free SSL, automated backup options, DDoS filtering and 24/7 expert support, all backed by our 99.9% uptime SLA.`,
   },
   {
     question: "Can I upgrade or downgrade later?",
@@ -39,7 +39,7 @@ export const catalog: SeedProduct[] = [
       "NVMe storage, free SSL, free CDN and a control panel anyone can use — from your first site to your hundredth.",
     seoTitle: "Web Hosting — Fast NVMe Shared Hosting",
     seoDescription:
-      "Affordable, lightning-fast web hosting on NVMe SSD with free SSL, CDN and 24/7 support. Plans from $2.79/mo.",
+      "Affordable, fast web hosting on NVMe SSD with free SSL, CDN and 24/7 support. Plans from $2.79/mo.",
     faq: genericFaq("Web Hosting"),
     plans: [
       {
@@ -76,7 +76,7 @@ export const catalog: SeedProduct[] = [
     shortDescription: "Managed WordPress, tuned for speed and security.",
     description:
       "Managed WordPress hosting with automatic core updates, staging, server-level caching and WP-CLI. We handle the infrastructure so you can focus on content.",
-    heroHeadline: "WordPress, fully managed and blazing fast",
+    heroHeadline: "WordPress, fully managed and fast",
     heroSubheadline:
       "Automatic updates, one-click staging, object caching and expert WP support on NVMe infrastructure.",
     seoTitle: "Managed WordPress Hosting",

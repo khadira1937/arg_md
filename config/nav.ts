@@ -117,7 +117,7 @@ export const mainNav: NavItem[] = [
       {
         title: "Managed services",
         links: [
-          { title: "Website Migration", href: "/website-migration", description: "Free, done-for-you moves", icon: ArrowRightLeft },
+          { title: "Website Migration", href: "/website-migration", description: "Done-for-you, free on annual plans", icon: ArrowRightLeft },
           { title: "Managed Private Cloud", href: "/managed-private-cloud", description: "Dedicated virtualization", icon: Cloud },
           { title: "DevOps Services", href: "/devops-services", description: "Ops expertise on tap", icon: Workflow },
           { title: "Kubernetes Solutions", href: "/kubernetes-hosting", description: "Managed clusters", icon: Container },
