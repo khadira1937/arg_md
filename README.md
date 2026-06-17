@@ -1,4 +1,4 @@
-# CloudynHost
+# HostynCloud
 
 A production-grade **cloud hosting platform** MVP — marketing site, DB-driven product
 catalog & pricing, authentication, cart, checkout (Stripe), provisioning, and customer +
@@ -57,8 +57,8 @@ npm run dev                 # http://localhost:3000
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | `admin@cloudynhost.com` | `Admin123!` |
-| Support | `support@cloudynhost.com` | `Support123!` |
+| Admin | `admin@hostyncloud.com` | `Admin123!` |
+| Support | `support@hostyncloud.com` | `Support123!` |
 | Customer | `customer@example.com` | `Customer123!` |
 
 Local mail (verification, reset, receipts) is viewable at **http://localhost:8025** (Mailpit).
@@ -112,7 +112,7 @@ no credentials are required.
 **Production — Resend (recommended):**
 ```bash
 RESEND_API_KEY=re_xxx
-EMAIL_FROM="CloudynHost <no-reply@yourdomain.com>"   # domain verified in Resend
+EMAIL_FROM="HostynCloud <no-reply@yourdomain.com>"   # domain verified in Resend
 ```
 
 **Production — SMTP (Postmark / SES / Mailgun / etc.):**
@@ -122,7 +122,7 @@ SMTP_PORT=587            # 465 if using TLS
 SMTP_USER=...
 SMTP_PASS=...
 SMTP_SECURE=false        # true for port 465
-EMAIL_FROM="CloudynHost <no-reply@yourdomain.com>"
+EMAIL_FROM="HostynCloud <no-reply@yourdomain.com>"
 ```
 
 Verify delivery any time with `npm run email:test you@example.com` or from `/admin/email`.

@@ -1,4 +1,4 @@
-# CloudynHost — Database Design
+# HostynCloud — Database Design
 
 PostgreSQL via Prisma. Money stored as **integer minor units** (cents) + `currency` to avoid
 float errors. Timestamps `createdAt`/`updatedAt` on all mutable models. Soft flags

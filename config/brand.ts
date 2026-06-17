@@ -3,25 +3,25 @@
  * Nothing in the UI hardcodes the brand name — it all reads from this file.
  */
 export const brand = {
-  name: "CloudynHost",
-  shortName: "CloudynHost",
-  domain: "cloudynhost.com",
-  legalName: "CloudynHost",
-  tagline: "Cloud hosting built for builders.",
+  name: "HostynCloud",
+  shortName: "HostynCloud",
+  domain: "hostyncloud.com",
+  legalName: "HostynCloud",
+  tagline: "Fast web hosting, VPS & cloud servers.",
   description:
-    "Fast, reliable cloud hosting, VPS and dedicated servers with transparent pricing, secure Stripe checkout and support-focused service — built for developers, startups and growing businesses.",
+    "Launch websites, apps and online stores on NVMe-powered web hosting, VPS and cloud servers — with transparent pricing, free SSL, secure Stripe checkout and real support after payment.",
   email: {
-    support: "support@cloudynhost.com",
-    sales: "sales@cloudynhost.com",
-    billing: "billing@cloudynhost.com",
-    abuse: "abuse@cloudynhost.com",
+    support: "support@hostyncloud.com",
+    sales: "sales@hostyncloud.com",
+    billing: "billing@hostyncloud.com",
+    abuse: "abuse@hostyncloud.com",
   },
   // Social links. Leave a value as "" to hide that link everywhere.
   // TODO: replace with real data source — your actual profile URLs.
   social: {
-    x: "https://x.com/cloudynhost",
-    github: "https://github.com/cloudynhost",
-    linkedin: "https://www.linkedin.com/company/cloudynhost",
+    x: "https://x.com/hostyncloud",
+    github: "https://github.com/hostyncloud",
+    linkedin: "https://www.linkedin.com/company/hostyncloud",
   },
   // Honest, verifiable highlights only — no invented customer counts or reviews.
   stats: {

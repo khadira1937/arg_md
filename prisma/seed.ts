@@ -42,7 +42,7 @@ const addons: AddonSeed[] = [
 ];
 
 async function main() {
-  console.log("🌱 Seeding CloudynHost...");
+  console.log("🌱 Seeding HostynCloud...");
 
   // Categories
   const categoryMap = new Map<string, string>();
@@ -162,14 +162,14 @@ async function main() {
   const customerPass = await bcrypt.hash("Customer123!", 12);
 
   await prisma.user.upsert({
-    where: { email: "admin@cloudynhost.com" },
+    where: { email: "admin@hostyncloud.com" },
     update: {},
-    create: { email: "admin@cloudynhost.com", name: "Ada Admin", role: "ADMIN", hashedPassword: adminPass, emailVerified: new Date(), profile: { create: { company: "CloudynHost" } } },
+    create: { email: "admin@hostyncloud.com", name: "Ada Admin", role: "ADMIN", hashedPassword: adminPass, emailVerified: new Date(), profile: { create: { company: "HostynCloud" } } },
   });
   await prisma.user.upsert({
-    where: { email: "support@cloudynhost.com" },
+    where: { email: "support@hostyncloud.com" },
     update: {},
-    create: { email: "support@cloudynhost.com", name: "Sam Support", role: "SUPPORT", hashedPassword: supportPass, emailVerified: new Date() },
+    create: { email: "support@hostyncloud.com", name: "Sam Support", role: "SUPPORT", hashedPassword: supportPass, emailVerified: new Date() },
   });
   await prisma.user.upsert({
     where: { email: "customer@example.com" },
@@ -199,7 +199,7 @@ async function main() {
   });
   const kbArticles = [
     { slug: "how-to-deploy-your-first-vps", title: "How to deploy your first VPS", excerpt: "Spin up a KVM VPS in minutes.", body: "# Deploy your first VPS\n\nChoose a plan, pick a location, and check out. Your credentials appear in the dashboard once provisioning completes." },
-    { slug: "connecting-a-domain", title: "Connecting a domain to your hosting", excerpt: "Point your domain at CloudynHost.", body: "# Connecting a domain\n\nUpdate your domain's A record to your service IP, or use our nameservers." },
+    { slug: "connecting-a-domain", title: "Connecting a domain to your hosting", excerpt: "Point your domain at HostynCloud.", body: "# Connecting a domain\n\nUpdate your domain's A record to your service IP, or use our nameservers." },
     { slug: "enabling-free-ssl", title: "Enabling free SSL", excerpt: "Secure your site with one click.", body: "# Enabling free SSL\n\nSSL is automatically provisioned for active domains. Force HTTPS from the panel." },
   ];
   for (const a of kbArticles) {
@@ -212,7 +212,7 @@ async function main() {
   console.log("  ✓ knowledge base");
 
   // Blog
-  const admin = await prisma.user.findUnique({ where: { email: "admin@cloudynhost.com" } });
+  const admin = await prisma.user.findUnique({ where: { email: "admin@hostyncloud.com" } });
   const posts = [
     { slug: "why-nvme-storage-matters", title: "Why NVMe storage makes your site feel instant", excerpt: "The performance case for NVMe.", body: "NVMe storage delivers dramatically lower latency than SATA SSDs..." },
     { slug: "choosing-vps-vs-cloud", title: "VPS vs Cloud Hosting: which should you pick?", excerpt: "A practical comparison.", body: "Both give you dedicated resources. Cloud hosting is managed; a VPS gives you full root control..." },
@@ -234,8 +234,8 @@ async function main() {
   console.log("  ✓ announcement");
 
   console.log("✅ Seed complete.\n");
-  console.log("   Admin:    admin@cloudynhost.com / Admin123!");
-  console.log("   Support:  support@cloudynhost.com / Support123!");
+  console.log("   Admin:    admin@hostyncloud.com / Admin123!");
+  console.log("   Support:  support@hostyncloud.com / Support123!");
   console.log("   Customer: customer@example.com / Customer123!");
 }
 

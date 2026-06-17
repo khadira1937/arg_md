@@ -458,8 +458,8 @@ export const catalog: SeedProduct[] = [
     sortOrder: 1,
     shortDescription: "Free, done-for-you website migration.",
     description:
-      "Our engineers move your sites, databases and email to CloudynHost with zero downtime — free with annual plans, or as a standalone service.",
-    heroHeadline: "Switch to CloudynHost with zero downtime",
+      "Our engineers move your sites, databases and email to HostynCloud with zero downtime — free with annual plans, or as a standalone service.",
+    heroHeadline: "Switch to HostynCloud with zero downtime",
     heroSubheadline: "Our team migrates your sites, databases and email for you — for free on annual plans.",
     seoTitle: "Free Website Migration",
     seoDescription: "Free, expert website migration with zero downtime. Standalone from $29.",

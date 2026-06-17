@@ -82,7 +82,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <CtaSection title="Start hosting with CloudynHost" primaryLabel="Get started" primaryHref="/register" />
+      <CtaSection title="Start hosting with HostynCloud" primaryLabel="Get started" primaryHref="/register" />
     </>
   );
 }

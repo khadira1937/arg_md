@@ -1,4 +1,4 @@
-# CloudynHost — Architecture Plan
+# HostynCloud — Architecture Plan
 
 ## 1. Stack
 

@@ -129,7 +129,7 @@ export function DashboardPreview({ className }: { className?: string }) {
       viewport={{ once: true, margin: "-80px" }}
       className={cn("overflow-hidden rounded-2xl border bg-card/80 shadow-premium glass", className)}
       role="group"
-      aria-label="CloudynHost dashboard preview"
+      aria-label="HostynCloud dashboard preview"
     >
       {/* Console chrome */}
       <div className="flex items-center gap-2 border-b bg-muted/40 px-4 py-3">

@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function CtaSection({
-  title = "Ready to launch on CloudynHost?",
+  title = "Ready to launch on HostynCloud?",
   description = "Choose a plan, check out securely with Stripe, and we'll set up your service fast — details delivered straight to your dashboard.",
   primaryHref = "/pricing",
   primaryLabel = "View pricing",

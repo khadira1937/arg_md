@@ -26,8 +26,9 @@ export const metadata: Metadata = {
     title: `${brand.name} — ${brand.tagline}`,
     description: siteConfig.description,
   },
-  twitter: { card: "summary_large_image", title: brand.name, description: siteConfig.description },
-  icons: { icon: "/favicon.ico" },
+  twitter: { card: "summary_large_image", title: `${brand.name} — ${brand.tagline}`, description: siteConfig.description },
+  // Favicon (app/icon.svg) and social preview (app/opengraph-image.tsx) are
+  // wired automatically via Next.js file-based metadata conventions.
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
