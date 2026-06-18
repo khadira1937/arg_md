@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  /* CloudynHost identity — a cyan → blue → indigo "cloud" system.
-     Cooler, more distinctive and more trustworthy than a generic violet SaaS theme. */
+  /* HostynCloud — cyan → sky → indigo "cloud" system on a deep-navy base.
+     Multi-hue: sky --primary, indigo --secondary, cyan --accent. Brand gradient
+     is the signature; semantic colors for availability/warning/error; explicit
+     dark-band surfaces for intentional dark sections on light pages. */
   :root {
-    --background: 210 40% 99%;
-    --foreground: 222 47% 11%;
+    --background: 210 40% 99%; /* near-white page #fbfcfe */
+    --foreground: 222 47% 11%; /* deep navy ink #0f172a */
 
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
@@ -15,29 +17,53 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 201 96% 40%;
+    --primary: 201 96% 40%; /* sky / electric blue #0588c8 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 224 76% 55%;
+    --secondary: 224 76% 55%; /* indigo-blue #3b5fe0 */
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 187 92% 40%;
+    --accent: 187 92% 40%; /* cyan #08b3c4 */
     --accent-foreground: 0 0% 100%;
 
-    --muted: 210 25% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 25% 96%; /* tinted neutral #f1f4f8 */
+    --muted-foreground: 215 16% 47%; /* secondary text #66748c */
 
-    --destructive: 0 84% 60%;
+    /* Semantic */
+    --destructive: 0 84% 60%; /* #ef4444 */
     --destructive-foreground: 0 0% 100%;
-
-    --success: 152 69% 38%;
+    --success: 152 69% 38%; /* #1ea268 — online / paid */
     --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%; /* #f59e0b — pending */
+    --warning-foreground: 222 47% 11%;
 
-    --border: 214 24% 90%;
+    --border: 214 24% 90%; /* hairline #dce1ea */
     --input: 214 24% 90%;
-    --ring: 201 96% 42%;
+    --ring: 201 96% 42%; /* focus ring (primary) */
 
-    --radius: 0.85rem;
+    /* Dark "infra" band surfaces (constant — used for alternating dark sections). */
+    --band: 222 47% 7%; /* #0A0E1A */
+    --band-raised: 222 47% 11%; /* #0F172A */
+    --band-card: 221 39% 11%; /* #111827 */
+    --band-border: 215 33% 18%; /* #1E293B */
+    --band-foreground: 210 30% 98%;
+    --band-muted: 215 20% 65%; /* #94A3B8 */
+
+    /* Convenience hex (non-hsl contexts: SVG fills, dark CTA panels). */
+    --navy-900: #0b1220; /* darkest hero/footer navy */
+    --navy-800: #0f172a;
+    --navy-700: #1e293b;
+    --cyan-500: #06b6d4; /* gradient stop 1 */
+    --sky-500: #0ea5e9; /* gradient stop 2 */
+    --blue-600: #2563eb;
+    --indigo-500: #6366f1; /* gradient stop 3 */
+
+    /* Brand gradients (signature). Mirror the tailwind bg-* utilities as CSS vars. */
+    --brand-gradient: linear-gradient(135deg, hsl(187 92% 44%) 0%, hsl(201 96% 47%) 45%, hsl(244 80% 63%) 100%);
+    --brand-gradient-soft: linear-gradient(135deg, hsl(187 92% 44% / 0.12) 0%, hsl(244 80% 63% / 0.12) 100%);
+    --brand-glow: radial-gradient(60% 60% at 50% 0%, hsl(201 96% 50% / 0.16) 0%, transparent 100%);
+
+    --radius: 0.85rem; /* base for buttons/inputs; cards use 2xl */
   }
 
   .dark {
@@ -122,6 +148,25 @@
   .bg-dots {
     background-image: radial-gradient(hsl(var(--foreground) / 0.07) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+
+  /* Faint dotted/grid textures for the dark "infra" bands. */
+  .bg-dots-band {
+    background-image: radial-gradient(hsl(0 0% 100% / 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .bg-grid-band {
+    background-image:
+      linear-gradient(to right, hsl(0 0% 100% / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 100% / 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 55%, transparent 100%);
+  }
+
+  /* Tabular figures for mono technical data (aligns prices/specs in columns). */
+  .tnum {
+    font-variant-numeric: tabular-nums;
   }
 
   /* Frosted card surface. */

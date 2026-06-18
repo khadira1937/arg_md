@@ -35,3 +35,16 @@ yarn-error.log*
 
 # atomic-write / tool temp artifacts
 *.tmp.*
+
+# design-handoff reference artifacts dumped into repo root (reference-only, never ship)
+/*.jsx.txt
+/*.jsx (1).txt
+/DESIGN_GUIDE*.md
+/README (1)*.md
+/colors*.css
+/fonts*.css
+/spacing*.css
+/styles*.css
+/typography*.css
+/hostyncloud-mark*.png
+/hostyn-cloud.png
