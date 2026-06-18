@@ -209,8 +209,8 @@ export function PricingSection({
                   <p className="text-2xl font-bold">Custom</p>
                 ) : (
                   <>
-                    <div className="flex items-baseline gap-1">
-                      <span className="font-display text-4xl font-bold tabular-nums">{formatMoney(perMonth)}</span>
+                    <div className="flex items-baseline gap-1 font-mono tnum">
+                      <span className="text-4xl font-bold">{formatMoney(perMonth)}</span>
                       <span className="text-sm text-muted-foreground">USD/mo</span>
                     </div>
                     {save > 0 && (
@@ -219,10 +219,10 @@ export function PricingSection({
                         <span className="text-muted-foreground"> off the renewal rate</span>
                       </p>
                     )}
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="mt-1 font-mono text-xs text-muted-foreground">
                       Renews at {formatMoney(renewalMonth)} USD/mo
                     </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="mt-1 font-mono text-xs text-muted-foreground">
                       Billed {formatMoney(price.amount)} USD {CYCLE_LABEL[price.billingCycle].toLowerCase()}
                       {price.setupFee > 0 && ` · ${formatMoney(price.setupFee)} USD setup`}
                     </p>
@@ -250,7 +250,7 @@ export function PricingSection({
                   <li key={i} className={cn("flex items-start gap-2", !f.included && "opacity-40")}>
                     <Check className={cn("mt-0.5 h-4 w-4 shrink-0", f.highlight ? "text-primary" : "text-success")} />
                     <span>
-                      {f.value ? <span className="font-medium">{f.value}</span> : null} {f.label}
+                      {f.value ? <span className="font-mono font-medium">{f.value}</span> : null} {f.label}
                     </span>
                   </li>
                 ))}
