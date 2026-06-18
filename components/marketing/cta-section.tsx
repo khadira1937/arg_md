@@ -19,21 +19,21 @@ export function CtaSection({
 }) {
   return (
     <div className="container py-16 sm:py-24">
-      <div className="relative overflow-hidden rounded-[2rem] bg-brand-gradient px-6 py-16 text-center text-white shadow-glow sm:px-16">
-        <div className="pointer-events-none absolute inset-0 opacity-25 [background:radial-gradient(60%_70%_at_50%_0%,white,transparent)]" />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)] [background-size:40px_40px]" />
+      <div className="relative overflow-hidden rounded-2xl border border-band-border bg-band px-6 py-16 text-center text-band-foreground sm:px-16">
+        <div className="pointer-events-none absolute inset-0 bg-grid-band opacity-70" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
         <div className="relative mx-auto max-w-2xl">
           <h2 className="text-balance font-display text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/90">{description}</p>
+          <p className="mx-auto mt-4 max-w-xl text-band-muted">{description}</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" className="bg-white text-primary shadow-lg hover:bg-white/90">
+            <Button asChild size="lg" variant="gradient">
               <Link href={primaryHref}>{primaryLabel} <ArrowRight className="h-4 w-4" /></Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white/20 hover:text-white"
+              className="border-band-border bg-band-card text-band-foreground hover:bg-band-card/70 hover:text-band-foreground"
             >
               <Link href={secondaryHref}>{secondaryLabel}</Link>
             </Button>

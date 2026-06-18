@@ -37,10 +37,19 @@ export type MegaMenuColumn = {
   links: NavLink[];
 };
 
+export type NavCta = {
+  title: string;
+  description: string;
+  href: string;
+  label: string;
+};
+
 export type NavItem = {
   title: string;
   href?: string;
   columns?: MegaMenuColumn[];
+  /** Accent call-to-action shown at the end of a mega panel. */
+  cta?: NavCta;
 };
 
 /** Primary navigation + mega menu definition (matches required IA). */
@@ -60,6 +69,12 @@ export const mainNav: NavItem[] = [
         ],
       },
     ],
+    cta: {
+      title: "Not sure which to pick?",
+      description: "Compare every hosting plan side by side.",
+      href: "/pricing",
+      label: "Compare plans",
+    },
   },
   {
     title: "Servers",
@@ -82,6 +97,12 @@ export const mainNav: NavItem[] = [
         ],
       },
     ],
+    cta: {
+      title: "Need full root access?",
+      description: "Deploy a KVM VPS with dedicated resources.",
+      href: "/vps-hosting",
+      label: "View VPS plans",
+    },
   },
   {
     title: "Domains & Email",
@@ -96,6 +117,12 @@ export const mainNav: NavItem[] = [
         ],
       },
     ],
+    cta: {
+      title: "Find your domain",
+      description: "Search live availability across popular TLDs.",
+      href: "/domains",
+      label: "Search domains",
+    },
   },
   {
     title: "Security",
@@ -110,6 +137,12 @@ export const mainNav: NavItem[] = [
         ],
       },
     ],
+    cta: {
+      title: "Security on every plan",
+      description: "Free SSL, DDoS mitigation and backups built in.",
+      href: "/security",
+      label: "Explore security",
+    },
   },
   {
     title: "Services",
@@ -124,6 +157,12 @@ export const mainNav: NavItem[] = [
         ],
       },
     ],
+    cta: {
+      title: "Free website migration",
+      description: "We'll move your site for you on annual plans.",
+      href: "/website-migration",
+      label: "Get migration help",
+    },
   },
   {
     title: "Resources",
@@ -138,6 +177,12 @@ export const mainNav: NavItem[] = [
         ],
       },
     ],
+    cta: {
+      title: "Check service status",
+      description: "Live status of our network and platform.",
+      href: "/status",
+      label: "View status",
+    },
   },
   { title: "Pricing", href: "/pricing" },
 ];

@@ -35,7 +35,7 @@ export default function DomainTransferPage() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s) => (
             <Card key={s.n} className="p-6">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gradient font-bold text-white">{s.n}</span>
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-bold text-white">{s.n}</span>
               <h3 className="mt-4 font-semibold">{s.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
             </Card>

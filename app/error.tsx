@@ -12,7 +12,7 @@ export default function GlobalErrorBoundary({ error, reset }: { error: Error & {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
-      <p className="font-display text-6xl font-bold text-gradient">Oops</p>
+      <p className="font-display text-6xl font-bold text-primary">Oops</p>
       <h1 className="mt-4 text-2xl font-bold">Something went wrong</h1>
       <p className="mt-2 max-w-sm text-muted-foreground">
         An unexpected error occurred. Our team has been notified.

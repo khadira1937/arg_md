@@ -27,7 +27,7 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">
           <h1 className="mx-auto max-w-3xl text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            Hosting that <span className="text-gradient">respects your time and budget</span>
+            Hosting that <span className="text-primary">respects your time and budget</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
             {brand.name} started with a simple belief: reliable hosting shouldn&apos;t be complicated,
@@ -42,7 +42,7 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map((v) => (
             <div key={v.title} className="h-full rounded-2xl border bg-card p-6 transition-colors hover:border-primary/30">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white"><v.icon className="h-5 w-5" /></span>
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white"><v.icon className="h-5 w-5" /></span>
               <h3 className="mt-4 font-semibold">{v.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.body}</p>
             </div>

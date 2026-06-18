@@ -46,6 +46,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
@@ -53,6 +57,15 @@ const config: Config = {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
+        },
+        // Dark "infra" band surfaces for alternating dark sections.
+        band: {
+          DEFAULT: "hsl(var(--band))",
+          raised: "hsl(var(--band-raised))",
+          card: "hsl(var(--band-card))",
+          border: "hsl(var(--band-border))",
+          foreground: "hsl(var(--band-foreground))",
+          muted: "hsl(var(--band-muted))",
         },
       },
       borderRadius: {
@@ -65,6 +78,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       backgroundImage: {
         "brand-gradient":

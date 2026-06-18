@@ -33,7 +33,7 @@ export function StatsStrip({ stats, className, variant = "card" }: { stats: Mark
       {stats.map((s) => {
         const inner = (
           <>
-            <p className="font-display text-2xl font-bold text-gradient sm:text-3xl">
+            <p className="font-display text-2xl font-bold text-primary sm:text-3xl">
               <StatValue value={s.value} />
             </p>
             <p className="mt-1 text-xs text-muted-foreground">

@@ -1,5 +1,5 @@
 import {
-  Server, Globe, ShoppingCart, Cloud, Cpu, Mail,
+  Server, Globe, Cloud, Cpu, Mail,
   HardDrive, ShieldCheck, DatabaseBackup, Activity, CreditCard, Network,
   type LucideIcon,
 } from "lucide-react";
@@ -111,22 +111,42 @@ export const INFRA_TRUST: { icon: LucideIcon; title: string; body: string }[] = 
   { icon: Cloud, title: "Scalable VPS resources", body: "Start small and scale CPU, RAM and storage as your project grows." },
 ];
 
-/** Region row — careful wording: availability depends on the chosen product. */
-export const REGION_ROW = ["United States", "Europe", "United Kingdom", "Canada", "Asia"];
+/**
+ * Live region availability. Per current confirmed footprint: United States and
+ * Europe are live; other regions are rolling out. Keep this honest.
+ */
+export const REGIONS = {
+  live: ["United States", "Europe"],
+  soon: ["United Kingdom", "Canada", "Asia"],
+};
 
-/** "How setup works" — 5 honest steps. */
+/** Dark "Infrastructure" band — real, technical callouts with mono values. */
+export const INFRA_SPECS: { icon: LucideIcon; label: string; value: string; note: string }[] = [
+  { icon: HardDrive, label: "Storage", value: "NVMe SSD", note: "Fast NVMe-backed storage on every plan." },
+  { icon: Server, label: "Virtualization", value: "KVM", note: "Full hardware virtualization on VPS plans." },
+  { icon: Cpu, label: "Isolation", value: "Dedicated vCPU/RAM", note: "Guaranteed resources, not oversold." },
+  { icon: DatabaseBackup, label: "Backups", value: "Snapshots", note: "Scheduled backups on supported plans." },
+  { icon: Network, label: "Network", value: "DDoS-filtered", note: "Always-on network-level mitigation." },
+  { icon: Globe, label: "Regions", value: "US · EU", note: "More regions rolling out." },
+];
+
+/**
+ * "How setup works" — honest steps. Provisioning is automated immediately after
+ * a successful Stripe payment; domain registration completes after the registrar
+ * confirms availability.
+ */
 export const SETUP_STEPS: { title: string; body: string }[] = [
-  { title: "Choose a hosting plan", body: "Pick the product and term that fit your project, then add it to your cart." },
+  { title: "Choose a plan", body: "Pick the product and term that fit your project, then add it to your cart." },
   { title: "Pay securely with Stripe", body: "Check out with Stripe's encrypted payment flow — we never see your card details." },
-  { title: "We prepare your service", body: "Your service is provisioned after payment. Some products are set up manually for accuracy." },
-  { title: "Get your access details by email", body: "Login and connection details are emailed to you and saved in your dashboard." },
+  { title: "Automatic provisioning", body: "Your service is provisioned automatically right after payment is confirmed." },
+  { title: "Access details by email", body: "Login and connection details are emailed to you and saved in your dashboard." },
   { title: "Manage & get support", body: "Control your services and open support tickets any time from your dashboard." },
 ];
 
-/** Quick-link category tiles. */
+/** Quick-link category tiles (dark band). WooCommerce dropped as a top-level category. */
 export const CATEGORY_TILES: { icon: LucideIcon; title: string; href: string; desc: string }[] = [
-  { icon: Globe, title: "Web & WordPress", href: "/web-hosting", desc: "Fast managed hosting" },
-  { icon: Server, title: "VPS & Dedicated", href: "/vps-hosting", desc: "Full root performance" },
-  { icon: ShoppingCart, title: "WooCommerce", href: "/woocommerce-hosting", desc: "Store-ready stacks" },
-  { icon: Cpu, title: "GPU Servers", href: "/gpu-servers", desc: "AI & rendering compute" },
+  { icon: Globe, title: "Web & WordPress", href: "/web-hosting", desc: "Fast managed hosting for sites & blogs" },
+  { icon: Server, title: "VPS & Dedicated", href: "/vps-hosting", desc: "Full root access & bare-metal power" },
+  { icon: Cloud, title: "Cloud Servers", href: "/cloud-hosting", desc: "Isolated, scalable cloud resources" },
+  { icon: Cpu, title: "GPU Servers", href: "/gpu-servers", desc: "Accelerated AI, ML & rendering" },
 ];

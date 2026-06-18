@@ -27,7 +27,7 @@ export default async function DataCentersPage() {
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">
-          <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">A global network, <span className="text-gradient">close to everyone</span></h1>
+          <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">A global network, <span className="text-primary">close to everyone</span></h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">{infrastructure.summary}</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
             {infrastructure.badges.map((b) => (

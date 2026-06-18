@@ -47,7 +47,7 @@ export default function AffiliatePage() {
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">
           <h1 className="mx-auto max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            Turn your audience into <span className="text-gradient">recurring income</span>
+            Turn your audience into <span className="text-primary">recurring income</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             Recommend hosting people actually love, and earn up to 40% commission on every referral — with transparent tracking and dependable payouts.
@@ -64,7 +64,7 @@ export default function AffiliatePage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {STEPS.map((s) => (
             <Card key={s.title} className="p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white"><s.icon className="h-5 w-5" /></span>
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white"><s.icon className="h-5 w-5" /></span>
               <h3 className="mt-4 font-semibold">{s.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
             </Card>
@@ -78,7 +78,7 @@ export default function AffiliatePage() {
           {TIERS.map((t) => (
             <Card key={t.name} className={`relative p-6 text-center ${t.popular ? "border-primary/50 ring-1 ring-primary/20" : ""}`}>
               <h3 className="font-semibold">{t.name}</h3>
-              <p className="mt-3 font-display text-4xl font-bold text-gradient">{t.rate}</p>
+              <p className="mt-3 font-display text-4xl font-bold text-primary">{t.rate}</p>
               <p className="mt-2 text-sm text-muted-foreground">{t.detail}</p>
             </Card>
           ))}

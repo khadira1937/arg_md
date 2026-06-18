@@ -48,7 +48,7 @@ export default function SecurityPage() {
         <div className="pointer-events-none absolute inset-0 bg-brand-glow" />
         <div className="container relative py-20 text-center">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            Security at <span className="text-gradient">{brand.name}</span>
+            Security at <span className="text-primary">{brand.name}</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             A plain-language overview of how we protect your account, your data and your services.
@@ -60,7 +60,7 @@ export default function SecurityPage() {
         <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
           {SECTIONS.map((s) => (
             <div key={s.title} className="h-full rounded-2xl border bg-card p-6 transition-colors hover:border-primary/30">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white">
                 <s.icon className="h-5 w-5" />
               </span>
               <h2 className="mt-4 font-semibold">{s.title}</h2>
