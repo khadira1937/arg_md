@@ -9,8 +9,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
+        // Signature brand-gradient CTA (cyan→sky→indigo). text-white (not
+        // primary-foreground, which flips dark on dark theme) stays legible on
+        // the gradient; hover brightens + deepens the brand-tinted shadow.
         gradient:
-          "bg-brand-gradient text-white shadow-lg shadow-primary/25 hover:opacity-95 hover:shadow-primary/40",
+          "bg-brand-gradient text-white shadow-premium hover:brightness-105 hover:shadow-glow",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
         outline:
           "border border-input bg-background shadow-sm hover:bg-muted hover:text-foreground",
