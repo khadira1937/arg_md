@@ -33,8 +33,8 @@ export default function DomainsPage() {
             { icon: RefreshCw, title: "Easy transfers", body: "Move existing domains to us with a few clicks." },
             { icon: Globe, title: "Instant DNS", body: "Manage records and connect hosting in seconds." },
           ].map((f) => (
-            <div key={f.title} className="rounded-2xl border bg-card p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white"><f.icon className="h-5 w-5" /></span>
+            <div key={f.title} className="rounded-2xl border bg-card p-6 hover-lift hover:border-primary/30">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-sm"><f.icon className="h-5 w-5" /></span>
               <h3 className="mt-4 font-semibold">{f.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
             </div>

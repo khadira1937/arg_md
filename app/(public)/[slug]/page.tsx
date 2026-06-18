@@ -151,6 +151,40 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </Section>
       )}
 
+      {/* Architecture band (server products) — dark, mono technical callouts */}
+      {isServer && (
+        <section className="border-y border-band-border bg-band text-band-foreground">
+          <div className="relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid-band opacity-60" />
+            <div className="container relative py-16 sm:py-20">
+              <div className="mx-auto max-w-2xl text-center">
+                <p className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wide text-primary">
+                  <span className="h-1 w-1 rounded-full bg-primary" /> Architecture
+                </p>
+                <h2 className="font-display text-3xl font-bold tracking-tight">Under the hood</h2>
+                <p className="mt-4 text-band-muted">The building blocks behind every {product.name} instance.</p>
+              </div>
+              <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {[
+                  { label: "Virtualization", value: "KVM", note: "Full hardware virtualization with isolated kernels." },
+                  { label: "Compute", value: "Dedicated vCPU", note: "Guaranteed cores — not oversold or shared." },
+                  { label: "Storage", value: "NVMe SSD", note: "Low-latency local NVMe on every instance." },
+                  { label: "Access", value: "Full root", note: "SSH root access and complete OS control." },
+                  { label: "Recovery", value: "Snapshots", note: "Point-in-time snapshots on supported plans." },
+                  { label: "Network", value: "DDoS-filtered", note: "Always-on network-level mitigation." },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl border border-band-border bg-band-card p-5">
+                    <span className="font-mono text-xs uppercase tracking-wide text-band-muted">{s.label}</span>
+                    <p className="mt-2 font-mono text-lg font-semibold">{s.value}</p>
+                    <p className="mt-1 text-sm text-band-muted">{s.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       {faqs.length > 0 && (
         <Section>
