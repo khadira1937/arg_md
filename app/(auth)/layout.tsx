@@ -25,7 +25,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
       <div className="relative w-full max-w-md">
         <div className="mb-8 flex flex-col items-center text-center">
-          <Logo />
+          <Logo invertOnDark />
           <p className="mt-3 text-sm text-muted-foreground">{brand.tagline}</p>
         </div>
         <div className="rounded-2xl border bg-card p-8 shadow-premium">{children}</div>

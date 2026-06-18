@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import Link from "next/link";
-import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Loader2, AlertCircle, CheckCircle2, Mail, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -52,14 +52,14 @@ export function LoginForm() {
       <Alert state={state} />
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
+        <Input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" icon={<Mail />} />
       </div>
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Label htmlFor="password">Password</Label>
           <Link href="/forgot-password" className="text-xs text-primary hover:underline">Forgot?</Link>
         </div>
-        <Input id="password" name="password" type="password" autoComplete="current-password" required />
+        <Input id="password" name="password" type="password" autoComplete="current-password" required icon={<Lock />} />
       </div>
       <Submit>Log in</Submit>
       <p className="text-center text-sm text-muted-foreground">
@@ -84,16 +84,16 @@ export function RegisterForm() {
       </div>
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
+        <Input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" icon={<Mail />} />
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" type="password" autoComplete="new-password" required />
+        <Input id="password" name="password" type="password" autoComplete="new-password" required icon={<Lock />} />
         <p className="text-xs text-muted-foreground">At least 8 characters with upper, lower and a number.</p>
       </div>
       <div className="space-y-2">
         <Label htmlFor="confirmPassword">Confirm password</Label>
-        <Input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" required />
+        <Input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" required icon={<Lock />} />
       </div>
       <Submit>Create account</Submit>
       <p className="text-center text-sm text-muted-foreground">
@@ -114,7 +114,7 @@ export function ForgotPasswordForm() {
       <Alert state={state} />
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" required placeholder="you@example.com" />
+        <Input id="email" name="email" type="email" required placeholder="you@example.com" icon={<Mail />} />
       </div>
       <Submit>Send reset link</Submit>
       <p className="text-center text-sm text-muted-foreground">
@@ -135,11 +135,11 @@ export function ResetPasswordForm({ token }: { token: string }) {
       <Alert state={state} />
       <div className="space-y-2">
         <Label htmlFor="password">New password</Label>
-        <Input id="password" name="password" type="password" autoComplete="new-password" required />
+        <Input id="password" name="password" type="password" autoComplete="new-password" required icon={<Lock />} />
       </div>
       <div className="space-y-2">
         <Label htmlFor="confirmPassword">Confirm password</Label>
-        <Input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" required />
+        <Input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" required icon={<Lock />} />
       </div>
       <Submit>Update password</Submit>
       {state?.success && (

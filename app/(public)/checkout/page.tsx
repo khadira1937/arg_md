@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ShoppingCart, ShieldCheck } from "lucide-react";
+import { ShoppingCart, ShieldCheck, ArrowLeft } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
 import { getCart } from "@/lib/cart";
 import { computeTotals, formatMoney, CYCLE_LABEL } from "@/lib/pricing";
@@ -36,6 +36,9 @@ export default async function CheckoutPage() {
 
   return (
     <div className="container py-12">
+      <Link href="/cart" className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
+        <ArrowLeft className="h-4 w-4" /> Back to cart
+      </Link>
       <h1 className="font-display text-3xl font-bold">Checkout</h1>
       {isPlaceholderMode() && (
         <Badge variant="warning" className="mt-3">Test mode — no real payment will be charged</Badge>
@@ -78,6 +81,16 @@ export default async function CheckoutPage() {
               <p className="text-xs text-muted-foreground">Coupons are validated and applied when you complete the order.</p>
             </div>
             <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-muted-foreground"><ShieldCheck className="h-3.5 w-3.5" /> Secured by Stripe</p>
+
+            {/* What happens next — honest provisioning timing */}
+            <div className="mt-4 rounded-lg border bg-muted/40 p-3">
+              <p className="text-xs font-semibold">What happens next</p>
+              <ol className="mt-2 space-y-1.5 text-xs text-muted-foreground">
+                <li className="flex gap-2"><span className="font-mono text-primary">1.</span> Pay securely — Stripe processes your card.</li>
+                <li className="flex gap-2"><span className="font-mono text-primary">2.</span> Your service is provisioned automatically, right after payment.</li>
+                <li className="flex gap-2"><span className="font-mono text-primary">3.</span> Access details arrive by email and in your dashboard.</li>
+              </ol>
+            </div>
           </Card>
         </div>
       </div>
