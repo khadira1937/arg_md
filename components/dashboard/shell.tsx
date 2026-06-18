@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LogOut } from "lucide-react";
 import { Logo } from "@/components/marketing/logo";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Sidebar, MobileNav, type SidebarVariant } from "./sidebar";
 import { logoutAction } from "@/app/actions/auth";
 
@@ -20,7 +21,7 @@ export function DashboardShell({
       <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur-md">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <Logo />
+            <Logo invertOnDark />
           </div>
           <div className="flex items-center gap-3">
             <div className="hidden text-right sm:block">
@@ -30,6 +31,7 @@ export function DashboardShell({
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-gradient text-sm font-semibold text-white">
               {(user.name ?? user.email).charAt(0).toUpperCase()}
             </span>
+            <ThemeToggle />
             <form action={logoutAction}>
               <Button type="submit" variant="ghost" size="icon" aria-label="Log out">
                 <LogOut className="h-4 w-4" />

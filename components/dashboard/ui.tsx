@@ -20,7 +20,7 @@ export function PageHeader({ title, description, action }: { title: string; desc
 export function StatCard({ label, value, icon: Icon, hint }: { label: string; value: string | number; icon: LucideIcon; hint?: string }) {
   return (
     <Card className="hover-lift relative overflow-hidden p-5">
-      <span className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-brand-gradient opacity-60" />
+      <span className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-brand-gradient" />
       <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-primary/5 blur-2xl" />
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">{label}</p>
@@ -73,10 +73,26 @@ export function TableEmpty({ colSpan, label }: { colSpan: number; label: string 
   );
 }
 
+const DOT_STYLES: Record<string, string> = {
+  ACTIVE: "bg-success", PAID: "bg-success", SUCCEEDED: "bg-success",
+  PENDING: "bg-warning", AWAITING_SETUP: "bg-warning", PROVISIONING: "bg-warning",
+  OPEN: "bg-warning", PROCESSING: "bg-primary",
+  SUSPENDED: "bg-destructive", FAILED: "bg-destructive",
+};
+
+const SETTING_UP = new Set(["AWAITING_SETUP", "PROVISIONING", "PENDING", "PROCESSING"]);
+
 export function StatusBadge({ status }: { status: string }) {
+  const settingUp = SETTING_UP.has(status);
+  const label = settingUp ? "Setting up" : status.toLowerCase().replace(/_/g, " ");
+  const dot = DOT_STYLES[status] ?? "bg-muted-foreground";
   return (
-    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize", STATUS_STYLES[status] ?? "bg-muted text-muted-foreground")}>
-      {status.toLowerCase().replace(/_/g, " ")}
+    <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize", STATUS_STYLES[status] ?? "bg-muted text-muted-foreground")}>
+      <span className="relative flex h-1.5 w-1.5">
+        {settingUp && <span className={cn("absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 motion-reduce:hidden", dot)} />}
+        <span className={cn("relative inline-flex h-1.5 w-1.5 rounded-full", dot)} />
+      </span>
+      {label}
     </span>
   );
 }
