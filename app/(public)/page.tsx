@@ -1,10 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import {
-  ArrowRight, CheckCircle2, ShieldCheck, Globe,
-} from "lucide-react";
+import { ArrowRight, Check, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Section, SectionHeading } from "@/components/marketing/section";
 import { Reveal } from "@/components/marketing/reveal";
 import { ProductCard } from "@/components/marketing/product-card";
@@ -13,54 +10,48 @@ import { DomainSearch } from "@/components/marketing/domain-search";
 import { PricingPreview } from "@/components/marketing/pricing-preview";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { CtaSection } from "@/components/marketing/cta-section";
-import { getFeaturedProducts, getLocations, lowestPrice } from "@/lib/catalog";
+import { getFeaturedProducts, lowestPrice } from "@/lib/catalog";
 import { brand } from "@/config/brand";
 import { pageMetadata } from "@/lib/seo";
 import {
-  PRODUCT_SPECS, INFRA_TRUST, REGION_ROW, SETUP_STEPS, CATEGORY_TILES,
+  PRODUCT_SPECS, INFRA_TRUST, INFRA_SPECS, REGIONS, SETUP_STEPS, CATEGORY_TILES,
 } from "@/config/marketing";
 
 export const metadata: Metadata = pageMetadata({
   title: "Web Hosting, VPS & Cloud Servers",
   description:
-    "HostynCloud offers fast NVMe web hosting, VPS and cloud servers with transparent pricing, free SSL, secure Stripe checkout and real support after payment. Find a domain and launch today.",
+    "HostynCloud runs fast NVMe web hosting, VPS and cloud servers with transparent pricing, free SSL, secure Stripe checkout and automated provisioning. Find a domain and launch today.",
   path: "/",
 });
 
 const HERO_BADGES = [
-  "Free SSL included",
-  "NVMe storage",
-  "Secure Stripe checkout",
-  "Setup after payment",
-  "Cancel anytime",
-  "Support tickets",
+  "Free SSL included", "NVMe storage", "Secure Stripe checkout",
+  "Automated provisioning", "Cancel anytime", "Support tickets",
 ];
 
 const HOME_FAQ = [
-  { question: "How fast is my service ready after I pay?", answer: "Most services are set up shortly after checkout. You'll receive an email and a management link in your dashboard as soon as it's ready. Some products are provisioned manually after payment for accuracy." },
+  { question: "How fast is my service ready after I pay?", answer: "Hosting services are provisioned automatically right after your Stripe payment is confirmed. You'll get an email and a management link in your dashboard within minutes." },
   { question: "What payment methods do you accept?", answer: "All major credit and debit cards through Stripe's secure, encrypted checkout. We never see or store your full card details." },
-  { question: "Do you register domains automatically?", answer: "Domain registration is completed after payment once availability is confirmed by the registrar. You can search and shortlist domains on our domains page." },
+  { question: "Do you register domains automatically?", answer: "Domain registration completes after payment once the registrar confirms availability. You can search live availability and shortlist domains on our domains page." },
   { question: "Can I upgrade or cancel later?", answer: "Yes. You can manage and cancel your services from your dashboard at any time. Renewal prices are always shown before you buy." },
 ];
 
 export default async function HomePage() {
-  const [featured, locations] = await Promise.all([getFeaturedProducts(), getLocations()]);
+  const featured = await getFeaturedProducts();
 
   return (
     <>
-      {/* ---------------------------------------------------------------- Hero */}
+      {/* ============================================================ Hero (light) */}
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-grid" />
-        <div className="pointer-events-none absolute inset-0 bg-mesh" />
-        <div className="pointer-events-none absolute -top-32 left-1/4 h-80 w-80 animate-aurora rounded-full bg-primary/20 blur-3xl" />
-        <div className="pointer-events-none absolute -top-20 right-1/4 h-72 w-72 animate-aurora rounded-full bg-secondary/20 blur-3xl [animation-delay:-7s]" />
+        <div className="pointer-events-none absolute inset-0 bg-dots opacity-40" />
         <div className="container relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:py-24">
           <div>
             <Reveal>
-              <Badge variant="muted" className="mb-5 gap-1.5 px-3 py-1">
-                <span className="flex h-2 w-2 rounded-full bg-success" />
-                {brand.stats.uptime} uptime target · NVMe-powered infrastructure
-              </Badge>
+              <span className="mb-5 inline-flex items-center gap-2 rounded-md border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                {brand.stats.uptime} uptime SLA · NVMe · KVM
+              </span>
             </Reveal>
             <Reveal delay={0.05}>
               <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl">
@@ -70,7 +61,7 @@ export default async function HomePage() {
             <Reveal delay={0.1}>
               <p className="mt-6 max-w-xl text-pretty text-lg text-muted-foreground">
                 Launch websites, apps and online stores on NVMe-powered infrastructure with transparent pricing,
-                secure Stripe checkout, and support after payment.
+                secure Stripe checkout, and automated provisioning after payment.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -78,7 +69,7 @@ export default async function HomePage() {
                 <Button asChild size="xl" variant="gradient">
                   <Link href="/web-hosting">Start with Web Hosting <ArrowRight className="h-4 w-4" /></Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
+                <Button asChild size="xl" variant="ghost" className="border">
                   <Link href="/vps-hosting">View VPS Plans</Link>
                 </Button>
               </div>
@@ -87,7 +78,7 @@ export default async function HomePage() {
               <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-2.5 sm:grid-cols-3">
                 {HERO_BADGES.map((t) => (
                   <span key={t} className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-success" /> {t}
+                    <Check className="h-4 w-4 shrink-0 text-success" /> {t}
                   </span>
                 ))}
               </div>
@@ -100,8 +91,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ----------------------------------------------------- Domain search */}
-      <section className="border-b bg-muted/30">
+      {/* ===================================================== Domain search (light) */}
+      <section className="border-b bg-muted/40">
         <div className="container py-14 sm:py-16">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Find your perfect domain name</h2>
@@ -113,7 +104,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* -------------------------------------------------- Featured products */}
+      {/* ================================================= Featured products (light) */}
       <Section>
         <SectionHeading
           eyebrow="Products"
@@ -131,9 +122,9 @@ export default async function HomePage() {
                   shortDescription={p.shortDescription}
                   inquiryOnly={p.inquiryOnly}
                   fromPrice={lowestPrice(p.plans)}
-                  badge={p.featured ? "Popular" : undefined}
                   bestFor={spec?.bestFor}
                   specs={spec?.specs}
+                  trustNote={p.inquiryOnly ? undefined : "Automated setup · cancel anytime"}
                 />
               </Reveal>
             );
@@ -141,28 +132,46 @@ export default async function HomePage() {
         </div>
         <div className="mt-10 text-center">
           <Button asChild variant="outline" size="lg">
-            <Link href="/pricing">See all products &amp; pricing <ArrowRight className="h-4 w-4" /></Link>
+            <Link href="/pricing">Compare all plans <ArrowRight className="h-4 w-4" /></Link>
           </Button>
         </div>
       </Section>
 
-      {/* ------------------------------------------------ Category quick links */}
-      <Section className="pt-0">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORY_TILES.map((c) => (
-            <Link key={c.href} href={c.href} className="group rounded-2xl border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <c.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-4 font-semibold">{c.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
-            </Link>
-          ))}
+      {/* ================================================== Categories (DARK band) */}
+      <section className="border-y border-band-border bg-band text-band-foreground">
+        <div className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 bg-grid-band opacity-60" />
+          <div className="container relative py-16 sm:py-20">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wide text-primary">
+                <span className="h-1 w-1 rounded-full bg-primary" /> Product lines
+              </p>
+              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">Built for the whole stack</h2>
+            </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {CATEGORY_TILES.map((c) => (
+                <Link
+                  key={c.href}
+                  href={c.href}
+                  className="group rounded-xl border border-band-border bg-band-card p-6 transition-colors hover:border-primary/50"
+                >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-band-border bg-band text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    <c.icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 font-semibold">{c.title}</h3>
+                  <p className="mt-1 text-sm text-band-muted">{c.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 font-mono text-xs text-primary">
+                    Explore <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {/* ------------------------------------------------------ Pricing preview */}
-      <Section className="bg-muted/30">
+      {/* ===================================================== Pricing preview (light) */}
+      <Section className="bg-muted/40">
         <SectionHeading
           eyebrow="Pricing"
           title="Simple, transparent plans"
@@ -171,57 +180,68 @@ export default async function HomePage() {
         <div className="mt-12"><PricingPreview /></div>
       </Section>
 
-      {/* ------------------------------------------------------ Infrastructure */}
-      <Section>
-        <SectionHeading
-          eyebrow="Reliability"
-          title="Built on reliable infrastructure"
-          description="Performance and protection built in — not sold as endless add-ons."
-        />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {INFRA_TRUST.map((f, i) => (
-            <Reveal key={f.title} delay={(i % 4) * 0.04}>
-              <div className="h-full rounded-2xl border bg-card p-6 transition-colors hover:border-primary/30">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white">
-                  <f.icon className="h-5 w-5" />
-                </span>
-                <h3 className="mt-4 font-semibold">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      {/* ================================================ Infrastructure (DARK band) */}
+      <section className="border-y border-band-border bg-band text-band-foreground">
+        <div className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 bg-grid-band opacity-60" />
+          <div className="pointer-events-none absolute -top-24 left-1/3 h-64 w-96 rounded-full bg-primary/15 blur-3xl" />
+          <div className="container relative py-16 sm:py-24">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wide text-primary">
+                <span className="h-1 w-1 rounded-full bg-primary" /> Infrastructure
+              </p>
+              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">Engineered for performance</h2>
+              <p className="mt-4 text-band-muted">Real, verifiable building blocks — no buzzwords, no upsell-only “features.”</p>
+            </div>
 
-        {/* Region row */}
-        <div className="mt-12 rounded-2xl border bg-card p-6 sm:p-8">
-          <div className="flex flex-col items-center gap-5 text-center">
-            <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Deploy close to your users</p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {REGION_ROW.map((r) => (
-                <span key={r} className="inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium">
-                  <Globe className="h-4 w-4 text-primary" /> {r}
-                </span>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {INFRA_SPECS.map((s) => (
+                <div key={s.label} className="rounded-xl border border-band-border bg-band-card p-5">
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-band-muted">
+                      <s.icon className="h-4 w-4 text-primary" /> {s.label}
+                    </span>
+                  </div>
+                  <p className="mt-2 font-mono text-lg font-semibold">{s.value}</p>
+                  <p className="mt-1 text-sm text-band-muted">{s.note}</p>
+                </div>
               ))}
             </div>
-            <p className="max-w-xl text-xs text-muted-foreground">
-              Server region availability depends on the selected product. See each product page for current locations.
-            </p>
+
+            {/* Region chips — US + EU live, others rolling out */}
+            <div className="mt-10 flex flex-col items-center gap-4 text-center">
+              <div className="flex flex-wrap items-center justify-center gap-2.5">
+                {REGIONS.live.map((r) => (
+                  <span key={r} className="inline-flex items-center gap-2 rounded-md border border-band-border bg-band-card px-3.5 py-1.5 font-mono text-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-success" /> {r}
+                  </span>
+                ))}
+                {REGIONS.soon.map((r) => (
+                  <span key={r} className="inline-flex items-center gap-2 rounded-md border border-dashed border-band-border px-3.5 py-1.5 font-mono text-sm text-band-muted">
+                    {r} <span className="text-[10px] uppercase">soon</span>
+                  </span>
+                ))}
+              </div>
+              <p className="max-w-xl font-mono text-xs text-band-muted">
+                Live regions: United States &amp; Europe. Region availability depends on the selected product.
+              </p>
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* --------------------------------------------------------- How setup works */}
-      <Section className="bg-muted/30">
+      {/* ====================================================== How setup works (light) */}
+      <Section>
         <SectionHeading
           eyebrow="Getting started"
           title="How setup works"
           description="A clear path from checkout to a service you can manage — with no surprises."
         />
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {SETUP_STEPS.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.05}>
-              <li className="relative h-full rounded-2xl border bg-card p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gradient font-display text-sm font-bold text-white">
+              <li className="relative h-full rounded-xl border bg-card p-6">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-gradient font-mono text-sm font-bold text-white">
                   {i + 1}
                 </span>
                 <h3 className="mt-4 text-sm font-semibold">{s.title}</h3>
@@ -231,32 +251,36 @@ export default async function HomePage() {
           ))}
         </ol>
         <p className="mx-auto mt-8 flex max-w-2xl items-center justify-center gap-2 text-center text-sm text-muted-foreground">
-          <ShieldCheck className="h-4 w-4 text-primary" />
-          Some services are provisioned manually after payment to ensure everything is configured correctly.
+          <Zap className="h-4 w-4 text-primary" />
+          Hosting is provisioned automatically right after payment. Domain registration completes once the registrar
+          confirms availability.
         </p>
       </Section>
 
-      {/* ------------------------------------------------------------- Data centers */}
-      <Section>
-        <SectionHeading eyebrow="Global network" title="A network that scales with you" />
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {locations.map((l) => (
-            <div key={l.id} className="flex items-center gap-3 rounded-xl border bg-card p-4 transition-colors hover:border-primary/30">
-              <span className="text-2xl">{l.flagEmoji}</span>
-              <div>
-                <p className="text-sm font-medium">{l.city}</p>
-                <p className="text-xs text-muted-foreground">{l.region}</p>
+      {/* ===================================================== Security / trust (light) */}
+      <Section className="bg-muted/40">
+        <SectionHeading
+          eyebrow="Reliability"
+          title="Security & trust, built in"
+          description="Performance and protection come standard — not sold as endless add-ons."
+        />
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {INFRA_TRUST.map((f, i) => (
+            <Reveal key={f.title} delay={(i % 4) * 0.04}>
+              <div className="h-full rounded-xl border bg-card p-6 transition-colors hover:border-primary/30 hover-lift">
+                <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-gradient text-white shadow-sm">
+                  <f.icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 font-semibold">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
-        </div>
-        <div className="mt-8 text-center">
-          <Button asChild variant="link"><Link href="/data-centers">View all data centers <ArrowRight className="h-4 w-4" /></Link></Button>
         </div>
       </Section>
 
-      {/* ----------------------------------------------------------------- FAQ */}
-      <Section className="bg-muted/30">
+      {/* ================================================================= FAQ (light) */}
+      <Section>
         <SectionHeading eyebrow="FAQ" title="Questions, answered" />
         <div className="mt-10"><FaqSection faqs={HOME_FAQ} /></div>
       </Section>
