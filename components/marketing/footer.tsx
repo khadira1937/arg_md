@@ -12,10 +12,7 @@ export function Footer() {
         <div className="container relative py-16">
           <div className="grid gap-12 lg:grid-cols-6">
             <div className="lg:col-span-2">
-              {/* Logo on a light chip so the navy wordmark stays legible on dark. */}
-              <span className="inline-flex rounded-lg bg-white px-3 py-2">
-                <Logo height={28} />
-              </span>
+              <Logo height={28} onDark />
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-band-muted">{brand.description}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
