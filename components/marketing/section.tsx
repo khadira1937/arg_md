@@ -28,7 +28,7 @@ export function SectionHeading({
   return (
     <div className={cn(center && "mx-auto text-center", "max-w-2xl", className)}>
       {eyebrow && (
-        <p className={cn("mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-primary", center && "justify-center")}>
+        <p className={cn("mb-3 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-primary", center && "justify-center")}>
           <span className="h-1 w-1 rounded-full bg-primary" />
           {eyebrow}
         </p>

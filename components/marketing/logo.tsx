@@ -15,12 +15,16 @@ export function Logo({
   /** Display height in pixels; width scales to the 3:1 logo ratio. */
   height = 34,
   priority = false,
+  /** Invert the navy wordmark to white on dark surfaces (navbar/page). Leave
+   *  false where the logo sits on a forced-light chip (e.g. the footer). */
+  invertOnDark = false,
 }: {
   className?: string;
   href?: string;
   asLink?: boolean;
   height?: number;
   priority?: boolean;
+  invertOnDark?: boolean;
 }) {
   const img = (
     <Image
@@ -29,7 +33,7 @@ export function Logo({
       width={Math.round(height * 3)}
       height={height}
       priority={priority}
-      className="h-auto w-auto select-none"
+      className={cn("h-auto w-auto select-none", invertOnDark && "site-logo")}
       style={{ height, width: "auto" }}
     />
   );

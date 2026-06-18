@@ -2,10 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ChevronDown, Menu, ShoppingCart, LayoutDashboard } from "lucide-react";
+import { ChevronDown, Menu, ShoppingCart, LayoutDashboard, ArrowRight } from "lucide-react";
 import { mainNav } from "@/config/nav";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Logo } from "./logo";
 import {
   Sheet,
@@ -28,74 +29,50 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const active = mainNav.find((i) => i.title === openMenu && i.columns);
+
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-all",
+        "sticky top-0 z-40 w-full border-b transition-all",
         scrolled
-          ? "border-b bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70"
-          : "bg-background/60 backdrop-blur-sm",
+          ? "border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
+          : "border-transparent bg-background/60 backdrop-blur-sm",
       )}
     >
-      <div className="container flex h-16 items-center justify-between gap-4">
+      <div
+        className={cn(
+          "container relative flex items-center justify-between gap-4 transition-all",
+          scrolled ? "h-14" : "h-16",
+        )}
+        onMouseLeave={() => setOpenMenu(null)}
+      >
         <div className="flex items-center gap-1">
-          <Logo />
+          <Logo height={scrolled ? 28 : 32} priority invertOnDark />
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex lg:items-center lg:gap-1" onMouseLeave={() => setOpenMenu(null)}>
+        <nav className="hidden lg:flex lg:items-center lg:gap-0.5">
           {mainNav.map((item) =>
             item.columns ? (
-              <div key={item.title} className="relative" onMouseEnter={() => setOpenMenu(item.title)}>
-                <button
-                  className={cn(
-                    "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground",
-                    openMenu === item.title && "bg-muted text-foreground",
-                  )}
-                >
-                  {item.title}
-                  <ChevronDown className="h-4 w-4 opacity-60" />
-                </button>
-                {openMenu === item.title && (
-                  <div className="absolute left-1/2 top-full z-50 w-[640px] -translate-x-1/2 pt-3">
-                    <div className="grid gap-2 rounded-2xl border bg-popover p-4 shadow-xl animate-fade-up md:grid-cols-2">
-                      {item.columns.map((col) => (
-                        <div key={col.title} className="space-y-1">
-                          <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                            {col.title}
-                          </p>
-                          {col.links.map((link) => {
-                            const Icon = link.icon;
-                            return (
-                              <Link
-                                key={link.href}
-                                href={link.href}
-                                className="group flex items-start gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-muted"
-                              >
-                                {Icon && (
-                                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                    <Icon className="h-4 w-4" />
-                                  </span>
-                                )}
-                                <span>
-                                  <span className="block text-sm font-medium text-foreground">{link.title}</span>
-                                  {link.description && (
-                                    <span className="block text-xs text-muted-foreground">{link.description}</span>
-                                  )}
-                                </span>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+              <button
+                key={item.title}
+                onMouseEnter={() => setOpenMenu(item.title)}
+                className={cn(
+                  "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground",
+                  openMenu === item.title && "bg-muted text-foreground",
                 )}
-              </div>
+              >
+                {item.title}
+                <ChevronDown
+                  className={cn("h-4 w-4 opacity-60 transition-transform", openMenu === item.title && "rotate-180")}
+                />
+              </button>
             ) : (
               <Link
                 key={item.title}
                 href={item.href!}
+                onMouseEnter={() => setOpenMenu(null)}
                 className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
               >
                 {item.title}
@@ -106,6 +83,8 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
+          <ThemeToggle className="hidden sm:inline-flex" />
+
           <Link href="/cart" className="relative hidden sm:inline-flex">
             <Button variant="ghost" size="icon" aria-label="Cart">
               <ShoppingCart className="h-5 w-5" />
@@ -142,9 +121,12 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[88vw] overflow-y-auto p-0">
+            <SheetContent side="right" className="w-[90vw] overflow-y-auto p-0 sm:max-w-md">
               <SheetHeader className="border-b">
-                <SheetTitle><Logo /></SheetTitle>
+                <SheetTitle className="flex items-center justify-between">
+                  <Logo height={28} invertOnDark />
+                  <ThemeToggle />
+                </SheetTitle>
               </SheetHeader>
               <div className="p-4">
                 <MobileNav />
@@ -162,6 +144,60 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
             </SheetContent>
           </Sheet>
         </div>
+
+        {/* Full-width mega panel (spans the container) */}
+        {active?.columns && (
+          <div className="absolute inset-x-0 top-full hidden pt-2 lg:block">
+            <div className="grid grid-cols-12 gap-6 rounded-2xl border bg-popover p-5 shadow-xl animate-fade-up">
+              <div className={cn("col-span-9 grid gap-x-8 gap-y-1", active.columns.length > 1 ? "grid-cols-3" : "grid-cols-2")}>
+                {active.columns.map((col) => (
+                  <div key={col.title} className="space-y-1">
+                    <p className="px-3 pb-1 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      {col.title}
+                    </p>
+                    {col.links.map((link) => {
+                      const Icon = link.icon;
+                      return (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="group flex items-start gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-muted"
+                        >
+                          {Icon && (
+                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border bg-card text-primary transition-colors group-hover:border-primary/40 group-hover:bg-primary/10">
+                              <Icon className="h-4 w-4" />
+                            </span>
+                          )}
+                          <span>
+                            <span className="block text-sm font-medium text-foreground">{link.title}</span>
+                            {link.description && (
+                              <span className="block text-xs text-muted-foreground">{link.description}</span>
+                            )}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+
+              {/* One accent CTA per panel */}
+              {active.cta && (
+                <div className="col-span-3 flex flex-col justify-between rounded-xl border border-primary/20 bg-primary/[0.04] p-5">
+                  <div>
+                    <p className="font-display text-base font-semibold">{active.cta.title}</p>
+                    <p className="mt-1.5 text-sm text-muted-foreground">{active.cta.description}</p>
+                  </div>
+                  <Button asChild variant="gradient" size="sm" className="mt-4 w-full">
+                    <Link href={active.cta.href}>
+                      {active.cta.label} <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
@@ -187,6 +223,14 @@ function MobileNav() {
                   {link.title}
                 </Link>
               ))}
+              {item.cta && (
+                <Link
+                  href={item.cta.href}
+                  className="mt-1 flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-primary hover:bg-primary/10"
+                >
+                  {item.cta.label} <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              )}
             </div>
           </details>
         ) : (

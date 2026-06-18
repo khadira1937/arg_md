@@ -201,6 +201,22 @@
   .animate-aurora {
     animation: aurora 14s ease-in-out infinite alternate;
   }
+
+  /* Logo inversion on dark surfaces. Opt-in via <Logo invertOnDark /> — the navy
+     wordmark would otherwise vanish on the dark navbar/page. Do NOT apply where
+     the logo sits on a forced-light chip (e.g. the footer). */
+  .dark .site-logo {
+    filter: brightness(0) invert(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora,
+  .animate-fade-up,
+  .hover-lift {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 @keyframes aurora {
