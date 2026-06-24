@@ -1,247 +1,149 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Check, Zap } from "lucide-react";
+import { ArrowRight, Check, PhoneCall, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/marketing/section";
 import { Reveal } from "@/components/marketing/reveal";
-import { ProductCard } from "@/components/marketing/product-card";
+import { HeroVisual } from "@/components/marketing/hero-visual";
 import { DomainSearch } from "@/components/marketing/domain-search";
 import { PricingPreview } from "@/components/marketing/pricing-preview";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { CtaSection } from "@/components/marketing/cta-section";
-import { getFeaturedProducts, lowestPrice } from "@/lib/catalog";
 import { brand } from "@/config/brand";
 import { pageMetadata } from "@/lib/seo";
-import {
-  PRODUCT_SPECS, INFRA_TRUST, INFRA_SPECS, REGIONS, SETUP_STEPS, CATEGORY_TILES,
-} from "@/config/marketing";
+import { SERVICES, WHY_US, PROCESS_STEPS, CARE_FEATURES } from "@/config/marketing";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Web Hosting, VPS & Cloud Servers",
+  title: "Digital Media, Marketing & Web Development Agency",
   description:
-    "HostynCloud runs fast NVMe web hosting, VPS and cloud servers with transparent pricing, free SSL, secure Stripe checkout and automated provisioning. Find a domain and launch today.",
+    "ARGANA MEDIA helps businesses build, grow and manage their online presence — websites, digital marketing, design, content, hosting support and business IT support, from one UK team.",
   path: "/",
 });
 
-const HERO_BADGES = [
-  "Free SSL included", "NVMe storage", "Secure Stripe checkout",
-  "Automated provisioning", "Cancel anytime", "Support tickets",
-];
+const HERO_BADGES = ["One team for everything", "Clear fixed quotes", "UK-registered company"];
 
 const HOME_FAQ = [
-  { question: "How fast is my service ready after I pay?", answer: "Hosting services are provisioned automatically right after your Stripe payment is confirmed. You'll get an email and a management link in your dashboard within minutes." },
-  { question: "What payment methods do you accept?", answer: "All major credit and debit cards through Stripe's secure, encrypted checkout. We never see or store your full card details." },
-  { question: "Do you register domains automatically?", answer: "Domain registration completes after payment once the registrar confirms availability. You can search live availability and shortlist domains on our domains page." },
-  { question: "Can I upgrade or cancel later?", answer: "Yes. You can manage and cancel your services from your dashboard at any time. Renewal prices are always shown before you buy." },
+  { question: "What does ARGANA MEDIA actually do?", answer: "We help businesses build, grow and manage their online presence. That covers websites and apps, digital marketing, design, content, hosting and website care, and everyday business IT support — all from one team." },
+  { question: "How do you price your work?", answer: "Most work is quoted per project or as a simple monthly plan. After a short discovery call we send a clear proposal with the scope, timeline and a fixed price, so you always know what you're paying before anything begins." },
+  { question: "Do I have to buy online?", answer: "No. For most services we discuss your project first, then send a proposal and a secure payment link or invoice. There's no pressure and no surprise charges." },
+  { question: "Do you look after the website after it launches?", answer: "Yes. Our hosting and website care plans keep your site online, secure, backed up and up to date, and we're on hand for edits and support whenever you need us." },
+  { question: "Do you work with small and new businesses?", answer: "Absolutely. We work with new, small and growing businesses and tailor the scope to your goals and budget — starting small and building as you grow." },
 ];
 
-export default async function HomePage() {
-  const featured = await getFeaturedProducts();
-
+export default function HomePage() {
   return (
     <>
-      {/* ============================================ Hero (centered, search-led) */}
+      {/* ============================================================= Hero */}
       <section className="relative overflow-hidden border-b">
         <div className="pointer-events-none absolute inset-0 bg-grid" />
         <div className="pointer-events-none absolute inset-0 bg-mesh" />
-        <div className="pointer-events-none absolute -top-28 left-1/2 h-72 w-[46rem] -translate-x-1/2 animate-aurora rounded-full bg-secondary/10 blur-3xl" />
-        <div className="container relative py-20 sm:py-24 lg:py-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <Reveal>
-              <span className="mb-6 inline-flex items-center gap-2 rounded-full border bg-card px-3.5 py-1.5 font-mono text-xs text-muted-foreground shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                {brand.stats.uptime} uptime SLA · NVMe · KVM
-              </span>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl">
-                Fast Web Hosting, <span className="text-gradient">VPS &amp; Cloud Servers</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
-                Launch websites, apps and online stores on NVMe-powered infrastructure with transparent pricing,
-                secure Stripe checkout, and automated provisioning after payment.
-              </p>
-            </Reveal>
+        <div className="pointer-events-none absolute -top-28 left-1/4 h-72 w-[40rem] -translate-x-1/2 animate-aurora rounded-full bg-secondary/10 blur-3xl" />
+        <div className="container relative py-16 sm:py-20 lg:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
+            {/* Left: copy */}
+            <div>
+              <Reveal>
+                <span className="mb-5 inline-flex items-center gap-2 rounded-full border bg-card px-3.5 py-1.5 text-xs font-medium text-muted-foreground shadow-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                  Digital media &amp; marketing agency · United Kingdom
+                </span>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl">
+                  Build, grow &amp; manage your <span className="text-gradient">online presence</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="mt-6 max-w-xl text-pretty text-lg text-muted-foreground">
+                  {brand.name} is your one team for websites, digital marketing, design, content, hosting support
+                  and business IT — helping growing businesses look professional, get found and stay supported.
+                </p>
+              </Reveal>
 
-            {/* Primary action: domain search, directly under the title */}
-            <Reveal delay={0.15}>
-              <div className="mx-auto mt-9 max-w-2xl text-left">
-                <DomainSearch />
-              </div>
-            </Reveal>
+              <Reveal delay={0.15}>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Button asChild size="xl" variant="gradient">
+                    <Link href="/book-a-call"><PhoneCall className="h-4 w-4" /> Book a Call</Link>
+                  </Button>
+                  <Button asChild size="xl" variant="outline">
+                    <Link href="/services">View Services <ArrowRight className="h-4 w-4" /></Link>
+                  </Button>
+                </div>
+              </Reveal>
 
-            {/* Secondary CTAs */}
-            <Reveal delay={0.2}>
-              <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Button asChild size="xl" variant="gradient">
-                  <Link href="/web-hosting">Start with Web Hosting <ArrowRight className="h-4 w-4" /></Link>
-                </Button>
-                <Button asChild size="xl" variant="outline">
-                  <Link href="/vps-hosting">View VPS Plans</Link>
-                </Button>
-              </div>
-            </Reveal>
+              <Reveal delay={0.2}>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Prefer to talk it through?{" "}
+                  <Link href="/contact" className="font-medium text-primary hover:underline">Request a quote</Link> — no obligation.
+                </p>
+              </Reveal>
 
-            {/* Trust badges */}
-            <Reveal delay={0.25}>
-              <div className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-2.5 text-left sm:grid-cols-3">
-                {HERO_BADGES.map((t) => (
-                  <span key={t} className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <Check className="h-4 w-4 shrink-0 text-success" /> {t}
-                  </span>
-                ))}
-              </div>
+              <Reveal delay={0.25}>
+                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5">
+                  {HERO_BADGES.map((t) => (
+                    <span key={t} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                      <Check className="h-4 w-4 shrink-0 text-success" /> {t}
+                    </span>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Right: animated visual */}
+            <Reveal delay={0.15} className="order-first lg:order-last">
+              <HeroVisual />
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ================================================= Featured products (light) */}
+      {/* ================================================== Services overview */}
       <Section>
         <SectionHeading
-          eyebrow="Products"
-          title="Hosting for every stage of growth"
-          description="From your first website to GPU compute — pick the infrastructure that fits, with real specs and transparent pricing."
+          eyebrow="What we do"
+          title="Everything your online presence needs"
+          description="Six connected services, one accountable team. Pick what you need now and grow into the rest when you're ready."
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p, i) => {
-            const spec = PRODUCT_SPECS[p.slug];
-            return (
-              <Reveal key={p.id} delay={i * 0.05}>
-                <ProductCard
-                  name={p.name}
-                  slug={p.slug}
-                  shortDescription={p.shortDescription}
-                  inquiryOnly={p.inquiryOnly}
-                  fromPrice={lowestPrice(p.plans)}
-                  bestFor={spec?.bestFor}
-                  specs={spec?.specs}
-                  trustNote={p.inquiryOnly ? undefined : "Automated setup · cancel anytime"}
-                />
-              </Reveal>
-            );
-          })}
-        </div>
-        <div className="mt-10 text-center">
-          <Button asChild variant="outline" size="lg">
-            <Link href="/pricing">Compare all plans <ArrowRight className="h-4 w-4" /></Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* ===================================================== Product lines (light) */}
-      <Section className="bg-muted/30">
-        <SectionHeading eyebrow="Product lines" title="Built for the whole stack" />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORY_TILES.map((c) => (
-            <Link
-              key={c.href}
-              href={c.href}
-              className="group rounded-2xl border bg-card p-6 hover-lift hover:border-primary/40"
-            >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-sm">
-                <c.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-4 font-semibold">{c.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                Explore <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      {/* ===================================================== Pricing preview (light) */}
-      <Section>
-        <SectionHeading
-          eyebrow="Pricing"
-          title="Simple, transparent plans"
-          description="Compare starting plans across web hosting, VPS and cloud servers. The renewal price is always shown before you buy."
-        />
-        <div className="mt-12"><PricingPreview /></div>
-      </Section>
-
-      {/* ===================================================== Infrastructure (light) */}
-      <Section className="bg-muted/30">
-        <SectionHeading
-          eyebrow="Infrastructure"
-          title="Engineered for performance"
-          description="Real, verifiable building blocks — no buzzwords, no upsell-only “features.”"
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {INFRA_SPECS.map((s) => (
-            <div key={s.label} className="rounded-2xl border bg-card p-5 hover-lift">
-              <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-muted-foreground">
-                <s.icon className="h-4 w-4 text-primary" /> {s.label}
-              </span>
-              <p className="mt-2 font-mono text-lg font-semibold">{s.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.note}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Region chips — US + EU live, others rolling out */}
-        <div className="mt-10 flex flex-col items-center gap-4 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            {REGIONS.live.map((r) => (
-              <span key={r} className="inline-flex items-center gap-2 rounded-md border bg-card px-3.5 py-1.5 font-mono text-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-success" /> {r}
-              </span>
-            ))}
-            {REGIONS.soon.map((r) => (
-              <span key={r} className="inline-flex items-center gap-2 rounded-md border border-dashed px-3.5 py-1.5 font-mono text-sm text-muted-foreground">
-                {r} <span className="text-[10px] uppercase">soon</span>
-              </span>
-            ))}
-          </div>
-          <p className="max-w-xl font-mono text-xs text-muted-foreground">
-            Live regions: United States &amp; Europe. Region availability depends on the selected product.
-          </p>
-        </div>
-      </Section>
-
-      {/* ====================================================== How setup works (light) */}
-      <Section>
-        <SectionHeading
-          eyebrow="Getting started"
-          title="How setup works"
-          description="A clear path from checkout to a service you can manage — with no surprises."
-        />
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {SETUP_STEPS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.05}>
-              <li className="relative h-full rounded-xl border bg-card p-6">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-gradient font-mono text-sm font-bold text-white">
-                  {i + 1}
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.title} delay={(i % 3) * 0.05}>
+              <Link
+                href={s.href}
+                className="group flex h-full flex-col rounded-2xl border bg-card p-6 hover-lift hover:border-primary/40"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-sm">
+                  <s.icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 text-sm font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-              </li>
+                <h3 className="mt-4 font-display text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.blurb}</p>
+                <ul className="mt-4 space-y-1.5">
+                  {s.points.map((p) => (
+                    <li key={p} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Check className="h-3.5 w-3.5 shrink-0 text-success" /> {p}
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                  Explore {s.title} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
             </Reveal>
           ))}
-        </ol>
-        <p className="mx-auto mt-8 flex max-w-2xl items-center justify-center gap-2 text-center text-sm text-muted-foreground">
-          <Zap className="h-4 w-4 text-primary" />
-          Hosting is provisioned automatically right after payment. Domain registration completes once the registrar
-          confirms availability.
-        </p>
+        </div>
       </Section>
 
-      {/* ===================================================== Security / trust (light) */}
-      <Section className="bg-muted/40">
+      {/* ======================================================= Why ARGANA */}
+      <Section className="bg-muted/30">
         <SectionHeading
-          eyebrow="Reliability"
-          title="Security & trust, built in"
-          description="Performance and protection come standard — not sold as endless add-ons."
+          eyebrow="Why ARGANA MEDIA"
+          title="A partner you can actually rely on"
+          description="We keep things clear, honest and joined-up — so working with us feels easy from the first call onwards."
         />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {INFRA_TRUST.map((f, i) => (
-            <Reveal key={f.title} delay={(i % 4) * 0.04}>
-              <div className="h-full rounded-xl border bg-card p-6 transition-colors hover:border-primary/30 hover-lift">
-                <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-gradient text-white shadow-sm">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {WHY_US.map((f, i) => (
+            <Reveal key={f.title} delay={(i % 3) * 0.04}>
+              <div className="h-full rounded-2xl border bg-card p-6 transition-colors hover:border-primary/30">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <f.icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-semibold">{f.title}</h3>
@@ -252,8 +154,77 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* ================================================================= FAQ (light) */}
+      {/* ========================================================= Process */}
       <Section>
+        <SectionHeading
+          eyebrow="How we work"
+          title="A simple, reassuring process"
+          description="From first hello to long-term growth, you'll always know what's happening and what comes next."
+        />
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PROCESS_STEPS.map((s, i) => (
+            <Reveal key={s.title} delay={i * 0.05}>
+              <li className="relative h-full rounded-2xl border bg-card p-6">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                    <s.icon className="h-5 w-5" />
+                  </span>
+                  <span className="font-mono text-sm font-bold text-muted-foreground/50">0{i + 1}</span>
+                </div>
+                <h3 className="mt-4 font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+              </li>
+            </Reveal>
+          ))}
+        </ol>
+      </Section>
+
+      {/* ================================================= Packages preview */}
+      <Section className="bg-muted/30">
+        <SectionHeading
+          eyebrow="Packages"
+          title="Simple starting points"
+          description="Every business is different, so we tailor scope to you. These packages are a starting point for your quote — never a checkout."
+        />
+        <div className="mt-12"><PricingPreview /></div>
+      </Section>
+
+      {/* =============================================== Hosting & website care */}
+      <Section>
+        <SectionHeading
+          eyebrow="Hosting & Website Care"
+          title="Your website, looked after"
+          description="Already have a domain in mind, or need one? Search below — then we'll connect it to your website, email, SSL, hosting and ongoing care."
+        />
+
+        <div className="mx-auto mt-10 max-w-2xl rounded-2xl border bg-card p-5 shadow-sm sm:p-7">
+          <div className="mb-3 flex items-center gap-2 text-sm font-medium">
+            <Search className="h-4 w-4 text-primary" /> Check a domain name
+          </div>
+          <DomainSearch />
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {CARE_FEATURES.map((f) => (
+            <div key={f.title} className="h-full rounded-2xl border bg-card p-6 hover-lift">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <f.icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-4 font-semibold">{f.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Button asChild variant="outline" size="lg">
+            <Link href="/hosting-website-care">Explore Hosting &amp; Website Care <ArrowRight className="h-4 w-4" /></Link>
+          </Button>
+        </div>
+      </Section>
+
+      {/* ============================================================= FAQ */}
+      <Section className="bg-muted/30">
         <SectionHeading eyebrow="FAQ" title="Questions, answered" />
         <div className="mt-10"><FaqSection faqs={HOME_FAQ} /></div>
       </Section>

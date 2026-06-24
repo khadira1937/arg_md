@@ -17,12 +17,12 @@ export default async function ServicesPage() {
   return (
     <div>
       <PageHeader
-        title="Services"
-        description="All your hosting services and their status."
-        action={<Button asChild variant="gradient"><Link href="/pricing"><Plus className="h-4 w-4" /> New service</Link></Button>}
+        title="Projects"
+        description="All your projects and services with their current status."
+        action={<Button asChild variant="gradient"><Link href="/services"><Plus className="h-4 w-4" /> Request service</Link></Button>}
       />
       {services.length === 0 ? (
-        <EmptyState icon={Server} title="No services yet" description="Deploy your first service to see it here." actionLabel="Explore plans" actionHref="/pricing" />
+        <EmptyState icon={Server} title="No projects yet" description="Request a service to start your first project." actionLabel="View services" actionHref="/services" />
       ) : (
         <div className="space-y-3">
           {services.map((s) => (

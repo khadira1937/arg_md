@@ -12,9 +12,9 @@ export default async function OrdersPage() {
 
   return (
     <div>
-      <PageHeader title="Orders" description="Your purchase history." />
+      <PageHeader title="Project orders" description="Your order and purchase history." />
       {orders.length === 0 ? (
-        <EmptyState icon={ShoppingBag} title="No orders yet" actionLabel="Browse plans" actionHref="/pricing" />
+        <EmptyState icon={ShoppingBag} title="No orders yet" actionLabel="View services" actionHref="/services" />
       ) : (
         <Card className="overflow-x-auto p-0">
           <table className="w-full text-sm">

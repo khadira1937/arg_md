@@ -1,27 +1,38 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  Server,
   Globe,
-  ShoppingCart,
-  Cloud,
-  Boxes,
-  Cpu,
-  HardDrive,
-  Gauge,
-  Mail,
-  ShieldCheck,
-  Lock,
-  Activity,
-  ArrowRightLeft,
-  Network,
-  Workflow,
-  Container,
-  BookOpen,
+  Megaphone,
+  Palette,
+  PenLine,
+  ServerCog,
   LifeBuoy,
-  MessageSquare,
+  Code2,
+  ShoppingCart,
+  LayoutTemplate,
+  Smartphone,
+  ArrowRightLeft,
+  Gauge,
+  Search,
+  MapPin,
+  Share2,
+  Mail,
+  Target,
+  BadgeDollarSign,
+  Sparkles,
+  PenTool,
+  Image as ImageIcon,
+  Presentation,
+  FileText,
   Newspaper,
-  DatabaseBackup,
-  Layers,
+  Camera,
+  Lightbulb,
+  Server,
+  ShieldCheck,
+  HardDriveDownload,
+  AtSign,
+  Lock,
+  MonitorSmartphone,
+  Wrench,
 } from "lucide-react";
 
 export type NavLink = {
@@ -44,180 +55,169 @@ export type NavCta = {
   label: string;
 };
 
+/** A service category card (left pane) + its sub-services (right pane). */
+export type ServiceCategory = {
+  title: string;
+  href: string;
+  icon: LucideIcon;
+  tagline: string;
+  links: { title: string; href: string; description?: string }[];
+};
+
 export type NavItem = {
   title: string;
   href?: string;
   columns?: MegaMenuColumn[];
+  /** Two-pane Nautilus-style services panel. */
+  services?: ServiceCategory[];
   /** Accent call-to-action shown at the end of a mega panel. */
   cta?: NavCta;
 };
 
-/** Primary navigation + mega menu definition (matches required IA). */
+/** The Services mega menu — left category cards, right sub-services. */
+export const serviceMenu: ServiceCategory[] = [
+  {
+    title: "Website & App",
+    href: "/website-app",
+    icon: Globe,
+    tagline: "Websites, stores and apps that work hard for your business.",
+    links: [
+      { title: "Website Development", href: "/website-app#development", description: "Custom, fast, built to convert" },
+      { title: "WordPress Websites", href: "/website-app#wordpress", description: "Easy to edit and maintain" },
+      { title: "E-commerce Stores", href: "/website-app#ecommerce", description: "Sell online with confidence" },
+      { title: "Landing Pages", href: "/website-app#landing", description: "Focused pages for campaigns" },
+      { title: "Web Apps & Portals", href: "/website-app#apps", description: "Custom tools and dashboards" },
+      { title: "Website Migration", href: "/website-app#migration", description: "Move platforms safely" },
+      { title: "Website Maintenance", href: "/website-app#maintenance", description: "Updates, fixes and edits" },
+      { title: "Speed & Performance", href: "/website-app#performance", description: "Faster loads, better scores" },
+    ],
+  },
+  {
+    title: "Digital Marketing",
+    href: "/digital-marketing",
+    icon: Megaphone,
+    tagline: "Get found, get clicks and turn visitors into customers.",
+    links: [
+      { title: "SEO", href: "/digital-marketing#seo", description: "Rank for what matters" },
+      { title: "Local SEO", href: "/digital-marketing#local-seo", description: "Win your local market" },
+      { title: "Google Business Profile", href: "/digital-marketing#gbp", description: "Maps & local visibility" },
+      { title: "Content Marketing", href: "/digital-marketing#content", description: "Content that attracts" },
+      { title: "Social Media Marketing", href: "/digital-marketing#social", description: "Grow and engage" },
+      { title: "Email Marketing", href: "/digital-marketing#email", description: "Nurture and retain" },
+      { title: "Paid Ads (Google & Meta)", href: "/digital-marketing#ads", description: "Campaigns that pay back" },
+      { title: "Lead Generation", href: "/digital-marketing#leads", description: "Fill your pipeline" },
+    ],
+  },
+  {
+    title: "Design",
+    href: "/design",
+    icon: Palette,
+    tagline: "Brand, web and marketing design that earns trust.",
+    links: [
+      { title: "Brand Identity", href: "/design#brand", description: "A look that feels you" },
+      { title: "Logo Design", href: "/design#logo", description: "Memorable and versatile" },
+      { title: "Web & UI/UX Design", href: "/design#web-ui", description: "Clear, modern interfaces" },
+      { title: "Landing Page Design", href: "/design#landing", description: "Designed to convert" },
+      { title: "Social Media Graphics", href: "/design#social", description: "Scroll-stopping visuals" },
+      { title: "Marketing & Print Graphics", href: "/design#marketing", description: "On-brand collateral" },
+      { title: "Presentation Design", href: "/design#presentations", description: "Pitch with polish" },
+    ],
+  },
+  {
+    title: "Digital Media & Content",
+    href: "/digital-media-content",
+    icon: PenLine,
+    tagline: "Words, photos and video that tell your story.",
+    links: [
+      { title: "Website Copywriting", href: "/digital-media-content#copy", description: "Clear, persuasive pages" },
+      { title: "Blog & Article Writing", href: "/digital-media-content#blog", description: "Helpful, on-brand articles" },
+      { title: "SEO Content", href: "/digital-media-content#seo-content", description: "Written to rank and read" },
+      { title: "Social Media Content", href: "/digital-media-content#social", description: "Posts and captions" },
+      { title: "Photography & Video", href: "/digital-media-content#media", description: "Original visual content" },
+      { title: "Content Strategy", href: "/digital-media-content#strategy", description: "A plan that compounds" },
+      { title: "Content Refresh", href: "/digital-media-content#refresh", description: "Update and reuse" },
+    ],
+  },
+  {
+    title: "Hosting & Website Care",
+    href: "/hosting-website-care",
+    icon: ServerCog,
+    tagline: "Keep your website online, secure and up to date.",
+    links: [
+      { title: "Managed Hosting Support", href: "/hosting-website-care#hosting", description: "We handle the technical side" },
+      { title: "Website Care Plans", href: "/hosting-website-care#care", description: "Updates, backups, monitoring" },
+      { title: "Domain Setup", href: "/hosting-website-care#domains", description: "Register and connect domains" },
+      { title: "Business Email Setup", href: "/hosting-website-care#email", description: "Professional mailboxes" },
+      { title: "SSL Setup", href: "/hosting-website-care#ssl", description: "Secure every page" },
+      { title: "Backups & Monitoring", href: "/hosting-website-care#backups", description: "Recover quickly, sleep easy" },
+    ],
+  },
+  {
+    title: "Business IT Support",
+    href: "/business-it-support",
+    icon: LifeBuoy,
+    tagline: "Friendly, reliable tech support for small businesses.",
+    links: [
+      { title: "IT Helpdesk Support", href: "/business-it-support#helpdesk", description: "Help when you need it" },
+      { title: "Email & Microsoft 365", href: "/business-it-support#email", description: "Setup and admin" },
+      { title: "Device & Account Setup", href: "/business-it-support#setup", description: "New starters, sorted" },
+      { title: "Security Essentials", href: "/business-it-support#security", description: "Protect your business" },
+      { title: "Backup & Recovery", href: "/business-it-support#backup", description: "Never lose your data" },
+      { title: "Tech Consulting", href: "/business-it-support#consulting", description: "Practical advice" },
+    ],
+  },
+];
+
+/** Icons reused by service sub-links (kept here for typed access if needed). */
+export const serviceIcons = {
+  Code2, ShoppingCart, LayoutTemplate, Smartphone, ArrowRightLeft, Gauge, Search,
+  MapPin, Share2, Mail, Target, BadgeDollarSign, Sparkles, PenTool, ImageIcon,
+  Presentation, FileText, Newspaper, Camera, Lightbulb, Server, ShieldCheck,
+  HardDriveDownload, AtSign, Lock, MonitorSmartphone, Wrench,
+};
+
+/** Primary navigation. "Services" uses the two-pane mega menu. */
 export const mainNav: NavItem[] = [
-  {
-    title: "Hosting",
-    columns: [
-      {
-        title: "Web & Apps",
-        links: [
-          { title: "Web Hosting", href: "/web-hosting", description: "Fast shared hosting for any site", icon: Globe },
-          { title: "WordPress Hosting", href: "/wordpress-hosting", description: "Managed WordPress, tuned", icon: Layers },
-          { title: "WooCommerce Hosting", href: "/woocommerce-hosting", description: "Store-ready performance", icon: ShoppingCart },
-          { title: "Cloud Hosting", href: "/cloud-hosting", description: "Isolated, dedicated resources", icon: Cloud },
-          { title: "Agency Hosting", href: "/agency-hosting", description: "Manage client sites at scale", icon: Boxes },
-          { title: "Node.js Hosting", href: "/nodejs-hosting", description: "Deploy Node apps fast", icon: Workflow },
-        ],
-      },
-    ],
-    cta: {
-      title: "Not sure which to pick?",
-      description: "Compare every hosting plan side by side.",
-      href: "/pricing",
-      label: "Compare plans",
-    },
-  },
-  {
-    title: "Servers",
-    columns: [
-      {
-        title: "Compute",
-        links: [
-          { title: "VPS Hosting", href: "/vps-hosting", description: "KVM virtual servers, full root", icon: Server },
-          { title: "Dedicated Servers", href: "/dedicated-servers", description: "Bare-metal performance", icon: Cpu },
-          { title: "GPU Servers", href: "/gpu-servers", description: "Accelerated AI & rendering", icon: Cpu },
-        ],
-      },
-      {
-        title: "Specialized",
-        links: [
-          { title: "USA Dedicated Servers", href: "/usa-dedicated-servers", description: "US-East & US-West stock", icon: Server },
-          { title: "Europe Dedicated Servers", href: "/europe-dedicated-servers", description: "EU regions, GDPR-ready", icon: Server },
-          { title: "Storage Servers", href: "/storage-servers", description: "High-capacity $/TB", icon: HardDrive },
-          { title: "10Gbps Servers", href: "/10gbps-servers", description: "Premium uplink", icon: Gauge },
-        ],
-      },
-    ],
-    cta: {
-      title: "Need full root access?",
-      description: "Deploy a KVM VPS with dedicated resources.",
-      href: "/vps-hosting",
-      label: "View VPS plans",
-    },
-  },
-  {
-    title: "Domains & Email",
-    columns: [
-      {
-        title: "Domains & Email",
-        links: [
-          { title: "Domain Search", href: "/domains", description: "Find & register a domain", icon: Globe },
-          { title: "Domain Transfer", href: "/domains/transfer", description: "Move your domain to us", icon: ArrowRightLeft },
-          { title: "Business Email", href: "/business-email", description: "Professional mailboxes", icon: Mail },
-          { title: "SSL Certificates", href: "/ssl-certificates", description: "Encrypt every site", icon: Lock },
-        ],
-      },
-    ],
-    cta: {
-      title: "Find your domain",
-      description: "Search live availability across popular TLDs.",
-      href: "/domains",
-      label: "Search domains",
-    },
-  },
-  {
-    title: "Security",
-    columns: [
-      {
-        title: "Protection",
-        links: [
-          { title: "DDoS Protection", href: "/ddos-protection", description: "Always-on mitigation", icon: ShieldCheck },
-          { title: "Backups", href: "/backup-storage", description: "Offsite encrypted backups", icon: DatabaseBackup },
-          { title: "SSL", href: "/ssl-certificates", description: "Free & premium certificates", icon: Lock },
-          { title: "Server Monitoring", href: "/support#monitoring", description: "Uptime & health alerts", icon: Activity },
-        ],
-      },
-    ],
-    cta: {
-      title: "Security on every plan",
-      description: "Free SSL, DDoS mitigation and backups built in.",
-      href: "/security",
-      label: "Explore security",
-    },
-  },
+  { title: "Home", href: "/" },
+  { title: "About", href: "/about" },
   {
     title: "Services",
-    columns: [
-      {
-        title: "Managed services",
-        links: [
-          { title: "Website Migration", href: "/website-migration", description: "Done-for-you, free on annual plans", icon: ArrowRightLeft },
-          { title: "Managed Private Cloud", href: "/managed-private-cloud", description: "Dedicated virtualization", icon: Cloud },
-          { title: "DevOps Services", href: "/devops-services", description: "Ops expertise on tap", icon: Workflow },
-          { title: "Kubernetes Solutions", href: "/kubernetes-hosting", description: "Managed clusters", icon: Container },
-        ],
-      },
-    ],
+    href: "/services",
+    services: serviceMenu,
     cta: {
-      title: "Free website migration",
-      description: "We'll move your site for you on annual plans.",
-      href: "/website-migration",
-      label: "Get migration help",
+      title: "Not sure where to start?",
+      description: "Book a free, no-pressure call and we'll map out the right plan for your business.",
+      href: "/book-a-call",
+      label: "Book a call",
     },
   },
-  {
-    title: "Resources",
-    columns: [
-      {
-        title: "Learn & get help",
-        links: [
-          { title: "Blog", href: "/blog", description: "Guides & product news", icon: Newspaper },
-          { title: "Knowledge Base", href: "/knowledge-base", description: "How-tos & docs", icon: BookOpen },
-          { title: "Support", href: "/support", description: "24/7 expert help", icon: LifeBuoy },
-          { title: "Contact", href: "/contact", description: "Talk to our team", icon: MessageSquare },
-        ],
-      },
-    ],
-    cta: {
-      title: "Check service status",
-      description: "Live status of our network and platform.",
-      href: "/status",
-      label: "View status",
-    },
-  },
-  { title: "Pricing", href: "/pricing" },
+  { title: "Portfolio", href: "/portfolio" },
+  { title: "Blog", href: "/blog" },
+  { title: "Contact", href: "/contact" },
 ];
 
 export const footerNav = {
-  Hosting: [
-    { title: "Web Hosting", href: "/web-hosting" },
-    { title: "WordPress Hosting", href: "/wordpress-hosting" },
-    { title: "WooCommerce Hosting", href: "/woocommerce-hosting" },
-    { title: "Cloud Hosting", href: "/cloud-hosting" },
-    { title: "Agency Hosting", href: "/agency-hosting" },
-  ],
-  Servers: [
-    { title: "VPS Hosting", href: "/vps-hosting" },
-    { title: "Dedicated Servers", href: "/dedicated-servers" },
-    { title: "GPU Servers", href: "/gpu-servers" },
-    { title: "Storage Servers", href: "/storage-servers" },
-    { title: "10Gbps Servers", href: "/10gbps-servers" },
+  Services: [
+    { title: "Website & App", href: "/website-app" },
+    { title: "Digital Marketing", href: "/digital-marketing" },
+    { title: "Design", href: "/design" },
+    { title: "Digital Media & Content", href: "/digital-media-content" },
+    { title: "Hosting & Website Care", href: "/hosting-website-care" },
+    { title: "Business IT Support", href: "/business-it-support" },
   ],
   Company: [
     { title: "About", href: "/about" },
-    { title: "Data Centers", href: "/data-centers" },
+    { title: "Portfolio", href: "/portfolio" },
     { title: "Blog", href: "/blog" },
-    { title: "Affiliate Program", href: "/affiliate" },
-    { title: "System Status", href: "/status" },
     { title: "Contact", href: "/contact" },
+    { title: "Book a Call", href: "/book-a-call" },
+    { title: "Client Portal", href: "/dashboard" },
   ],
   Legal: [
-    { title: "Terms of Service", href: "/terms" },
+    { title: "Terms & Conditions", href: "/terms" },
     { title: "Privacy Policy", href: "/privacy" },
+    { title: "Cookie Policy", href: "/cookie-policy" },
     { title: "Refund Policy", href: "/refund-policy" },
-    { title: "Acceptable Use", href: "/acceptable-use-policy" },
-    { title: "DMCA", href: "/dmca" },
-    { title: "Security", href: "/security" },
-    { title: "SLA", href: "/sla" },
-    { title: "Report Abuse", href: "/abuse" },
+    { title: "Acceptable Use Policy", href: "/acceptable-use-policy" },
   ],
 } as const;

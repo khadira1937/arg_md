@@ -3,12 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function CtaSection({
-  title = "Ready to launch on HostynCloud?",
-  description = "Choose a plan, check out securely with Stripe, and we'll set up your service fast — details delivered straight to your dashboard.",
-  primaryHref = "/pricing",
-  primaryLabel = "View pricing",
+  title = "Ready to grow your online presence?",
+  description = "Book a free, no-pressure discovery call and we'll map out the right plan for your business — websites, marketing, design, content or support.",
+  primaryHref = "/book-a-call",
+  primaryLabel = "Book a Call",
   secondaryHref = "/contact",
-  secondaryLabel = "Talk to us",
+  secondaryLabel = "Request a Quote",
 }: {
   title?: string;
   description?: string;

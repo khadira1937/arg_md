@@ -22,24 +22,24 @@ export default async function DashboardOverview() {
     <div>
       <PageHeader
         title={`Welcome back, ${user.name?.split(" ")[0] ?? "there"}`}
-        description="Here's an overview of your account."
-        action={<Button asChild variant="gradient"><Link href="/pricing"><Plus className="h-4 w-4" /> New service</Link></Button>}
+        description="Here's an overview of your projects and account."
+        action={<Button asChild variant="gradient"><Link href="/services"><Plus className="h-4 w-4" /> Request service</Link></Button>}
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard label="Active services" value={activeServices} icon={Server} />
+        <StatCard label="Active projects" value={activeServices} icon={Server} />
         <StatCard label="Open invoices" value={openInvoices} icon={FileText} hint={openInvoices > 0 ? `${formatMoney(unpaidTotal._sum.total ?? 0)} due` : "All paid"} />
-        <StatCard label="Total orders" value={recentOrders.length} icon={ShoppingBag} />
+        <StatCard label="Project orders" value={recentOrders.length} icon={ShoppingBag} />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <Card className="p-6">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-semibold">Recent services</h2>
+            <h2 className="font-semibold">Recent projects</h2>
             <Link href="/dashboard/services" className="text-sm text-primary hover:underline">View all</Link>
           </div>
           {recentServices.length === 0 ? (
-            <EmptyState icon={Rocket} title="No services yet" description="Deploy your first service to get started." actionLabel="Explore plans" actionHref="/pricing" />
+            <EmptyState icon={Rocket} title="No projects yet" description="Request a service to get your first project started." actionLabel="View services" actionHref="/services" />
           ) : (
             <div className="space-y-3">
               {recentServices.map((s) => (

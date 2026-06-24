@@ -2,13 +2,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
- * HostynCloud brand logo — an inline, theme-aware wordmark: a gradient "cloud +
- * bolt" mark (mirrors app/icon.svg) followed by "Hostyn" (ink) + "Cloud" (sky).
- *
- * Rendered as vector + tokenized text instead of a PNG so it stays crisp and
- * adapts to light/dark automatically (no brittle CSS color-inversion). On
- * surfaces that are ALWAYS dark regardless of theme (e.g. the footer band) pass
- * `onDark` so "Hostyn" uses white rather than the (navy) foreground token.
+ * ARGANA MEDIA brand logo — an inline, theme-aware wordmark: a gradient rounded
+ * "A" monogram mark followed by "ARGANA" (ink) + "MEDIA" (sky). Rendered as
+ * vector + tokenized text so it stays crisp and adapts to light/dark
+ * automatically. On always-dark surfaces (e.g. the footer band) pass `onDark`
+ * so "ARGANA" uses white rather than the dark foreground token.
  */
 export function Logo({
   className,
@@ -32,34 +30,32 @@ export function Logo({
   priority?: boolean;
   invertOnDark?: boolean;
 }) {
-  const fontSize = Math.round(height * 0.62);
+  const fontSize = Math.round(height * 0.5);
 
   const content = (
-    <span className="inline-flex select-none items-center gap-2" style={{ height }}>
+    <span className="inline-flex select-none items-center gap-2.5" style={{ height }}>
       <svg width={height} height={height} viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <defs>
-          <linearGradient id="hc-logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+          <linearGradient id="am-logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
             <stop stopColor="#06B6D4" />
             <stop offset="0.5" stopColor="#0EA5E9" />
             <stop offset="1" stopColor="#6366F1" />
           </linearGradient>
         </defs>
-        <rect width="32" height="32" rx="7" fill="url(#hc-logo-grad)" />
+        <rect width="32" height="32" rx="8" fill="url(#am-logo-grad)" />
+        {/* Stylised "A" monogram */}
         <path
-          d="M9.5 22a5 5 0 0 1 .6-9.95A6.9 6.9 0 0 1 23 11.5a4.1 4.1 0 0 1 .3 7.9"
-          stroke="#fff"
-          strokeWidth="1.9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M16 7.5l6.4 17h-3.5l-1.2-3.4h-3.4l-1.2 3.4H9.6L16 7.5z"
+          fill="#fff"
         />
-        <path d="M16 10.5l-3 5.2h2.6l-1.2 4.1 4.5-5.7h-2.7l1.4-3.6z" fill="#fff" />
+        <path d="M15.1 18.3h1.8L16 15.6l-0.9 2.7z" fill="url(#am-logo-grad)" />
       </svg>
       <span
-        className="font-display font-bold leading-none tracking-tight"
-        style={{ fontSize }}
+        className="font-display font-bold leading-none"
+        style={{ fontSize, letterSpacing: "0.06em" }}
       >
-        <span className={onDark ? "text-white" : "text-foreground"}>Hostyn</span>
-        <span className="text-primary">Cloud</span>
+        <span className={onDark ? "text-white" : "text-foreground"}>ARGANA</span>
+        <span className="text-primary"> MEDIA</span>
       </span>
     </span>
   );
@@ -69,7 +65,7 @@ export function Logo({
   return (
     <Link
       href={href}
-      aria-label="HostynCloud home"
+      aria-label={`${"ARGANA MEDIA"} home`}
       className={cn("inline-flex shrink-0 items-center transition-opacity hover:opacity-90", className)}
     >
       {content}

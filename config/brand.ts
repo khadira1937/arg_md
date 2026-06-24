@@ -1,34 +1,53 @@
 /**
  * Central brand configuration. Rename / recolor the whole product here.
  * Nothing in the UI hardcodes the brand name — it all reads from this file.
+ *
+ * Public-facing brand: "ARGANA MEDIA".
+ * Legal entity (footer / legal pages / invoices only): "ARGANA MEDIA LTD".
  */
 export const brand = {
-  name: "HostynCloud",
-  shortName: "HostynCloud",
-  domain: "hostyncloud.com",
-  legalName: "HostynCloud",
-  tagline: "Fast web hosting, VPS & cloud servers.",
+  name: "ARGANA MEDIA",
+  shortName: "ARGANA",
+  domain: "arganamedia.co.uk",
+  legalName: "ARGANA MEDIA LTD",
+  tagline: "Digital media, marketing & web development for growing businesses.",
   description:
-    "Launch websites, apps and online stores on NVMe-powered web hosting, VPS and cloud servers — with transparent pricing, free SSL, secure Stripe checkout and real support after payment.",
+    "ARGANA MEDIA helps businesses build, grow and manage their online presence — digital content, marketing, website and app development, design, hosting support and business IT support, delivered by one dependable UK team.",
+
+  // Contact details shown across the site. Placeholders you can update any time.
+  // TODO: confirm the live mailbox + phone number before launch.
   email: {
-    support: "support@hostyncloud.com",
-    sales: "sales@hostyncloud.com",
-    billing: "billing@hostyncloud.com",
-    abuse: "abuse@hostyncloud.com",
+    hello: "hello@arganamedia.co.uk",
+    support: "support@arganamedia.co.uk",
+    sales: "hello@arganamedia.co.uk",
+    billing: "billing@arganamedia.co.uk",
+    abuse: "abuse@arganamedia.co.uk",
   },
+  phone: "+44 20 3318 9024", // placeholder UK number — replace with your real line.
+  phoneHref: "+442033189024",
+
+  // Registered company information (England & Wales).
+  company: {
+    legalName: "ARGANA MEDIA LTD",
+    number: "17296255",
+    jurisdiction: "England and Wales",
+    registeredOffice: "2nd Floor College House, 17 King Edwards Road, Ruislip, London",
+  },
+
   // Social links. Leave a value as "" to hide that link everywhere.
-  // TODO: replace with real data source — your actual profile URLs.
+  // TODO: replace with your real profile URLs.
   social: {
-    x: "https://x.com/hostyncloud",
-    github: "https://github.com/hostyncloud",
-    linkedin: "https://www.linkedin.com/company/hostyncloud",
+    x: "",
+    github: "",
+    linkedin: "https://www.linkedin.com/company/argana-media",
   },
-  // Honest, verifiable highlights only — no invented customer counts or reviews.
+
+  // Honest, verifiable highlights only — no invented client counts or reviews.
   stats: {
-    uptime: "99.9%",
-    regions: "8",
-    setup: "Fast",
-    support: "24/7",
+    registered: "UK-registered",
+    services: "6 core services",
+    support: "Dedicated support",
+    quotes: "Fixed quotes",
   },
 } as const;
 

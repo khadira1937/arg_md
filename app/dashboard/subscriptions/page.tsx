@@ -15,9 +15,9 @@ export default async function SubscriptionsPage() {
 
   return (
     <div>
-      <PageHeader title="Subscriptions" description="Recurring plans and renewal dates." />
+      <PageHeader title="Care plans" description="Your recurring care plans and renewal dates." />
       {subs.length === 0 ? (
-        <EmptyState icon={RefreshCw} title="No subscriptions yet" actionLabel="Browse plans" actionHref="/pricing" />
+        <EmptyState icon={RefreshCw} title="No care plans yet" actionLabel="View services" actionHref="/services" />
       ) : (
         <div className="space-y-3">
           {subs.map((s) => (

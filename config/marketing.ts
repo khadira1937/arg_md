@@ -1,55 +1,102 @@
 import {
-  Server, Globe, Cloud, Cpu, Mail,
-  HardDrive, ShieldCheck, DatabaseBackup, Activity, CreditCard, Network,
+  Globe, Megaphone, Palette, PenLine, ServerCog, LifeBuoy,
+  Compass, PencilRuler, Rocket, LineChart, ShieldCheck, HeartHandshake,
+  Users, Clock, BadgeCheck, MessagesSquare,
   type LucideIcon,
 } from "lucide-react";
 
 /**
- * Marketing presentation data for the homepage + product pages.
- *
- * These are static, editorial "starting at / typical spec" values used for the
- * marketing preview only. Exact, configurable pricing is always rendered from
- * the database on /pricing and each product page — links point there.
+ * Marketing presentation data for the ARGANA MEDIA homepage and service pages.
+ * Editorial content only — no live pricing. "From" figures are starting points
+ * for a quote, never a checkout. Real scope and price are agreed per project.
  */
 
-/** Per-product spec sheets, keyed by product slug. Rendered on product cards. */
-export const PRODUCT_SPECS: Record<string, { bestFor: string; specs: string[] }> = {
-  "web-hosting": {
-    bestFor: "Best for personal sites & small business",
-    specs: ["1 website", "NVMe SSD storage", "Free SSL certificate", "Email mailboxes included", "Weekly backups", "Support tickets"],
-  },
-  "wordpress-hosting": {
-    bestFor: "Best for blogs, portfolios & WP sites",
-    specs: ["Managed WordPress", "NVMe SSD storage", "Free SSL + CDN-ready", "Automatic core updates", "Daily backups", "1-click staging"],
-  },
-  "woocommerce-hosting": {
-    bestFor: "Best for online stores",
-    specs: ["Store-tuned stack", "NVMe SSD storage", "Free SSL checkout", "Object caching", "Daily backups", "Priority support"],
-  },
-  "cloud-hosting": {
-    bestFor: "Best for growing, high-traffic sites",
-    specs: ["Dedicated resources", "NVMe SSD storage", "Free SSL", "Isolated environment", "Daily backups", "Scalable plans"],
-  },
-  "vps-hosting": {
-    bestFor: "Best for developers & full control",
-    specs: ["KVM virtualization", "Full root access", "Dedicated CPU & RAM", "Linux OS templates", "Scalable resources", "Snapshots & backups"],
-  },
-  "dedicated-servers": {
-    bestFor: "Best for demanding, single-tenant workloads",
-    specs: ["Bare-metal performance", "Dedicated CPU & RAM", "Enterprise NVMe", "Full hardware isolation", "IPMI access", "Custom configurations"],
-  },
-  "gpu-servers": {
-    bestFor: "Best for AI, ML & rendering",
-    specs: ["Dedicated GPU", "High-core CPU", "Large RAM pools", "NVMe scratch storage", "CUDA-ready images", "Hourly or monthly terms"],
-  },
-  "business-email": {
-    bestFor: "Best for professional inboxes",
-    specs: ["Mailboxes on your domain", "Anti-spam & anti-virus", "Webmail + IMAP/SMTP", "Calendars & contacts", "Mobile sync", "Admin controls"],
-  },
+/** The six core service lines shown on the homepage + services hub. */
+export type ServiceCard = {
+  icon: LucideIcon;
+  title: string;
+  href: string;
+  blurb: string;
+  points: string[];
 };
 
-/** Pricing preview — three categories, three plans each. */
-export type PreviewPlan = {
+export const SERVICES: ServiceCard[] = [
+  {
+    icon: Globe,
+    title: "Website & App",
+    href: "/website-app",
+    blurb: "Fast, modern websites, online stores and web apps designed to turn visitors into customers.",
+    points: ["Website development", "E-commerce stores", "Web apps & portals"],
+  },
+  {
+    icon: Megaphone,
+    title: "Digital Marketing",
+    href: "/digital-marketing",
+    blurb: "Get found on Google and social media, and turn that attention into real enquiries and sales.",
+    points: ["SEO & local SEO", "Social media & content", "Google & Meta ads"],
+  },
+  {
+    icon: Palette,
+    title: "Design",
+    href: "/design",
+    blurb: "Brand identity, logos and on-brand visuals that make your business look established and trustworthy.",
+    points: ["Brand identity & logos", "Web & UI/UX design", "Marketing graphics"],
+  },
+  {
+    icon: PenLine,
+    title: "Digital Media & Content",
+    href: "/digital-media-content",
+    blurb: "Copy, blogs, photography and video that tell your story clearly and keep people engaged.",
+    points: ["Website copywriting", "Blogs & SEO content", "Photo & video content"],
+  },
+  {
+    icon: ServerCog,
+    title: "Hosting & Website Care",
+    href: "/hosting-website-care",
+    blurb: "We keep your website online, secure, backed up and up to date — so you never have to worry about it.",
+    points: ["Managed hosting support", "Care & maintenance plans", "Domains, email & SSL"],
+  },
+  {
+    icon: LifeBuoy,
+    title: "Business IT Support",
+    href: "/business-it-support",
+    blurb: "Friendly, dependable tech support for small businesses — from email and devices to everyday security.",
+    points: ["IT helpdesk support", "Email & Microsoft 365", "Security & backups"],
+  },
+];
+
+/** How we work — a clear, reassuring process. */
+export const PROCESS_STEPS: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: Compass, title: "Discover", body: "We start with a free call to understand your business, goals and where you want to be." },
+  { icon: PencilRuler, title: "Plan", body: "You get a clear proposal with scope, timeline and a fixed quote — no jargon, no surprises." },
+  { icon: Rocket, title: "Build", body: "Our team designs, writes, builds and sets everything up, keeping you in the loop throughout." },
+  { icon: LineChart, title: "Grow", body: "After launch we support, maintain and market — helping your online presence improve over time." },
+];
+
+/** Why businesses choose ARGANA MEDIA — honest, defensible reasons. */
+export const WHY_US: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: Users, title: "One team, everything covered", body: "Marketing, content, design, websites and support under one roof — no juggling multiple freelancers." },
+  { icon: BadgeCheck, title: "Clear, fixed quotes", body: "You always know what you're paying and what you're getting before any work begins." },
+  { icon: HeartHandshake, title: "We stay with you", body: "We don't disappear after launch. Care plans and support keep your website healthy long term." },
+  { icon: ShieldCheck, title: "A registered UK company", body: "ARGANA MEDIA LTD is registered in England and Wales — a real business you can rely on." },
+  { icon: Clock, title: "Responsive & reliable", body: "Friendly people who reply, keep their word and hit the timelines we agree together." },
+  { icon: MessagesSquare, title: "Plain-English advice", body: "We explain the why behind every recommendation so you can make confident decisions." },
+];
+
+/** Hosting & website-care highlights (paired with the domain search). */
+export const CARE_FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: ServerCog, title: "Managed hosting support", body: "We handle the technical side of getting your site online and keeping it fast and stable." },
+  { icon: ShieldCheck, title: "Security & SSL", body: "Free SSL, sensible security settings and monitoring so every page stays protected." },
+  { icon: Clock, title: "Updates & backups", body: "Regular updates and off-site backups mean issues are prevented — and quickly recovered." },
+  { icon: LifeBuoy, title: "A real person to call", body: "When something needs changing or fixing, you have a team who knows your site." },
+];
+
+/**
+ * Service package previews — three tabs, three packages each. These are starting
+ * points for a conversation, shown as "from" prices with a quote CTA (no public
+ * checkout). Replace the figures with your own commercial numbers any time.
+ */
+export type PreviewPackage = {
   name: string;
   price: string;
   period: string;
@@ -57,96 +104,61 @@ export type PreviewPlan = {
   specs: string[];
   href: string;
   popular?: boolean;
-  renewalNote?: string;
 };
 
-export const PRICING_PREVIEW: { key: string; label: string; plans: PreviewPlan[] }[] = [
+export const SERVICE_PACKAGES: { key: string; label: string; packages: PreviewPackage[] }[] = [
   {
-    key: "web",
-    label: "Web Hosting",
-    plans: [
-      { name: "Starter", price: "$2.79", period: "/mo", bestFor: "One simple website", href: "/web-hosting",
-        specs: ["1 website", "10 GB NVMe storage", "Free SSL", "1 mailbox"] },
-      { name: "Business", price: "$4.99", period: "/mo", popular: true, bestFor: "Growing sites & stores", href: "/web-hosting",
-        specs: ["25 websites", "100 GB NVMe storage", "Free SSL + CDN-ready", "Daily backups"], renewalNote: "Billed on the term you choose. Renewal price shown at checkout." },
-      { name: "Cloud", price: "$9.99", period: "/mo", bestFor: "High-traffic projects", href: "/cloud-hosting",
-        specs: ["100 websites", "200 GB NVMe storage", "Dedicated resources", "Priority support"] },
+    key: "websites",
+    label: "Websites",
+    packages: [
+      {
+        name: "Starter Website", price: "from £750", period: "/project", bestFor: "New & small businesses", href: "/website-app",
+        specs: ["Up to 5 pages", "Mobile-friendly design", "Contact form & basic SEO", "Connected to your domain"],
+      },
+      {
+        name: "Business Website", price: "from £1,800", period: "/project", popular: true, bestFor: "Growing businesses", href: "/website-app",
+        specs: ["Custom design & copy", "Up to ~12 pages", "On-page SEO setup", "Care plan ready"],
+      },
+      {
+        name: "E-commerce / Web App", price: "from £3,500", period: "/project", bestFor: "Stores & custom tools", href: "/website-app",
+        specs: ["Online store or web app", "Payments & integrations", "Training & handover", "Ongoing support"],
+      },
     ],
   },
   {
-    key: "vps",
-    label: "VPS Hosting",
-    plans: [
-      { name: "VPS 1", price: "$4.99", period: "/mo", bestFor: "Dev & small apps", href: "/vps-hosting",
-        specs: ["1 vCPU", "2 GB RAM", "40 GB NVMe", "Full root access"] },
-      { name: "VPS 2", price: "$9.99", period: "/mo", popular: true, bestFor: "Production workloads", href: "/vps-hosting",
-        specs: ["2 vCPU", "4 GB RAM", "80 GB NVMe", "Snapshots & backups"], renewalNote: "Monthly billing. Cancel anytime from your dashboard." },
-      { name: "VPS 4", price: "$19.99", period: "/mo", bestFor: "Scaling teams", href: "/vps-hosting",
-        specs: ["4 vCPU", "8 GB RAM", "160 GB NVMe", "Priority network"] },
+    key: "marketing",
+    label: "Marketing",
+    packages: [
+      {
+        name: "Marketing Essentials", price: "from £450", period: "/mo", bestFor: "Building momentum", href: "/digital-marketing",
+        specs: ["SEO foundations", "Google Business Profile", "Monthly content", "Simple reporting"],
+      },
+      {
+        name: "Growth", price: "from £900", period: "/mo", popular: true, bestFor: "Ready to scale", href: "/digital-marketing",
+        specs: ["SEO + content marketing", "Social media management", "Email campaigns", "Monthly strategy call"],
+      },
+      {
+        name: "Performance", price: "from £1,800", period: "/mo", bestFor: "Maximising results", href: "/digital-marketing",
+        specs: ["SEO, content & social", "Google & Meta ads", "Landing pages & CRO", "Detailed reporting"],
+      },
     ],
   },
   {
-    key: "cloud",
-    label: "Cloud Servers",
-    plans: [
-      { name: "Cloud S", price: "$14.99", period: "/mo", bestFor: "Isolated single app", href: "/cloud-hosting",
-        specs: ["2 vCPU dedicated", "4 GB RAM", "80 GB NVMe", "1 dedicated IPv4"] },
-      { name: "Cloud M", price: "$29.99", period: "/mo", popular: true, bestFor: "Business platforms", href: "/cloud-hosting",
-        specs: ["4 vCPU dedicated", "8 GB RAM", "160 GB NVMe", "Auto backups"], renewalNote: "Scale up or down as your traffic changes." },
-      { name: "Cloud L", price: "$59.99", period: "/mo", bestFor: "Mission-critical apps", href: "/cloud-hosting",
-        specs: ["8 vCPU dedicated", "16 GB RAM", "320 GB NVMe", "Priority support"] },
+    key: "care",
+    label: "Care & Hosting",
+    packages: [
+      {
+        name: "Care Lite", price: "from £19", period: "/mo", bestFor: "Simple sites", href: "/hosting-website-care",
+        specs: ["Hosting support", "Software updates", "Weekly backups", "Uptime monitoring"],
+      },
+      {
+        name: "Care Plus", price: "from £49", period: "/mo", popular: true, bestFor: "Most businesses", href: "/hosting-website-care",
+        specs: ["Everything in Lite", "Daily backups", "Security & SSL care", "Small edits included"],
+      },
+      {
+        name: "Care Pro", price: "from £99", period: "/mo", bestFor: "Busy & critical sites", href: "/hosting-website-care",
+        specs: ["Everything in Plus", "Priority support", "Performance tuning", "Monthly check-in"],
+      },
     ],
   },
-];
-
-/** "Built on reliable infrastructure" trust cards. */
-export const INFRA_TRUST: { icon: LucideIcon; title: string; body: string }[] = [
-  { icon: HardDrive, title: "NVMe SSD storage", body: "Fast NVMe-backed storage on every plan for quick reads, writes and page loads." },
-  { icon: ShieldCheck, title: "SSL security", body: "Free SSL certificates so every site you host is encrypted by default." },
-  { icon: Network, title: "DDoS protection", body: "Network-level mitigation helps keep your services reachable under attack." },
-  { icon: DatabaseBackup, title: "Backups", body: "Scheduled backups on supported plans so you can recover quickly." },
-  { icon: Activity, title: "Server monitoring", body: "Health and uptime monitoring with alerting on production services." },
-  { icon: Mail, title: "Support tickets", body: "Open a ticket any time — real people read it and follow up until it's resolved." },
-  { icon: CreditCard, title: "Secure Stripe checkout", body: "Payments are processed by Stripe. Your full card details never touch our servers." },
-  { icon: Cloud, title: "Scalable VPS resources", body: "Start small and scale CPU, RAM and storage as your project grows." },
-];
-
-/**
- * Live region availability. Per current confirmed footprint: United States and
- * Europe are live; other regions are rolling out. Keep this honest.
- */
-export const REGIONS = {
-  live: ["United States", "Europe"],
-  soon: ["United Kingdom", "Canada", "Asia"],
-};
-
-/** Dark "Infrastructure" band — real, technical callouts with mono values. */
-export const INFRA_SPECS: { icon: LucideIcon; label: string; value: string; note: string }[] = [
-  { icon: HardDrive, label: "Storage", value: "NVMe SSD", note: "Fast NVMe-backed storage on every plan." },
-  { icon: Server, label: "Virtualization", value: "KVM", note: "Full hardware virtualization on VPS plans." },
-  { icon: Cpu, label: "Isolation", value: "Dedicated vCPU/RAM", note: "Guaranteed resources, not oversold." },
-  { icon: DatabaseBackup, label: "Backups", value: "Snapshots", note: "Scheduled backups on supported plans." },
-  { icon: Network, label: "Network", value: "DDoS-filtered", note: "Always-on network-level mitigation." },
-  { icon: Globe, label: "Regions", value: "US · EU", note: "More regions rolling out." },
-];
-
-/**
- * "How setup works" — honest steps. Provisioning is automated immediately after
- * a successful Stripe payment; domain registration completes after the registrar
- * confirms availability.
- */
-export const SETUP_STEPS: { title: string; body: string }[] = [
-  { title: "Choose a plan", body: "Pick the product and term that fit your project, then add it to your cart." },
-  { title: "Pay securely with Stripe", body: "Check out with Stripe's encrypted payment flow — we never see your card details." },
-  { title: "Automatic provisioning", body: "Your service is provisioned automatically right after payment is confirmed." },
-  { title: "Access details by email", body: "Login and connection details are emailed to you and saved in your dashboard." },
-  { title: "Manage & get support", body: "Control your services and open support tickets any time from your dashboard." },
-];
-
-/** Quick-link category tiles (dark band). WooCommerce dropped as a top-level category. */
-export const CATEGORY_TILES: { icon: LucideIcon; title: string; href: string; desc: string }[] = [
-  { icon: Globe, title: "Web & WordPress", href: "/web-hosting", desc: "Fast managed hosting for sites & blogs" },
-  { icon: Server, title: "VPS & Dedicated", href: "/vps-hosting", desc: "Full root access & bare-metal power" },
-  { icon: Cloud, title: "Cloud Servers", href: "/cloud-hosting", desc: "Isolated, scalable cloud resources" },
-  { icon: Cpu, title: "GPU Servers", href: "/gpu-servers", desc: "Accelerated AI, ML & rendering" },
 ];

@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 
-export const metadata: Metadata = pageMetadata({ title: "Blog", description: "Product news, guides and engineering insights from our team.", path: "/blog" });
+export const metadata: Metadata = pageMetadata({ title: "Blog", description: "Practical guides and insights on websites, marketing, design and growing your business online.", path: "/blog" });
 
 export default async function BlogPage() {
   const posts = await prisma.blogPost.findMany({ where: { published: true }, orderBy: { publishedAt: "desc" } });
@@ -19,7 +19,7 @@ export default async function BlogPage() {
         <div className="pointer-events-none absolute inset-0 bg-mesh" />
         <div className="container relative">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">The {brand.name} Blog</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">Guides, product updates and insights on hosting and infrastructure.</p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">Practical guides and insights on websites, marketing, design, content and growing your business online.</p>
         </div>
       </section>
 

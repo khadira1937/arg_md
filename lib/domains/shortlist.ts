@@ -10,8 +10,8 @@
  * and avoids touching the existing cart/checkout/Stripe flow.
  */
 
-const KEY = "hostyncloud_domain_shortlist";
-export const DOMAIN_SHORTLIST_EVENT = "hostyncloud:domains-changed";
+const KEY = "argana_domain_shortlist";
+export const DOMAIN_SHORTLIST_EVENT = "argana:domains-changed";
 
 export type ShortlistedDomain = {
   domain: string;

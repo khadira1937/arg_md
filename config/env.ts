@@ -21,7 +21,7 @@ const envSchema = z.object({
     .default("true")
     .transform((v) => v === "true"),
 
-  EMAIL_FROM: z.string().default("HostynCloud <no-reply@hostyncloud.com>"),
+  EMAIL_FROM: z.string().default("ARGANA MEDIA <no-reply@arganamedia.co.uk>"),
   SMTP_HOST: z.string().optional().default("localhost"),
   SMTP_PORT: z.coerce.number().optional().default(1025),
   SMTP_USER: z.string().optional().default(""),

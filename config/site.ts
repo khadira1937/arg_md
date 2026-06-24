@@ -6,20 +6,20 @@ export const siteConfig = {
   ogImage: "/og.png",
   description: brand.description,
   keywords: [
-    "cloud hosting",
-    "vps hosting",
-    "dedicated servers",
-    "gpu servers",
-    "wordpress hosting",
-    "woocommerce hosting",
-    "managed cloud",
-    "kubernetes hosting",
-    "ddos protection",
-    "domain registration",
+    "digital marketing agency",
+    "website development",
+    "web design",
+    "content marketing",
+    "SEO",
+    "social media marketing",
+    "brand design",
+    "app development",
+    "website hosting and care",
+    "business IT support",
   ],
-  // Currency defaults for display. Pricing values themselves come from the DB.
-  currency: "USD",
-  locale: "en-US",
+  // Currency defaults for display.
+  currency: "GBP",
+  locale: "en-GB",
 } as const;
 
 export type SiteConfig = typeof siteConfig;

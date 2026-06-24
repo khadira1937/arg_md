@@ -13,7 +13,7 @@ export default async function SupportPage() {
   return (
     <div>
       <PageHeader
-        title="Support"
+        title="Support tickets"
         description="Open a ticket and our team will help."
         action={<Button asChild variant="gradient"><Link href="/dashboard/support/new"><Plus className="h-4 w-4" /> New ticket</Link></Button>}
       />

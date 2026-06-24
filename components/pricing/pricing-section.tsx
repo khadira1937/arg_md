@@ -232,7 +232,7 @@ export function PricingSection({
 
               {inquiryOnly ? (
                 <Button asChild variant="gradient" className="mt-5 w-full">
-                  <Link href={`/contact?product=${productSlug}`}>Contact sales</Link>
+                  <Link href={`/contact?product=${productSlug}`}>Get a quote</Link>
                 </Button>
               ) : (
                 <Button

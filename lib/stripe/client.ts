@@ -16,7 +16,7 @@ export function getStripe(): Stripe {
     _stripe = new Stripe(env.STRIPE_SECRET_KEY, {
       // Use the SDK's pinned API version to avoid type drift across upgrades.
       typescript: true,
-      appInfo: { name: "HostynCloud" },
+      appInfo: { name: "ARGANA MEDIA" },
     });
   }
   return _stripe;

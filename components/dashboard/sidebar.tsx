@@ -17,11 +17,11 @@ type Item = { title: string; href: string; icon: LucideIcon };
 // across the server -> client boundary (which React cannot serialize).
 const DASHBOARD_LINKS: Item[] = [
   { title: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { title: "Services", href: "/dashboard/services", icon: Server },
-  { title: "Orders", href: "/dashboard/orders", icon: ShoppingBag },
+  { title: "Projects", href: "/dashboard/services", icon: Server },
+  { title: "Project Orders", href: "/dashboard/orders", icon: ShoppingBag },
   { title: "Invoices", href: "/dashboard/invoices", icon: FileText },
-  { title: "Subscriptions", href: "/dashboard/subscriptions", icon: RefreshCw },
-  { title: "Support", href: "/dashboard/support", icon: LifeBuoy },
+  { title: "Care Plans", href: "/dashboard/subscriptions", icon: RefreshCw },
+  { title: "Support Tickets", href: "/dashboard/support", icon: LifeBuoy },
   { title: "Profile", href: "/dashboard/profile", icon: User },
 ];
 
@@ -81,7 +81,7 @@ export function MobileNav({ variant }: { variant: SidebarVariant }) {
 export function Sidebar({ variant }: { variant: SidebarVariant }) {
   const pathname = usePathname();
   const links = linksFor(variant);
-  const title = variant === "admin" ? "Admin" : "Customer";
+  const title = variant === "admin" ? "Admin" : "Client Portal";
   const roots = ROOTS;
 
   return (

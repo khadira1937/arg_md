@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import type { DomainResult, DomainSearchResponse } from "@/lib/domains/types";
 import { addDomainToShortlist, isDomainShortlisted, getDomainShortlist } from "@/lib/domains/shortlist";
 
-const CHIP_TLDS = [".com", ".net", ".org", ".co.uk", ".cloud", ".host"];
+const CHIP_TLDS = [".co.uk", ".com", ".uk", ".net", ".org", ".io"];
 
 function formatPrice(price: number | null, currency: string): string {
   if (price == null) return "—";
@@ -221,8 +221,8 @@ export function DomainSearch({ className }: { className?: string }) {
 
           <p className="flex items-start gap-1.5 pt-1 text-xs text-muted-foreground">
             <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-            Domain registration is completed after payment once availability is confirmed by the registrar. Prices
-            marked “est.” are estimates and finalized at checkout.
+            Shortlist any names you like and {`ARGANA MEDIA`} will register and connect them to your website, email,
+            SSL and hosting for you. Prices marked “est.” are estimates and confirmed before registration.
           </p>
         </div>
       )}

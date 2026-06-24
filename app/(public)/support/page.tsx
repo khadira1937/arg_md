@@ -1,35 +1,38 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, MessageSquare, LifeBuoy, Activity, ArrowRight } from "lucide-react";
-import { prisma } from "@/lib/db";
+import { BookOpen, MessageSquare, PhoneCall, LifeBuoy, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Section, SectionHeading } from "@/components/marketing/section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 
-export const metadata: Metadata = pageMetadata({ title: "Support", description: `Get help from ${brand.name} — knowledge base, tickets and 24/7 expert support.`, path: "/support" });
+export const metadata: Metadata = pageMetadata({ title: "Support", description: `Get help from ${brand.name} — contact us, book a call or open a support ticket in your client portal.`, path: "/support" });
 
-export default async function SupportPage() {
-  const categories = await prisma.knowledgeBaseCategory.findMany({ include: { _count: { select: { articles: true } } }, orderBy: { sortOrder: "asc" } });
+const OPTIONS = [
+  { icon: MessageSquare, title: "Contact us", desc: "Send us a message and we'll reply", href: "/contact" },
+  { icon: PhoneCall, title: "Book a call", desc: "Talk it through with our team", href: "/book-a-call" },
+  { icon: LifeBuoy, title: "Open a ticket", desc: "Existing clients — via your portal", href: "/dashboard/support" },
+  { icon: BookOpen, title: "Read the blog", desc: "Guides, tips and how-tos", href: "/blog" },
+];
 
+export default function SupportPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Support", path: "/support" }])} />
-      <section className="border-b py-16 text-center" id="monitoring">
+      <section className="border-b py-16 text-center">
         <div className="container">
           <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">How can we help?</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">Browse the knowledge base, open a ticket, or reach our team 24/7.</p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+            Whether you&apos;re an existing client or just exploring, we&apos;re here to help. Choose the option that
+            suits you best.
+          </p>
         </div>
       </section>
 
       <Section>
-        <div className="grid gap-5 sm:grid-cols-3">
-          {[
-            { icon: BookOpen, title: "Knowledge base", desc: "Guides and how-tos", href: "/knowledge-base" },
-            { icon: MessageSquare, title: "Open a ticket", desc: "Get personal help", href: "/dashboard/support/new" },
-            { icon: Activity, title: "System status", desc: "Live uptime & monitoring", href: "/data-centers" },
-          ].map((c) => (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {OPTIONS.map((c) => (
             <Link key={c.title} href={c.href}>
               <Card className="group h-full p-6 transition-all hover:-translate-y-1 hover:shadow-md">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary"><c.icon className="h-5 w-5" /></span>
@@ -42,16 +45,16 @@ export default async function SupportPage() {
       </Section>
 
       <Section className="bg-muted/30 pt-0">
-        <SectionHeading eyebrow="Knowledge base" title="Popular help topics" />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((c) => (
-            <Link key={c.id} href="/knowledge-base">
-              <Card className="flex items-center justify-between p-5 hover:border-primary/40">
-                <div className="flex items-center gap-3"><LifeBuoy className="h-5 w-5 text-primary" /><span className="font-medium">{c.name}</span></div>
-                <span className="text-xs text-muted-foreground">{c._count.articles} articles</span>
-              </Card>
+        <div className="mx-auto max-w-2xl rounded-2xl border bg-card p-8 text-center">
+          <h2 className="font-display text-2xl font-semibold">Existing clients</h2>
+          <p className="mt-3 text-muted-foreground">
+            Sign in to your client portal to view projects, invoices and care plans, and to raise a support ticket.
+          </p>
+          <div className="mt-6">
+            <Link href="/dashboard" className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline">
+              Go to your Client Portal <ArrowRight className="h-4 w-4" />
             </Link>
-          ))}
+          </div>
         </div>
       </Section>
     </>

@@ -35,9 +35,9 @@ export default function OpengraphImage() {
               fontWeight: 800,
             }}
           >
-            H
+            A
           </div>
-          <div style={{ display: "flex", fontSize: 30, fontWeight: 700, color: "#e2e8f0" }}>
+          <div style={{ display: "flex", fontSize: 30, fontWeight: 700, color: "#e2e8f0", letterSpacing: "0.04em" }}>
             {brand.name}
           </div>
         </div>
@@ -46,25 +46,25 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 62,
+              fontSize: 60,
               fontWeight: 700,
               color: "#f8fafc",
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
-              maxWidth: 960,
+              maxWidth: 980,
             }}
           >
-            Fast web hosting, VPS &amp; cloud servers
+            Build, grow &amp; manage your online presence
           </div>
-          <div style={{ display: "flex", marginTop: 22, fontSize: 28, color: "#94a3b8", maxWidth: 940 }}>
-            NVMe-powered infrastructure, free SSL and secure Stripe checkout across {brand.stats.regions} regions.
+          <div style={{ display: "flex", marginTop: 22, fontSize: 27, color: "#94a3b8", maxWidth: 960 }}>
+            Digital media, marketing, websites, design, hosting support and business IT — from one UK team.
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 36, fontSize: 23, color: "#94a3b8" }}>
-          <div style={{ display: "flex" }}>Web hosting from $2.79/mo</div>
+        <div style={{ display: "flex", gap: 30, fontSize: 22, color: "#94a3b8" }}>
+          <div style={{ display: "flex" }}>Marketing &amp; SEO</div>
           <div style={{ display: "flex", color: "#334155" }}>•</div>
-          <div style={{ display: "flex" }}>VPS from $4.99/mo</div>
+          <div style={{ display: "flex" }}>Web &amp; app development</div>
           <div style={{ display: "flex", color: "#334155" }}>•</div>
           <div style={{ display: "flex" }}>{brand.domain}</div>
         </div>

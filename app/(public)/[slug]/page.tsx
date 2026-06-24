@@ -108,9 +108,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
               {[
-                { icon: Zap, t: "NVMe performance" },
-                { icon: ShieldCheck, t: "Free SSL & DDoS filtering" },
-                { icon: Headphones, t: "24/7 expert support" },
+                { icon: Zap, t: "Clear fixed quotes" },
+                { icon: ShieldCheck, t: "UK-registered company" },
+                { icon: Headphones, t: "Dedicated support" },
               ].map((b) => (
                 <span key={b.t} className="flex items-center gap-1.5"><b.icon className="h-4 w-4 text-primary" /> {b.t}</span>
               ))}

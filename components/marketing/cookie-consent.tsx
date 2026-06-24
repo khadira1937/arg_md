@@ -41,9 +41,9 @@ export function CookieConsent() {
               <Cookie className="h-5 w-5" />
             </span>
             <p className="flex-1 text-sm text-muted-foreground">
-              We use essential cookies to run the site, and analytics/affiliate cookies only with your
+              {`ARGANA MEDIA`} uses essential cookies to run the site, and analytics cookies only with your
               consent. See our{" "}
-              <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
+              <Link href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</Link>.
             </p>
             <div className="flex shrink-0 gap-2">
               <Button variant="outline" size="sm" onClick={() => choose("rejected")}>Decline</Button>

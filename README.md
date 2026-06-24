@@ -1,6 +1,10 @@
-# HostynCloud
+# ARGANA MEDIA
 
-A production-grade **cloud hosting platform** MVP — marketing site, DB-driven product
+A production-grade **digital agency website** (ARGANA MEDIA LTD) — marketing site, DB-driven service catalog, client portal, cart and Stripe checkout. Originally built on a hosting-platform template; now a digital media, marketing, web development, hosting-support and IT-support agency site.
+
+Legacy note: this repo was previously branded "HostynCloud". The remaining lines below are part of the original template's setup docs.
+
+A production-grade platform MVP — marketing site, DB-driven product
 catalog & pricing, authentication, cart, checkout (Stripe), provisioning, and customer +
 admin dashboards. Built with Next.js (App Router), TypeScript, Tailwind, Prisma & PostgreSQL.
 
@@ -57,9 +61,9 @@ npm run dev                 # http://localhost:3000
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | `admin@hostyncloud.com` | `Admin123!` |
-| Support | `support@hostyncloud.com` | `Support123!` |
-| Customer | `customer@example.com` | `Customer123!` |
+| Admin | `admin@arganamedia.co.uk` | `Admin123!` |
+| Support | `support@arganamedia.co.uk` | `Support123!` |
+| Client | `client@example.com` | `Customer123!` |
 
 Local mail (verification, reset, receipts) is viewable at **http://localhost:8025** (Mailpit).
 
@@ -112,7 +116,7 @@ no credentials are required.
 **Production — Resend (recommended):**
 ```bash
 RESEND_API_KEY=re_xxx
-EMAIL_FROM="HostynCloud <no-reply@yourdomain.com>"   # domain verified in Resend
+EMAIL_FROM="ARGANA MEDIA <no-reply@yourdomain.com>"   # domain verified in Resend
 ```
 
 **Production — SMTP (Postmark / SES / Mailgun / etc.):**
@@ -122,7 +126,7 @@ SMTP_PORT=587            # 465 if using TLS
 SMTP_USER=...
 SMTP_PASS=...
 SMTP_SECURE=false        # true for port 465
-EMAIL_FROM="HostynCloud <no-reply@yourdomain.com>"
+EMAIL_FROM="ARGANA MEDIA <no-reply@yourdomain.com>"
 ```
 
 Verify delivery any time with `npm run email:test you@example.com` or from `/admin/email`.
