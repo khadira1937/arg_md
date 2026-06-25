@@ -81,15 +81,17 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       backgroundImage: {
+        // Premium gold CTA gradient (landing-page "Book a Call" button).
+        "gold-gradient": "linear-gradient(135deg, #F6D79A 0%, #E3A94E 100%)",
         "brand-gradient":
-          "linear-gradient(135deg, hsl(187 92% 44%) 0%, hsl(201 96% 47%) 45%, hsl(244 80% 63%) 100%)",
+          "linear-gradient(135deg, hsl(183 74% 56%) 0%, hsl(205 84% 64%) 45%, hsl(39 82% 74%) 100%)",
         "brand-gradient-soft":
-          "linear-gradient(135deg, hsl(187 92% 44% / 0.12) 0%, hsl(244 80% 63% / 0.12) 100%)",
+          "linear-gradient(135deg, hsl(183 74% 56% / 0.12) 0%, hsl(39 82% 74% / 0.12) 100%)",
         "brand-glow":
-          "radial-gradient(60% 60% at 50% 0%, hsl(201 96% 50% / 0.16) 0%, transparent 100%)",
+          "radial-gradient(60% 60% at 50% 0%, hsl(183 74% 56% / 0.16) 0%, transparent 100%)",
       },
       boxShadow: {
-        glow: "0 0 0 1px hsl(201 96% 45% / 0.18), 0 20px 60px -24px hsl(201 96% 45% / 0.45)",
+        glow: "0 0 0 1px hsl(183 74% 56% / 0.20), 0 20px 60px -24px hsl(183 74% 50% / 0.40)",
       },
       keyframes: {
         "accordion-down": {

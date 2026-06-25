@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Sora, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { brand } from "@/config/brand";
@@ -7,9 +7,9 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const sora = Sora({ subsets: ["latin"], variable: "--font-display", display: "swap" });
-// Monospace for ALL technical data: prices, specs, regions, plan codes, resource values.
+// Sans (General Sans) + display (Clash Display) match the landing page and are
+// loaded globally via the Fontshare <link> below; the CSS variables are set in
+// globals.css. Monospace (JetBrains) is kept for technical data (prices/specs).
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
@@ -36,8 +36,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${sora.variable} ${jetbrainsMono.variable} font-sans`}>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap"
+        />
+      </head>
+      <body className={`${jetbrainsMono.variable} font-sans`}>
         <ThemeProvider>
           <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           {children}

@@ -23,8 +23,8 @@ export const brand = {
     billing: "billing@arganamedia.co.uk",
     abuse: "abuse@arganamedia.co.uk",
   },
-  phone: "+44 20 3318 9024", // placeholder UK number — replace with your real line.
-  phoneHref: "+442033189024",
+  phone: "+44 20 0000 0000", // placeholder UK number — replace with your real line.
+  phoneHref: "+442000000000",
 
   // Registered company information (England & Wales).
   company: {

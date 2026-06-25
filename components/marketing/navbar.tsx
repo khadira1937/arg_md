@@ -2,345 +2,208 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronRight, Menu, ShoppingCart, LayoutDashboard, ArrowRight, PhoneCall } from "lucide-react";
-import { mainNav } from "@/config/nav";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Logo } from "./logo";
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+  Globe,
+  Megaphone,
+  Palette,
+  PenLine,
+  ServerCog,
+  LifeBuoy,
+  ChevronDown,
+  ShoppingCart,
+  LayoutDashboard,
+  Menu,
+  X,
+  ArrowRight,
+  Phone,
+  type LucideIcon,
+} from "lucide-react";
+
+/**
+ * Shared ARGANA MEDIA navbar — a React port of the landing page's own navbar so
+ * every non-home public page uses the exact same look (dark glass bar, gradient
+ * "A" mark, underline-on-hover links, 3-column Services mega-menu, cart, Client
+ * Portal and the gold "Book a Call" CTA). Wired to the real session, cart count
+ * and routes. Styling lives under the isolated `amx-` prefix in globals.css.
+ */
 
 type NavUser = { name?: string | null; role: string } | null;
 
-export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: number }) {
-  const [scrolled, setScrolled] = React.useState(false);
-  const [openMenu, setOpenMenu] = React.useState<string | null>(null);
-  const [activeCat, setActiveCat] = React.useState(0);
+type MegaCol = { title: string; href: string; Icon: LucideIcon; links: [string, string][] };
 
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+const MEGA: MegaCol[] = [
+  { title: "Website & App", href: "/website-app", Icon: Globe, links: [
+    ["Website Development", "/website-app#development"],
+    ["WordPress Websites", "/website-app#wordpress"],
+    ["E-commerce Stores", "/website-app#ecommerce"],
+    ["Landing Pages", "/website-app#landing"],
+    ["Website Maintenance", "/website-app#maintenance"],
+  ] },
+  { title: "Digital Marketing", href: "/digital-marketing", Icon: Megaphone, links: [
+    ["SEO", "/digital-marketing#seo"],
+    ["Local SEO", "/digital-marketing#local-seo"],
+    ["Content Marketing", "/digital-marketing#content"],
+    ["Social Media Marketing", "/digital-marketing#social"],
+    ["Paid Ads (Google & Meta)", "/digital-marketing#ads"],
+  ] },
+  { title: "Design", href: "/design", Icon: Palette, links: [
+    ["Brand Identity", "/design#brand"],
+    ["Logo Design", "/design#logo"],
+    ["Web & UI/UX Design", "/design#web-ui"],
+    ["Landing Page Design", "/design#landing"],
+    ["Social Media Graphics", "/design#social"],
+  ] },
+  { title: "Digital Media & Content", href: "/digital-media-content", Icon: PenLine, links: [
+    ["Website Copywriting", "/digital-media-content#copy"],
+    ["Blog & Article Writing", "/digital-media-content#blog"],
+    ["SEO Content", "/digital-media-content#seo-content"],
+    ["Social Media Content", "/digital-media-content#social"],
+    ["Content Strategy", "/digital-media-content#strategy"],
+  ] },
+  { title: "Hosting & Website Care", href: "/hosting-website-care", Icon: ServerCog, links: [
+    ["Managed Hosting Support", "/hosting-website-care#hosting"],
+    ["Website Care Plans", "/hosting-website-care#care"],
+    ["Domain Setup", "/hosting-website-care#domains"],
+    ["Business Email Setup", "/hosting-website-care#email"],
+    ["SSL Setup", "/hosting-website-care#ssl"],
+  ] },
+  { title: "Business IT Support", href: "/business-it-support", Icon: LifeBuoy, links: [
+    ["IT Helpdesk Support", "/business-it-support#helpdesk"],
+    ["Email & Microsoft 365", "/business-it-support#email"],
+    ["Device & Account Setup", "/business-it-support#setup"],
+    ["Security Essentials", "/business-it-support#security"],
+    ["Backup & Recovery", "/business-it-support#backup"],
+  ] },
+];
 
-  const active = mainNav.find((i) => i.title === openMenu && (i.columns || i.services));
+const NAV_LEFT: [string, string][] = [["Home", "/"], ["About", "/about"]];
+const NAV_RIGHT: [string, string][] = [["Portfolio", "/portfolio"], ["Blog", "/blog"], ["Contact", "/contact"]];
+const MOBILE_LINKS: [string, string][] = [
+  ["Home", "/"], ["About", "/about"], ["Services", "/services"],
+  ["Portfolio", "/portfolio"], ["Blog", "/blog"], ["Contact", "/contact"],
+];
 
+function Brand({ onClick }: { onClick?: () => void }) {
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-40 w-full border-b transition-all",
-        scrolled
-          ? "border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
-          : "border-transparent bg-background/60 backdrop-blur-sm",
-      )}
-    >
-      <div
-        className={cn(
-          "container relative flex items-center justify-between gap-4 transition-all",
-          scrolled ? "h-14" : "h-16",
-        )}
-        onMouseLeave={() => setOpenMenu(null)}
-      >
-        <div className="flex items-center gap-1">
-          <Logo height={scrolled ? 26 : 30} priority invertOnDark />
-        </div>
-
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex lg:items-center lg:gap-0.5">
-          {mainNav.map((item) =>
-            item.columns || item.services ? (
-              <button
-                key={item.title}
-                onMouseEnter={() => {
-                  setOpenMenu(item.title);
-                  setActiveCat(0);
-                }}
-                className={cn(
-                  "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground",
-                  openMenu === item.title && "bg-muted text-foreground",
-                )}
-              >
-                {item.title}
-                <ChevronDown
-                  className={cn("h-4 w-4 opacity-60 transition-transform", openMenu === item.title && "rotate-180")}
-                />
-              </button>
-            ) : (
-              <Link
-                key={item.title}
-                href={item.href!}
-                onMouseEnter={() => setOpenMenu(null)}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
-              >
-                {item.title}
-              </Link>
-            ),
-          )}
-        </nav>
-
-        {/* Right actions */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle className="hidden sm:inline-flex" />
-
-          <Link href="/cart" className="relative hidden sm:inline-flex">
-            <Button variant="ghost" size="icon" aria-label="Cart">
-              <ShoppingCart className="h-5 w-5" />
-            </Button>
-            {cartCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
-                {cartCount}
-              </span>
-            )}
-          </Link>
-
-          {user ? (
-            <Button asChild variant="ghost" className="hidden sm:inline-flex">
-              <Link href="/dashboard">
-                <LayoutDashboard className="h-4 w-4" />
-                Client Portal
-              </Link>
-            </Button>
-          ) : (
-            <Button asChild variant="ghost" className="hidden sm:inline-flex">
-              <Link href="/login">Client Portal</Link>
-            </Button>
-          )}
-
-          <Button asChild variant="gradient" className="hidden sm:inline-flex">
-            <Link href="/book-a-call">
-              <PhoneCall className="h-4 w-4" />
-              Book a Call
-            </Link>
-          </Button>
-
-          {/* Mobile */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="lg:hidden" aria-label="Menu">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[90vw] overflow-y-auto p-0 sm:max-w-md">
-              <SheetHeader className="border-b">
-                <SheetTitle className="flex items-center justify-between">
-                  <Logo height={26} invertOnDark />
-                  <ThemeToggle />
-                </SheetTitle>
-              </SheetHeader>
-              <div className="p-4">
-                <MobileNav />
-                <div className="mt-4 grid gap-2">
-                  <Button asChild variant="gradient"><Link href="/book-a-call">Book a Call</Link></Button>
-                  {user ? (
-                    <Button asChild variant="outline"><Link href="/dashboard">Client Portal</Link></Button>
-                  ) : (
-                    <>
-                      <Button asChild variant="outline"><Link href="/login">Client Portal</Link></Button>
-                      <Button asChild variant="ghost"><Link href="/contact">Contact us</Link></Button>
-                    </>
-                  )}
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {/* Two-pane Services mega panel */}
-        {active?.services && (
-          <div className="absolute inset-x-0 top-full hidden pt-2 lg:block">
-            <div className="grid grid-cols-12 overflow-hidden rounded-2xl border bg-popover shadow-xl animate-fade-up">
-              {/* Left: category cards */}
-              <div className="col-span-4 border-r bg-muted/30 p-3">
-                <div className="flex items-center justify-between px-3 pb-2 pt-1">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Our services</p>
-                  <Link href="/services" className="text-xs font-medium text-primary hover:underline">All</Link>
-                </div>
-                {active.services.map((c, i) => {
-                  const Icon = c.icon;
-                  const isActive = activeCat === i;
-                  return (
-                    <Link
-                      key={c.title}
-                      href={c.href}
-                      onMouseEnter={() => setActiveCat(i)}
-                      className={cn(
-                        "group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors",
-                        isActive ? "bg-card shadow-sm" : "hover:bg-card/60",
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors",
-                          isActive ? "border-primary/40 bg-primary/10 text-primary" : "bg-card text-muted-foreground",
-                        )}
-                      >
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-sm font-semibold text-foreground">{c.title}</span>
-                        <span className="block truncate text-xs text-muted-foreground">{c.tagline}</span>
-                      </span>
-                      <ChevronRight className={cn("h-4 w-4 shrink-0 text-muted-foreground transition-opacity", isActive ? "opacity-100 text-primary" : "opacity-0")} />
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {/* Right: selected category's services */}
-              <div className="col-span-8 flex flex-col p-5">
-                {(() => {
-                  const cat = active.services![activeCat] ?? active.services![0];
-                  return (
-                    <>
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-display text-base font-semibold">{cat.title}</p>
-                          <p className="mt-0.5 text-sm text-muted-foreground">{cat.tagline}</p>
-                        </div>
-                        <Button asChild variant="outline" size="sm">
-                          <Link href={cat.href}>View {cat.title} <ArrowRight className="h-3.5 w-3.5" /></Link>
-                        </Button>
-                      </div>
-                      <div className="mt-4 grid flex-1 grid-cols-2 gap-x-6 gap-y-1">
-                        {cat.links.map((link) => (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            className="group rounded-lg px-3 py-2 transition-colors hover:bg-muted"
-                          >
-                            <span className="block text-sm font-medium text-foreground">{link.title}</span>
-                            {link.description && (
-                              <span className="block text-xs text-muted-foreground">{link.description}</span>
-                            )}
-                          </Link>
-                        ))}
-                      </div>
-                      {active.cta && (
-                        <div className="mt-4 flex items-center justify-between rounded-xl border border-primary/20 bg-primary/[0.04] px-4 py-3">
-                          <div className="min-w-0">
-                            <p className="text-sm font-semibold">{active.cta.title}</p>
-                            <p className="truncate text-xs text-muted-foreground">{active.cta.description}</p>
-                          </div>
-                          <Button asChild variant="gradient" size="sm" className="ml-4 shrink-0">
-                            <Link href={active.cta.href}>{active.cta.label} <ArrowRight className="h-4 w-4" /></Link>
-                          </Button>
-                        </div>
-                      )}
-                    </>
-                  );
-                })()}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Generic column mega panel (fallback for any column-based item) */}
-        {active?.columns && !active.services && (
-          <div className="absolute inset-x-0 top-full hidden pt-2 lg:block">
-            <div className="grid grid-cols-12 gap-6 rounded-2xl border bg-popover p-5 shadow-xl animate-fade-up">
-              <div className={cn("col-span-9 grid gap-x-8 gap-y-1", active.columns.length > 1 ? "grid-cols-3" : "grid-cols-2")}>
-                {active.columns.map((col) => (
-                  <div key={col.title} className="space-y-1">
-                    <p className="px-3 pb-1 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      {col.title}
-                    </p>
-                    {col.links.map((link) => {
-                      const Icon = link.icon;
-                      return (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className="group flex items-start gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-muted"
-                        >
-                          {Icon && (
-                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border bg-card text-primary transition-colors group-hover:border-primary/40 group-hover:bg-primary/10">
-                              <Icon className="h-4 w-4" />
-                            </span>
-                          )}
-                          <span>
-                            <span className="block text-sm font-medium text-foreground">{link.title}</span>
-                            {link.description && (
-                              <span className="block text-xs text-muted-foreground">{link.description}</span>
-                            )}
-                          </span>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-              {active.cta && (
-                <div className="col-span-3 flex flex-col justify-between rounded-xl border border-primary/20 bg-primary/[0.04] p-5">
-                  <div>
-                    <p className="font-display text-base font-semibold">{active.cta.title}</p>
-                    <p className="mt-1.5 text-sm text-muted-foreground">{active.cta.description}</p>
-                  </div>
-                  <Button asChild variant="gradient" size="sm" className="mt-4 w-full">
-                    <Link href={active.cta.href}>
-                      {active.cta.label} <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
+    <Link href="/" onClick={onClick} aria-label="ARGANA MEDIA home" style={{ display: "flex", alignItems: "center", gap: 11, textDecoration: "none", flexShrink: 0 }}>
+      <span style={{ position: "relative", width: 34, height: 34, display: "grid", placeItems: "center" }}>
+        <span style={{ position: "absolute", inset: 0, borderRadius: 11, background: "linear-gradient(135deg,#35E0E8,#4DA8F5 45%,#F3CD86)", opacity: 0.92 }} />
+        <span style={{ position: "absolute", inset: 1.5, borderRadius: 9.5, background: "#080d18" }} />
+        <span style={{ position: "relative", fontFamily: "'Clash Display'", fontWeight: 600, fontSize: 18, background: "linear-gradient(135deg,#35E0E8,#F3CD86)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>A</span>
+      </span>
+      <span style={{ fontFamily: "'Clash Display'", fontWeight: 600, fontSize: 18, letterSpacing: "0.14em", color: "#F4F7FC" }}>
+        ARGANA<span style={{ color: "#8A93A6", fontWeight: 500 }}> MEDIA</span>
+      </span>
+    </Link>
   );
 }
 
-function MobileNav() {
+export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: number }) {
+  const [servicesOpen, setServicesOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const portalHref = user ? "/dashboard" : "/login";
+
   return (
-    <div className="space-y-1">
-      {mainNav.map((item) =>
-        item.services ? (
-          <details key={item.title} className="group rounded-xl border">
-            <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-medium">
-              {item.title}
-              <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-            </summary>
-            <div className="space-y-2 px-2 pb-3">
-              {item.services.map((cat) => (
-                <div key={cat.href} className="rounded-lg bg-muted/40 p-2">
-                  <Link href={cat.href} className="block px-2 py-1 text-sm font-semibold text-foreground">
-                    {cat.title}
-                  </Link>
-                  <div className="grid">
-                    {cat.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:bg-card hover:text-foreground"
-                      >
-                        {link.title}
-                      </Link>
+    <>
+      <header style={{ position: "sticky", top: 0, zIndex: 60, background: "rgba(7,11,20,0.85)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <nav style={{ maxWidth: 1280, margin: "0 auto", padding: "16px 28px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+          <Brand />
+
+          {/* Desktop nav */}
+          <div className="amx-desktop" style={{ display: "flex", alignItems: "center", gap: 30 }}>
+            {NAV_LEFT.map(([t, h]) => (
+              <Link key={t} href={h} className="amx-navlink">{t}</Link>
+            ))}
+
+            <div style={{ position: "relative" }} onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+              <Link href="/services" className="amx-navlink" style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+                Services
+                <ChevronDown size={13} strokeWidth={2.5} style={{ transition: "transform .2s", transform: servicesOpen ? "rotate(180deg)" : "none" }} />
+              </Link>
+              <div
+                style={{
+                  position: "absolute", top: "100%", left: "50%", paddingTop: 18,
+                  transform: `translateX(-50%) translateY(${servicesOpen ? "0" : "8px"})`,
+                  opacity: servicesOpen ? 1 : 0,
+                  visibility: servicesOpen ? "visible" : "hidden",
+                  transition: "opacity .22s ease, transform .22s ease, visibility .22s",
+                }}
+              >
+                <div style={{ width: "min(780px,94vw)", background: "rgba(13,18,30,0.97)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 18, padding: 20, boxShadow: "0 30px 70px -24px rgba(0,0,0,.85)" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,minmax(0,1fr))", gap: "8px 24px" }}>
+                    {MEGA.map((c) => (
+                      <div key={c.title} style={{ padding: 6 }}>
+                        <Link href={c.href} style={{ display: "flex", alignItems: "center", gap: 9, textDecoration: "none", marginBottom: 9 }}>
+                          <span style={{ display: "grid", placeItems: "center", width: 30, height: 30, borderRadius: 9, background: "rgba(53,224,232,0.1)", color: "#35E0E8", flexShrink: 0 }}>
+                            <c.Icon size={17} strokeWidth={1.8} />
+                          </span>
+                          <span style={{ color: "#EEF2F9", fontSize: 14, fontWeight: 600, fontFamily: "'Clash Display'" }}>{c.title}</span>
+                        </Link>
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                          {c.links.map(([lt, lh]) => (
+                            <Link key={lh} href={lh} className="amx-subnav" onClick={() => setServicesOpen(false)}>{lt}</Link>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
+                  <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+                    <span style={{ fontSize: 12.5, color: "#7E8AA3" }}>Not sure where to start? Book a free, no-pressure call.</span>
+                    <Link href="/book-a-call" className="amx-gold" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#0A0E18", fontSize: 13, fontWeight: 600, padding: "9px 16px", borderRadius: 10, whiteSpace: "nowrap" }} onClick={() => setServicesOpen(false)}>
+                      Book a Call <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
-              ))}
-              <Link href="/services" className="flex items-center gap-1.5 px-2 py-2 text-sm font-medium text-primary">
-                View all services <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+              </div>
             </div>
-          </details>
-        ) : (
-          <Link
-            key={item.title}
-            href={item.href!}
-            className="block rounded-xl border px-4 py-3 text-sm font-medium hover:bg-muted"
-          >
-            {item.title}
-          </Link>
-        ),
+
+            {NAV_RIGHT.map(([t, h]) => (
+              <Link key={t} href={h} className="amx-navlink">{t}</Link>
+            ))}
+          </div>
+
+          {/* Right actions */}
+          <div style={{ display: "flex", alignItems: "center", gap: 14, flexShrink: 0 }}>
+            <Link href="/cart" aria-label="Cart" className="amx-desktop amx-icon" style={{ position: "relative", color: "#C7CEDC", padding: 6, display: "grid", placeItems: "center", textDecoration: "none" }}>
+              <ShoppingCart size={20} strokeWidth={1.7} />
+              {cartCount > 0 && (
+                <span style={{ position: "absolute", top: -2, right: -2, minWidth: 16, height: 16, display: "grid", placeItems: "center", padding: "0 4px", borderRadius: 100, background: "linear-gradient(135deg,#F6D79A,#E3A94E)", color: "#0A0E18", fontSize: 10, fontWeight: 700 }}>{cartCount}</span>
+              )}
+            </Link>
+
+            <Link href={portalHref} className="amx-desktop amx-portal" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#C7CEDC", fontSize: 13.5, fontWeight: 500, padding: "8px 14px", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 10, transition: "border-color .25s, color .25s" }}>
+              <LayoutDashboard size={15} strokeWidth={1.8} /> Client Portal
+            </Link>
+
+            <Link href="/book-a-call" className="amx-desktop amx-gold" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#0A0E18", fontSize: 13.5, fontWeight: 600, padding: "10px 18px", borderRadius: 10 }}>
+              <Phone size={15} /> Book a Call
+            </Link>
+
+            <button aria-label="Menu" className="amx-burger" onClick={() => setMobileOpen(true)} style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.14)", borderRadius: 10, width: 42, height: 42, cursor: "pointer", color: "#EEF2F9", placeItems: "center" }}>
+              <Menu size={18} />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile panel */}
+      {mobileOpen && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 80, background: "rgba(7,11,20,0.98)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", padding: 28, display: "flex", flexDirection: "column", gap: 6 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
+            <Brand onClick={() => setMobileOpen(false)} />
+            <button aria-label="Close menu" onClick={() => setMobileOpen(false)} style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.14)", borderRadius: 10, width: 42, height: 42, color: "#EEF2F9", display: "grid", placeItems: "center", cursor: "pointer" }}>
+              <X size={18} />
+            </button>
+          </div>
+          {MOBILE_LINKS.map(([t, h]) => (
+            <Link key={t} href={h} onClick={() => setMobileOpen(false)} style={{ textDecoration: "none", color: "#EEF2F9", fontFamily: "'Clash Display'", fontWeight: 500, fontSize: 24, padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,.07)" }}>{t}</Link>
+          ))}
+          <div style={{ display: "flex", gap: 12, marginTop: 22 }}>
+            <Link href={portalHref} onClick={() => setMobileOpen(false)} style={{ flex: 1, textAlign: "center", textDecoration: "none", color: "#EEF2F9", fontWeight: 600, padding: 14, border: "1px solid rgba(255,255,255,.16)", borderRadius: 12 }}>Client Portal</Link>
+            <Link href="/book-a-call" onClick={() => setMobileOpen(false)} className="amx-gold" style={{ flex: 1, textAlign: "center", textDecoration: "none", color: "#0A0E18", fontWeight: 600, padding: 14, borderRadius: 12 }}>Book a Call</Link>
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 }

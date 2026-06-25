@@ -37,9 +37,9 @@ export function Logo({
       <svg width={height} height={height} viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="am-logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#06B6D4" />
-            <stop offset="0.5" stopColor="#0EA5E9" />
-            <stop offset="1" stopColor="#6366F1" />
+            <stop stopColor="#35E0E8" />
+            <stop offset="0.5" stopColor="#4DA8F5" />
+            <stop offset="1" stopColor="#F3CD86" />
           </linearGradient>
         </defs>
         <rect width="32" height="32" rx="8" fill="url(#am-logo-grad)" />

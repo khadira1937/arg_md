@@ -9,11 +9,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
-        // Signature brand-gradient CTA (cyan→sky→indigo). text-white (not
-        // primary-foreground, which flips dark on dark theme) stays legible on
-        // the gradient; hover brightens + deepens the brand-tinted shadow.
+        // Signature primary CTA — the premium GOLD button from the ARGANA MEDIA
+        // landing page (dark ink on a gold gradient, soft gold glow on hover).
+        // Kept under the `gradient` name so existing callers stay the primary CTA.
         gradient:
-          "bg-brand-gradient text-white shadow-premium hover:brightness-105 hover:shadow-glow",
+          "bg-gold-gradient text-[#0a0e18] shadow-sm hover:brightness-[1.06] hover:shadow-[0_12px_38px_-10px_rgba(243,205,134,0.55)]",
+        // Secondary CTA — the translucent "glass" button from the landing page.
+        glass:
+          "border border-white/15 bg-white/[0.04] text-foreground backdrop-blur-sm hover:border-white/25 hover:bg-white/[0.08]",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
         outline:
           "border border-input bg-background shadow-sm hover:bg-muted hover:text-foreground",

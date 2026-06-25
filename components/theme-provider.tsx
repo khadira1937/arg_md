@@ -4,9 +4,10 @@ import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 /**
- * App-wide theme provider. Uses the `class` strategy (toggles `.dark` on <html>),
- * defaults to the OS preference, and persists the choice to localStorage
- * (next-themes handles both automatically). Wrap the app once in the root layout.
+ * App-wide theme provider. The site is forced to the ARGANA dark theme on every
+ * page (to match the landing page), so we pin next-themes to `dark` via
+ * `forcedTheme`. The `.dark` class is also set statically on <html> in the root
+ * layout, so the first paint is already dark with no flash.
  */
 export function ThemeProvider({
   children,
@@ -15,8 +16,7 @@ export function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      forcedTheme="dark"
       disableTransitionOnChange
       {...props}
     >
