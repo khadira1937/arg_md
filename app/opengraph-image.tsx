@@ -57,7 +57,7 @@ export default function OpengraphImage() {
             Build, grow &amp; manage your online presence
           </div>
           <div style={{ display: "flex", marginTop: 22, fontSize: 27, color: "#94a3b8", maxWidth: 960 }}>
-            Digital media, marketing, websites, design, hosting support and business IT — from one UK team.
+            Digital media, marketing, websites, design, hosting support and business IT — from one team across the UK and Europe.
           </div>
         </div>
 

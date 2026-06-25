@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
-  description: `Learn about ${brand.name} — a UK digital media, marketing and web development agency helping growing businesses build and manage their online presence.`,
+  description: `Learn about ${brand.name} — a digital media, marketing and web development agency serving the UK and Europe, helping growing businesses build and manage their online presence.`,
   path: "/about",
 });
 
@@ -38,7 +38,7 @@ export default function AboutPage() {
       <Hero
         eyebrow="About ARGANA MEDIA"
         title={<>Helping businesses <span style={{ color: TEAL }}>grow online</span>, without the hassle</>}
-        sub={`${brand.name} is a UK digital media and marketing agency with real technical capability. We help growing businesses build, improve and manage their online presence — marketing, content, design, web development, hosting support and business IT, all from one dependable team.`}
+        sub={`${brand.name} is a digital media and marketing agency serving the UK and Europe, with real technical capability. We help growing businesses build, improve and manage their online presence — marketing, content, design, web development, hosting support and business IT, all from one dependable team.`}
         actions={<HeroActions secondaryHref="/services" secondaryLabel="View Services" />}
       />
 

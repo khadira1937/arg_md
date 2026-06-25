@@ -12,7 +12,7 @@ export const brand = {
   legalName: "ARGANA MEDIA",
   tagline: "Digital media, marketing & web development for growing businesses.",
   description:
-    "ARGANA MEDIA helps businesses build, grow and manage their online presence — digital content, marketing, website and app development, design, hosting support and business IT support, delivered by one dependable UK team.",
+    "ARGANA MEDIA helps businesses build, grow and manage their online presence — digital content, marketing, website and app development, design, hosting support and business IT support, delivered by one dependable team across the UK and Europe.",
 
   // Contact details shown across the site. Placeholders you can update any time.
   // TODO: confirm the live mailbox + phone number before launch.

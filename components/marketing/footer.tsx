@@ -25,7 +25,7 @@ export function Footer() {
               </span>
             </Link>
             <p style={{ margin: "0 0 18px", fontSize: 14, lineHeight: 1.6, color: "#8A93A6" }}>
-              Digital media, marketing and IT for growing businesses — content, websites, design, hosting support and everyday tech, from one trusted UK team.
+              Digital media, marketing and IT for growing businesses — content, websites, design, hosting support and everyday tech, from one trusted team across the UK and Europe.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 7, fontSize: 13.5 }}>
               <a href={`mailto:${brand.email.hello}`} style={{ color: "#A7B0C2", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 9 }}>
