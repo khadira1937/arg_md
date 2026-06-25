@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 /** Honest, defensible trust signals for conversion points (cart, checkout). */
 const ITEMS = [
   { icon: CreditCard, title: "Secure checkout", body: "Payments processed by Stripe" },
-  { icon: ShieldCheck, title: "UK-registered company", body: "ARGANA MEDIA LTD" },
+  { icon: ShieldCheck, title: "", body: "ARGANA MEDIA" },
   { icon: Zap, title: "Clear, fixed quotes", body: "Agreed before work begins" },
   { icon: LifeBuoy, title: "Dedicated support", body: "Help via your client portal" },
 ];

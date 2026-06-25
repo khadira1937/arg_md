@@ -86,11 +86,8 @@ const MOBILE_LINKS: [string, string][] = [
 function Brand({ onClick }: { onClick?: () => void }) {
   return (
     <Link href="/" onClick={onClick} aria-label="ARGANA MEDIA home" style={{ display: "flex", alignItems: "center", gap: 11, textDecoration: "none", flexShrink: 0 }}>
-      <span style={{ position: "relative", width: 34, height: 34, display: "grid", placeItems: "center" }}>
-        <span style={{ position: "absolute", inset: 0, borderRadius: 11, background: "linear-gradient(135deg,#35E0E8,#4DA8F5 45%,#F3CD86)", opacity: 0.92 }} />
-        <span style={{ position: "absolute", inset: 1.5, borderRadius: 9.5, background: "#080d18" }} />
-        <span style={{ position: "relative", fontFamily: "'Clash Display'", fontWeight: 600, fontSize: 18, background: "linear-gradient(135deg,#35E0E8,#F3CD86)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>A</span>
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/argana_media_logo_concept_2.png" alt="ARGANA MEDIA" width={38} height={38} style={{ display: "block", flexShrink: 0, objectFit: "contain" }} />
       <span style={{ fontFamily: "'Clash Display'", fontWeight: 600, fontSize: 18, letterSpacing: "0.14em", color: "#F4F7FC" }}>
         ARGANA<span style={{ color: "#8A93A6", fontWeight: 500 }}> MEDIA</span>
       </span>

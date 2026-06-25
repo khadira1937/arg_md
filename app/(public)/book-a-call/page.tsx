@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { PhoneCall, Mail, Clock, CheckCircle2, MessageSquare } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { PhoneCall, Mail, Clock, Check, MessageSquare } from "lucide-react";
 import { ContactForm } from "@/components/marketing/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
+import { Hero, Band, Card, DISPLAY, TEAL } from "@/components/marketing/amx-ui";
 
 export const metadata: Metadata = pageMetadata({
   title: "Book a Call",
@@ -28,78 +28,69 @@ const EXPECT = [
 
 export default function BookACallPage() {
   return (
-    <div className="container py-16">
+    <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Book a Call", path: "/book-a-call" }])} />
 
-      <div className="mx-auto max-w-2xl text-center">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border bg-card px-3.5 py-1.5 text-xs font-medium text-muted-foreground shadow-sm">
-          <PhoneCall className="h-3.5 w-3.5 text-primary" /> Free discovery call
-        </span>
-        <h1 className="font-display text-4xl font-bold tracking-tight">Let&apos;s talk about your project</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Whether you need a new website, more customers, better design or reliable support, the best place to start
-          is a quick, free conversation. Tell us a bit about your business and we&apos;ll take it from there.
-        </p>
-      </div>
+      <Hero
+        eyebrow="Free Discovery Call"
+        eyebrowColor={TEAL}
+        title="Let's talk about your project"
+        sub="Whether you need a new website, more customers, better design or reliable support, the best place to start is a quick, free conversation. Tell us a bit about your business and we'll take it from there."
+      />
 
-      <div className="mx-auto mt-12 grid max-w-5xl gap-8 lg:grid-cols-5">
-        {/* Left: what to expect */}
-        <div className="space-y-4 lg:col-span-2">
-          <Card className="p-6">
-            <h2 className="font-semibold">How it works</h2>
-            <ol className="mt-4 space-y-4">
-              {STEPS.map((s, i) => (
-                <li key={s.title} className="flex gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-xs font-bold text-white">{i + 1}</span>
-                  <div>
-                    <p className="text-sm font-medium">{s.title}</p>
-                    <p className="text-sm text-muted-foreground">{s.body}</p>
+      <Band>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(320px,100%),1fr))", gap: 36, alignItems: "start" }}>
+          {/* Left */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <Card hover={false} style={{ padding: 26 }}>
+              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "0 0 18px", color: "#F4F7FC" }}>How it works</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+                {STEPS.map((s, i) => (
+                  <div key={s.title} style={{ display: "flex", gap: 14 }}>
+                    <span style={{ flexShrink: 0, display: "grid", placeItems: "center", width: 30, height: 30, borderRadius: 9, fontFamily: DISPLAY, fontWeight: 600, fontSize: 13, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}>{i + 1}</span>
+                    <div>
+                      <p style={{ margin: 0, fontSize: 14.5, fontWeight: 600, color: "#EEF2F9" }}>{s.title}</p>
+                      <p style={{ margin: "3px 0 0", fontSize: 13.5, lineHeight: 1.5, color: "#8A93A6" }}>{s.body}</p>
+                    </div>
                   </div>
-                </li>
-              ))}
-            </ol>
-          </Card>
+                ))}
+              </div>
+            </Card>
 
-          <Card className="p-6">
-            <h2 className="font-semibold">What to expect</h2>
-            <ul className="mt-3 space-y-2">
-              {EXPECT.map((e) => (
-                <li key={e} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" /> {e}
-                </li>
-              ))}
-            </ul>
-          </Card>
+            <Card hover={false} style={{ padding: 26 }}>
+              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "0 0 14px", color: "#F4F7FC" }}>What to expect</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+                {EXPECT.map((e) => (
+                  <span key={e} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 14, color: "#C7CEDC" }}>
+                    <Check size={17} strokeWidth={2.4} color="#34D399" style={{ flexShrink: 0, marginTop: 1 }} /> {e}
+                  </span>
+                ))}
+              </div>
+            </Card>
 
-          <Card className="space-y-3 p-6 text-sm">
-            <a href={`mailto:${brand.email.hello}`} className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><Mail className="h-4 w-4" /></span>
-              {brand.email.hello}
-            </a>
-            <a href={`tel:${brand.phoneHref}`} className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><PhoneCall className="h-4 w-4" /></span>
-              {brand.phone}
-            </a>
-            <p className="flex items-center gap-3 text-muted-foreground">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><Clock className="h-4 w-4" /></span>
-              Mon–Fri, UK business hours
-            </p>
+            <Card hover={false} style={{ padding: 22, display: "flex", flexDirection: "column", gap: 12 }}>
+              <a href={`mailto:${brand.email.hello}`} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#A7B0C2", textDecoration: "none" }}>
+                <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(53,224,232,0.1)", color: TEAL }}><Mail size={16} /></span>{brand.email.hello}
+              </a>
+              <a href={`tel:${brand.phoneHref}`} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#A7B0C2", textDecoration: "none" }}>
+                <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(53,224,232,0.1)", color: TEAL }}><PhoneCall size={16} /></span>{brand.phone}
+              </a>
+              <span style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#8A93A6" }}>
+                <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(243,205,134,0.12)", color: "#F3CD86" }}><Clock size={16} /></span>Mon–Fri, UK business hours
+              </span>
+            </Card>
+          </div>
+
+          {/* Right: form */}
+          <Card hover={false} style={{ padding: "28px 26px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+              <MessageSquare size={20} color={TEAL} />
+              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: 0, color: "#F4F7FC" }}>Request your free call</h2>
+            </div>
+            <ContactForm submitLabel="Request my call" subjectLabel="What do you need help with?" messageLabel="Tell us about your business & goals" />
           </Card>
         </div>
-
-        {/* Right: form */}
-        <Card className="p-6 lg:col-span-3">
-          <div className="mb-4 flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-primary" />
-            <h2 className="font-semibold">Request your free call</h2>
-          </div>
-          <ContactForm
-            submitLabel="Request my call"
-            subjectLabel="What do you need help with?"
-            messageLabel="Tell us about your business & goals"
-          />
-        </Card>
-      </div>
-    </div>
+      </Band>
+    </>
   );
 }

@@ -167,7 +167,7 @@ async function main() {
   await prisma.user.upsert({
     where: { email: "admin@arganamedia.co.uk" },
     update: {},
-    create: { email: "admin@arganamedia.co.uk", name: "Argana Admin", role: "ADMIN", hashedPassword: adminPass, emailVerified: new Date(), profile: { create: { company: "ARGANA MEDIA LTD" } } },
+    create: { email: "admin@arganamedia.co.uk", name: "Argana Admin", role: "ADMIN", hashedPassword: adminPass, emailVerified: new Date(), profile: { create: { company: "ARGANA MEDIA" } } },
   });
   await prisma.user.upsert({
     where: { email: "support@arganamedia.co.uk" },

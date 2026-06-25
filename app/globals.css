@@ -303,6 +303,21 @@
 .amx-gold:hover { box-shadow: 0 12px 40px -8px rgba(243, 205, 134, 0.5); transform: translateY(-2px); }
 .amx-portal:hover { border-color: rgba(255, 255, 255, 0.28) !important; color: #fff !important; }
 .amx-icon:hover { color: #fff !important; }
+/* Shared content-page primitives (components/marketing/amx-ui.tsx) */
+.amx-card { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s, background 0.35s; }
+.amx-card:hover { transform: translateY(-5px); border-color: rgba(243, 205, 134, 0.4) !important; background: rgba(255, 255, 255, 0.045) !important; }
+.amx-ghost:hover { background: rgba(255, 255, 255, 0.07) !important; border-color: rgba(255, 255, 255, 0.3) !important; }
+.amx-arrowlink { transition: gap 0.25s; }
+.amx-arrowlink:hover { gap: 12px !important; }
+.amx-pill:hover { color: #eef2f9 !important; border-color: rgba(53, 224, 232, 0.5) !important; background: rgba(53, 224, 232, 0.08) !important; }
+.amx-port:hover .amx-port-img { transform: scale(1.06); }
+.amx-faq { border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.025); border-radius: 14px; overflow: hidden; }
+.amx-faq + .amx-faq { margin-top: 12px; }
+.amx-faq > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; font-family: "Clash Display", sans-serif; font-weight: 500; font-size: 16.5px; color: #eef2f9; }
+.amx-faq > summary::-webkit-details-marker { display: none; }
+.amx-faq > summary::after { content: "+"; color: #35e0e8; font-size: 22px; line-height: 1; flex-shrink: 0; }
+.amx-faq[open] > summary::after { content: "\2212"; }
+.amx-faq > div { padding: 0 20px 20px; font-size: 14.5px; line-height: 1.6; color: #a7b0c2; }
 .amx-footlink { color: #a7b0c2; text-decoration: none; font-size: 14px; transition: color 0.2s; }
 .amx-footlink:hover { color: #35e0e8; }
 .amx-footgrid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px 32px; }

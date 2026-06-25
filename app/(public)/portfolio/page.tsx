@@ -1,12 +1,8 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Globe, ShoppingCart, Megaphone, Palette, PenLine, ServerCog } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Section, SectionHeading } from "@/components/marketing/section";
-import { Reveal } from "@/components/marketing/reveal";
-import { CtaSection } from "@/components/marketing/cta-section";
+import { Globe, ShoppingCart, Palette, Megaphone, PenLine, ServerCog, ArrowUpRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { Hero, HeroActions, Band, Head, Card, Grid, Cta, DISPLAY, TEAL } from "@/components/marketing/amx-ui";
 
 export const metadata: Metadata = pageMetadata({
   title: "Portfolio",
@@ -16,12 +12,12 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const WORK = [
-  { icon: Globe, type: "Business Website", body: "A clean, modern website with clear messaging, on-page SEO and a care plan to keep it healthy after launch.", tags: ["Web design", "Copywriting", "SEO setup"] },
-  { icon: ShoppingCart, type: "Online Store", body: "An e-commerce build with product pages, secure payments and the integrations a small retailer needs to start selling.", tags: ["E-commerce", "Payments", "Training"] },
-  { icon: Palette, type: "Brand Identity", body: "A complete visual identity — logo, colours, type and guidelines — that makes a new business look established from day one.", tags: ["Logo", "Brand kit", "Guidelines"] },
-  { icon: Megaphone, type: "Local Marketing Campaign", body: "Local SEO, a Google Business Profile refresh and a content plan designed to bring in nearby customers.", tags: ["Local SEO", "Content", "GBP"] },
-  { icon: PenLine, type: "Content & Social", body: "An ongoing content programme — blog articles and social posts — that keeps a brand visible and consistent.", tags: ["Blog", "Social", "Strategy"] },
-  { icon: ServerCog, type: "Website Care & Hosting", body: "Managed hosting support with backups, updates, security and monitoring for a business that wanted peace of mind.", tags: ["Hosting", "Backups", "Care plan"] },
+  { icon: Globe, type: "Business Website", cat: "Website & Design", body: "A clean, modern website with clear messaging, on-page SEO and a care plan to keep it healthy after launch.", g: "linear-gradient(135deg,#0E2233,#123B4A 60%,#1C5563)", img: "/portfolio/portfolio_business_website.png", tags: ["Web design", "Copywriting", "SEO setup"] },
+  { icon: ShoppingCart, type: "Online Store", cat: "E-commerce", body: "An e-commerce build with product pages, secure payments and the integrations a small retailer needs to start selling.", g: "linear-gradient(135deg,#161B2E,#1E2647 60%,#2B3566)", img: "/portfolio/portfolio_online_store.png", tags: ["E-commerce", "Payments", "Training"] },
+  { icon: Palette, type: "Brand Identity", cat: "Design", body: "A complete visual identity — logo, colours, type and guidelines — that makes a new business look established from day one.", g: "linear-gradient(135deg,#241B0E,#3A2C12 60%,#5A4520)", img: "/portfolio/portfolio_brand_identity.png", tags: ["Logo", "Brand kit", "Guidelines"] },
+  { icon: Megaphone, type: "Local Marketing Campaign", cat: "Digital Marketing", body: "Local SEO, a Google Business Profile refresh and a content plan designed to bring in nearby customers.", g: "linear-gradient(135deg,#0E2A22,#103A2C 60%,#1A5141)", img: "/portfolio/portfolio_marketing_campaign.png", tags: ["Local SEO", "Content", "GBP"] },
+  { icon: PenLine, type: "Content & Social", cat: "Digital Media & Content", body: "An ongoing content programme — blog articles and social posts — that keeps a brand visible and consistent.", g: "linear-gradient(135deg,#2A1430,#3A1B45 60%,#4E2659)", img: "/portfolio/portfolio_content_social.png", tags: ["Blog", "Social", "Strategy"] },
+  { icon: ServerCog, type: "Website Care & Hosting", cat: "Hosting & Website Care", body: "Managed hosting support with backups, updates, security and monitoring for a business that wanted peace of mind.", g: "linear-gradient(135deg,#0E2233,#14323F 60%,#1C5563)", img: "/portfolio/portfolio_hosting_care.png", tags: ["Hosting", "Backups", "Care plan"] },
 ];
 
 const APPROACH = [
@@ -35,70 +31,58 @@ export default function PortfolioPage() {
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Portfolio", path: "/portfolio" }])} />
 
-      <section className="relative overflow-hidden border-b">
-        <div className="pointer-events-none absolute inset-0 bg-grid" />
-        <div className="pointer-events-none absolute inset-0 bg-mesh" />
-        <div className="container relative py-16 text-center sm:py-20">
-          <Reveal>
-            <h1 className="mx-auto max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              The work we love to do
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-              Here are the kinds of projects we deliver for growing businesses. We're building our public case-study
-              library as projects go live — if you'd like to see examples relevant to your sector, just ask.
-            </p>
-            <div className="mt-8">
-              <Button asChild size="xl" variant="gradient"><Link href="/book-a-call">Start your project <ArrowRight className="h-4 w-4" /></Link></Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <Hero
+        eyebrow="Our Work"
+        title="Built across media, marketing & the web"
+        sub="You've probably seen the kind of work we do. Here's a snapshot of the projects we deliver for growing businesses — we're building our public case-study library as projects go live, and we're always happy to share examples relevant to your sector on a call."
+        actions={<HeroActions secondaryHref="/contact" secondaryLabel="Request a Quote" />}
+      />
 
-      <Section>
-        <SectionHeading eyebrow="What we deliver" title="Projects across every service" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {WORK.map((w, i) => (
-            <Reveal key={w.type} delay={(i % 3) * 0.05}>
-              <div className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card hover-lift">
-                <div className="relative flex h-36 items-center justify-center bg-brand-gradient">
-                  <div className="pointer-events-none absolute inset-0 bg-grid-band opacity-40" />
-                  <w.icon className="relative h-10 w-10 text-white" />
+      <Band>
+        <Head eyebrow="What we deliver" title="Projects across every service" center
+          sub="A snapshot of the work we take on. Real case studies are shared on request." />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={280} gap={18}>
+            {WORK.map((w) => (
+              <div key={w.type} className="amx-card amx-port" style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.022)" }}>
+                <div style={{ position: "relative", height: 150, overflow: "hidden" }}>
+                  <div className="amx-port-img" style={{ position: "absolute", inset: 0, background: `url('${w.img}') center/cover, ${w.g}`, transition: "transform .5s cubic-bezier(.22,1,.36,1)" }} />
+                  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%)" }} />
+                  <span style={{ position: "absolute", left: 16, top: 16, display: "inline-flex", alignItems: "center", gap: 7, fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#F4F7FC", background: "rgba(7,11,20,0.5)", backdropFilter: "blur(6px)", padding: "6px 11px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)" }}>{w.cat}</span>
+                  <span style={{ position: "absolute", right: 16, bottom: 16, display: "grid", placeItems: "center", width: 38, height: 38, borderRadius: 12, background: "rgba(7,11,20,0.45)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.14)", color: "#fff" }}><w.icon size={18} strokeWidth={1.9} /></span>
                 </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-lg font-semibold">{w.type}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {w.tags.map((t) => (
-                      <span key={t} className="rounded-full border bg-muted/50 px-2.5 py-0.5 text-xs text-muted-foreground">{t}</span>
-                    ))}
+                <div style={{ padding: 22, display: "flex", flexDirection: "column", flex: 1 }}>
+                  <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 19, margin: "0 0 8px", color: "#EEF2F9" }}>{w.type}</h3>
+                  <p style={{ margin: "0 0 16px", fontSize: 13.5, lineHeight: 1.55, color: "#8A93A6", flex: 1 }}>{w.body}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                    {w.tags.map((t) => <span key={t} style={{ fontSize: 12, color: "#9AA4B8", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", padding: "4px 11px", borderRadius: 100 }}>{t}</span>)}
                   </div>
                 </div>
               </div>
-            </Reveal>
-          ))}
+            ))}
+          </Grid>
         </div>
-      </Section>
+      </Band>
 
-      <Section className="bg-muted/30">
-        <SectionHeading eyebrow="Our approach" title="How we make work that lasts" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-3">
-          {APPROACH.map((a) => (
-            <div key={a.title} className="rounded-2xl border bg-card p-6">
-              <h3 className="font-semibold">{a.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
-            </div>
-          ))}
+      <Band borderTop bg="linear-gradient(180deg, rgba(255,255,255,0.012), transparent)">
+        <Head eyebrow="Our approach" eyebrowColor={TEAL} title="How we make work that lasts" center />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={280} gap={18}>
+            {APPROACH.map((a, i) => (
+              <Card key={a.title}>
+                <span style={{ display: "grid", placeItems: "center", width: 40, height: 40, borderRadius: 12, background: "rgba(243,205,134,0.12)", color: "#F3CD86", fontFamily: DISPLAY, fontWeight: 600, marginBottom: 16 }}>0{i + 1}</span>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "#EEF2F9" }}>{a.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{a.body}</p>
+              </Card>
+            ))}
+          </Grid>
         </div>
-      </Section>
+        <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, color: "#54607A", fontSize: 13 }}>
+          <ArrowUpRight size={15} /> Real case studies are shared on request — just ask on your call.
+        </div>
+      </Band>
 
-      <CtaSection
-        title="Imagine your project here"
-        description="Tell us what you're trying to achieve and we'll show you how we'd approach it — and share relevant examples."
-        primaryHref="/book-a-call"
-        primaryLabel="Book a Call"
-        secondaryHref="/contact"
-        secondaryLabel="Request a Quote"
-      />
+      <Cta title="Imagine your project here" sub="Tell us what you're trying to achieve and we'll show you how we'd approach it — and share relevant examples." secondaryLabel="Request a Quote" />
     </>
   );
 }

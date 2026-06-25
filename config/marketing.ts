@@ -78,7 +78,7 @@ export const WHY_US: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: Users, title: "One team, everything covered", body: "Marketing, content, design, websites and support under one roof — no juggling multiple freelancers." },
   { icon: BadgeCheck, title: "Clear, fixed quotes", body: "You always know what you're paying and what you're getting before any work begins." },
   { icon: HeartHandshake, title: "We stay with you", body: "We don't disappear after launch. Care plans and support keep your website healthy long term." },
-  { icon: ShieldCheck, title: "A registered UK company", body: "ARGANA MEDIA LTD is registered in England and Wales — a real business you can rely on." },
+  { icon: ShieldCheck, title: "A registered UK company", body: "ARGANA MEDIA is a real, registered UK business you can rely on for the long term." },
   { icon: Clock, title: "Responsive & reliable", body: "Friendly people who reply, keep their word and hit the timelines we agree together." },
   { icon: MessagesSquare, title: "Plain-English advice", body: "We explain the why behind every recommendation so you can make confident decisions." },
 ];

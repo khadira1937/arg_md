@@ -1,14 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Check, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Section, SectionHeading } from "@/components/marketing/section";
-import { Reveal } from "@/components/marketing/reveal";
-import { PricingPreview } from "@/components/marketing/pricing-preview";
-import { CtaSection } from "@/components/marketing/cta-section";
+import { ArrowRight, Check } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
-import { SERVICES, PROCESS_STEPS } from "@/config/marketing";
+import { SERVICES, PROCESS_STEPS, WHY_US } from "@/config/marketing";
+import {
+  Hero, HeroActions, Band, Head, Card, Grid, Feature, Cta, DISPLAY, TEAL, GOLD,
+} from "@/components/marketing/amx-ui";
 
 export const metadata: Metadata = pageMetadata({
   title: "Services",
@@ -22,83 +20,72 @@ export default function ServicesPage() {
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])} />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b">
-        <div className="pointer-events-none absolute inset-0 bg-grid" />
-        <div className="pointer-events-none absolute inset-0 bg-mesh" />
-        <div className="container relative py-16 text-center sm:py-20">
-          <Reveal>
-            <h1 className="mx-auto max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              One team for your whole <span className="text-gradient">online presence</span>
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-              From the first website to long-term marketing and support, our services connect together so you get a
-              joined-up result — not six separate suppliers to manage.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button asChild size="xl" variant="gradient"><Link href="/book-a-call"><PhoneCall className="h-4 w-4" /> Book a Call</Link></Button>
-              <Button asChild size="xl" variant="outline"><Link href="/contact">Request a Quote</Link></Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <Hero
+        eyebrow="Our Services"
+        title={<>One team for your whole <span style={{ background: "linear-gradient(110deg,#35E0E8,#9BD4F2 45%,#F3CD86)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>online presence</span></>}
+        sub="From the first website to long-term marketing and support, our services connect together so you get a joined-up result — not six separate suppliers to manage."
+        actions={<HeroActions secondaryHref="/book-a-call" secondaryLabel="Book a Call" />}
+      />
 
-      {/* Service cards */}
-      <Section>
-        <SectionHeading eyebrow="Our services" title="Six services, one accountable team" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={(i % 3) * 0.05}>
-              <Link href={s.href} className="group flex h-full flex-col rounded-2xl border bg-card p-6 hover-lift hover:border-primary/40">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-sm">
-                  <s.icon className="h-5 w-5" />
+      <Band>
+        <Head eyebrow="What we do" title="Six services, one accountable team" center
+          sub="Each area works on its own or together. Most clients start with one and grow into the rest." />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={300} gap={18}>
+            {SERVICES.map((s) => (
+              <Link key={s.title} href={s.href} className="amx-card" style={{ display: "flex", flexDirection: "column", height: "100%", padding: 26, borderRadius: 20, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", textDecoration: "none" }}>
+                <span style={{ display: "grid", placeItems: "center", width: 48, height: 48, borderRadius: 14, background: "linear-gradient(135deg,#35E0E8,#4DA8F5 60%,#F3CD86)", color: "#0A0E18", marginBottom: 18 }}>
+                  <s.icon size={22} strokeWidth={1.9} />
                 </span>
-                <h3 className="mt-4 font-display text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.blurb}</p>
-                <ul className="mt-4 space-y-1.5">
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 9px", color: "#F4F7FC" }}>{s.title}</h3>
+                <p style={{ margin: "0 0 16px", fontSize: 14.5, lineHeight: 1.55, color: "#A7B0C2" }}>{s.blurb}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 18 }}>
                   {s.points.map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Check className="h-3.5 w-3.5 shrink-0 text-success" /> {p}
-                    </li>
+                    <span key={p} style={{ display: "flex", alignItems: "center", gap: 9, fontSize: 13.5, color: "#8A93A6" }}>
+                      <Check size={15} strokeWidth={2.4} color={TEAL} /> {p}
+                    </span>
                   ))}
-                </ul>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Explore {s.title} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </div>
+                <span style={{ marginTop: "auto", display: "inline-flex", alignItems: "center", gap: 7, fontSize: 14, fontWeight: 600, color: GOLD }}>
+                  Explore {s.title} <ArrowRight size={15} />
                 </span>
               </Link>
-            </Reveal>
-          ))}
+            ))}
+          </Grid>
         </div>
-      </Section>
+      </Band>
 
-      {/* Process */}
-      <Section className="bg-muted/30">
-        <SectionHeading eyebrow="How we work" title="Simple, transparent, joined-up" />
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PROCESS_STEPS.map((s, i) => (
-            <li key={s.title} className="relative h-full rounded-2xl border bg-card p-6">
-              <div className="flex items-center justify-between">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gradient text-white"><s.icon className="h-5 w-5" /></span>
-                <span className="font-mono text-sm font-bold text-muted-foreground/50">0{i + 1}</span>
-              </div>
-              <h3 className="mt-4 font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      <Band borderTop bg="linear-gradient(180deg, rgba(255,255,255,0.012), transparent)">
+        <Head eyebrow="How it works" eyebrowColor={TEAL} title="Simple, transparent, joined-up" center />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={230} gap={16}>
+            {PROCESS_STEPS.map((s, i) => (
+              <Card key={s.title} style={{ height: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+                  <span style={{ display: "grid", placeItems: "center", width: 44, height: 44, borderRadius: 13, background: "rgba(53,224,232,0.1)", color: TEAL }}>
+                    <s.icon size={20} strokeWidth={1.8} />
+                  </span>
+                  <span style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 15, color: "rgba(255,255,255,0.2)" }}>0{i + 1}</span>
+                </div>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "#EEF2F9" }}>{s.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{s.body}</p>
+              </Card>
+            ))}
+          </Grid>
+        </div>
+      </Band>
 
-      {/* Packages */}
-      <Section>
-        <SectionHeading
-          eyebrow="Packages"
-          title="Starting points, tailored to you"
-          description="A few common ways to work with us. Every quote is shaped around your goals — these are just a place to begin."
-        />
-        <div className="mt-12"><PricingPreview /></div>
-      </Section>
+      <Band borderTop>
+        <Head eyebrow="Why ARGANA MEDIA" title="A partner you can rely on" center
+          sub="We keep things clear, honest and joined-up — so working with us feels easy from the first call onwards." />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={280} gap={16}>
+            {WHY_US.map((w) => <Feature key={w.title} icon={w.icon} title={w.title} body={w.body} />)}
+          </Grid>
+        </div>
+      </Band>
 
-      <CtaSection />
+      <Cta />
     </>
   );
 }

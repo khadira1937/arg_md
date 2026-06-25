@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
-const SESSION_COOKIE = "cloudyn_session";
+const SESSION_COOKIE = "argana_session";
 const secret = new TextEncoder().encode(process.env.AUTH_SECRET ?? "");
 
 async function getRole(req: NextRequest): Promise<string | null> {

@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import type { Role } from "@prisma/client";
 import { env } from "@/config/env";
 
-export const SESSION_COOKIE = "cloudyn_session";
+export const SESSION_COOKIE = "argana_session";
 
 export type SessionPayload = {
   userId: string;

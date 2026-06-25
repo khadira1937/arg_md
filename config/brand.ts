@@ -3,13 +3,13 @@
  * Nothing in the UI hardcodes the brand name — it all reads from this file.
  *
  * Public-facing brand: "ARGANA MEDIA".
- * Legal entity (footer / legal pages / invoices only): "ARGANA MEDIA LTD".
+ * Legal entity (footer / legal pages / invoices only): "ARGANA MEDIA".
  */
 export const brand = {
   name: "ARGANA MEDIA",
   shortName: "ARGANA",
   domain: "arganamedia.co.uk",
-  legalName: "ARGANA MEDIA LTD",
+  legalName: "ARGANA MEDIA",
   tagline: "Digital media, marketing & web development for growing businesses.",
   description:
     "ARGANA MEDIA helps businesses build, grow and manage their online presence — digital content, marketing, website and app development, design, hosting support and business IT support, delivered by one dependable UK team.",
@@ -23,12 +23,12 @@ export const brand = {
     billing: "billing@arganamedia.co.uk",
     abuse: "abuse@arganamedia.co.uk",
   },
-  phone: "+44 20 0000 0000", // placeholder UK number — replace with your real line.
-  phoneHref: "+442000000000",
+  phone: "+44 7882 737419",
+  phoneHref: "+447882737419",
 
   // Registered company information (England & Wales).
   company: {
-    legalName: "ARGANA MEDIA LTD",
+    legalName: "ARGANA MEDIA",
     number: "17296255",
     jurisdiction: "England and Wales",
     registeredOffice: "2nd Floor College House, 17 King Edwards Road, Ruislip, London",

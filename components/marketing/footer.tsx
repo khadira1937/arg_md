@@ -18,11 +18,8 @@ export function Footer() {
         <div className="amx-footgrid">
           <div className="amx-footbrand">
             <Link href="/" style={{ display: "flex", alignItems: "center", gap: 11, textDecoration: "none", marginBottom: 18 }}>
-              <span style={{ position: "relative", width: 34, height: 34, display: "grid", placeItems: "center" }}>
-                <span style={{ position: "absolute", inset: 0, borderRadius: 11, background: "linear-gradient(135deg,#35E0E8,#4DA8F5 45%,#F3CD86)", opacity: 0.92 }} />
-                <span style={{ position: "absolute", inset: 1.5, borderRadius: 9.5, background: "#060912" }} />
-                <span style={{ position: "relative", fontFamily: "'Clash Display'", fontWeight: 600, fontSize: 18, background: "linear-gradient(135deg,#35E0E8,#F3CD86)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>A</span>
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/argana_media_logo_concept_2.png" alt="ARGANA MEDIA" width={40} height={40} style={{ display: "block", flexShrink: 0, objectFit: "contain" }} />
               <span style={{ fontFamily: "'Clash Display'", fontWeight: 600, fontSize: 18, letterSpacing: "0.14em", color: "#F4F7FC" }}>
                 ARGANA<span style={{ color: "#8A93A6", fontWeight: 500 }}> MEDIA</span>
               </span>
@@ -54,7 +51,7 @@ export function Footer() {
 
         <div style={{ marginTop: 48, paddingTop: 26, borderTop: "1px solid rgba(255,255,255,0.07)" }}>
           <p style={{ margin: "0 0 6px", fontSize: 13, color: "#8A93A6" }}>
-            <strong style={{ color: "#C7CEDC", fontWeight: 600 }}>{brand.company.legalName}</strong> · Registered in {brand.company.jurisdiction} · Company number {brand.company.number}
+            <strong style={{ color: "#C7CEDC", fontWeight: 600 }}>{brand.company.legalName}</strong> · Company number {brand.company.number}
           </p>
           <p style={{ margin: "0 0 18px", fontSize: 13, color: "#54607A" }}>Registered office: {brand.company.registeredOffice}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 16px", justifyContent: "space-between", alignItems: "center" }}>

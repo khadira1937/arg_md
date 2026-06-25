@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, MessageSquare, PhoneCall, LifeBuoy, ArrowRight } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Section, SectionHeading } from "@/components/marketing/section";
+import { MessageSquare, PhoneCall, LifeBuoy, BookOpen, ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
+import { Hero, Band, Grid, Card, DISPLAY, TEAL } from "@/components/marketing/amx-ui";
 
 export const metadata: Metadata = pageMetadata({ title: "Support", description: `Get help from ${brand.name} — contact us, book a call or open a support ticket in your client portal.`, path: "/support" });
 
@@ -20,43 +19,36 @@ export default function SupportPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Support", path: "/support" }])} />
-      <section className="border-b py-16 text-center">
-        <div className="container">
-          <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">How can we help?</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Whether you&apos;re an existing client or just exploring, we&apos;re here to help. Choose the option that
-            suits you best.
-          </p>
-        </div>
-      </section>
 
-      <Section>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {OPTIONS.map((c) => (
-            <Link key={c.title} href={c.href}>
-              <Card className="group h-full p-6 transition-all hover:-translate-y-1 hover:shadow-md">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary"><c.icon className="h-5 w-5" /></span>
-                <h3 className="mt-4 flex items-center gap-1 font-semibold">{c.title} <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" /></h3>
-                <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
-              </Card>
+      <Hero
+        eyebrow="Help & Support"
+        title="How can we help?"
+        sub="Whether you're an existing client or just exploring, we're here to help. Choose the option that suits you best."
+      />
+
+      <Band>
+        <Grid min={240} gap={18}>
+          {OPTIONS.map((o) => (
+            <Link key={o.title} href={o.href} className="amx-card" style={{ display: "flex", flexDirection: "column", height: "100%", padding: 26, borderRadius: 18, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", textDecoration: "none" }}>
+              <span style={{ display: "grid", placeItems: "center", width: 46, height: 46, borderRadius: 13, background: "rgba(53,224,232,0.1)", color: TEAL, marginBottom: 16 }}><o.icon size={20} strokeWidth={1.8} /></span>
+              <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 6px", color: "#EEF2F9" }}>{o.title}</h3>
+              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.5, color: "#8A93A6" }}>{o.desc}</p>
             </Link>
           ))}
-        </div>
-      </Section>
+        </Grid>
+      </Band>
 
-      <Section className="bg-muted/30 pt-0">
-        <div className="mx-auto max-w-2xl rounded-2xl border bg-card p-8 text-center">
-          <h2 className="font-display text-2xl font-semibold">Existing clients</h2>
-          <p className="mt-3 text-muted-foreground">
+      <Band borderTop bg="linear-gradient(180deg, rgba(255,255,255,0.012), transparent)">
+        <Card hover={false} style={{ maxWidth: 640, margin: "0 auto", padding: "36px 32px", textAlign: "center" }}>
+          <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 24, margin: 0, color: "#F4F7FC" }}>Existing clients</h2>
+          <p style={{ margin: "14px 0 22px", fontSize: 16, lineHeight: 1.6, color: "#A7B0C2" }}>
             Sign in to your client portal to view projects, invoices and care plans, and to raise a support ticket.
           </p>
-          <div className="mt-6">
-            <Link href="/dashboard" className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline">
-              Go to your Client Portal <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </Section>
+          <Link href="/dashboard" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 15, fontWeight: 600, color: TEAL, textDecoration: "none" }}>
+            Go to your Client Portal <ArrowRight size={16} />
+          </Link>
+        </Card>
+      </Band>
     </>
   );
 }

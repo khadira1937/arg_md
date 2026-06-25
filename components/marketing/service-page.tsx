@@ -1,21 +1,25 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Section, SectionHeading } from "@/components/marketing/section";
-import { Reveal } from "@/components/marketing/reveal";
-import { FaqSection } from "@/components/marketing/faq-section";
-import { CtaSection } from "@/components/marketing/cta-section";
+import { ArrowRight, PhoneCall } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
-import { PROCESS_STEPS } from "@/config/marketing";
 import { SERVICE_DETAILS } from "@/config/services-content";
+import {
+  Hero, Band, Head, Card, CheckRow, Grid, Cta, Btn, Eyebrow,
+  DISPLAY, TEAL, GOLD,
+} from "@/components/marketing/amx-ui";
+
+const PROCESS = [
+  { n: "01", title: "Discover", body: "A free, no-pressure call to understand your business, goals and audience." },
+  { n: "02", title: "Plan", body: "A written proposal with clear scope, timeline and a fixed quote — no jargon." },
+  { n: "03", title: "Create", body: "We design, write, build and set everything up, keeping you in the loop." },
+  { n: "04", title: "Support", body: "After launch we support, maintain and improve — your presence keeps getting better." },
+];
 
 export function ServicePage({ slug }: { slug: string }) {
-  const detail = SERVICE_DETAILS[slug];
-  if (!detail) notFound();
-  const Icon = detail.icon;
+  const d = SERVICE_DETAILS[slug];
+  if (!d) notFound();
+  const Icon = d.icon;
 
   return (
     <>
@@ -24,141 +28,198 @@ export function ServicePage({ slug }: { slug: string }) {
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Services", path: "/services" },
-            { name: detail.category, path: `/${detail.slug}` },
+            { name: d.category, path: `/${d.slug}` },
           ]),
-          serviceJsonLd({ name: detail.category, description: detail.heroSub, path: `/${detail.slug}` }),
+          serviceJsonLd({ name: d.category, description: d.heroSub, path: `/${d.slug}` }),
         ]}
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b">
-        <div className="pointer-events-none absolute inset-0 bg-grid" />
-        <div className="pointer-events-none absolute inset-0 bg-mesh" />
-        <div className="pointer-events-none absolute -top-20 right-0 h-72 w-72 animate-aurora rounded-full bg-accent/15 blur-3xl" />
-        <div className="container relative py-16 sm:py-20">
-          <Reveal>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full border bg-card px-3.5 py-1.5 text-xs font-medium text-muted-foreground shadow-sm">
-              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-brand-gradient text-white">
-                <Icon className="h-3 w-3" />
-              </span>
-              {detail.eyebrow}
+      <Hero
+        eyebrow={d.eyebrow}
+        eyebrowColor={TEAL}
+        title={d.heroHeadline}
+        sub={d.heroSub}
+        badge={
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "7px 14px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.03)", marginBottom: 22 }}>
+            <span style={{ display: "grid", placeItems: "center", width: 22, height: 22, borderRadius: 7, background: "linear-gradient(135deg,#35E0E8,#F3CD86)", color: "#0A0E18" }}>
+              <Icon size={13} strokeWidth={2} />
             </span>
-            <h1 className="max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              {detail.heroHeadline}
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{detail.heroSub}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="xl" variant="gradient">
-                <Link href="/book-a-call"><PhoneCall className="h-4 w-4" /> Book a Call</Link>
-              </Button>
-              <Button asChild size="xl" variant="outline">
-                <Link href="/contact">Request a Quote <ArrowRight className="h-4 w-4" /></Link>
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+            <span style={{ fontSize: 12.5, letterSpacing: "0.05em", color: "#C7CEDC", fontWeight: 500 }}>ARGANA MEDIA Service</span>
+          </span>
+        }
+        actions={
+          <>
+            <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
+            <Btn href="/contact" variant="ghost">Request a Quote</Btn>
+          </>
+        }
+      />
 
       {/* Intro */}
-      <Section className="pb-0">
-        <div className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-muted-foreground">
-          {detail.intro}
-        </div>
-      </Section>
+      <Band max={860} pad="clamp(48px,7vh,80px)">
+        <p style={{ margin: 0, textAlign: "center", fontSize: "clamp(16px,1.8vw,19px)", lineHeight: 1.65, color: "#C2CBDB" }}>{d.intro}</p>
+      </Band>
 
-      {/* Offerings */}
-      <Section>
-        <SectionHeading eyebrow="What we offer" title={`${detail.category} services`} />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {detail.offerings.map((o, i) => (
-            <Reveal key={o.title} delay={(i % 3) * 0.05}>
-              <div className="h-full rounded-2xl border bg-card p-6 hover-lift hover:border-primary/30">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Check className="h-5 w-5" />
-                </span>
-                <h3 className="mt-4 font-semibold">{o.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{o.body}</p>
+      {/* Rich content sections */}
+      {d.sections && d.sections.length > 0 && (
+        <Band max={900} pad="clamp(8px,2vh,28px)">
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(40px,6vh,64px)" }}>
+            {d.sections.map((s) => (
+              <div key={s.title}>
+                <span style={{ display: "inline-block", width: 34, height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${TEAL}, ${GOLD})`, marginBottom: 18 }} />
+                <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: "clamp(24px,3.4vw,34px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0, color: "#F4F7FC" }}>{s.title}</h2>
+                {s.body.map((p, i) => (
+                  <p key={i} style={{ margin: "16px 0 0", fontSize: 16.5, lineHeight: 1.7, color: "#A7B0C2" }}>{p}</p>
+                ))}
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
+            ))}
+          </div>
+        </Band>
+      )}
 
-      {/* Outcomes */}
-      <Section className="bg-muted/30">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <Badge variant="muted" className="mb-3">Why it matters</Badge>
-            <h2 className="font-display text-3xl font-bold tracking-tight">What you can expect</h2>
-            <p className="mt-4 text-muted-foreground">
-              We focus on outcomes, not buzzwords. Here's what working with {`ARGANA MEDIA`} on {detail.category.toLowerCase()} typically means for your business.
-            </p>
-            <div className="mt-7">
-              <Button asChild variant="gradient"><Link href="/book-a-call">Start a conversation <ArrowRight className="h-4 w-4" /></Link></Button>
+      {/* What's included */}
+      <Band borderTop bg="linear-gradient(180deg, rgba(255,255,255,0.012), transparent)">
+        <Head eyebrow="What's included" title={`Our ${d.category.toLowerCase()} services`} center
+          sub="Pick exactly what you need now and grow into the rest when you're ready — it's all delivered by one team." />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={300} gap={18}>
+            {d.offerings.map((o) => (
+              <Card key={o.title} style={{ height: "100%" }}>
+                <span style={{ display: "inline-block", width: 34, height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${TEAL}, ${GOLD})`, marginBottom: 16 }} />
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18.5, margin: "0 0 8px", color: "#EEF2F9" }}>{o.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{o.body}</p>
+              </Card>
+            ))}
+          </Grid>
+        </div>
+      </Band>
+
+      {/* Packages (priced services) */}
+      {d.packages && d.packages.length > 0 && (
+        <Band id="packages" borderTop>
+          <Head eyebrow="Packages" title={d.packagesTitle ?? `Our ${d.category.toLowerCase()} packages`} center sub={d.packagesSub} />
+          <div style={{ marginTop: 44 }}>
+            <Grid min={270} gap={18}>
+              {d.packages.map((p) => (
+                <Card
+                  key={p.name}
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    ...(p.popular
+                      ? { border: "1px solid rgba(243,205,134,0.4)", background: "linear-gradient(165deg, rgba(243,205,134,0.07), rgba(255,255,255,0.02))" }
+                      : {}),
+                  }}
+                >
+                  {p.popular && (
+                    <span style={{ position: "absolute", top: 16, right: 16, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)", padding: "5px 10px", borderRadius: 100 }}>Most popular</span>
+                  )}
+                  <span style={{ display: "inline-block", width: 36, height: 3, borderRadius: 3, background: p.popular ? "linear-gradient(90deg,#F6D79A,#E3A94E)" : `linear-gradient(90deg, ${TEAL}, ${GOLD})`, marginBottom: 18 }} />
+                  <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 21, margin: "0 0 6px", color: "#F4F7FC" }}>{p.name}</h3>
+                  <p style={{ margin: "0 0 16px", fontSize: 13, color: "#8A93A6", minHeight: 34 }}>{p.bestFor}</p>
+                  <div style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 26, color: "#EEF2F9", marginBottom: 20 }}>{p.price}</div>
+                  {p.specs && p.specs.length > 0 && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 24, flex: 1 }}>
+                      {p.specs.map((s) => <CheckRow key={s}>{s}</CheckRow>)}
+                    </div>
+                  )}
+                  <Btn href="/contact" variant={p.popular ? "gold" : "ghost"} icon={false}>Get a Quote</Btn>
+                </Card>
+              ))}
+            </Grid>
+            {d.packagesNote && (
+              <p style={{ margin: "28px auto 0", maxWidth: 780, textAlign: "center", fontSize: 13, color: "#8A93A6", lineHeight: 1.65 }}>{d.packagesNote}</p>
+            )}
+          </div>
+        </Band>
+      )}
+
+      {/* Pricing note (quote-only services) */}
+      {!d.packages && d.pricingNote && (
+        <Band id="packages" borderTop bg="linear-gradient(180deg, rgba(243,205,134,0.03), transparent 40%)">
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+            <Head eyebrow="Pricing" eyebrowColor={GOLD} title={d.pricingTitle ?? "Every project is bespoke"} center />
+            <p style={{ margin: "20px auto 0", maxWidth: 680, fontSize: 16.5, lineHeight: 1.7, color: "#A7B0C2" }}>{d.pricingNote}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 13, justifyContent: "center", marginTop: 30 }}>
+              <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
+              <Btn href="/contact" variant="ghost">Request a Quote</Btn>
             </div>
           </div>
-          <ul className="grid gap-3">
-            {detail.outcomes.map((o) => (
-              <li key={o} className="flex items-start gap-3 rounded-xl border bg-card p-4">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
-                  <Check className="h-3.5 w-3.5" />
-                </span>
-                <span className="text-sm">{o}</span>
-              </li>
-            ))}
-          </ul>
+        </Band>
+      )}
+
+      {/* Outcomes */}
+      <Band>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(320px,100%),1fr))", gap: 44, alignItems: "center" }}>
+          <div>
+            <Eyebrow color={GOLD}>Why it matters</Eyebrow>
+            <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: "clamp(26px,3.6vw,40px)", lineHeight: 1.08, letterSpacing: "-0.02em", margin: 0, color: "#F4F7FC" }}>What you can expect</h2>
+            <p style={{ margin: "18px 0 28px", fontSize: 16.5, lineHeight: 1.6, color: "#A7B0C2", maxWidth: 480 }}>
+              We focus on outcomes, not buzzwords. Here&apos;s what working with us on {d.category.toLowerCase()} typically means for your business.
+            </p>
+            <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Start a conversation</Btn>
+          </div>
+          <Card hover={false} style={{ padding: "28px 26px", display: "flex", flexDirection: "column", gap: 16 }}>
+            {d.outcomes.map((o) => <CheckRow key={o}>{o}</CheckRow>)}
+          </Card>
         </div>
-      </Section>
+      </Band>
 
       {/* Process */}
-      <Section>
-        <SectionHeading eyebrow="How we work" title="A clear path from idea to results" />
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PROCESS_STEPS.map((s, i) => (
-            <li key={s.title} className="relative h-full rounded-2xl border bg-card p-6">
-              <div className="flex items-center justify-between">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gradient text-white">
-                  <s.icon className="h-5 w-5" />
-                </span>
-                <span className="font-mono text-sm font-bold text-muted-foreground/50">0{i + 1}</span>
-              </div>
-              <h3 className="mt-4 font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      <Band borderTop bg="linear-gradient(180deg, rgba(53,224,232,0.02), transparent 40%)">
+        <Head eyebrow="How we work" eyebrowColor={TEAL} title="A clear path from idea to results" center
+          sub="From first hello to long-term growth, you'll always know what's happening and what comes next." />
+        <div style={{ marginTop: 44 }}>
+          <Grid min={230} gap={16}>
+            {PROCESS.map((p) => (
+              <Card key={p.n} style={{ height: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+                  <span style={{ display: "grid", placeItems: "center", width: 44, height: 44, borderRadius: 13, fontFamily: DISPLAY, fontWeight: 600, fontSize: 16, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}>{p.n}</span>
+                </div>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "#EEF2F9" }}>{p.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{p.body}</p>
+              </Card>
+            ))}
+          </Grid>
+        </div>
+      </Band>
 
       {/* FAQ */}
-      {detail.faq.length > 0 && (
-        <Section className="bg-muted/30">
-          <SectionHeading eyebrow="FAQ" title={`${detail.category} questions`} />
-          <div className="mt-10"><FaqSection faqs={detail.faq} /></div>
-        </Section>
+      {d.faq.length > 0 && (
+        <Band>
+          <Head eyebrow="FAQ" title={`${d.category} questions`} center />
+          <div style={{ maxWidth: 760, margin: "40px auto 0" }}>
+            {d.faq.map((f) => (
+              <details key={f.question} className="amx-faq">
+                <summary>{f.question}</summary>
+                <div>{f.answer}</div>
+              </details>
+            ))}
+          </div>
+        </Band>
       )}
 
       {/* Related */}
-      {detail.related.length > 0 && (
-        <Section>
-          <SectionHeading eyebrow="Explore more" title="Related services" />
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            {detail.related.map((r) => (
-              <Link key={r.href} href={r.href} className="group flex items-center justify-between rounded-2xl border bg-card p-6 hover-lift hover:border-primary/40">
-                <span className="font-semibold">{r.title}</span>
-                <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            ))}
+      {d.related.length > 0 && (
+        <Band borderTop>
+          <Head eyebrow="Explore more" title="Related services" center />
+          <div style={{ marginTop: 40 }}>
+            <Grid min={260} gap={18}>
+              {d.related.map((r) => (
+                <Link key={r.href} href={r.href} className="amx-card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: 24, borderRadius: 18, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", textDecoration: "none" }}>
+                  <span style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 17, color: "#EEF2F9" }}>{r.title}</span>
+                  <ArrowRight size={18} color={TEAL} />
+                </Link>
+              ))}
+            </Grid>
           </div>
-        </Section>
+        </Band>
       )}
 
-      <CtaSection
-        title={`Let's talk about your ${detail.category.toLowerCase()} project`}
-        description="Book a free, no-pressure call or request a quote. We'll listen first, then suggest the right next step for your business."
-        primaryHref="/book-a-call"
-        primaryLabel="Book a Call"
-        secondaryHref="/contact"
-        secondaryLabel="Request a Quote"
+      <Cta
+        title={d.ctaTitle ?? `Let's talk about your ${d.category.toLowerCase()} project`}
+        sub="Book a free, no-pressure call or request a quote. We'll listen first, then suggest the right next step for your business."
       />
     </>
   );

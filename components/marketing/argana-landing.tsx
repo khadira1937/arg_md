@@ -102,7 +102,7 @@ const whyUs = [
   { icon: ICON.users, title: "One team, everything covered", body: "Marketing, content, design, websites and support under one roof — no juggling multiple freelancers." },
   { icon: ICON.badge, title: "Clear, fixed quotes", body: "You always know what you're paying and what you're getting before any work begins." },
   { icon: ICON.heart, title: "We stay with you", body: "We don't disappear after launch — care plans and support keep your presence healthy long term." },
-  { icon: ICON.shield, title: "A registered UK company", body: "ARGANA MEDIA LTD is registered in England and Wales — a real business you can rely on." },
+  { icon: ICON.shield, title: "A registered UK company", body: "ARGANA MEDIA is a real, registered UK business you can rely on for the long term." },
   { icon: ICON.clock, title: "Responsive & reliable", body: "Friendly people who reply, keep their word and hit the timelines we agree together." },
   { icon: ICON.msg, title: "Plain-English advice", body: "We explain the why behind every recommendation so you can make confident decisions." },
 ];
@@ -141,10 +141,10 @@ const careFeatures = [
 ];
 
 const portfolio = [
-  { label: "Brand Website", cat: "Website & Design", body: "A custom multi-page site with brand identity, copy and on-page SEO, built to convert.", g: "linear-gradient(135deg,#0E2233,#123B4A 60%,#1C5563)" },
-  { label: "Content Campaign", cat: "Digital Media & Content", body: "A planned run of articles, social content and visuals that build authority over time.", g: "linear-gradient(135deg,#241B0E,#3A2C12 60%,#5A4520)" },
-  { label: "Local SEO Project", cat: "Digital Marketing", body: "Local pages, Google Business Profile and citations to win nearby customer searches.", g: "linear-gradient(135deg,#0E2A22,#103A2C 60%,#1A5141)" },
-  { label: "Website Care Setup", cat: "Hosting & Website Care", body: "Hosting, SSL, backups and monitoring configured for reliable, worry-free uptime.", g: "linear-gradient(135deg,#161B2E,#1E2647 60%,#2B3566)" },
+  { label: "Brand Website", cat: "Website & Design", body: "A custom multi-page site with brand identity, copy and on-page SEO, built to convert.", g: "linear-gradient(135deg,#0E2233,#123B4A 60%,#1C5563)", img: "/service_brand_website.png" },
+  { label: "Content Campaign", cat: "Digital Media & Content", body: "A planned run of articles, social content and visuals that build authority over time.", g: "linear-gradient(135deg,#241B0E,#3A2C12 60%,#5A4520)", img: "/service_digital_media.png" },
+  { label: "Local SEO Project", cat: "Digital Marketing", body: "Local pages, Google Business Profile and citations to win nearby customer searches.", g: "linear-gradient(135deg,#0E2A22,#103A2C 60%,#1A5141)", img: "/service_digital_marketing.png" },
+  { label: "Website Care Setup", cat: "Hosting & Website Care", body: "Hosting, SSL, backups and monitoring configured for reliable, worry-free uptime.", g: "linear-gradient(135deg,#161B2E,#1E2647 60%,#2B3566)", img: "/service_hosting_care.png" },
 ];
 
 const footerServices: [string, string][] = [
@@ -196,8 +196,25 @@ const CSS = `
     .am-root [data-desktopnav] { display: none !important; }
     .am-root [data-burger] { display: inline-flex !important; }
   }
+  /* Services two-pane → single column on tablet & mobile */
+  @media (max-width: 900px) {
+    .am-svc-grid { grid-template-columns: 1fr !important; }
+  }
+  /* Tablet nav spacing */
+  @media (max-width: 980px) {
+    #am-nav nav { padding-top: 15px !important; padding-bottom: 15px !important; }
+  }
+  /* Phones: tighten hero, sections & nav so everything fits and looks intentional */
   @media (max-width: 640px) {
-    .am-root [data-herofloor] { opacity: .5 !important; }
+    .am-root [data-herofloor] { opacity: .42 !important; bottom: -50% !important; width: 172vw !important; }
+    .am-hero { padding: 108px 18px 50px !important; min-height: auto !important; }
+    .am-root #services, .am-root #process, .am-root #packages,
+    .am-root #portal, .am-root #contact { padding-left: 18px !important; padding-right: 18px !important; }
+    #am-nav nav { padding: 14px 18px !important; gap: 14px !important; }
+  }
+  @media (max-width: 430px) {
+    .am-nav-cta { display: none !important; }
+    .am-hero { padding-top: 98px !important; }
   }
   /* Footer: brand on the left, then Services / Company / Legal columns to its
      right (mirrors the rest of the site's footer placement). */
@@ -285,11 +302,7 @@ function pageHTML() {
 <header id="am-nav" style="position:fixed; top:0; left:0; right:0; z-index:60; transition:background .35s ease, border-color .35s ease, backdrop-filter .35s; border-bottom:1px solid transparent;">
   <nav style="max-width:1280px; margin:0 auto; padding:18px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
     <a href="#top" style="display:flex; align-items:center; gap:11px; text-decoration:none; flex-shrink:0;">
-      <span style="position:relative; width:34px; height:34px; display:grid; place-items:center;">
-        <span style="position:absolute; inset:0; border-radius:11px; background:linear-gradient(135deg,#35E0E8,#4DA8F5 45%,#F3CD86); opacity:.92;"></span>
-        <span style="position:absolute; inset:1.5px; border-radius:9.5px; background:#080d18;"></span>
-        <span style="position:relative; font-family:'Clash Display'; font-weight:600; font-size:18px; background:linear-gradient(135deg,#35E0E8,#F3CD86); -webkit-background-clip:text; background-clip:text; color:transparent;">A</span>
-      </span>
+      <img src="/argana_media_logo_concept_2.png" alt="ARGANA MEDIA" width="38" height="38" style="display:block; flex-shrink:0; object-fit:contain;" />
       <span style="font-family:'Clash Display'; font-weight:600; font-size:18px; letter-spacing:.14em; color:#F4F7FC;">ARGANA<span style="color:#8A93A6; font-weight:500;"> MEDIA</span></span>
     </a>
     <div data-desktopnav="1" style="display:flex; align-items:center; gap:30px;">
@@ -324,7 +337,7 @@ function pageHTML() {
     <div style="display:flex; align-items:center; gap:14px; flex-shrink:0;">
       <a href="/cart" aria-label="Cart" data-desktopnav="1" style="position:relative; background:transparent; border:none; color:#C7CEDC; cursor:pointer; padding:6px; display:grid; place-items:center; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#C7CEDC'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></a>
       <a href="/dashboard" data-desktopnav="1" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#C7CEDC; font-size:13.5px; font-weight:500; padding:8px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:10px; transition:.25s;" onmouseover="this.style.borderColor='rgba(255,255,255,.28)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#C7CEDC'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Client Portal</a>
-      <a href="/book-a-call" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#0A0E18; font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:10px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Book a Call</a>
+      <a href="/book-a-call" class="am-btn-gold am-nav-cta" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#0A0E18; font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:10px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Book a Call</a>
       <button data-burger="1" aria-label="Menu" style="display:none; background:transparent; border:1px solid rgba(255,255,255,0.14); border-radius:10px; width:42px; height:42px; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:0;">
         <span style="display:block; width:18px; height:2px; background:#EEF2F9; border-radius:2px;"></span>
         <span style="display:block; width:18px; height:2px; background:#EEF2F9; border-radius:2px;"></span>
@@ -344,7 +357,7 @@ function pageHTML() {
 </div>
 
 <!-- HERO -->
-<section id="top" style="position:relative; min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:130px 24px 60px; text-align:center; isolation:isolate;">
+<section id="top" class="am-hero" style="position:relative; min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:130px 24px 60px; text-align:center; isolation:isolate;">
   <canvas id="am-canvas" style="position:absolute; inset:0; width:100%; height:100%; z-index:0;"></canvas>
   <div style="position:absolute; z-index:1; top:8%; left:50%; transform:translateX(-50%); width:min(900px,92vw); height:520px; background:radial-gradient(ellipse at center, rgba(53,224,232,0.16), transparent 62%); animation:am-aurora 14s ease-in-out infinite; pointer-events:none;"></div>
   <div style="position:absolute; z-index:1; bottom:2%; left:50%; transform:translateX(-50%); width:min(720px,86vw); height:420px; background:radial-gradient(ellipse at center, rgba(243,205,134,0.18), transparent 60%); animation:am-aurora 17s ease-in-out infinite reverse; pointer-events:none;"></div>
@@ -366,7 +379,6 @@ function pageHTML() {
       <a href="/book-a-call" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#0A0E18; font-size:15px; font-weight:600; padding:15px 28px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;">Book a Call<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="/services" class="am-btn-ghost" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#EEF2F9; font-size:15px; font-weight:600; padding:15px 28px; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.03); backdrop-filter:blur(8px); transition:.3s;">View Services</a>
     </div>
-    <div style="display:flex; align-items:center; gap:10px; margin-top:26px; color:#CCD4E3; font-size:12.5px; text-shadow:0 1px 3px #070B14, 0 2px 18px rgba(7,11,20,0.95);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Registered in England &amp; Wales · Company No. 17296255</div>
     <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:10px 18px; margin-top:28px;">
       ${heroCaps.map((c) => `<span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:#B4BFD4; font-weight:600; text-shadow:0 1px 3px #070B14, 0 2px 16px rgba(7,11,20,0.95);"><span style="width:5px; height:5px; border-radius:50%; background:linear-gradient(135deg,#35E0E8,#F3CD86); box-shadow:0 0 8px rgba(53,224,232,0.6);"></span>${c}</span>`).join("")}
     </div>
@@ -381,7 +393,7 @@ function pageHTML() {
     <h2 style="font-family:'Clash Display'; font-weight:600; font-size:clamp(30px,4.6vw,54px); line-height:1.06; letter-spacing:-0.02em; margin:0; color:#F4F7FC;">Everything your business needs to grow online</h2>
     <p style="margin:20px 0 0; font-size:17px; line-height:1.6; color:#A7B0C2;">Four connected areas of expertise — explored under one roof, delivered by one team. Pick an area to see what's included.</p>
   </div>
-  <div data-reveal="1" data-reveal-delay="80" style="margin-top:46px; display:grid; grid-template-columns:minmax(0,0.92fr) minmax(0,1.4fr); gap:22px; align-items:stretch;">
+  <div class="am-svc-grid" data-reveal="1" data-reveal-delay="80" style="margin-top:46px; display:grid; grid-template-columns:minmax(0,0.92fr) minmax(0,1.4fr); gap:22px; align-items:stretch;">
     <div id="am-groupnav" style="display:flex; flex-direction:column; gap:12px;">${groupNavHTML(0)}</div>
     <div style="position:relative; border:1px solid rgba(255,255,255,0.09); border-radius:22px; padding:clamp(26px,3vw,40px); background:linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); overflow:hidden;">
       <div id="am-detail">${detailHTML(serviceGroups[0])}</div>
@@ -432,10 +444,10 @@ function pageHTML() {
       const btnStyle = p.popular ? "color:#0A0E18; background:linear-gradient(135deg,#F6D79A,#E3A94E); border:none;" : "color:#EEF2F9; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.16);";
       const periodLabel = p.period ? "/" + p.period : "";
       const badge = p.popular ? `<span style="position:absolute; top:16px; right:16px; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; color:#0A0E18; background:linear-gradient(135deg,#F6D79A,#E3A94E); padding:5px 10px; border-radius:100px;">Most popular</span>` : "";
-      return `<div class="am-pkg" style="position:relative; display:flex; flex-direction:column; padding:28px 24px; border-radius:20px; border:1px solid ${cardBorder}; background:${cardBg}; overflow:hidden;">${badge}<span style="display:inline-block; width:36px; height:3px; border-radius:3px; background:${p.accent}; margin-bottom:18px;"></span><h3 style="font-family:'Clash Display'; font-weight:600; font-size:21px; margin:0 0 6px; color:#F4F7FC;">${p.name}</h3><p style="margin:0 0 18px; font-size:13px; color:#8A93A6; min-height:34px;">${p.bestFor}</p><div style="display:flex; align-items:baseline; gap:6px; margin-bottom:20px;"><span style="font-family:'Clash Display'; font-weight:600; font-size:26px; color:#EEF2F9;">${p.price}</span><span style="font-size:13px; color:#7E8AA3;">${periodLabel}</span></div><div style="display:flex; flex-direction:column; gap:11px; margin-bottom:26px; flex:1;">${p.specs.map((s) => `<span style="display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:#C7CEDC; line-height:1.4;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="2.2" style="flex-shrink:0; margin-top:1px;"><path d="M20 6 9 17l-5-5"/></svg>${s}</span>`).join("")}</div><a href="${p.cta === "Book a Call" ? "/book-a-call" : "/contact"}" class="${btnClass}" style="display:inline-flex; align-items:center; justify-content:center; gap:7px; text-decoration:none; font-weight:600; font-size:14px; padding:13px 18px; border-radius:11px; ${btnStyle} transition:.3s;">${p.cta}</a></div>`;
+      return `<div class="am-pkg" style="position:relative; display:flex; flex-direction:column; padding:28px 24px; border-radius:20px; border:1px solid ${cardBorder}; background:${cardBg}; overflow:hidden;">${badge}<span style="display:inline-block; width:36px; height:3px; border-radius:3px; background:${p.accent}; margin-bottom:18px;"></span><h3 style="font-family:'Clash Display'; font-weight:600; font-size:21px; margin:0 0 6px; color:#F4F7FC;">${p.name}</h3><p style="margin:0 0 22px; font-size:13.5px; line-height:1.5; color:#8A93A6; min-height:40px;">${p.bestFor}</p><div style="display:flex; flex-direction:column; gap:11px; margin-bottom:26px; flex:1;">${p.specs.map((s) => `<span style="display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:#C7CEDC; line-height:1.4;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="2.2" style="flex-shrink:0; margin-top:1px;"><path d="M20 6 9 17l-5-5"/></svg>${s}</span>`).join("")}</div><a href="${p.cta === "Book a Call" ? "/book-a-call" : "/contact"}" class="${btnClass}" style="display:inline-flex; align-items:center; justify-content:center; gap:7px; text-decoration:none; font-weight:600; font-size:14px; padding:13px 18px; border-radius:11px; ${btnStyle} transition:.3s;">${p.cta}</a></div>`;
     }).join("")}
   </div>
-  <p style="text-align:center; margin:28px 0 0; font-size:13.5px; color:#7E8AA3;">All figures are starting points for a quote — never a checkout. Final scope and price are agreed per project.</p>
+  <p style="text-align:center; margin:28px 0 0; font-size:13.5px; color:#7E8AA3;">Every project is unique, so every quote is too — no checkout, no pressure. Tell us your goals and we'll shape the right plan for your business.</p>
 </section>
 
 <!-- CARE + DOMAIN -->
@@ -516,7 +528,7 @@ function pageHTML() {
       <a href="/contact" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#35E0E8; font-weight:600; font-size:14.5px;">Start your project<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div data-reveal="1" data-reveal-delay="80" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;">
-      ${portfolio.map((it) => `<a href="/portfolio" class="am-port" style="text-decoration:none; display:flex; flex-direction:column; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.022);"><div style="position:relative; height:170px; overflow:hidden;"><div class="am-port-img" style="position:absolute; inset:0; background:${it.g}; transition:transform .5s cubic-bezier(.22,1,.36,1);"></div><div style="position:absolute; inset:0; background:radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%);"></div><span style="position:absolute; left:16px; top:16px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#F4F7FC; background:rgba(7,11,20,0.55); backdrop-filter:blur(6px); padding:6px 11px; border-radius:100px; border:1px solid rgba(255,255,255,0.12);">${it.cat}</span><span class="am-port-arrow" style="position:absolute; right:16px; bottom:16px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:rgba(7,11,20,0.5); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.14); color:#fff; opacity:.6; transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></div><div style="padding:20px;"><h3 style="font-family:'Clash Display'; font-weight:500; font-size:19px; margin:0 0 8px; color:#EEF2F9;">${it.label}</h3><p style="margin:0; font-size:13.5px; line-height:1.55; color:#8A93A6;">${it.body}</p></div></a>`).join("")}
+      ${portfolio.map((it) => `<a href="/portfolio" class="am-port" style="text-decoration:none; display:flex; flex-direction:column; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.022);"><div style="position:relative; height:170px; overflow:hidden;"><div class="am-port-img" style="position:absolute; inset:0; background:url('${it.img}') center/cover, ${it.g}; transition:transform .5s cubic-bezier(.22,1,.36,1);"></div><div style="position:absolute; inset:0; background:radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%);"></div><span style="position:absolute; left:16px; top:16px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#F4F7FC; background:rgba(7,11,20,0.55); backdrop-filter:blur(6px); padding:6px 11px; border-radius:100px; border:1px solid rgba(255,255,255,0.12);">${it.cat}</span><span class="am-port-arrow" style="position:absolute; right:16px; bottom:16px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:rgba(7,11,20,0.5); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.14); color:#fff; opacity:.6; transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></div><div style="padding:20px;"><h3 style="font-family:'Clash Display'; font-weight:500; font-size:19px; margin:0 0 8px; color:#EEF2F9;">${it.label}</h3><p style="margin:0; font-size:13.5px; line-height:1.55; color:#8A93A6;">${it.body}</p></div></a>`).join("")}
     </div>
     <p style="margin:26px 0 0; font-size:13px; color:#54607A; text-align:center;">Placeholder project types shown — real case studies are shared on request.</p>
   </div>
@@ -544,18 +556,18 @@ function pageHTML() {
   <div style="max-width:1280px; margin:0 auto; padding:64px 28px 32px;">
     <div class="am-foot-grid">
       <div class="am-foot-brand">
-        <a href="#top" style="display:flex; align-items:center; gap:11px; text-decoration:none; margin-bottom:18px;"><span style="position:relative; width:34px; height:34px; display:grid; place-items:center;"><span style="position:absolute; inset:0; border-radius:11px; background:linear-gradient(135deg,#35E0E8,#4DA8F5 45%,#F3CD86); opacity:.92;"></span><span style="position:absolute; inset:1.5px; border-radius:9.5px; background:#060912;"></span><span style="position:relative; font-family:'Clash Display'; font-weight:600; font-size:18px; background:linear-gradient(135deg,#35E0E8,#F3CD86); -webkit-background-clip:text; background-clip:text; color:transparent;">A</span></span><span style="font-family:'Clash Display'; font-weight:600; font-size:18px; letter-spacing:.14em; color:#F4F7FC;">ARGANA<span style="color:#8A93A6; font-weight:500;"> MEDIA</span></span></a>
+        <a href="#top" style="display:flex; align-items:center; gap:11px; text-decoration:none; margin-bottom:18px;"><img src="/argana_media_logo_concept_2.png" alt="ARGANA MEDIA" width="40" height="40" style="display:block; flex-shrink:0; object-fit:contain;" /><span style="font-family:'Clash Display'; font-weight:600; font-size:18px; letter-spacing:.14em; color:#F4F7FC;">ARGANA<span style="color:#8A93A6; font-weight:500;"> MEDIA</span></span></a>
         <p style="margin:0 0 18px; font-size:14px; line-height:1.6; color:#8A93A6;">Digital media, marketing and IT for growing businesses — content, websites, design, hosting support and everyday tech, from one trusted UK team.</p>
-        <div style="display:flex; flex-direction:column; gap:7px; font-size:13.5px; color:#A7B0C2;"><a href="mailto:hello@arganamedia.co.uk" style="color:#A7B0C2; text-decoration:none; display:inline-flex; align-items:center; gap:9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>hello@arganamedia.co.uk</a><a href="tel:+442000000000" style="color:#A7B0C2; text-decoration:none; display:inline-flex; align-items:center; gap:9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+44 20 0000 0000</a></div>
+        <div style="display:flex; flex-direction:column; gap:7px; font-size:13.5px; color:#A7B0C2;"><a href="mailto:hello@arganamedia.co.uk" style="color:#A7B0C2; text-decoration:none; display:inline-flex; align-items:center; gap:9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>hello@arganamedia.co.uk</a><a href="tel:+447882737419" style="color:#A7B0C2; text-decoration:none; display:inline-flex; align-items:center; gap:9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+44 7882 737419</a></div>
       </div>
       <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#54607A; font-weight:600; margin:0 0 16px;">Services</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerServices.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
       <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#54607A; font-weight:600; margin:0 0 16px;">Company</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerCompany.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
       <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#54607A; font-weight:600; margin:0 0 16px;">Legal</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerLegal.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
     </div>
     <div style="margin-top:48px; padding-top:26px; border-top:1px solid rgba(255,255,255,0.07);">
-      <p style="margin:0 0 6px; font-size:13px; color:#8A93A6;"><strong style="color:#C7CEDC; font-weight:600;">ARGANA MEDIA LTD</strong> · Registered in England and Wales · Company number 17296255</p>
+      <p style="margin:0 0 6px; font-size:13px; color:#8A93A6;"><strong style="color:#C7CEDC; font-weight:600;">ARGANA MEDIA</strong> · Company number 17296255</p>
       <p style="margin:0 0 18px; font-size:13px; color:#54607A;">Registered office: 2nd Floor College House, 17 King Edwards Road, Ruislip, London</p>
-      <div style="display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:space-between; align-items:center;"><span style="font-size:12.5px; color:#54607A;">© ${year} ARGANA MEDIA LTD. All rights reserved.</span><span style="font-size:12.5px; color:#54607A;">Made with care in the UK.</span></div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:space-between; align-items:center;"><span style="font-size:12.5px; color:#54607A;">© ${year} ARGANA MEDIA. All rights reserved.</span><span style="font-size:12.5px; color:#54607A;">Made with care in the UK.</span></div>
     </div>
   </div>
 </footer>
