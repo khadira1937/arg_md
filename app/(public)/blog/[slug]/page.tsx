@@ -7,14 +7,16 @@ import { Markdown } from "@/components/marketing/markdown";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
-  const posts = await prisma.blogPost.findMany({ where: { published: true }, select: { slug: true } });
-  return posts.map((p) => ({ slug: p.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({ where: { slug } });
+  const post = await prisma.blogPost.findUnique({ where: { slug } }).catch(() => null);
   if (!post) return {};
   return pageMetadata({ title: post.seoTitle ?? post.title, description: post.seoDescription ?? post.excerpt ?? undefined, path: `/blog/${post.slug}` });
 }

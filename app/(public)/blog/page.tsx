@@ -8,9 +8,12 @@ import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 
 export const metadata: Metadata = pageMetadata({ title: "Blog", description: "Practical guides and insights on websites, marketing, design and growing your business online.", path: "/blog" });
+export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({ where: { published: true }, orderBy: { publishedAt: "desc" } });
+  const posts = await prisma.blogPost
+    .findMany({ where: { published: true }, orderBy: { publishedAt: "desc" } })
+    .catch(() => []);
 
   return (
     <>

@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 import { siteConfig } from "@/config/site";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
 
@@ -11,7 +13,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms", "/privacy", "/cookie-policy", "/refund-policy", "/acceptable-use-policy",
   ];
 
-  const posts = await prisma.blogPost.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } });
+  const posts = await prisma.blogPost
+    .findMany({ where: { published: true }, select: { slug: true, updatedAt: true } })
+    .catch(() => []);
 
   const now = new Date();
 

@@ -21,15 +21,15 @@ import type { ClientPlan, ClientLocation } from "@/components/pricing/types";
 const SERVER_TYPES = new Set(["VPS", "DEDICATED", "STORAGE", "GPU"]);
 
 export const dynamicParams = true;
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
-  const products = await prisma.product.findMany({ where: { isActive: true }, select: { slug: true } });
-  return products.map((p) => ({ slug: p.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = await prisma.product.findUnique({ where: { slug } });
+  const product = await prisma.product.findUnique({ where: { slug } }).catch(() => null);
   if (!product) return {};
   return pageMetadata({
     title: product.seoTitle ?? product.name,
@@ -71,11 +71,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const faqs = (product.faq as { question: string; answer: string }[] | null) ?? [];
   const fromPrice = lowestPrice(product.plans);
 
-  const related = await prisma.product.findMany({
-    where: { categoryId: product.categoryId, isActive: true, id: { not: product.id } },
-    take: 3,
-    include: { plans: { where: { isActive: true }, include: { prices: true } } },
-  });
+  const related = await prisma.product
+    .findMany({
+      where: { categoryId: product.categoryId, isActive: true, id: { not: product.id } },
+      take: 3,
+      include: { plans: { where: { isActive: true }, include: { prices: true } } },
+    })
+    .catch(() => []);
 
   return (
     <>
