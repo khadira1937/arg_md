@@ -408,10 +408,11 @@ function pageHTML() {
 <section id="why" style="position:relative; padding:clamp(70px,9vh,120px) 0; border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); background:linear-gradient(180deg, rgba(255,255,255,0.012), transparent);">
   <div style="max-width:1280px; margin:0 auto; padding:0 28px;">
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:48px; align-items:start;">
-      <div data-reveal="1" style="position:sticky; top:110px;">
+      <div data-reveal="1">
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;"><span style="width:28px; height:1.5px; background:linear-gradient(90deg,#35E0E8,#F3CD86);"></span><span style="font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#F3CD86; font-weight:600;">Why ARGANA MEDIA</span></div>
         <h2 style="font-family:'Clash Display'; font-weight:600; font-size:clamp(30px,4.4vw,50px); line-height:1.07; letter-spacing:-0.02em; margin:0; color:#F4F7FC;">A media-first partner that actually delivers</h2>
         <p style="margin:20px 0 0; font-size:16.5px; line-height:1.6; color:#A7B0C2;">We combine creative thinking with technical delivery — strategy, content, design, build and support working together, not in silos. Built for small businesses, startups and growing brands.</p>
+        <img src="/why-argana-team.webp" alt="A creative team collaborating on a project strategy in a modern office" width="461" height="257" loading="lazy" decoding="async" style="width:100%; height:auto; margin-top:32px; border-radius:18px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 30px 70px -35px rgba(0,0,0,.85); display:block;" />
       </div>
       <div data-reveal="1" data-reveal-delay="100" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;">
         ${whyUs.map((w) => `<div class="am-card-svc" style="padding:24px 22px; border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.025);"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:rgba(53,224,232,0.1); color:#35E0E8; margin-bottom:16px;">${w.icon}</span><h3 style="font-family:'Clash Display'; font-weight:500; font-size:18px; margin:0 0 8px; color:#EEF2F9;">${w.title}</h3><p style="margin:0; font-size:14px; line-height:1.55; color:#8A93A6;">${w.body}</p></div>`).join("")}
@@ -496,22 +497,9 @@ function pageHTML() {
       </div>
       <a href="/dashboard" class="am-btn-ghost" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#EEF2F9; font-weight:600; font-size:14.5px; padding:13px 24px; border-radius:12px; border:1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.02); transition:.3s;">Explore the portal<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
-    <div data-reveal="1" data-reveal-delay="100" style="position:relative;" aria-hidden="true">
+    <div data-reveal="1" data-reveal-delay="100" style="position:relative;">
       <div style="position:absolute; inset:-30px; background:radial-gradient(circle at 60% 35%, rgba(53,224,232,0.16), transparent 65%); pointer-events:none;"></div>
-      <!-- Abstract "calm digital ecosystem" — brandless, no text, no fabricated UI -->
-      <div style="position:relative; aspect-ratio:1/0.84; min-height:300px; border:1px solid rgba(255,255,255,0.1); border-radius:24px; overflow:hidden; background:radial-gradient(130% 100% at 50% 0%, rgba(255,255,255,0.05), rgba(255,255,255,0.012)); box-shadow:0 50px 100px -40px rgba(0,0,0,.9);">
-        <div style="position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:72%; aspect-ratio:1; background:radial-gradient(circle, rgba(243,205,134,0.12), transparent 62%); pointer-events:none;"></div>
-        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:86%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(53,224,232,0.13);"></div>
-        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:58%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(243,205,134,0.15);"></div>
-        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:32%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(255,255,255,0.1);"></div>
-        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:106px; height:106px; border-radius:50%; background:radial-gradient(circle at 38% 32%, rgba(53,224,232,0.95), rgba(77,168,245,0.55) 46%, rgba(243,205,134,0.22) 82%, transparent); box-shadow:0 0 70px rgba(53,224,232,0.5), inset 0 0 30px rgba(255,255,255,0.12);"></div>
-        <span style="position:absolute; left:50%; top:7%; transform:translateX(-50%); width:12px; height:12px; border-radius:50%; background:#35E0E8; box-shadow:0 0 14px rgba(53,224,232,0.85);"></span>
-        <span style="position:absolute; right:13%; top:50%; transform:translateY(-50%); width:10px; height:10px; border-radius:50%; background:#F3CD86; box-shadow:0 0 14px rgba(243,205,134,0.85);"></span>
-        <span style="position:absolute; left:13%; top:50%; transform:translateY(-50%); width:9px; height:9px; border-radius:50%; background:#7CC6F0; box-shadow:0 0 12px rgba(124,198,240,0.75);"></span>
-        <span style="position:absolute; left:50%; bottom:8%; transform:translateX(-50%); width:8px; height:8px; border-radius:50%; background:#34D399; box-shadow:0 0 12px rgba(52,211,153,0.75);"></span>
-        <div style="position:absolute; left:8%; top:13%; width:86px; height:56px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);"><span style="position:absolute; left:12px; top:14px; width:48%; height:4px; border-radius:4px; background:linear-gradient(90deg,rgba(53,224,232,0.5),transparent);"></span><span style="position:absolute; left:12px; top:26px; width:70%; height:4px; border-radius:4px; background:rgba(255,255,255,0.1);"></span></div>
-        <div style="position:absolute; right:8%; bottom:13%; width:98px; height:62px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);"><span style="position:absolute; left:12px; top:16px; width:55%; height:4px; border-radius:4px; background:linear-gradient(90deg,rgba(243,205,134,0.5),transparent);"></span><span style="position:absolute; left:12px; top:28px; width:38%; height:4px; border-radius:4px; background:rgba(255,255,255,0.1);"></span></div>
-      </div>
+      <img src="/client-workspace.webp" alt="A professional managing projects on a laptop in a calm, modern workspace" width="612" height="408" loading="lazy" decoding="async" style="position:relative; width:100%; height:auto; display:block; border-radius:24px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 50px 100px -40px rgba(0,0,0,.9);" />
     </div>
   </div>
 </section>
