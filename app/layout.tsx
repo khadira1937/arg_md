@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   twitter: { card: "summary_large_image", title: `${brand.name} — ${brand.tagline}`, description: siteConfig.description },
-  // Favicon (app/icon.svg) and social preview (app/opengraph-image.tsx) are
+  // Favicon (app/icon.png) and social preview (app/opengraph-image.tsx) are
   // wired automatically via Next.js file-based metadata conventions.
 };
 
@@ -38,6 +38,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        {/* Preconnect cuts the font handshake latency. TODO (Phase 2): self-host
+            Clash Display + General Sans (woff2 in /public/fonts via next/font/local)
+            to drop the third-party request entirely. */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap"

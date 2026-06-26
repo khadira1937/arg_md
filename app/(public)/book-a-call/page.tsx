@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 import { Hero, Band, Card, DISPLAY, TEAL } from "@/components/marketing/amx-ui";
+import { CALENDLY_URL } from "@/config/cta";
 
 export const metadata: Metadata = pageMetadata({
   title: "Book a Call",
@@ -76,13 +77,22 @@ export default function BookACallPage() {
                 <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(53,224,232,0.1)", color: TEAL }}><PhoneCall size={16} /></span>{brand.phone}
               </a>
               <span style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#8A93A6" }}>
-                <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(243,205,134,0.12)", color: "#F3CD86" }}><Clock size={16} /></span>Mon–Fri, UK business hours
+                <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(243,205,134,0.12)", color: "#F3CD86" }}><Clock size={16} /></span>Mon–Fri · 9am–6pm UK time
               </span>
             </Card>
           </div>
 
-          {/* Right: form */}
+          {/* Right: instant booking + form */}
           <Card hover={false} style={{ padding: "28px 26px" }}>
+            <div style={{ marginBottom: 22, padding: 18, borderRadius: 14, border: "1px solid rgba(243,205,134,0.22)", background: "linear-gradient(135deg, rgba(243,205,134,0.08), rgba(53,224,232,0.05))" }}>
+              <p style={{ margin: "0 0 12px", fontSize: 14, lineHeight: 1.5, color: "#C7CEDC" }}>Already know when you&rsquo;re free? Pick a time that suits you and book instantly — no back-and-forth.</p>
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", textDecoration: "none", color: "#0A0E18", fontWeight: 600, fontSize: 14.5, padding: "13px 20px", borderRadius: 11, background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}><PhoneCall size={16} /> Pick a time on Calendly</a>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "0 0 20px" }}>
+              <span style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+              <span style={{ fontSize: 12, color: "#7E8AA3" }}>or send us a message</span>
+              <span style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+            </div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
               <MessageSquare size={20} color={TEAL} />
               <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: 0, color: "#F4F7FC" }}>Request your free call</h2>

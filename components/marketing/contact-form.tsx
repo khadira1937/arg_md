@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { contactAction, type ContactState } from "@/app/actions/contact";
+import { CALENDLY_URL } from "@/config/cta";
 
 type FormAction = (prev: ContactState, formData: FormData) => Promise<ContactState>;
 
@@ -32,6 +33,12 @@ export function ContactForm({
       <div className="flex flex-col items-center rounded-2xl border bg-success/5 p-8 text-center">
         <CheckCircle2 className="h-10 w-10 text-success" />
         <p className="mt-3 font-medium">{state.success}</p>
+        <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+          We usually reply within one business day. Prefer to talk it through now?
+        </p>
+        <Button asChild variant="gradient" className="mt-5">
+          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call instead</a>
+        </Button>
       </div>
     );
   }

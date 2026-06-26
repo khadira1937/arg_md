@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode, CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, PhoneCall, Check } from "lucide-react";
+import { CALENDLY_URL, isExternal } from "@/config/cta";
 
 /**
  * ARGANA MEDIA shared UI primitives — a server-safe toolkit that recreates the
@@ -39,9 +40,12 @@ export function Btn({
     display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none",
     fontSize: 15, fontWeight: 600, borderRadius: 12, transition: "0.3s", whiteSpace: "nowrap",
   };
+  // External links (Calendly etc.) open in a new tab; internal use next/link.
+  const ext = isExternal(href);
+  const extProps = ext ? { target: "_blank", rel: "noopener noreferrer" } : {};
   if (variant === "link") {
     return (
-      <Link href={href} className="amx-arrowlink" style={{ ...base, color: TEAL, fontSize: 14.5 }}>
+      <Link href={href} {...extProps} className="amx-arrowlink" style={{ ...base, color: TEAL, fontSize: 14.5 }}>
         {children}{icon && <ArrowRight size={16} />}
       </Link>
     );
@@ -50,7 +54,7 @@ export function Btn({
     ? { ...base, color: "#0A0E18", padding: "15px 28px", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }
     : { ...base, color: "#EEF2F9", padding: "15px 28px", border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.03)" };
   return (
-    <Link href={href} className={variant === "gold" ? "amx-gold" : "amx-ghost"} style={styles}>
+    <Link href={href} {...extProps} className={variant === "gold" ? "amx-gold" : "amx-ghost"} style={styles}>
       {children}{icon && <ArrowRight size={16} />}
     </Link>
   );
@@ -86,7 +90,7 @@ export function Hero({
 export function HeroActions({ secondaryHref = "/services", secondaryLabel = "View Services" }: { secondaryHref?: string; secondaryLabel?: string }) {
   return (
     <>
-      <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
+      <Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
       <Btn href={secondaryHref} variant="ghost">{secondaryLabel}</Btn>
     </>
   );
@@ -162,7 +166,7 @@ export function Grid({ children, min = 260, gap = 18 }: { children: ReactNode; m
 export function Cta({
   title = "Ready to build a stronger digital presence?",
   sub = "Tell us where you want your business to be online. We'll bring the strategy, creativity and technical delivery to get you there.",
-  primaryHref = "/book-a-call", primaryLabel = "Book a Call",
+  primaryHref = CALENDLY_URL, primaryLabel = "Book a Call",
   secondaryHref = "/contact", secondaryLabel = "Contact Us",
 }: { title?: string; sub?: string; primaryHref?: string; primaryLabel?: string; secondaryHref?: string; secondaryLabel?: string }) {
   return (

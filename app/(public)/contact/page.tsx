@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin, LifeBuoy, PhoneCall } from "lucide-react";
+import { Mail, Phone, MapPin, LifeBuoy, PhoneCall, Clock } from "lucide-react";
 import { ContactForm } from "@/components/marketing/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { brand } from "@/config/brand";
 import { Hero, Band, Card, Btn, DISPLAY, TEAL } from "@/components/marketing/amx-ui";
+import { CALENDLY_URL } from "@/config/cta";
 
 export const metadata: Metadata = pageMetadata({ title: "Contact", description: `Get in touch with ${brand.name}.`, path: "/contact" });
 
@@ -23,7 +24,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Get in touch"
         sub="Questions about a website, marketing, design or support? Send us a message and we'll get back to you — or book a free discovery call and we'll talk it through."
-        actions={<Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Book a free call</Btn>}
+        actions={<Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Book a free call</Btn>}
       />
 
       <Band>
@@ -46,6 +47,9 @@ export default function ContactPage() {
                 <span style={{ display: "block", fontSize: 13, lineHeight: 1.5, color: "#8A93A6" }}>{brand.company.registeredOffice}</span>
               </span>
             </Card>
+            <p style={{ display: "flex", alignItems: "center", gap: 8, margin: "4px 2px 0", fontSize: 12.5, color: "#8A93A6" }}>
+              <Clock size={14} /> We reply Mon–Fri · 9am–6pm UK time
+            </p>
           </div>
 
           {/* Right: form */}

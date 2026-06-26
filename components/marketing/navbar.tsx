@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { CALENDLY_URL } from "@/config/cta";
 import {
   Globe,
   Megaphone,
@@ -146,7 +147,7 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
                   </div>
                   <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
                     <span style={{ fontSize: 12.5, color: "#7E8AA3" }}>Not sure where to start? Book a free, no-pressure call.</span>
-                    <Link href="/book-a-call" className="amx-gold" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#0A0E18", fontSize: 13, fontWeight: 600, padding: "9px 16px", borderRadius: 10, whiteSpace: "nowrap" }} onClick={() => setServicesOpen(false)}>
+                    <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="amx-gold" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#0A0E18", fontSize: 13, fontWeight: 600, padding: "9px 16px", borderRadius: 10, whiteSpace: "nowrap" }} onClick={() => setServicesOpen(false)}>
                       Book a Call <ArrowRight size={14} />
                     </Link>
                   </div>
@@ -172,7 +173,7 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
               <LayoutDashboard size={15} strokeWidth={1.8} /> Client Portal
             </Link>
 
-            <Link href="/book-a-call" className="amx-desktop amx-gold" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#0A0E18", fontSize: 13.5, fontWeight: 600, padding: "10px 18px", borderRadius: 10 }}>
+            <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="amx-desktop amx-gold" style={{ display: "inline-flex", alignItems: "center", gap: 7, textDecoration: "none", color: "#0A0E18", fontSize: 13.5, fontWeight: 600, padding: "10px 18px", borderRadius: 10 }}>
               <Phone size={15} /> Book a Call
             </Link>
 
@@ -197,7 +198,7 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
           ))}
           <div style={{ display: "flex", gap: 12, marginTop: 22 }}>
             <Link href={portalHref} onClick={() => setMobileOpen(false)} style={{ flex: 1, textAlign: "center", textDecoration: "none", color: "#EEF2F9", fontWeight: 600, padding: 14, border: "1px solid rgba(255,255,255,.16)", borderRadius: 12 }}>Client Portal</Link>
-            <Link href="/book-a-call" onClick={() => setMobileOpen(false)} className="amx-gold" style={{ flex: 1, textAlign: "center", textDecoration: "none", color: "#0A0E18", fontWeight: 600, padding: 14, borderRadius: 12 }}>Book a Call</Link>
+            <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="amx-gold" style={{ flex: 1, textAlign: "center", textDecoration: "none", color: "#0A0E18", fontWeight: 600, padding: 14, borderRadius: 12 }}>Book a Call</Link>
           </div>
         </div>
       )}

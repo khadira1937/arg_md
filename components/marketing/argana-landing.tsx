@@ -17,6 +17,9 @@
 
 import { useEffect, useRef } from "react";
 
+// Every "Book a Call" CTA opens Calendly in a new tab (override with NEXT_PUBLIC_CALENDLY_URL).
+const CALENDLY = process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/mbenzakatako/30min";
+
 /* ----------------------------- icons ----------------------------- */
 const ICON: Record<string, string> = {
   globe: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
@@ -233,7 +236,7 @@ const CSS = `
 function groupButtonHTML(g: typeof serviceGroups[number], i: number, active: boolean) {
   const border = active ? "rgba(243,205,134,0.45)" : "rgba(255,255,255,0.08)";
   const bg = active ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.02)";
-  const arrow = active ? "#F3CD86" : "#54607A";
+  const arrow = active ? "#F3CD86" : "#7E8AA3";
   return `<button data-group="${i}" style="text-align:left; cursor:pointer; display:flex; align-items:center; gap:14px; padding:20px 20px; border-radius:16px; border:1px solid ${border}; background:${bg}; transition:.3s;">
     <span style="display:grid; place-items:center; width:42px; height:42px; border-radius:12px; background:rgba(255,255,255,0.05); color:${g.color}; flex-shrink:0;">${g.icon}</span>
     <span style="font-family:'Clash Display'; font-weight:500; font-size:19px; color:#EEF2F9;">${g.title}</span>
@@ -325,7 +328,7 @@ function pageHTML() {
             </div>
             <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
               <span style="font-size:12.5px; color:#7E8AA3;">Not sure where to start? Book a free, no-pressure call.</span>
-              <a href="/book-a-call" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#0A0E18; font-size:13px; font-weight:600; padding:9px 16px; border-radius:10px; background:linear-gradient(135deg,#F6D79A,#E3A94E); white-space:nowrap;">Book a Call<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#0A0E18; font-size:13px; font-weight:600; padding:9px 16px; border-radius:10px; background:linear-gradient(135deg,#F6D79A,#E3A94E); white-space:nowrap;">Book a Call<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
           </div>
         </div>
@@ -337,7 +340,7 @@ function pageHTML() {
     <div style="display:flex; align-items:center; gap:14px; flex-shrink:0;">
       <a href="/cart" aria-label="Cart" data-desktopnav="1" style="position:relative; background:transparent; border:none; color:#C7CEDC; cursor:pointer; padding:6px; display:grid; place-items:center; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#C7CEDC'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></a>
       <a href="/dashboard" data-desktopnav="1" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#C7CEDC; font-size:13.5px; font-weight:500; padding:8px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:10px; transition:.25s;" onmouseover="this.style.borderColor='rgba(255,255,255,.28)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#C7CEDC'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Client Portal</a>
-      <a href="/book-a-call" class="am-btn-gold am-nav-cta" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#0A0E18; font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:10px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Book a Call</a>
+      <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" class="am-btn-gold am-nav-cta" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; color:#0A0E18; font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:10px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Book a Call</a>
       <button data-burger="1" aria-label="Menu" style="display:none; background:transparent; border:1px solid rgba(255,255,255,0.14); border-radius:10px; width:42px; height:42px; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:0;">
         <span style="display:block; width:18px; height:2px; background:#EEF2F9; border-radius:2px;"></span>
         <span style="display:block; width:18px; height:2px; background:#EEF2F9; border-radius:2px;"></span>
@@ -352,7 +355,7 @@ function pageHTML() {
   ${[["Home", "#top"], ["About", "/about"], ["Services", "/services"], ["Portfolio", "/portfolio"], ["Blog", "/blog"], ["Contact", "/contact"]].map(([t, h]) => `<a href="${h}" data-close="1" style="text-decoration:none; color:#EEF2F9; font-family:'Clash Display'; font-weight:500; font-size:24px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07);">${t}</a>`).join("")}
   <div style="display:flex; gap:12px; margin-top:22px;">
     <a href="/dashboard" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#EEF2F9; font-weight:600; padding:14px; border:1px solid rgba(255,255,255,.16); border-radius:12px;">Client Portal</a>
-    <a href="/book-a-call" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#0A0E18; font-weight:600; padding:14px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E);">Book a Call</a>
+    <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#0A0E18; font-weight:600; padding:14px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E);">Book a Call</a>
   </div>
 </div>
 
@@ -376,7 +379,7 @@ function pageHTML() {
     <h1 style="font-family:'Clash Display'; font-weight:600; font-size:clamp(33px,5vw,62px); line-height:1.05; letter-spacing:-0.02em; margin:0; color:#F4F7FC; text-shadow:0 2px 34px rgba(7,11,20,0.55);">Build, Grow &amp; Scale Your<br/><span style="background:linear-gradient(110deg,#35E0E8 5%,#9BD4F2 45%,#F3CD86 92%); -webkit-background-clip:text; background-clip:text; color:transparent;">Digital Presence</span></h1>
     <p style="max-width:528px; margin:22px 0 0; font-size:clamp(15px,1.7vw,17.5px); line-height:1.62; color:#C2CBDB; text-shadow:0 1px 18px rgba(7,11,20,0.75);">ARGANA MEDIA helps growing businesses thrive online — content, marketing, websites, design, hosting support and IT, all from one trusted team across the UK and Europe.</p>
     <div style="display:flex; flex-wrap:wrap; gap:13px; justify-content:center; margin-top:32px;">
-      <a href="/book-a-call" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#0A0E18; font-size:15px; font-weight:600; padding:15px 28px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;">Book a Call<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#0A0E18; font-size:15px; font-weight:600; padding:15px 28px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;">Book a Call<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="/services" class="am-btn-ghost" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#EEF2F9; font-size:15px; font-weight:600; padding:15px 28px; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.03); backdrop-filter:blur(8px); transition:.3s;">View Services</a>
     </div>
     <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:10px 18px; margin-top:28px;">
@@ -468,7 +471,7 @@ function pageHTML() {
         <p style="margin:0 0 20px; font-size:14px; color:#8A93A6;">Search for a name. If it's free, we'll register, connect and secure it for you — no control panels required.</p>
         <form id="am-domain-form" style="display:flex; gap:10px; flex-wrap:wrap;">
           <div style="flex:1; min-width:200px; display:flex; align-items:center; gap:8px; padding:0 16px; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(7,11,20,0.5);">
-            <span style="color:#54607A;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></span>
+            <span style="color:#7E8AA3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></span>
             <input id="am-domain-input" placeholder="yourbusiness" style="flex:1; background:transparent; border:none; outline:none; color:#EEF2F9; font-size:15px; font-family:'General Sans',sans-serif; padding:14px 0;" />
           </div>
           <button type="submit" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:none; font-weight:600; font-size:14.5px; padding:0 22px; border-radius:12px; color:#0A0E18; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;">Search</button>
@@ -493,28 +496,21 @@ function pageHTML() {
       </div>
       <a href="/dashboard" class="am-btn-ghost" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#EEF2F9; font-weight:600; font-size:14.5px; padding:13px 24px; border-radius:12px; border:1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.02); transition:.3s;">Explore the portal<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
-    <div data-reveal="1" data-reveal-delay="100" style="position:relative;">
-      <div style="position:absolute; inset:-30px; background:radial-gradient(circle at 60% 30%, rgba(53,224,232,0.14), transparent 65%); pointer-events:none;"></div>
-      <div style="position:relative; border:1px solid rgba(255,255,255,0.1); border-radius:18px; overflow:hidden; background:#0B1120; box-shadow:0 50px 100px -40px rgba(0,0,0,.9);">
-        <div style="display:flex; align-items:center; gap:8px; padding:13px 16px; border-bottom:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02);"><span style="width:11px; height:11px; border-radius:50%; background:#E3A94E;"></span><span style="width:11px; height:11px; border-radius:50%; background:#34D399;"></span><span style="width:11px; height:11px; border-radius:50%; background:#35E0E8;"></span><span style="margin-left:12px; font-size:12px; color:#54607A; font-family:'General Sans';">portal.arganamedia.co.uk</span></div>
-        <div style="padding:20px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;"><div><div style="font-size:12px; color:#7E8AA3;">Welcome back</div><div style="font-family:'Clash Display'; font-weight:600; font-size:18px; color:#F4F7FC;">Your dashboard</div></div><span style="display:grid; place-items:center; width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#35E0E8,#F3CD86); color:#0A0E18; font-weight:600; font-family:'Clash Display'; font-size:14px;">JM</span></div>
-          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px;">
-            <div style="padding:14px; border-radius:13px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.025);"><div style="font-family:'Clash Display'; font-weight:600; font-size:22px; color:#35E0E8;">3</div><div style="font-size:11px; color:#8A93A6; margin-top:2px;">Active projects</div></div>
-            <div style="padding:14px; border-radius:13px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.025);"><div style="font-family:'Clash Display'; font-weight:600; font-size:22px; color:#F3CD86;">2</div><div style="font-size:11px; color:#8A93A6; margin-top:2px;">Open requests</div></div>
-            <div style="padding:14px; border-radius:13px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.025);"><div style="font-family:'Clash Display'; font-weight:600; font-size:22px; color:#34D399;">1</div><div style="font-size:11px; color:#8A93A6; margin-top:2px;">Support ticket</div></div>
-          </div>
-          <div style="padding:16px; border-radius:13px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.025); margin-bottom:14px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"><span style="font-size:13px; font-weight:600; color:#EEF2F9;">Website redesign</span><span style="font-size:11px; color:#35E0E8;">In progress · 70%</span></div>
-            <div style="height:7px; border-radius:100px; background:rgba(255,255,255,0.07); overflow:hidden; margin-bottom:14px;"><span style="display:block; width:70%; height:100%; border-radius:100px; background:linear-gradient(90deg,#35E0E8,#4DA8F5);"></span></div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"><span style="font-size:13px; font-weight:600; color:#EEF2F9;">SEO & content (monthly)</span><span style="font-size:11px; color:#34D399;">On track · 45%</span></div>
-            <div style="height:7px; border-radius:100px; background:rgba(255,255,255,0.07); overflow:hidden;"><span style="display:block; width:45%; height:100%; border-radius:100px; background:linear-gradient(90deg,#34D399,#35E0E8);"></span></div>
-          </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div style="padding:13px 14px; border-radius:13px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.025);"><div style="font-size:11px; color:#7E8AA3; margin-bottom:6px;">Latest invoice</div><div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-family:'Clash Display'; font-weight:600; font-size:16px; color:#F4F7FC;">£480.00</span><span style="font-size:10.5px; font-weight:600; color:#34D399; background:rgba(52,211,153,0.12); padding:4px 9px; border-radius:100px;">Paid</span></div></div>
-            <div style="padding:13px 14px; border-radius:13px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.025);"><div style="font-size:11px; color:#7E8AA3; margin-bottom:6px;">Support ticket</div><div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-size:13px; font-weight:600; color:#F4F7FC;">#2041</span><span style="font-size:10.5px; font-weight:600; color:#F3CD86; background:rgba(243,205,134,0.12); padding:4px 9px; border-radius:100px;">Replied</span></div></div>
-          </div>
-        </div>
+    <div data-reveal="1" data-reveal-delay="100" style="position:relative;" aria-hidden="true">
+      <div style="position:absolute; inset:-30px; background:radial-gradient(circle at 60% 35%, rgba(53,224,232,0.16), transparent 65%); pointer-events:none;"></div>
+      <!-- Abstract "calm digital ecosystem" — brandless, no text, no fabricated UI -->
+      <div style="position:relative; aspect-ratio:1/0.84; min-height:300px; border:1px solid rgba(255,255,255,0.1); border-radius:24px; overflow:hidden; background:radial-gradient(130% 100% at 50% 0%, rgba(255,255,255,0.05), rgba(255,255,255,0.012)); box-shadow:0 50px 100px -40px rgba(0,0,0,.9);">
+        <div style="position:absolute; top:-22%; left:50%; transform:translateX(-50%); width:72%; aspect-ratio:1; background:radial-gradient(circle, rgba(243,205,134,0.12), transparent 62%); pointer-events:none;"></div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:86%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(53,224,232,0.13);"></div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:58%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(243,205,134,0.15);"></div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:32%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(255,255,255,0.1);"></div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:106px; height:106px; border-radius:50%; background:radial-gradient(circle at 38% 32%, rgba(53,224,232,0.95), rgba(77,168,245,0.55) 46%, rgba(243,205,134,0.22) 82%, transparent); box-shadow:0 0 70px rgba(53,224,232,0.5), inset 0 0 30px rgba(255,255,255,0.12);"></div>
+        <span style="position:absolute; left:50%; top:7%; transform:translateX(-50%); width:12px; height:12px; border-radius:50%; background:#35E0E8; box-shadow:0 0 14px rgba(53,224,232,0.85);"></span>
+        <span style="position:absolute; right:13%; top:50%; transform:translateY(-50%); width:10px; height:10px; border-radius:50%; background:#F3CD86; box-shadow:0 0 14px rgba(243,205,134,0.85);"></span>
+        <span style="position:absolute; left:13%; top:50%; transform:translateY(-50%); width:9px; height:9px; border-radius:50%; background:#7CC6F0; box-shadow:0 0 12px rgba(124,198,240,0.75);"></span>
+        <span style="position:absolute; left:50%; bottom:8%; transform:translateX(-50%); width:8px; height:8px; border-radius:50%; background:#34D399; box-shadow:0 0 12px rgba(52,211,153,0.75);"></span>
+        <div style="position:absolute; left:8%; top:13%; width:86px; height:56px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);"><span style="position:absolute; left:12px; top:14px; width:48%; height:4px; border-radius:4px; background:linear-gradient(90deg,rgba(53,224,232,0.5),transparent);"></span><span style="position:absolute; left:12px; top:26px; width:70%; height:4px; border-radius:4px; background:rgba(255,255,255,0.1);"></span></div>
+        <div style="position:absolute; right:8%; bottom:13%; width:98px; height:62px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);"><span style="position:absolute; left:12px; top:16px; width:55%; height:4px; border-radius:4px; background:linear-gradient(90deg,rgba(243,205,134,0.5),transparent);"></span><span style="position:absolute; left:12px; top:28px; width:38%; height:4px; border-radius:4px; background:rgba(255,255,255,0.1);"></span></div>
       </div>
     </div>
   </div>
@@ -528,9 +524,9 @@ function pageHTML() {
       <a href="/contact" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#35E0E8; font-weight:600; font-size:14.5px;">Start your project<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div data-reveal="1" data-reveal-delay="80" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;">
-      ${portfolio.map((it) => `<a href="/portfolio" class="am-port" style="text-decoration:none; display:flex; flex-direction:column; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.022);"><div style="position:relative; height:170px; overflow:hidden;"><div class="am-port-img" style="position:absolute; inset:0; background:url('${it.img}') center/cover, ${it.g}; transition:transform .5s cubic-bezier(.22,1,.36,1);"></div><div style="position:absolute; inset:0; background:radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%);"></div><span style="position:absolute; left:16px; top:16px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#F4F7FC; background:rgba(7,11,20,0.55); backdrop-filter:blur(6px); padding:6px 11px; border-radius:100px; border:1px solid rgba(255,255,255,0.12);">${it.cat}</span><span class="am-port-arrow" style="position:absolute; right:16px; bottom:16px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:rgba(7,11,20,0.5); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.14); color:#fff; opacity:.6; transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></div><div style="padding:20px;"><h3 style="font-family:'Clash Display'; font-weight:500; font-size:19px; margin:0 0 8px; color:#EEF2F9;">${it.label}</h3><p style="margin:0; font-size:13.5px; line-height:1.55; color:#8A93A6;">${it.body}</p></div></a>`).join("")}
+      ${portfolio.map((it) => `<a href="/portfolio" class="am-port" style="text-decoration:none; display:flex; flex-direction:column; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.022);"><div style="position:relative; height:170px; overflow:hidden;"><div class="am-port-img" style="position:absolute; inset:0; background:radial-gradient(120% 90% at 28% 12%, rgba(255,255,255,0.08), transparent 55%), radial-gradient(80% 120% at 100% 100%, rgba(53,224,232,0.10), transparent 60%), ${it.g}; transition:transform .5s cubic-bezier(.22,1,.36,1);"></div><div style="position:absolute; inset:0; background:radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%);"></div><span style="position:absolute; left:16px; top:16px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#F4F7FC; background:rgba(7,11,20,0.55); backdrop-filter:blur(6px); padding:6px 11px; border-radius:100px; border:1px solid rgba(255,255,255,0.12);">${it.cat}</span><span class="am-port-arrow" style="position:absolute; right:16px; bottom:16px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:rgba(7,11,20,0.5); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.14); color:#fff; opacity:.6; transition:.3s;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></div><div style="padding:20px;"><h3 style="font-family:'Clash Display'; font-weight:500; font-size:19px; margin:0 0 8px; color:#EEF2F9;">${it.label}</h3><p style="margin:0; font-size:13.5px; line-height:1.55; color:#8A93A6;">${it.body}</p></div></a>`).join("")}
     </div>
-    <p style="margin:26px 0 0; font-size:13px; color:#54607A; text-align:center;">Placeholder project types shown — real case studies are shared on request.</p>
+    <p style="margin:26px 0 0; font-size:13px; color:#7E8AA3; text-align:center;">Sample project types — real case studies are shared on request.</p>
   </div>
 </section>
 
@@ -544,7 +540,7 @@ function pageHTML() {
       <h2 style="font-family:'Clash Display'; font-weight:600; font-size:clamp(32px,5.5vw,64px); line-height:1.04; letter-spacing:-0.02em; margin:0 auto; max-width:760px; color:#F4F7FC;">Ready to build a stronger digital presence?</h2>
       <p style="margin:22px auto 0; max-width:560px; font-size:17px; line-height:1.6; color:#A7B0C2;">Tell us where you want your business to be online. We'll bring the strategy, creativity and technical delivery to get you there.</p>
       <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:38px;">
-        <a href="/book-a-call" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#0A0E18; font-size:15px; font-weight:600; padding:16px 32px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;">Book a Call<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+        <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" class="am-btn-gold" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#0A0E18; font-size:15px; font-weight:600; padding:16px 32px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E); transition:.3s;">Book a Call<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.05 2a9 9 0 0 1 8 7.94M14.05 6A5 5 0 0 1 18 10M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
         <a href="/contact" class="am-btn-ghost" style="display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#EEF2F9; font-size:15px; font-weight:600; padding:16px 32px; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.02); transition:.3s;">Contact Us</a>
       </div>
     </div>
@@ -560,14 +556,14 @@ function pageHTML() {
         <p style="margin:0 0 18px; font-size:14px; line-height:1.6; color:#8A93A6;">Digital media, marketing and IT for growing businesses — content, websites, design, hosting support and everyday tech, from one trusted team across the UK and Europe.</p>
         <div style="display:flex; flex-direction:column; gap:7px; font-size:13.5px; color:#A7B0C2;"><a href="mailto:hello@arganamedia.co.uk" style="color:#A7B0C2; text-decoration:none; display:inline-flex; align-items:center; gap:9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>hello@arganamedia.co.uk</a><a href="tel:+447882737419" style="color:#A7B0C2; text-decoration:none; display:inline-flex; align-items:center; gap:9px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35E0E8" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+44 7882 737419</a></div>
       </div>
-      <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#54607A; font-weight:600; margin:0 0 16px;">Services</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerServices.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
-      <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#54607A; font-weight:600; margin:0 0 16px;">Company</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerCompany.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
-      <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#54607A; font-weight:600; margin:0 0 16px;">Legal</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerLegal.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
+      <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7E8AA3; font-weight:600; margin:0 0 16px;">Services</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerServices.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
+      <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7E8AA3; font-weight:600; margin:0 0 16px;">Company</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerCompany.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
+      <div><h4 style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7E8AA3; font-weight:600; margin:0 0 16px;">Legal</h4><div style="display:flex; flex-direction:column; gap:11px;">${footerLegal.map(([label, href]) => `<a href="${href}" style="text-decoration:none; color:#A7B0C2; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#35E0E8'" onmouseout="this.style.color='#A7B0C2'">${label}</a>`).join("")}</div></div>
     </div>
     <div style="margin-top:48px; padding-top:26px; border-top:1px solid rgba(255,255,255,0.07);">
       <p style="margin:0 0 6px; font-size:13px; color:#8A93A6;"><strong style="color:#C7CEDC; font-weight:600;">ARGANA MEDIA</strong> · Company number 17296255</p>
-      <p style="margin:0 0 18px; font-size:13px; color:#54607A;">Registered office: 2nd Floor College House, 17 King Edwards Road, Ruislip, London</p>
-      <div style="display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:space-between; align-items:center;"><span style="font-size:12.5px; color:#54607A;">© ${year} ARGANA MEDIA. All rights reserved.</span><span style="font-size:12.5px; color:#54607A;">Made with care in the UK.</span></div>
+      <p style="margin:0 0 18px; font-size:13px; color:#7E8AA3;">Registered office: 2nd Floor College House, 17 King Edwards Road, Ruislip, London</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px 16px; justify-content:space-between; align-items:center;"><span style="font-size:12.5px; color:#7E8AA3;">© ${year} ARGANA MEDIA. All rights reserved.</span><span style="font-size:12.5px; color:#7E8AA3;">Made with care in the UK.</span></div>
     </div>
   </div>
 </footer>
@@ -647,6 +643,9 @@ export default function ArganaLanding() {
     let raf = 0;
     let mx = 0, my = 0;
     const ctx = canvas?.getContext("2d") ?? null;
+    // Respect prefers-reduced-motion: render a single static frame, no rAF loop.
+    const reduceMotion = typeof window !== "undefined" && typeof window.matchMedia === "function"
+      && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let w = 0, h = 0, dpr = 1;
     type Spark = { x: number; y: number; vx: number; vy: number; size: number; life: number; max: number; color: string };
     type Sky = { x: number; y: number; r: number; base: number; tw: number; ph: number; gold: boolean; depth: number };
@@ -703,7 +702,7 @@ export default function ArganaLanding() {
         ctx.beginPath(); ctx.arc(p.x + px * 0.6, p.y + py * 0.6, p.size, 0, Math.PI * 2); ctx.fill();
       }
       ctx.globalAlpha = 1;
-      raf = requestAnimationFrame(draw);
+      if (!reduceMotion) raf = requestAnimationFrame(draw);
     };
     if (canvas && ctx) { seed(); draw(); }
 
@@ -735,6 +734,7 @@ export default function ArganaLanding() {
     // 9) scroll-reveal
     const revealEls = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"));
     revealEls.forEach((el) => {
+      if (reduceMotion) return; // no entrance animation for reduced-motion users
       el.style.opacity = "0";
       el.style.transform = "translateY(28px)";
       el.style.transition = "opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)";
@@ -769,7 +769,20 @@ export default function ArganaLanding() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div ref={rootRef} className="am-root" />
+      <div ref={rootRef} className="am-root">
+        {/* Server-rendered hero fallback — visible to search engines, social
+            unfurlers and no-JS users. Replaced by the full animated design on
+            mount (root.innerHTML in the effect below). */}
+        <section style={{ minHeight: "62vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "120px 24px 64px" }}>
+          <span style={{ fontSize: 11.5, letterSpacing: "0.34em", textTransform: "uppercase", color: "#8FA0BC", fontWeight: 500, marginBottom: 20 }}>ARGANA MEDIA · UK &amp; Europe Digital Agency</span>
+          <h1 style={{ fontFamily: "'Clash Display', sans-serif", fontWeight: 600, fontSize: "clamp(33px,5vw,62px)", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0, color: "#F4F7FC", maxWidth: 780 }}>Build, Grow &amp; Scale Your Digital Presence</h1>
+          <p style={{ maxWidth: 528, margin: "22px 0 0", fontSize: "clamp(15px,1.7vw,17.5px)", lineHeight: 1.62, color: "#C2CBDB" }}>ARGANA MEDIA helps growing businesses thrive online — content, marketing, websites, design, hosting support and IT, all from one trusted team across the UK and Europe.</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 13, justifyContent: "center", marginTop: 32 }}>
+            <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none", color: "#0A0E18", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 12, background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}>Book a Call</a>
+            <a href="/services" style={{ display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none", color: "#EEF2F9", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.03)" }}>View Services</a>
+          </div>
+        </section>
+      </div>
     </>
   );
 }

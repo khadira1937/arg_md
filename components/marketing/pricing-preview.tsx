@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { SERVICE_PACKAGES } from "@/config/marketing";
+import { CALENDLY_URL } from "@/config/cta";
 
 export function PricingPreview() {
   const [active, setActive] = React.useState(SERVICE_PACKAGES[0].key);
@@ -64,7 +65,7 @@ export function PricingPreview() {
 
             <div className="mt-6 flex flex-1 flex-col justify-end gap-2">
               <Button asChild variant={p.popular ? "gradient" : "outline"} className="w-full">
-                <Link href="/book-a-call">
+                <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                   Get a quote <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

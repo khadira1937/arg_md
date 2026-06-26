@@ -46,7 +46,7 @@ export default function PortfolioPage() {
             {WORK.map((w) => (
               <div key={w.type} className="amx-card amx-port" style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.022)" }}>
                 <div style={{ position: "relative", height: 150, overflow: "hidden" }}>
-                  <div className="amx-port-img" style={{ position: "absolute", inset: 0, background: `url('${w.img}') center/cover, ${w.g}`, transition: "transform .5s cubic-bezier(.22,1,.36,1)" }} />
+                  <div className="amx-port-img" style={{ position: "absolute", inset: 0, background: `radial-gradient(120% 90% at 28% 12%, rgba(255,255,255,0.08), transparent 55%), radial-gradient(80% 120% at 100% 100%, rgba(53,224,232,0.10), transparent 60%), ${w.g}`, transition: "transform .5s cubic-bezier(.22,1,.36,1)" }} />
                   <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%)" }} />
                   <span style={{ position: "absolute", left: 16, top: 16, display: "inline-flex", alignItems: "center", gap: 7, fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#F4F7FC", background: "rgba(7,11,20,0.5)", backdropFilter: "blur(6px)", padding: "6px 11px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)" }}>{w.cat}</span>
                   <span style={{ position: "absolute", right: 16, bottom: 16, display: "grid", placeItems: "center", width: 38, height: 38, borderRadius: 12, background: "rgba(7,11,20,0.45)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.14)", color: "#fff" }}><w.icon size={18} strokeWidth={1.9} /></span>
@@ -77,7 +77,7 @@ export default function PortfolioPage() {
             ))}
           </Grid>
         </div>
-        <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, color: "#54607A", fontSize: 13 }}>
+        <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, color: "#7E8AA3", fontSize: 13 }}>
           <ArrowUpRight size={15} /> Real case studies are shared on request — just ask on your call.
         </div>
       </Band>

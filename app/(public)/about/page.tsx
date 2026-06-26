@@ -100,7 +100,7 @@ export default function AboutPage() {
           <Grid min={220} gap={14}>
             {FACTS.map((f) => (
               <Card key={f.label} hover={false} style={{ padding: 22 }}>
-                <p style={{ margin: 0, fontSize: 11.5, letterSpacing: "0.06em", textTransform: "uppercase", color: "#54607A" }}>{f.label}</p>
+                <p style={{ margin: 0, fontSize: 11.5, letterSpacing: "0.06em", textTransform: "uppercase", color: "#7E8AA3" }}>{f.label}</p>
                 <p style={{ margin: "8px 0 0", fontFamily: DISPLAY, fontWeight: 600, fontSize: 17, color: "#F4F7FC" }}>{f.value}</p>
               </Card>
             ))}

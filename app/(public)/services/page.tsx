@@ -24,7 +24,7 @@ export default function ServicesPage() {
         eyebrow="Our Services"
         title={<>One team for your whole <span style={{ background: "linear-gradient(110deg,#35E0E8,#9BD4F2 45%,#F3CD86)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>online presence</span></>}
         sub="From the first website to long-term marketing and support, our services connect together so you get a joined-up result — not six separate suppliers to manage."
-        actions={<HeroActions secondaryHref="/book-a-call" secondaryLabel="Book a Call" />}
+        actions={<HeroActions secondaryHref="/pricing" secondaryLabel="View Pricing" />}
       />
 
       <Band>

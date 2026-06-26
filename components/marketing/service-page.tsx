@@ -4,6 +4,7 @@ import { ArrowRight, PhoneCall } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { SERVICE_DETAILS } from "@/config/services-content";
+import { CALENDLY_URL } from "@/config/cta";
 import {
   Hero, Band, Head, Card, CheckRow, Grid, Cta, Btn, Eyebrow,
   DISPLAY, TEAL, GOLD,
@@ -49,7 +50,7 @@ export function ServicePage({ slug }: { slug: string }) {
         }
         actions={
           <>
-            <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
+            <Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
             <Btn href="/contact" variant="ghost">Request a Quote</Btn>
           </>
         }
@@ -142,7 +143,7 @@ export function ServicePage({ slug }: { slug: string }) {
             <Head eyebrow="Pricing" eyebrowColor={GOLD} title={d.pricingTitle ?? "Every project is bespoke"} center />
             <p style={{ margin: "20px auto 0", maxWidth: 680, fontSize: 16.5, lineHeight: 1.7, color: "#A7B0C2" }}>{d.pricingNote}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 13, justifyContent: "center", marginTop: 30 }}>
-              <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
+              <Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
               <Btn href="/contact" variant="ghost">Request a Quote</Btn>
             </div>
           </div>
@@ -158,7 +159,7 @@ export function ServicePage({ slug }: { slug: string }) {
             <p style={{ margin: "18px 0 28px", fontSize: 16.5, lineHeight: 1.6, color: "#A7B0C2", maxWidth: 480 }}>
               We focus on outcomes, not buzzwords. Here&apos;s what working with us on {d.category.toLowerCase()} typically means for your business.
             </p>
-            <Btn href="/book-a-call" variant="gold" icon={false}><PhoneCall size={16} /> Start a conversation</Btn>
+            <Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Start a conversation</Btn>
           </div>
           <Card hover={false} style={{ padding: "28px 26px", display: "flex", flexDirection: "column", gap: 16 }}>
             {d.outcomes.map((o) => <CheckRow key={o}>{o}</CheckRow>)}

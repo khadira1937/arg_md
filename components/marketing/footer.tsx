@@ -39,7 +39,7 @@ export function Footer() {
 
           {(["Services", "Company", "Legal"] as const).map((heading) => (
             <div key={heading}>
-              <h4 style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "#54607A", fontWeight: 600, margin: "0 0 16px" }}>{heading}</h4>
+              <h4 style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "#7E8AA3", fontWeight: 600, margin: "0 0 16px" }}>{heading}</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
                 {footerNav[heading].map((l) => (
                   <Link key={l.href} href={l.href} className="amx-footlink">{l.title}</Link>
@@ -53,10 +53,10 @@ export function Footer() {
           <p style={{ margin: "0 0 6px", fontSize: 13, color: "#8A93A6" }}>
             <strong style={{ color: "#C7CEDC", fontWeight: 600 }}>{brand.company.legalName}</strong> · Company number {brand.company.number}
           </p>
-          <p style={{ margin: "0 0 18px", fontSize: 13, color: "#54607A" }}>Registered office: {brand.company.registeredOffice}</p>
+          <p style={{ margin: "0 0 18px", fontSize: 13, color: "#7E8AA3" }}>Registered office: {brand.company.registeredOffice}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 16px", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: 12.5, color: "#54607A" }}>© {year} {brand.company.legalName}. All rights reserved.</span>
-            <span style={{ fontSize: 12.5, color: "#54607A" }}>Made with care in the UK.</span>
+            <span style={{ fontSize: 12.5, color: "#7E8AA3" }}>© {year} {brand.company.legalName}. All rights reserved.</span>
+            <span style={{ fontSize: 12.5, color: "#7E8AA3" }}>Made with care in the UK.</span>
           </div>
         </div>
       </div>

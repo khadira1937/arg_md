@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { SERVICE_PACKAGES } from "@/config/marketing";
 import { Hero, HeroActions, Band, Head, Card, Grid, Feature, Cta, DISPLAY, TEAL, GOLD } from "@/components/marketing/amx-ui";
+import { CALENDLY_URL } from "@/config/cta";
 
 export const metadata: Metadata = pageMetadata({
   title: "How We Work & Pricing",
@@ -62,7 +63,7 @@ export default function PricingPage() {
                         </span>
                       ))}
                     </div>
-                    <Link href="/book-a-call" className={p.popular ? "amx-gold" : "amx-ghost"} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 7, textDecoration: "none", fontWeight: 600, fontSize: 14, padding: "12px 16px", borderRadius: 11, ...(p.popular ? { color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" } : { color: "#EEF2F9", border: "1px solid rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.02)" }) }}>
+                    <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={p.popular ? "amx-gold" : "amx-ghost"} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 7, textDecoration: "none", fontWeight: 600, fontSize: 14, padding: "12px 16px", borderRadius: 11, ...(p.popular ? { color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" } : { color: "#EEF2F9", border: "1px solid rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.02)" }) }}>
                       Get a quote
                     </Link>
                   </Card>

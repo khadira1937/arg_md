@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CALENDLY_URL, isExternal } from "@/config/cta";
 
 export function CtaSection({
   title = "Ready to grow your online presence?",
   description = "Book a free, no-pressure discovery call and we'll map out the right plan for your business — websites, marketing, design, content or support.",
-  primaryHref = "/book-a-call",
+  primaryHref = CALENDLY_URL,
   primaryLabel = "Book a Call",
   secondaryHref = "/contact",
   secondaryLabel = "Request a Quote",
@@ -29,7 +30,7 @@ export function CtaSection({
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{description}</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" variant="gradient">
-              <Link href={primaryHref}>{primaryLabel} <ArrowRight className="h-4 w-4" /></Link>
+              <Link href={primaryHref} {...(isExternal(primaryHref) ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{primaryLabel} <ArrowRight className="h-4 w-4" /></Link>
             </Button>
             <Button asChild size="lg" variant="glass">
               <Link href={secondaryHref}>{secondaryLabel}</Link>
