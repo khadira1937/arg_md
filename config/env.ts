@@ -58,6 +58,15 @@ const envSchema = z.object({
   NAMECHEAP_API_BASE_URL: z.string().optional().default("https://api.namecheap.com/xml.response"),
 });
 
+// On Vercel with the Supabase/Postgres integration, the pooled connection is
+// provided as POSTGRES_PRISMA_URL (and the direct one as POSTGRES_URL_NON_POOLING).
+// Map it onto DATABASE_URL — the name Prisma's schema reads — so the app works
+// without manually adding a DATABASE_URL variable. Local dev sets DATABASE_URL
+// directly, so this is a no-op there.
+if (!process.env.DATABASE_URL && process.env.POSTGRES_PRISMA_URL) {
+  process.env.DATABASE_URL = process.env.POSTGRES_PRISMA_URL;
+}
+
 const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
