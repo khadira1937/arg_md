@@ -59,12 +59,13 @@ const envSchema = z.object({
 });
 
 // On Vercel with the Supabase/Postgres integration, the pooled connection is
-// provided as POSTGRES_PRISMA_URL (and the direct one as POSTGRES_URL_NON_POOLING).
-// Map it onto DATABASE_URL — the name Prisma's schema reads — so the app works
-// without manually adding a DATABASE_URL variable. Local dev sets DATABASE_URL
-// directly, so this is a no-op there.
-if (!process.env.DATABASE_URL && process.env.POSTGRES_PRISMA_URL) {
-  process.env.DATABASE_URL = process.env.POSTGRES_PRISMA_URL;
+// provided as POSTGRES_PRISMA_URL. Map it onto DATABASE_URL (the name Prisma's
+// schema reads) when DATABASE_URL is missing OR is a leftover localhost value
+// (e.g. copied from a local .env) that can't be reached from Vercel. Local dev
+// sets only DATABASE_URL and has no POSTGRES_PRISMA_URL, so this is a no-op there.
+const pooledDbUrl = process.env.POSTGRES_PRISMA_URL;
+if (pooledDbUrl && (!process.env.DATABASE_URL || /localhost|127\.0\.0\.1/.test(process.env.DATABASE_URL))) {
+  process.env.DATABASE_URL = pooledDbUrl;
 }
 
 const parsed = envSchema.safeParse(process.env);
