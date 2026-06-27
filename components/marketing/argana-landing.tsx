@@ -195,6 +195,9 @@ const CSS = `
   .am-btn-ghost:hover { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.28) !important; }
   .am-port:hover .am-port-img { transform: scale(1.06); }
   .am-port:hover .am-port-arrow { transform: translate(4px,-4px); opacity:1; }
+  .am-why-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width: 900px) { .am-why-cards { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width: 560px) { .am-why-cards { grid-template-columns:1fr; } }
   @media (max-width: 980px) {
     .am-root [data-desktopnav] { display: none !important; }
     .am-root [data-burger] { display: inline-flex !important; }
@@ -407,16 +410,19 @@ function pageHTML() {
 <!-- WHY -->
 <section id="why" style="position:relative; padding:clamp(70px,9vh,120px) 0; border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); background:linear-gradient(180deg, rgba(255,255,255,0.012), transparent);">
   <div style="max-width:1280px; margin:0 auto; padding:0 28px;">
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:48px; align-items:start;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:52px; align-items:center; margin-bottom:60px;">
       <div data-reveal="1">
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;"><span style="width:28px; height:1.5px; background:linear-gradient(90deg,#35E0E8,#F3CD86);"></span><span style="font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:#F3CD86; font-weight:600;">Why ARGANA MEDIA</span></div>
         <h2 style="font-family:'Clash Display'; font-weight:600; font-size:clamp(30px,4.4vw,50px); line-height:1.07; letter-spacing:-0.02em; margin:0; color:#F4F7FC;">A media-first partner that actually delivers</h2>
-        <p style="margin:20px 0 0; font-size:16.5px; line-height:1.6; color:#A7B0C2;">We combine creative thinking with technical delivery — strategy, content, design, build and support working together, not in silos. Built for small businesses, startups and growing brands.</p>
-        <img src="/why-argana-team.webp" alt="A creative team collaborating on a project strategy in a modern office" width="461" height="257" loading="lazy" decoding="async" style="width:100%; height:auto; margin-top:32px; border-radius:18px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 30px 70px -35px rgba(0,0,0,.85); display:block;" />
+        <p style="margin:20px 0 0; font-size:16.5px; line-height:1.6; color:#A7B0C2; max-width:520px;">We combine creative thinking with technical delivery — strategy, content, design, build and support working together, not in silos. Built for small businesses, startups and growing brands.</p>
       </div>
-      <div data-reveal="1" data-reveal-delay="100" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;">
-        ${whyUs.map((w) => `<div class="am-card-svc" style="padding:24px 22px; border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.025);"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:rgba(53,224,232,0.1); color:#35E0E8; margin-bottom:16px;">${w.icon}</span><h3 style="font-family:'Clash Display'; font-weight:500; font-size:18px; margin:0 0 8px; color:#EEF2F9;">${w.title}</h3><p style="margin:0; font-size:14px; line-height:1.55; color:#8A93A6;">${w.body}</p></div>`).join("")}
+      <div data-reveal="1" data-reveal-delay="100" style="position:relative;">
+        <div style="position:absolute; inset:-24px; background:radial-gradient(circle at 65% 40%, rgba(53,224,232,0.14), transparent 65%); pointer-events:none;"></div>
+        <img src="/why-argana-media.webp" alt="A creative team collaborating in a strategy meeting" width="1400" height="788" loading="lazy" decoding="async" style="position:relative; width:100%; aspect-ratio:3/2; object-fit:cover; display:block; border-radius:20px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 40px 90px -45px rgba(0,0,0,.9);" />
       </div>
+    </div>
+    <div data-reveal="1" data-reveal-delay="80" class="am-why-cards">
+      ${whyUs.map((w) => `<div class="am-card-svc" style="padding:24px 22px; border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.025);"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:rgba(53,224,232,0.1); color:#35E0E8; margin-bottom:16px;">${w.icon}</span><h3 style="font-family:'Clash Display'; font-weight:500; font-size:18px; margin:0 0 8px; color:#EEF2F9;">${w.title}</h3><p style="margin:0; font-size:14px; line-height:1.55; color:#8A93A6;">${w.body}</p></div>`).join("")}
     </div>
   </div>
 </section>
@@ -499,7 +505,7 @@ function pageHTML() {
     </div>
     <div data-reveal="1" data-reveal-delay="100" style="position:relative;">
       <div style="position:absolute; inset:-30px; background:radial-gradient(circle at 60% 35%, rgba(53,224,232,0.16), transparent 65%); pointer-events:none;"></div>
-      <img src="/client-workspace.webp" alt="A professional managing projects on a laptop in a calm, modern workspace" width="612" height="408" loading="lazy" decoding="async" style="position:relative; width:100%; height:auto; display:block; border-radius:24px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 50px 100px -40px rgba(0,0,0,.9);" />
+      <img src="/client-media-workspace.webp" alt="A professional managing projects on a laptop in a calm, modern workspace" width="1200" height="802" loading="lazy" decoding="async" style="position:relative; width:100%; height:auto; display:block; border-radius:24px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 50px 100px -40px rgba(0,0,0,.9);" />
     </div>
   </div>
 </section>
