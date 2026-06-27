@@ -78,10 +78,10 @@ const MEGA: MegaCol[] = [
 ];
 
 const NAV_LEFT: [string, string][] = [["Home", "/"], ["About", "/about"]];
-const NAV_RIGHT: [string, string][] = [["Portfolio", "/portfolio"], ["Blog", "/blog"], ["Contact", "/contact"]];
+const NAV_RIGHT: [string, string][] = [["What We Build", "/what-we-build"], ["Blog", "/blog"], ["Contact", "/contact"]];
 const MOBILE_LINKS: [string, string][] = [
   ["Home", "/"], ["About", "/about"], ["Services", "/services"],
-  ["Portfolio", "/portfolio"], ["Blog", "/blog"], ["Contact", "/contact"],
+  ["What We Build", "/what-we-build"], ["Blog", "/blog"], ["Contact", "/contact"],
 ];
 
 function Brand({ onClick }: { onClick?: () => void }) {

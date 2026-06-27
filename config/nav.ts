@@ -194,7 +194,7 @@ export const mainNav: NavItem[] = [
       label: "Book a call",
     },
   },
-  { title: "Portfolio", href: "/portfolio" },
+  { title: "What We Build", href: "/what-we-build" },
   { title: "Blog", href: "/blog" },
   { title: "Contact", href: "/contact" },
 ];
@@ -210,7 +210,7 @@ export const footerNav = {
   ],
   Company: [
     { title: "About", href: "/about" },
-    { title: "Portfolio", href: "/portfolio" },
+    { title: "What We Build", href: "/what-we-build" },
     { title: "Blog", href: "/blog" },
     { title: "Contact", href: "/contact" },
     { title: "Book a Call", href: "/book-a-call" },

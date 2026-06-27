@@ -160,7 +160,7 @@ const footerServices: [string, string][] = [
 ];
 const footerCompany: [string, string][] = [
   ["About", "/about"],
-  ["Portfolio", "/portfolio"],
+  ["What We Build", "/what-we-build"],
   ["Blog", "/blog"],
   ["Contact", "/contact"],
   ["Book a Call", "/book-a-call"],
@@ -336,7 +336,7 @@ function pageHTML() {
           </div>
         </div>
       </div>
-      <a href="/portfolio" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">Portfolio</a>
+      <a href="/what-we-build" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">What We Build</a>
       <a href="/blog" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">Blog</a>
       <a href="/contact" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">Contact</a>
     </div>
@@ -355,7 +355,7 @@ function pageHTML() {
 
 <!-- MOBILE PANEL -->
 <div id="am-mobile" style="position:fixed; inset:0; z-index:55; background:rgba(7,11,20,0.97); backdrop-filter:blur(18px); padding:96px 28px 40px; display:none; flex-direction:column; gap:6px;">
-  ${[["Home", "#top"], ["About", "/about"], ["Services", "/services"], ["Portfolio", "/portfolio"], ["Blog", "/blog"], ["Contact", "/contact"]].map(([t, h]) => `<a href="${h}" data-close="1" style="text-decoration:none; color:#EEF2F9; font-family:'Clash Display'; font-weight:500; font-size:24px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07);">${t}</a>`).join("")}
+  ${[["Home", "#top"], ["About", "/about"], ["Services", "/services"], ["What We Build", "/what-we-build"], ["Blog", "/blog"], ["Contact", "/contact"]].map(([t, h]) => `<a href="${h}" data-close="1" style="text-decoration:none; color:#EEF2F9; font-family:'Clash Display'; font-weight:500; font-size:24px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07);">${t}</a>`).join("")}
   <div style="display:flex; gap:12px; margin-top:22px;">
     <a href="/dashboard" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#EEF2F9; font-weight:600; padding:14px; border:1px solid rgba(255,255,255,.16); border-radius:12px;">Client Portal</a>
     <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#0A0E18; font-weight:600; padding:14px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E);">Book a Call</a>
