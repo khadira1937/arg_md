@@ -17,6 +17,11 @@ import {
   X,
   ArrowRight,
   Phone,
+  Newspaper,
+  FolderOpen,
+  LayoutGrid,
+  BookOpen,
+  Search,
   type LucideIcon,
 } from "lucide-react";
 
@@ -78,10 +83,16 @@ const MEGA: MegaCol[] = [
 ];
 
 const NAV_LEFT: [string, string][] = [["Home", "/"], ["About", "/about"]];
-const NAV_RIGHT: [string, string][] = [["What We Build", "/what-we-build"], ["Blog", "/blog"], ["Contact", "/contact"]];
+const KH_MENU: [string, string, LucideIcon, string][] = [
+  ["Insights", "/knowledge-hub", Newspaper, "Articles & analysis"],
+  ["Case Studies", "/case-studies", FolderOpen, "Real project write-ups"],
+  ["Categories", "/knowledge-hub#categories", LayoutGrid, "Browse by topic"],
+  ["Guides", "/knowledge-hub#guides", BookOpen, "In-depth walkthroughs"],
+  ["Search", "/knowledge-hub/search", Search, "Find a resource"],
+];
 const MOBILE_LINKS: [string, string][] = [
   ["Home", "/"], ["About", "/about"], ["Services", "/services"],
-  ["What We Build", "/what-we-build"], ["Blog", "/blog"], ["Contact", "/contact"],
+  ["What We Build", "/what-we-build"], ["Knowledge Hub", "/knowledge-hub"], ["Case Studies", "/case-studies"], ["Contact", "/contact"],
 ];
 
 function Brand({ onClick }: { onClick?: () => void }) {
@@ -98,6 +109,7 @@ function Brand({ onClick }: { onClick?: () => void }) {
 
 export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: number }) {
   const [servicesOpen, setServicesOpen] = React.useState(false);
+  const [khOpen, setKhOpen] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const portalHref = user ? "/dashboard" : "/login";
 
@@ -155,9 +167,39 @@ export function Navbar({ user, cartCount = 0 }: { user?: NavUser; cartCount?: nu
               </div>
             </div>
 
-            {NAV_RIGHT.map(([t, h]) => (
-              <Link key={t} href={h} className="amx-navlink">{t}</Link>
-            ))}
+            <Link href="/what-we-build" className="amx-navlink">What We Build</Link>
+
+            {/* Knowledge Hub dropdown */}
+            <div style={{ position: "relative" }} onMouseEnter={() => setKhOpen(true)} onMouseLeave={() => setKhOpen(false)}>
+              <Link href="/knowledge-hub" className="amx-navlink" style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+                Knowledge Hub
+                <ChevronDown size={13} strokeWidth={2.5} style={{ transition: "transform .2s", transform: khOpen ? "rotate(180deg)" : "none" }} />
+              </Link>
+              <div
+                style={{
+                  position: "absolute", top: "100%", left: "50%", paddingTop: 18,
+                  transform: `translateX(-50%) translateY(${khOpen ? "0" : "8px"})`,
+                  opacity: khOpen ? 1 : 0, visibility: khOpen ? "visible" : "hidden",
+                  transition: "opacity .22s ease, transform .22s ease, visibility .22s",
+                }}
+              >
+                <div style={{ width: 320, background: "rgba(13,18,30,0.97)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 18, padding: 10, boxShadow: "0 30px 70px -24px rgba(0,0,0,.85)" }}>
+                  {KH_MENU.map(([label, href, Icon, desc]) => (
+                    <Link key={href} href={href} className="amx-khitem" onClick={() => setKhOpen(false)} style={{ display: "flex", gap: 12, alignItems: "center", padding: "11px 12px", borderRadius: 12, textDecoration: "none" }}>
+                      <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(53,224,232,0.1)", color: "#35E0E8", flexShrink: 0 }}>
+                        <Icon size={17} strokeWidth={1.8} />
+                      </span>
+                      <span style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={{ color: "#EEF2F9", fontSize: 14, fontWeight: 600, fontFamily: "'Clash Display'" }}>{label}</span>
+                        <span style={{ color: "#8A93A6", fontSize: 12 }}>{desc}</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <Link href="/contact" className="amx-navlink">Contact</Link>
           </div>
 
           {/* Right actions */}

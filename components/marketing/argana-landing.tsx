@@ -161,7 +161,8 @@ const footerServices: [string, string][] = [
 const footerCompany: [string, string][] = [
   ["About", "/about"],
   ["What We Build", "/what-we-build"],
-  ["Blog", "/blog"],
+  ["Knowledge Hub", "/knowledge-hub"],
+  ["Case Studies", "/case-studies"],
   ["Contact", "/contact"],
   ["Book a Call", "/book-a-call"],
   ["Client Portal", "/dashboard"],
@@ -337,7 +338,14 @@ function pageHTML() {
         </div>
       </div>
       <a href="/what-we-build" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">What We Build</a>
-      <a href="/blog" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">Blog</a>
+      <div class="am-dd-wrap" style="position:relative;">
+        <a href="/knowledge-hub" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500; display:inline-flex; align-items:center; gap:5px;">Knowledge Hub<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></a>
+        <div class="am-dd" style="position:absolute; top:100%; right:0; padding-top:18px;">
+          <div style="width:320px; background:rgba(13,18,30,0.94); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.09); border-radius:18px; padding:10px; box-shadow:0 30px 70px -24px rgba(0,0,0,.85);">
+            ${[["Insights", "/knowledge-hub", "Articles & analysis", '<path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/>'], ["Case Studies", "/case-studies", "Real project write-ups", '<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/>'], ["Categories", "/knowledge-hub#categories", "Browse by topic", '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>'], ["Guides", "/knowledge-hub#guides", "In-depth walkthroughs", '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'], ["Search", "/knowledge-hub/search", "Find a resource", '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>']].map((it) => `<a href="${it[1]}" style="display:flex; gap:12px; align-items:center; padding:11px 12px; border-radius:12px; text-decoration:none;" onmouseover="this.style.background='rgba(255,255,255,.05)'" onmouseout="this.style.background='transparent'"><span style="display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:rgba(53,224,232,0.1); color:#35E0E8; flex-shrink:0;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${it[3]}</svg></span><span style="display:flex; flex-direction:column;"><span style="color:#EEF2F9; font-size:14px; font-weight:600; font-family:'Clash Display';">${it[0]}</span><span style="color:#8A93A6; font-size:12px;">${it[2]}</span></span></a>`).join("")}
+          </div>
+        </div>
+      </div>
       <a href="/contact" class="am-link" style="text-decoration:none; color:#C7CEDC; font-size:14.5px; font-weight:500;">Contact</a>
     </div>
     <div style="display:flex; align-items:center; gap:14px; flex-shrink:0;">
@@ -355,7 +363,7 @@ function pageHTML() {
 
 <!-- MOBILE PANEL -->
 <div id="am-mobile" style="position:fixed; inset:0; z-index:55; background:rgba(7,11,20,0.97); backdrop-filter:blur(18px); padding:96px 28px 40px; display:none; flex-direction:column; gap:6px;">
-  ${[["Home", "#top"], ["About", "/about"], ["Services", "/services"], ["What We Build", "/what-we-build"], ["Blog", "/blog"], ["Contact", "/contact"]].map(([t, h]) => `<a href="${h}" data-close="1" style="text-decoration:none; color:#EEF2F9; font-family:'Clash Display'; font-weight:500; font-size:24px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07);">${t}</a>`).join("")}
+  ${[["Home", "#top"], ["About", "/about"], ["Services", "/services"], ["What We Build", "/what-we-build"], ["Knowledge Hub", "/knowledge-hub"], ["Case Studies", "/case-studies"], ["Contact", "/contact"]].map(([t, h]) => `<a href="${h}" data-close="1" style="text-decoration:none; color:#EEF2F9; font-family:'Clash Display'; font-weight:500; font-size:24px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07);">${t}</a>`).join("")}
   <div style="display:flex; gap:12px; margin-top:22px;">
     <a href="/dashboard" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#EEF2F9; font-weight:600; padding:14px; border:1px solid rgba(255,255,255,.16); border-radius:12px;">Client Portal</a>
     <a href="${CALENDLY}" target="_blank" rel="noopener noreferrer" data-close="1" style="flex:1; text-align:center; text-decoration:none; color:#0A0E18; font-weight:600; padding:14px; border-radius:12px; background:linear-gradient(135deg,#F6D79A,#E3A94E);">Book a Call</a>

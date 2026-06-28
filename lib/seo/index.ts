@@ -73,7 +73,7 @@ export function websiteJsonLd() {
     url: siteConfig.url,
     potentialAction: {
       "@type": "SearchAction",
-      target: `${siteConfig.url}/knowledge-base?q={search_term_string}`,
+      target: `${siteConfig.url}/knowledge-hub/search?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
@@ -137,6 +137,48 @@ export function faqJsonLd(faqs: { question: string; answer: string }[]) {
       "@type": "Question",
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+}
+
+export function articleJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  authorName?: string;
+  section?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: input.title,
+    description: input.description,
+    ...(input.image ? { image: [`${siteConfig.url}${input.image}`] } : {}),
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${siteConfig.url}${input.path}` },
+    author: { "@type": "Organization", name: input.authorName ?? brand.name },
+    publisher: {
+      "@type": "Organization",
+      name: brand.name,
+      logo: { "@type": "ImageObject", url: `${siteConfig.url}/argana_media_logo_concept_2.png` },
+    },
+    ...(input.datePublished ? { datePublished: input.datePublished } : {}),
+    ...(input.dateModified ? { dateModified: input.dateModified } : {}),
+    ...(input.section ? { articleSection: input.section } : {}),
+  };
+}
+
+export function itemListJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: `${siteConfig.url}${it.path}`,
     })),
   };
 }

@@ -195,7 +195,7 @@ export const mainNav: NavItem[] = [
     },
   },
   { title: "What We Build", href: "/what-we-build" },
-  { title: "Blog", href: "/blog" },
+  { title: "Knowledge Hub", href: "/knowledge-hub" },
   { title: "Contact", href: "/contact" },
 ];
 
@@ -211,7 +211,8 @@ export const footerNav = {
   Company: [
     { title: "About", href: "/about" },
     { title: "What We Build", href: "/what-we-build" },
-    { title: "Blog", href: "/blog" },
+    { title: "Knowledge Hub", href: "/knowledge-hub" },
+    { title: "Case Studies", href: "/case-studies" },
     { title: "Contact", href: "/contact" },
     { title: "Book a Call", href: "/book-a-call" },
     { title: "Client Portal", href: "/dashboard" },
