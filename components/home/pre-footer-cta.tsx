@@ -4,10 +4,10 @@ import { ArrowRight, ArrowUpRight, PhoneCall } from "lucide-react";
 import { FadeUp } from "./fade-up";
 
 /**
- * Pre-footer CTA — solid black band that sits between Stats / Forward-Deployed
+ * Pre-footer CTA — solid black band that sits between the principles section
  * and the site footer. Two hover-image cards on top (What We Build + Start a
- * Conversation), then a large centred "Speak to a Deployment Specialist" call
- * with the Book a Call burnt-orange primary CTA — accent #1.
+ * Conversation), then a large centred "Let's talk about what you're building."
+ * call with the Book a Call burnt-orange primary CTA — accent #1.
  */
 const CALENDLY = "https://calendly.com/arganamedia";
 
@@ -28,7 +28,7 @@ const CARDS = [
     eyebrow: "Start a conversation",
     title: "Book a working call",
     body:
-      "Tell us what you're building. 30 minutes, no pitch, plain answers — and a clear next step you can act on.",
+      "Tell us what you're building. 30 minutes, no pitch, plain answers.",
     href: CALENDLY,
     external: true,
     image: {
@@ -94,11 +94,10 @@ export function PreFooterCta() {
         </ul>
 
         <FadeUp index={3} className="mx-auto mt-24 max-w-3xl text-center sm:mt-32">
-          <p className="am-label-caps text-white/55">Solve your commercial challenges</p>
-          <h2 className="am-headline-md mt-6 text-white">Speak to a Deployment Specialist</h2>
+          <p className="am-label-caps text-white/55">Get in touch</p>
+          <h2 className="am-headline-md mt-6 text-white">Let&apos;s talk about what you&apos;re building.</h2>
           <p className="am-body-lg mx-auto mt-6 max-w-xl text-white/70">
-            30 minutes with someone who&apos;s built this before — no slide deck, no pitch.
-            Tell us where you want to be, and we&apos;ll show you the shortest line to it.
+            30-minute call. We&apos;ll listen first, then tell you honestly whether we&apos;re the right team for it.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a

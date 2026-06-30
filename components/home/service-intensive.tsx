@@ -2,18 +2,16 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Play, Star, ArrowUpRight } from "lucide-react";
+import { Play, ArrowUpRight } from "lucide-react";
 import { serviceIntensive } from "@/data/home";
 import { industries } from "@/data/industries";
 import { FadeUp } from "./fade-up";
 
 /**
- * Light "Service-Intensive Software" band. Industry tab strip across the top
- * (active tab uses burnt-orange underline — accent #3). Clicking a tab swaps
- * both the hero image AND the testimonial overlay together. The four starred
- * mini-reviews below stay static — they're cross-industry social proof.
- *
- * The stars are amber/ink (not burnt-orange) to keep the accent rationed.
+ * Light "Who we work with" band. Sector tab strip across the top (active tab
+ * uses burnt-orange underline — accent #3). Clicking a tab swaps the hero
+ * image and the headline overlay together. Below the figure sits a single
+ * NDA disclaimer line — no fake testimonials, no fake stars.
  */
 export function ServiceIntensive() {
   const [active, setActive] = useState(0);
@@ -40,7 +38,7 @@ export function ServiceIntensive() {
         <FadeUp index={1}>
           <div
             role="tablist"
-            aria-label="Industries"
+            aria-label="Sectors"
             className="mb-12 flex flex-wrap gap-x-10 gap-y-3 border-b border-[color:var(--argana-outline-variant)] pb-2"
           >
             {industries.map((tab, i) => (
@@ -80,41 +78,25 @@ export function ServiceIntensive() {
             <div aria-hidden className="absolute inset-0 bg-black/30" />
             <button
               type="button"
-              aria-label="Play customer story"
+              aria-label="Play sector intro"
               className="absolute left-1/2 top-1/2 inline-flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition hover:bg-white/25"
             >
               <Play className="ml-1 h-7 w-7 fill-white" aria-hidden />
             </button>
             <figcaption className="absolute bottom-8 left-8 right-8 max-w-2xl text-white sm:bottom-12 sm:left-12">
-              <blockquote className="text-xl font-medium leading-snug sm:text-2xl">
-                &ldquo;{current.testimonial.quote}&rdquo;
-              </blockquote>
-              <div className="mt-5">
-                <p className="text-sm font-bold">{current.testimonial.author}</p>
-                <p className="text-xs text-white/75">{current.testimonial.role}</p>
-              </div>
+              <p className="am-label-caps text-white/70">{current.label}</p>
+              <p className="mt-3 text-xl font-medium leading-snug sm:text-2xl">
+                {current.headline}
+              </p>
             </figcaption>
           </figure>
         </FadeUp>
 
-        <ul className="mt-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {serviceIntensive.reviews.map((review, i) => (
-            <FadeUp as="li" key={review.cite} index={i + 1} className="text-center">
-              <div
-                className="mb-3 flex justify-center gap-1 text-[color:var(--argana-on-surface)]"
-                aria-label="5 out of 5 stars"
-              >
-                {Array.from({ length: 5 }).map((_, s) => (
-                  <Star key={s} className="h-4 w-4 fill-current" aria-hidden />
-                ))}
-              </div>
-              <p className="text-sm font-semibold text-[color:var(--argana-on-surface)]">
-                &ldquo;{review.quote}&rdquo;
-              </p>
-              <p className="am-label-caps mt-2 text-[color:var(--argana-outline)]">{review.cite}</p>
-            </FadeUp>
-          ))}
-        </ul>
+        <FadeUp index={3} className="py-16 text-center">
+          <p className="am-body-md text-[color:var(--argana-on-surface-muted)]">
+            Selected work — under NDA until launch. Speak to us about specific case studies.
+          </p>
+        </FadeUp>
       </div>
     </section>
   );

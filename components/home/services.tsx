@@ -49,9 +49,9 @@ function HeroMockup() {
             </svg>
           </div>
           <div>
-            <p className="text-sm font-semibold text-[color:var(--argana-on-surface)]">AI Signals</p>
+            <p className="text-sm font-semibold text-[color:var(--argana-on-surface)]">Argana Studio</p>
             <p className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--argana-on-surface-variant)]">
-              • Ticket closed
+              • Project live
             </p>
           </div>
           <div className="ml-auto inline-flex h-4 w-4 items-center justify-center rounded-full bg-[color:var(--argana-on-surface)]">
@@ -104,7 +104,7 @@ function CardMockupAgent() {
             </svg>
           </div>
           <span className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--argana-on-surface)]">
-            Agent
+            Studio
           </span>
         </div>
       </div>
@@ -131,20 +131,20 @@ function CardMockupHandover() {
       />
       <div className="relative w-full max-w-[240px]">
         <div className="mb-2 flex items-center gap-2 rounded border border-[color:var(--argana-outline-variant)] bg-white p-3">
-          <span className="text-[10px] font-bold text-[color:var(--argana-outline)]">← Handover</span>
+          <span className="text-[10px] font-bold text-[color:var(--argana-outline)]">↑ Organic Traffic</span>
         </div>
         <div className="ml-8 space-y-2 border-l-2 border-[color:var(--argana-outline-variant)] pl-4">
           <div className="flex items-center justify-between rounded border border-[color:var(--argana-outline-variant)] bg-white p-3 text-[10px] text-[color:var(--argana-on-surface)]">
-            <span>Sonnet 3.5</span>
+            <span>This quarter</span>
           </div>
           <div className="space-y-1 rounded border border-[color:var(--argana-outline-variant)] bg-white p-3 text-[10px] text-[color:var(--argana-on-surface)]">
             <div className="flex items-center gap-2">
               <span aria-hidden className="block h-2 w-2 rounded-sm bg-[color:var(--argana-on-surface)]" />
-              Analyze Conversations
+              New rankings won
             </div>
             <div className="flex items-center gap-2">
               <span aria-hidden className="block h-2 w-2 rounded-sm bg-[color:var(--argana-on-surface)]" />
-              Identify Value Drivers
+              CRO experiments shipped
             </div>
           </div>
         </div>
@@ -187,11 +187,11 @@ function CardMockupNotify() {
             </svg>
           </div>
           <span className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--argana-on-surface)]">
-            Agent
+            Care
           </span>
         </div>
         <p className="text-[10px] text-[color:var(--argana-on-surface-variant)]">
-          Usage dropped, shall we send an email?
+          Lighthouse passed. Deploy is healthy.
         </p>
       </div>
     </div>
@@ -227,6 +227,9 @@ export function Services() {
             return (
               <FadeUp as="li" key={card.title} index={i + 1}>
                 <Mockup />
+                <p className="am-label-caps mb-2 text-[color:var(--argana-burnt)]">
+                  {card.eyebrow}
+                </p>
                 <h3 className="am-headline-sm text-sm font-bold text-[color:var(--argana-on-surface)]">
                   {card.title}
                 </h3>

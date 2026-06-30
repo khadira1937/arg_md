@@ -1,9 +1,9 @@
 /**
- * Argana Media homepage content — single source of truth for the planhat-
- * inspired homepage. Each section (nav, hero, trust, services, workflow,
- * service-intensive, stats) exports its own const so components pull only
- * what they need. The site-wide footer is the shared `components/marketing/
- * footer.tsx` and is no longer authored here.
+ * Argana Media homepage content — single source of truth for the homepage.
+ * Each section (nav, hero, trust, services, workflow, service-intensive,
+ * stats) exports its own const so components pull only what they need. The
+ * site-wide footer is the shared `components/marketing/footer.tsx` and is no
+ * longer authored here.
  */
 
 export const nav = {
@@ -20,11 +20,11 @@ export const nav = {
 } as const;
 
 export const hero = {
-  eyebrow: "The agentic customer platform",
-  heading: "Deploy AI with confidence across the customer lifecycle",
-  body: "Argana Media provides B2B enterprises with forward-deployed software and services that deliver lifelong revenue growth.",
-  cta: { label: "Book a Call", href: "https://calendly.com/arganamedia" },
-  secondaryCta: { label: "What we build", href: "/what-we-build" },
+  eyebrow: "DIGITAL AGENCY · UK",
+  heading: "Websites, brands, and growth — built to be judged on.",
+  body: "Argana Media is a boutique digital studio helping UK businesses ship sites that convert, brands that hold up, and content that earns attention. Strategy, design, and engineering under one roof.",
+  cta: { label: "BOOK A CALL", href: "https://calendly.com/arganamedia" },
+  secondaryCta: { label: "SEE WHAT WE BUILD", href: "/what-we-build" },
   image: {
     src: "https://framerusercontent.com/images/ySowSd1AhLEKVSDhrToFAfbaI.webp?width=2678&height=1494",
     alt: "Argana Media — premium digital workspace",
@@ -46,71 +46,71 @@ export const trust = {
 } as const;
 
 export const services = {
-  heading: "Drive real-world outcomes by automating commercial processes",
-  body: "A comprehensive platform that empowers artificial and human intelligence to collaborate seamlessly across the entire marketing funnel.",
+  heading: "Four crafts. One team. No handoffs.",
+  body: "Strategy, design, engineering and content live in the same room — so what we ship is consistent, fast, and accountable from first brief to live site.",
   cards: [
     {
-      title: "Assemble your GTM under one roof",
-      body: "Arm your go-to-market agents, teams and tools with rich context that turns post-sale truth into pre-sales intelligence.",
+      eyebrow: "STUDIO",
+      title: "Sites that earn the click.",
+      body: "Marketing sites, product pages and bespoke web apps — designed for clarity, built for speed, owned by you.",
       mockup: "agent" as const,
     },
     {
-      title: "Deploy agents with confidence",
-      body: "Delegate processes to governed agents which execute with greater speed and precision than humanly possible.",
+      eyebrow: "GROWTH",
+      title: "Traffic that compounds.",
+      body: "SEO, content and on-page CRO grounded in evidence, not vanity metrics. We publish what moves the needle and prove it.",
       mockup: "handover" as const,
     },
     {
-      title: "Stay in the loop",
-      body: "Give your team the capability to leverage, supervise and enhance organic search outputs at scale.",
+      eyebrow: "CARE",
+      title: "Live sites, looked after.",
+      body: "Hosting, monitoring and ongoing improvements. We treat your site like a product, not a deliverable — and stay on call.",
       mockup: "notify" as const,
     },
   ],
 } as const;
 
 export const workflow = {
-  eyebrow: "Platform",
-  heading: "Deploy with confidence",
-  body: "Argana Media is architected to equip agents and humans with everything they need to execute with clarity and control.",
-  hubLabel: "Argana engine",
-  nodes: ["Context", "Training", "Input", "Collaboration", "Agents", "Execution"] as const,
+  eyebrow: "HOW WE WORK",
+  heading: "From first call to live site.",
+  body: "A short, honest process. No discovery deck theatre, no surprise scope creep — every phase has a deliverable you can review.",
+  hubLabel: "ARGANA STUDIO",
+  nodes: ["DISCOVERY", "STRATEGY", "DESIGN", "BUILD", "LAUNCH", "GROW"] as const,
   contextBox: {
-    label: "Context",
-    body: "Argana constructs a comprehensive living model of your customers and commercial operations spanning traditional CRM data, rich time series data, SOPs and external telemetry.",
+    label: "DISCOVERY",
+    body: "We start with a working session — your goals, your audience, the constraints we'll work inside. You leave with a one-page brief, a fixed timeline and a fixed quote before we write a line of code.",
   },
 } as const;
 
 export const serviceIntensive = {
-  heading: "Built for service-intensive teams",
-  body: "Argana is a system of action that empowers you to define customer outcomes, run cross-functional workflows and report on real, measurable ROI. Pick the industry closest to yours below.",
-  reviews: [
-    {
-      quote: "A perfect fit for our company and how we want to support our clients",
-      cite: "Casey, VP Strategic Initiatives",
-    },
-    {
-      quote: "Amazing CSP for agile teams",
-      cite: "Melanie, Global Customer Success Director",
-    },
-    {
-      quote: "Unlocked levels of data visibility and automation I didn't think were possible in our environment.",
-      cite: "Jarret, Senior Director of Customer Success Automation",
-    },
-    {
-      quote: "Success for your customer success team",
-      cite: "Brenda, Customer Success",
-    },
-  ],
+  heading: "Who we work with",
+  body: "Five sectors we know well. Pick the one closest to yours — the brief, the budget and the build will look different depending on where you sit.",
 } as const;
 
 export const stats = {
-  eyebrow: "Services",
-  heading: ["Don't buy hypotheticals.", "Buy outcomes."],
-  body: "Argana Media dispatches forward-deployed teams that work shoulder-to-shoulder with you to deliver real-world outcomes.",
+  eyebrow: "WHAT WE BELIEVE",
+  heading: ["Built to ship.", "Built to last."],
+  body: "We don't sell hours. We don't sell decks. We sell shipped work that earns its keep.",
   items: [
-    { value: "34%", label: "More customers per CSM" },
-    { value: "+300", label: "Hours saved annually per person" },
-    { value: "900%", label: "Seat expansion" },
-    { value: "21%", label: "Less churn" },
+    {
+      number: "01",
+      label: "Senior hands only",
+      sub: "The people who pitch the work are the people who build it. No juniors learning on your project.",
+    },
+    {
+      number: "02",
+      label: "Plain English",
+      sub: "We explain SEO, ads, and code in words you can repeat to your team. No jargon firewall.",
+    },
+    {
+      number: "03",
+      label: "Honest scope",
+      sub: "Fixed-price where we can, transparent rates where we can't. You always know what you're paying for.",
+    },
+    {
+      number: "04",
+      label: "Shipped, not finished",
+      sub: "Launch is week one, not week last. We stay close after the site goes live.",
+    },
   ],
 } as const;
-

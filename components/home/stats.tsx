@@ -2,13 +2,14 @@ import { stats } from "@/data/home";
 import { FadeUp } from "./fade-up";
 
 /**
- * Dark "Don't buy hypotheticals. Buy outcomes." stats band. Four tabular-num
- * figures laid out as a 1-pixel hairline grid (border: rgba(255,255,255,0.08)
- * separators read as gridlines on the black background).
+ * Dark "What we believe" principles band. Four numbered cells laid out as a
+ * 1-pixel hairline grid (border: rgba(255,255,255,0.08) separators read as
+ * gridlines on the black background). Each cell has a large numeral, a label,
+ * and a supporting sub line.
  */
 export function Stats() {
   return (
-    <section id="services" className="am-band-dark am-section border-t border-white/10">
+    <section id="principles" className="am-band-dark am-section border-t border-white/10">
       <div className="am-container">
         <FadeUp className="mx-auto mb-20 max-w-2xl text-center">
           <p className="am-label-caps text-white/60">{stats.eyebrow}</p>
@@ -23,8 +24,9 @@ export function Stats() {
         <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4">
           {stats.items.map((item, i) => (
             <FadeUp as="li" key={item.label} index={i + 1} className="bg-black p-12 sm:p-16">
-              <div className="tnum text-6xl font-bold tracking-tighter sm:text-7xl">{item.value}</div>
+              <div className="tnum text-6xl font-bold tracking-tighter sm:text-7xl">{item.number}</div>
               <p className="am-label-caps mt-6 text-white/50">{item.label}</p>
+              <p className="mt-3 text-[13.5px] leading-relaxed text-white/65">{item.sub}</p>
             </FadeUp>
           ))}
         </ul>

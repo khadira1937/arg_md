@@ -1,95 +1,69 @@
 /**
- * Industry tab content for the homepage Service-Intensive band. Each industry
- * supplies a label, hero image (poster) and a customer quote. Clicking a tab
- * swaps the image + testimonial together; the 4-up star reviews below stay
- * static across all tabs.
+ * Sector tab content for the homepage "Who we work with" band. Each entry
+ * supplies a label, hero image (poster), a short headline that appears in
+ * the image overlay, and a longer body paragraph that swaps top-right.
  *
- * Images are Unsplash workspace/team photography (free licence). Drop licensed
- * photography into `public/industries/*.jpg` and update `image.src` to the
- * local path when ready — see public/industries/README.md.
+ * Images are Unsplash workspace/team photography (free licence). Drop
+ * licensed photography into `public/industries/*.jpg` and update `image.src`
+ * to the local path when ready — see public/industries/README.md.
  */
 export type Industry = {
   id: string;
   label: string;
+  headline: string;
   body: string;
   image: { src: string; alt: string };
-  testimonial: { quote: string; author: string; role: string };
 };
 
 export const industries: readonly Industry[] = [
   {
-    id: "service-intensive",
-    label: "Service-Intensive Software",
-    body: "Continuously unlock the value your customers need. Argana is a system of action that empowers you to define and track customer objectives, run cross-functional workflows, and report on ROI.",
+    id: "professional-services",
+    label: "Professional Services",
+    headline: "A site that earns trust before the first call.",
+    body: "Law firms, accountants, clinics and consultancies — we build sites that signal credibility on first impression and turn researchers into enquiries. Clean copy, fast pages, the right proof in the right places.",
     image: {
       src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&q=80&auto=format&fit=crop",
-      alt: "Team collaborating in a bright meeting room",
-    },
-    testimonial: {
-      quote:
-        "We've grown from an initial base of 40 clients to just north of 280 clients that are managed digitally.",
-      author: "William Riley",
-      role: "Director of Digital Customer Success at Matillion",
+      alt: "Professional team meeting in a modern office",
     },
   },
   {
-    id: "security",
-    label: "Security",
-    body: "Standardise risk reviews, audit trails and compliance reporting in one place. Argana captures evidence as work happens so reviews stop being a fire drill.",
+    id: "saas-b2b",
+    label: "SaaS & B2B Tech",
+    headline: "Marketing sites that make the product obvious.",
+    body: "Landing pages, pricing, docs and growth pages built for B2B buyers who skim. We take a complex product and make the value land in one screen — then back it up with the depth a serious evaluator needs.",
     image: {
-      src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=80&auto=format&fit=crop",
-      alt: "Security operations centre, monitors glowing in low light",
-    },
-    testimonial: {
-      quote:
-        "Argana built our compliance reporting in three weeks. What used to take a quarter now happens on demand.",
-      author: "Sarah Chen",
-      role: "Head of InfoSec at Vaultline",
+      src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1920&q=80&auto=format&fit=crop",
+      alt: "Developer working at a screen with code editor open",
     },
   },
   {
-    id: "it-services",
-    label: "IT Services",
-    body: "Stop juggling spreadsheets across ten clients. Argana packages onboarding, renewals and quarterly business reviews into one repeatable, measurable operating system.",
+    id: "ecommerce",
+    label: "E-commerce & DTC",
+    headline: "Stores that convert without the bloat.",
+    body: "Storefronts, product pages and checkout flows built for speed and conversion. We strip the plugin sprawl, fix the page-speed score, and design product detail pages people actually buy from.",
     image: {
-      src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80&auto=format&fit=crop",
-      alt: "Modern office workspace seen through a glass partition",
-    },
-    testimonial: {
-      quote:
-        "They standardised our entire client onboarding flow. New engagements now start the same way every time — and we can prove it.",
-      author: "James Patel",
-      role: "COO at Northwave IT",
+      src: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1920&q=80&auto=format&fit=crop",
+      alt: "Curated product flatlay shot from above",
     },
   },
   {
-    id: "healthcare",
-    label: "Healthcare & Life Sciences",
-    body: "Move sensitive work out of email and into a system designed for it. Patient portals, study coordination and clinic operations — built to the regulatory bar from day one.",
+    id: "hospitality-lifestyle",
+    label: "Hospitality & Lifestyle",
+    headline: "Brands that feel as good as the place itself.",
+    body: "Restaurants, hotels, studios and lifestyle brands — sites that match the room. Photography-first design, frictionless bookings, and a brand identity that holds up across menu, signage and Instagram.",
     image: {
-      src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80&auto=format&fit=crop",
-      alt: "Clinician reviewing data on a tablet in a healthcare setting",
-    },
-    testimonial: {
-      quote:
-        "Argana built our patient portal end-to-end. On time, on spec, and our patients actually use it.",
-      author: "Dr. Lina Marsh",
-      role: "CMO at Helix Health",
+      src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=80&auto=format&fit=crop",
+      alt: "Warm interior of a boutique hospitality space",
     },
   },
   {
-    id: "connected",
-    label: "Connected Businesses",
-    body: "When your operation lives across stores, sites and partners, one source of truth changes everything. Argana joins the dots so leaders see the whole picture in one place.",
+    id: "property-trades",
+    label: "Property & Trades",
+    headline: "Lead-generation sites built to fill the diary.",
+    body: "Estate agents, builders, contractors and specialist trades. Clear service pages, real project galleries, and quote forms that route straight to the people who answer the phone — so the calendar stays full.",
     image: {
-      src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1920&q=80&auto=format&fit=crop",
-      alt: "Team gathered around a screen reviewing operations data",
-    },
-    testimonial: {
-      quote:
-        "Real partners, not vendors. We extended the contract twice — and the results spoke for themselves.",
-      author: "Tom Aldridge",
-      role: "CEO at Loopwork",
+      src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80&auto=format&fit=crop",
+      alt: "Construction site at dusk with cranes against the skyline",
     },
   },
 ] as const;
