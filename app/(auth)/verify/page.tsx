@@ -2,30 +2,45 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { verifyEmailAction } from "@/app/actions/auth";
-import { Button } from "@/components/ui/button";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({ title: "Verify email", path: "/verify", noIndex: true });
+
+const headingStyle = {
+  fontFamily: "var(--font-hanken), ui-sans-serif, system-ui, sans-serif",
+  fontWeight: 600,
+  fontSize: 24,
+  letterSpacing: "-0.01em",
+  margin: "16px 0 0",
+  color: "var(--argana-on-surface)",
+} as const;
+
+const subStyle = {
+  margin: "10px 0 0",
+  fontSize: 14.5,
+  lineHeight: 1.5,
+  color: "var(--argana-on-surface-muted)",
+} as const;
 
 export default async function VerifyPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
   const { token } = await searchParams;
   const ok = token ? await verifyEmailAction(token) : false;
 
   return (
-    <div className="text-center">
+    <div style={{ textAlign: "center" }}>
       {ok ? (
         <>
-          <CheckCircle2 className="mx-auto h-12 w-12 text-success" />
-          <h1 className="mt-4 text-xl font-bold">Email verified</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Your email address is confirmed. You're all set.</p>
-          <Button asChild variant="gradient" className="mt-6"><Link href="/dashboard">Go to dashboard</Link></Button>
+          <CheckCircle2 style={{ width: 48, height: 48, margin: "0 auto", color: "var(--argana-burnt)" }} />
+          <h1 style={headingStyle}>Email verified</h1>
+          <p style={subStyle}>Your email address is confirmed. You&apos;re all set.</p>
+          <Link href="/dashboard" className="am-cta" style={{ marginTop: 24 }}>Go to dashboard</Link>
         </>
       ) : (
         <>
-          <XCircle className="mx-auto h-12 w-12 text-destructive" />
-          <h1 className="mt-4 text-xl font-bold">Verification failed</h1>
-          <p className="mt-2 text-sm text-muted-foreground">This link is invalid or has expired.</p>
-          <Button asChild variant="outline" className="mt-6"><Link href="/dashboard">Back to dashboard</Link></Button>
+          <XCircle style={{ width: 48, height: 48, margin: "0 auto", color: "var(--argana-burnt)" }} />
+          <h1 style={headingStyle}>Verification failed</h1>
+          <p style={subStyle}>This link is invalid or has expired.</p>
+          <Link href="/dashboard" className="am-cta-ghost-light" style={{ marginTop: 24, display: "inline-flex" }}>Back to dashboard</Link>
         </>
       )}
     </div>

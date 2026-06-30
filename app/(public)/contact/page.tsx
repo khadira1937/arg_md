@@ -35,26 +35,26 @@ export default function ContactPage() {
               <a key={m.title} href={m.href} className="amx-card" style={{ display: "flex", alignItems: "center", gap: 14, padding: 18, borderRadius: 16, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", textDecoration: "none" }}>
                 <span style={{ display: "grid", placeItems: "center", width: 42, height: 42, borderRadius: 12, background: "rgba(53,224,232,0.1)", color: TEAL }}><m.icon size={19} strokeWidth={1.8} /></span>
                 <span>
-                  <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: "#EEF2F9" }}>{m.title}</span>
-                  <span style={{ display: "block", fontSize: 13, color: "#8A93A6" }}>{m.value}</span>
+                  <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--argana-on-surface)" }}>{m.title}</span>
+                  <span style={{ display: "block", fontSize: 13, color: "var(--argana-on-surface-muted)" }}>{m.value}</span>
                 </span>
               </a>
             ))}
             <Card hover={false} style={{ display: "flex", alignItems: "flex-start", gap: 14, padding: 18 }}>
               <span style={{ display: "grid", placeItems: "center", width: 42, height: 42, flexShrink: 0, borderRadius: 12, background: "rgba(243,205,134,0.12)", color: "#F3CD86" }}><MapPin size={19} strokeWidth={1.8} /></span>
               <span>
-                <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: "#EEF2F9" }}>Registered office</span>
-                <span style={{ display: "block", fontSize: 13, lineHeight: 1.5, color: "#8A93A6" }}>{brand.company.registeredOffice}</span>
+                <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: "var(--argana-on-surface)" }}>Registered office</span>
+                <span style={{ display: "block", fontSize: 13, lineHeight: 1.5, color: "var(--argana-on-surface-muted)" }}>{brand.company.registeredOffice}</span>
               </span>
             </Card>
-            <p style={{ display: "flex", alignItems: "center", gap: 8, margin: "4px 2px 0", fontSize: 12.5, color: "#8A93A6" }}>
+            <p style={{ display: "flex", alignItems: "center", gap: 8, margin: "4px 2px 0", fontSize: 12.5, color: "var(--argana-on-surface-muted)" }}>
               <Clock size={14} /> We reply Mon–Fri · 9am–6pm UK time
             </p>
           </div>
 
           {/* Right: form */}
           <Card hover={false} style={{ padding: "28px 26px", gridColumn: "span 1" }}>
-            <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 22, margin: "0 0 18px", color: "#F4F7FC" }}>Send us a message</h2>
+            <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 22, margin: "0 0 18px", color: "var(--argana-on-surface)" }}>Send us a message</h2>
             <ContactForm subjectLabel="How can we help?" messageLabel="Your message" submitLabel="Send message" />
           </Card>
         </div>

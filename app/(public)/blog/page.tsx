@@ -27,14 +27,14 @@ export default async function BlogPage() {
 
       <Band>
         {posts.length === 0 ? (
-          <p style={{ textAlign: "center", color: "#8A93A6" }}>No posts yet — check back soon.</p>
+          <p style={{ textAlign: "center", color: "var(--argana-on-surface-muted)" }}>No posts yet — check back soon.</p>
         ) : (
           <Grid min={300} gap={18}>
             {posts.map((post) => (
               <Link key={post.id} href={`/blog/${post.slug}`} className="amx-card" style={{ display: "flex", flexDirection: "column", height: "100%", padding: 26, borderRadius: 18, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", textDecoration: "none" }}>
-                <p style={{ margin: 0, fontSize: 12, color: "#7E8AA3" }}>{post.publishedAt?.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</p>
-                <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "10px 0 0", color: "#F4F7FC" }}>{post.title}</h2>
-                {post.excerpt && <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.55, color: "#8A93A6", flex: 1 }}>{post.excerpt}</p>}
+                <p style={{ margin: 0, fontSize: 12, color: "var(--argana-outline)" }}>{post.publishedAt?.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</p>
+                <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "10px 0 0", color: "var(--argana-on-surface)" }}>{post.title}</h2>
+                {post.excerpt && <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.55, color: "var(--argana-on-surface-muted)", flex: 1 }}>{post.excerpt}</p>}
                 <span style={{ marginTop: 18, display: "inline-flex", alignItems: "center", gap: 7, fontSize: 14, fontWeight: 600, color: GOLD }}>Read more <ArrowRight size={15} /></span>
               </Link>
             ))}

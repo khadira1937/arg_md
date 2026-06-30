@@ -45,7 +45,7 @@ export function ServicePage({ slug }: { slug: string }) {
             <span style={{ display: "grid", placeItems: "center", width: 22, height: 22, borderRadius: 7, background: "linear-gradient(135deg,#35E0E8,#F3CD86)", color: "#0A0E18" }}>
               <Icon size={13} strokeWidth={2} />
             </span>
-            <span style={{ fontSize: 12.5, letterSpacing: "0.05em", color: "#C7CEDC", fontWeight: 500 }}>ARGANA MEDIA Service</span>
+            <span style={{ fontSize: 12.5, letterSpacing: "0.05em", color: "var(--argana-on-surface)", fontWeight: 500 }}>ARGANA MEDIA Service</span>
           </span>
         }
         actions={
@@ -58,7 +58,7 @@ export function ServicePage({ slug }: { slug: string }) {
 
       {/* Intro */}
       <Band max={860} pad="clamp(48px,7vh,80px)">
-        <p style={{ margin: 0, textAlign: "center", fontSize: "clamp(16px,1.8vw,19px)", lineHeight: 1.65, color: "#C2CBDB" }}>{d.intro}</p>
+        <p style={{ margin: 0, textAlign: "center", fontSize: "clamp(16px,1.8vw,19px)", lineHeight: 1.65, color: "var(--argana-on-surface-muted)" }}>{d.intro}</p>
       </Band>
 
       {/* Rich content sections */}
@@ -68,9 +68,9 @@ export function ServicePage({ slug }: { slug: string }) {
             {d.sections.map((s) => (
               <div key={s.title}>
                 <span style={{ display: "inline-block", width: 34, height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${TEAL}, ${GOLD})`, marginBottom: 18 }} />
-                <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: "clamp(24px,3.4vw,34px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0, color: "#F4F7FC" }}>{s.title}</h2>
+                <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: "clamp(24px,3.4vw,34px)", lineHeight: 1.1, letterSpacing: "-0.02em", margin: 0, color: "var(--argana-on-surface)" }}>{s.title}</h2>
                 {s.body.map((p, i) => (
-                  <p key={i} style={{ margin: "16px 0 0", fontSize: 16.5, lineHeight: 1.7, color: "#A7B0C2" }}>{p}</p>
+                  <p key={i} style={{ margin: "16px 0 0", fontSize: 16.5, lineHeight: 1.7, color: "var(--argana-on-surface-muted)" }}>{p}</p>
                 ))}
               </div>
             ))}
@@ -87,8 +87,8 @@ export function ServicePage({ slug }: { slug: string }) {
             {d.offerings.map((o) => (
               <Card key={o.title} style={{ height: "100%" }}>
                 <span style={{ display: "inline-block", width: 34, height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${TEAL}, ${GOLD})`, marginBottom: 16 }} />
-                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18.5, margin: "0 0 8px", color: "#EEF2F9" }}>{o.title}</h3>
-                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{o.body}</p>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18.5, margin: "0 0 8px", color: "var(--argana-on-surface)" }}>{o.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "var(--argana-on-surface-muted)" }}>{o.body}</p>
               </Card>
             ))}
           </Grid>
@@ -117,9 +117,9 @@ export function ServicePage({ slug }: { slug: string }) {
                     <span style={{ position: "absolute", top: 16, right: 16, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)", padding: "5px 10px", borderRadius: 100 }}>Most popular</span>
                   )}
                   <span style={{ display: "inline-block", width: 36, height: 3, borderRadius: 3, background: p.popular ? "linear-gradient(90deg,#F6D79A,#E3A94E)" : `linear-gradient(90deg, ${TEAL}, ${GOLD})`, marginBottom: 18 }} />
-                  <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 21, margin: "0 0 6px", color: "#F4F7FC" }}>{p.name}</h3>
-                  <p style={{ margin: "0 0 16px", fontSize: 13, color: "#8A93A6", minHeight: 34 }}>{p.bestFor}</p>
-                  <div style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 26, color: "#EEF2F9", marginBottom: 20 }}>{p.price}</div>
+                  <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 21, margin: "0 0 6px", color: "var(--argana-on-surface)" }}>{p.name}</h3>
+                  <p style={{ margin: "0 0 16px", fontSize: 13, color: "var(--argana-on-surface-muted)", minHeight: 34 }}>{p.bestFor}</p>
+                  <div style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 26, color: "var(--argana-on-surface)", marginBottom: 20 }}>{p.price}</div>
                   {p.specs && p.specs.length > 0 && (
                     <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 24, flex: 1 }}>
                       {p.specs.map((s) => <CheckRow key={s}>{s}</CheckRow>)}
@@ -130,7 +130,7 @@ export function ServicePage({ slug }: { slug: string }) {
               ))}
             </Grid>
             {d.packagesNote && (
-              <p style={{ margin: "28px auto 0", maxWidth: 780, textAlign: "center", fontSize: 13, color: "#8A93A6", lineHeight: 1.65 }}>{d.packagesNote}</p>
+              <p style={{ margin: "28px auto 0", maxWidth: 780, textAlign: "center", fontSize: 13, color: "var(--argana-on-surface-muted)", lineHeight: 1.65 }}>{d.packagesNote}</p>
             )}
           </div>
         </Band>
@@ -141,7 +141,7 @@ export function ServicePage({ slug }: { slug: string }) {
         <Band id="packages" borderTop bg="linear-gradient(180deg, rgba(243,205,134,0.03), transparent 40%)">
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <Head eyebrow="Pricing" eyebrowColor={GOLD} title={d.pricingTitle ?? "Every project is bespoke"} center />
-            <p style={{ margin: "20px auto 0", maxWidth: 680, fontSize: 16.5, lineHeight: 1.7, color: "#A7B0C2" }}>{d.pricingNote}</p>
+            <p style={{ margin: "20px auto 0", maxWidth: 680, fontSize: 16.5, lineHeight: 1.7, color: "var(--argana-on-surface-muted)" }}>{d.pricingNote}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 13, justifyContent: "center", marginTop: 30 }}>
               <Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Book a Call</Btn>
               <Btn href="/contact" variant="ghost">Request a Quote</Btn>
@@ -155,8 +155,8 @@ export function ServicePage({ slug }: { slug: string }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(320px,100%),1fr))", gap: 44, alignItems: "center" }}>
           <div>
             <Eyebrow color={GOLD}>Why it matters</Eyebrow>
-            <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: "clamp(26px,3.6vw,40px)", lineHeight: 1.08, letterSpacing: "-0.02em", margin: 0, color: "#F4F7FC" }}>What you can expect</h2>
-            <p style={{ margin: "18px 0 28px", fontSize: 16.5, lineHeight: 1.6, color: "#A7B0C2", maxWidth: 480 }}>
+            <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: "clamp(26px,3.6vw,40px)", lineHeight: 1.08, letterSpacing: "-0.02em", margin: 0, color: "var(--argana-on-surface)" }}>What you can expect</h2>
+            <p style={{ margin: "18px 0 28px", fontSize: 16.5, lineHeight: 1.6, color: "var(--argana-on-surface-muted)", maxWidth: 480 }}>
               We focus on outcomes, not buzzwords. Here&apos;s what working with us on {d.category.toLowerCase()} typically means for your business.
             </p>
             <Btn href={CALENDLY_URL} variant="gold" icon={false}><PhoneCall size={16} /> Start a conversation</Btn>
@@ -178,8 +178,8 @@ export function ServicePage({ slug }: { slug: string }) {
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
                   <span style={{ display: "grid", placeItems: "center", width: 44, height: 44, borderRadius: 13, fontFamily: DISPLAY, fontWeight: 600, fontSize: 16, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}>{p.n}</span>
                 </div>
-                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "#EEF2F9" }}>{p.title}</h3>
-                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{p.body}</p>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "var(--argana-on-surface)" }}>{p.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "var(--argana-on-surface-muted)" }}>{p.body}</p>
               </Card>
             ))}
           </Grid>
@@ -209,7 +209,7 @@ export function ServicePage({ slug }: { slug: string }) {
             <Grid min={260} gap={18}>
               {d.related.map((r) => (
                 <Link key={r.href} href={r.href} className="amx-card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: 24, borderRadius: 18, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.025)", textDecoration: "none" }}>
-                  <span style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 17, color: "#EEF2F9" }}>{r.title}</span>
+                  <span style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 17, color: "var(--argana-on-surface)" }}>{r.title}</span>
                   <ArrowRight size={18} color={TEAL} />
                 </Link>
               ))}

@@ -27,14 +27,14 @@ export default function ClientPortalPage() {
 
       <Band>
         <Card hover={false} style={{ padding: 28, maxWidth: 560, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 14px", color: "#F4F7FC" }}>
+          <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 14px", color: "var(--argana-on-surface)" }}>
             Portal coming soon
           </h2>
-          <p style={{ margin: "0 0 18px", fontSize: 14.5, lineHeight: 1.6, color: "#A7B0C2" }}>
+          <p style={{ margin: "0 0 18px", fontSize: 14.5, lineHeight: 1.6, color: "var(--argana-on-surface-muted)" }}>
             We&apos;re rolling out the client portal to active customers in stages. If you&apos;re an existing client and would like early access, drop us a line and we&apos;ll send you an invite.
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <a href={`mailto:${brand.email.hello}`} style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 14, color: "#A7B0C2", textDecoration: "none" }}>
+            <a href={`mailto:${brand.email.hello}`} style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--argana-on-surface-muted)", textDecoration: "none" }}>
               <Mail size={16} color={TEAL} /> {brand.email.hello}
             </a>
             <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 14, color: TEAL, textDecoration: "none" }}>

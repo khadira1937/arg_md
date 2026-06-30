@@ -38,11 +38,11 @@ export default function ServicesPage() {
                 <span style={{ display: "grid", placeItems: "center", width: 48, height: 48, borderRadius: 14, background: "linear-gradient(135deg,#35E0E8,#4DA8F5 60%,#F3CD86)", color: "#0A0E18", marginBottom: 18 }}>
                   <s.icon size={22} strokeWidth={1.9} />
                 </span>
-                <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 9px", color: "#F4F7FC" }}>{s.title}</h3>
-                <p style={{ margin: "0 0 16px", fontSize: 14.5, lineHeight: 1.55, color: "#A7B0C2" }}>{s.blurb}</p>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 9px", color: "var(--argana-on-surface)" }}>{s.title}</h3>
+                <p style={{ margin: "0 0 16px", fontSize: 14.5, lineHeight: 1.55, color: "var(--argana-on-surface-muted)" }}>{s.blurb}</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 18 }}>
                   {s.points.map((p) => (
-                    <span key={p} style={{ display: "flex", alignItems: "center", gap: 9, fontSize: 13.5, color: "#8A93A6" }}>
+                    <span key={p} style={{ display: "flex", alignItems: "center", gap: 9, fontSize: 13.5, color: "var(--argana-on-surface-muted)" }}>
                       <Check size={15} strokeWidth={2.4} color={TEAL} /> {p}
                     </span>
                   ))}
@@ -68,8 +68,8 @@ export default function ServicesPage() {
                   </span>
                   <span style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 15, color: "rgba(255,255,255,0.2)" }}>0{i + 1}</span>
                 </div>
-                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "#EEF2F9" }}>{s.title}</h3>
-                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{s.body}</p>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "var(--argana-on-surface)" }}>{s.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "var(--argana-on-surface-muted)" }}>{s.body}</p>
               </Card>
             ))}
           </Grid>

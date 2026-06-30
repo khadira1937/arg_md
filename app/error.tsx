@@ -2,26 +2,64 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function GlobalErrorBoundary({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
-    // In production, send to your error tracker (Sentry, etc.). Never leak details to the UI.
     console.error(error);
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
-      <p className="font-display text-6xl font-bold text-primary">Oops</p>
-      <h1 className="mt-4 text-2xl font-bold">Something went wrong</h1>
-      <p className="mt-2 max-w-sm text-muted-foreground">
-        An unexpected error occurred. Our team has been notified.
-        {error.digest && <span className="mt-1 block text-xs">Reference: {error.digest}</span>}
-      </p>
-      <div className="mt-8 flex gap-3">
-        <Button variant="gradient" onClick={reset}>Try again</Button>
-        <Button asChild variant="outline"><Link href="/">Back home</Link></Button>
-      </div>
+    <div className="flex min-h-screen flex-col" style={{ background: "var(--argana-ink, #000)" }}>
+      <main className="am-band-dark" style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "120px 24px 80px" }}>
+        <div style={{ maxWidth: 720, width: "100%", textAlign: "center", color: "#fff" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-hanken), ui-sans-serif, system-ui, sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(120px, 22vw, 240px)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+              margin: 0,
+              color: "#fff",
+            }}
+          >
+            500
+          </p>
+          <h1
+            style={{
+              fontFamily: "var(--font-hanken), ui-sans-serif, system-ui, sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(28px, 4vw, 44px)",
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+              margin: "24px 0 0",
+              color: "#fff",
+            }}
+          >
+            Something went wrong on our end.
+          </h1>
+          <p
+            style={{
+              margin: "20px auto 0",
+              maxWidth: 520,
+              fontSize: 17,
+              lineHeight: 1.6,
+              color: "rgba(255,255,255,0.72)",
+            }}
+          >
+            An unexpected error stopped this page from loading. Our team has been notified — try again, or get in touch if it keeps happening.
+            {error.digest && (
+              <span style={{ display: "block", marginTop: 10, fontSize: 13, color: "rgba(255,255,255,0.5)" }}>
+                Reference: {error.digest}
+              </span>
+            )}
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center", marginTop: 36 }}>
+            <button type="button" onClick={reset} className="am-cta">Try again</button>
+            <Link href="/contact" className="am-cta-ghost-dark">Talk to us</Link>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

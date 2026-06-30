@@ -1,49 +1,94 @@
 import Link from "next/link";
-import { ArrowLeft, CreditCard, ShieldCheck, Headphones } from "lucide-react";
-import { Logo } from "@/components/marketing/logo";
+import { ArrowLeft } from "lucide-react";
 import { brand } from "@/config/brand";
-
-const TRUST = [
-  { icon: CreditCard, label: "Secure Stripe checkout" },
-  { icon: ShieldCheck, label: "Transparent pricing" },
-  { icon: Headphones, label: "Support via tickets" },
-];
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-12">
-      <div className="pointer-events-none absolute inset-0 bg-mesh" />
-      <div className="pointer-events-none absolute inset-0 bg-grid" />
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[40rem] -translate-x-1/2 animate-aurora rounded-full bg-primary/15 blur-3xl" />
-
-      <Link
-        href="/"
-        className="absolute left-5 top-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        background: "var(--argana-surface)",
+        color: "var(--argana-on-surface)",
+        fontFamily: "var(--font-hanken), ui-sans-serif, system-ui, sans-serif",
+      }}
+    >
+      {/* Top bar — wordmark + back link */}
+      <header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "20px clamp(20px, 5vw, 48px)",
+        }}
       >
-        <ArrowLeft className="h-4 w-4" /> Back to {brand.domain}
-      </Link>
+        <Link
+          href="/"
+          aria-label="ARGANA MEDIA home"
+          style={{
+            fontWeight: 700,
+            fontSize: 16,
+            letterSpacing: "0.14em",
+            color: "var(--argana-on-surface)",
+            textDecoration: "none",
+          }}
+        >
+          ARGANA <span style={{ color: "var(--argana-burnt)" }}>MEDIA</span>
+        </Link>
+        <Link
+          href="/"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: 13.5,
+            color: "var(--argana-on-surface-muted)",
+            textDecoration: "none",
+          }}
+        >
+          <ArrowLeft style={{ width: 14, height: 14 }} /> Back to {brand.domain}
+        </Link>
+      </header>
 
-      <div className="relative w-full max-w-md">
-        <div className="mb-8 flex flex-col items-center text-center">
-          <Logo invertOnDark />
-          <p className="mt-3 text-sm text-muted-foreground">{brand.tagline}</p>
+      {/* Centred card */}
+      <main
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "32px 20px 48px",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 440,
+            padding: "36px clamp(24px, 4vw, 40px)",
+            border: "1px solid var(--argana-outline-variant)",
+            borderRadius: 12,
+            background: "transparent",
+          }}
+        >
+          {children}
         </div>
-        <div className="rounded-2xl border bg-card p-8 shadow-premium">{children}</div>
+      </main>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
-          {TRUST.map((t) => (
-            <span key={t.label} className="flex items-center gap-1.5">
-              <t.icon className="h-3.5 w-3.5 text-primary" /> {t.label}
-            </span>
-          ))}
-        </div>
-
-        <p className="mt-5 text-center text-xs text-muted-foreground">
-          By continuing you agree to our{" "}
-          <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and{" "}
-          <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.
-        </p>
-      </div>
+      {/* Minimal copyright footer */}
+      <footer
+        style={{
+          padding: "20px clamp(20px, 5vw, 48px)",
+          textAlign: "center",
+          fontSize: 12.5,
+          color: "var(--argana-on-surface-muted)",
+        }}
+      >
+        © {new Date().getFullYear()} {brand.name} · {" "}
+        <Link href="/terms" style={{ color: "var(--argana-on-surface-muted)", textDecoration: "underline" }}>Terms</Link>
+        {" · "}
+        <Link href="/privacy" style={{ color: "var(--argana-on-surface-muted)", textDecoration: "underline" }}>Privacy</Link>
+      </footer>
     </div>
   );
 }

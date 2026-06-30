@@ -3,9 +3,6 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { contactAction, type ContactState } from "@/app/actions/contact";
 import { CALENDLY_URL } from "@/config/cta";
 
@@ -13,7 +10,11 @@ type FormAction = (prev: ContactState, formData: FormData) => Promise<ContactSta
 
 function Submit({ label }: { label: string }) {
   const { pending } = useFormStatus();
-  return <Button type="submit" variant="gradient" className="w-full" disabled={pending}>{pending ? <Loader2 className="h-4 w-4 animate-spin" /> : label}</Button>;
+  return (
+    <button type="submit" className="am-cta" style={{ width: "100%", justifyContent: "center" }} disabled={pending}>
+      {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : label}
+    </button>
+  );
 }
 
 export function ContactForm({
@@ -30,27 +31,51 @@ export function ContactForm({
   const [state, action] = useActionState<ContactState, FormData>(serverAction, null);
   if (state?.success) {
     return (
-      <div className="flex flex-col items-center rounded-2xl border bg-success/5 p-8 text-center">
-        <CheckCircle2 className="h-10 w-10 text-success" />
-        <p className="mt-3 font-medium">{state.success}</p>
-        <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+      <div
+        style={{
+          display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
+          padding: 32, borderRadius: 16,
+          border: "1px solid var(--argana-outline-variant)",
+          background: "transparent",
+          color: "var(--argana-on-surface)",
+        }}
+      >
+        <CheckCircle2 style={{ width: 40, height: 40, color: "var(--argana-burnt)" }} />
+        <p style={{ marginTop: 12, fontWeight: 600 }}>{state.success}</p>
+        <p style={{ marginTop: 6, maxWidth: 320, fontSize: 14, color: "var(--argana-on-surface-muted)" }}>
           We usually reply within one business day. Prefer to talk it through now?
         </p>
-        <Button asChild variant="gradient" className="mt-5">
-          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call instead</a>
-        </Button>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="am-cta" style={{ marginTop: 20 }}>
+          Book a call instead
+        </a>
       </div>
     );
   }
   return (
-    <form action={action} className="space-y-4">
-      {state?.error && <p className="flex items-center gap-2 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"><AlertCircle className="h-4 w-4" /> {state.error}</p>}
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-2"><Label htmlFor="name">Name</Label><Input id="name" name="name" required /></div>
-        <div className="space-y-2"><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required /></div>
+    <form action={action} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+      {state?.error && (
+        <p style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", borderRadius: 6, fontSize: 14, color: "var(--argana-burnt)", border: "1px solid var(--argana-burnt)", background: "rgba(174,50,0,0.04)" }}>
+          <AlertCircle style={{ width: 16, height: 16 }} /> {state.error}
+        </p>
+      )}
+      <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fit,minmax(min(220px,100%),1fr))" }}>
+        <div>
+          <label htmlFor="name" className="am-label">Name</label>
+          <input id="name" name="name" required className="am-input" placeholder="Your full name" />
+        </div>
+        <div>
+          <label htmlFor="email" className="am-label">Email</label>
+          <input id="email" name="email" type="email" required className="am-input" placeholder="you@company.com" />
+        </div>
       </div>
-      <div className="space-y-2"><Label htmlFor="subject">{subjectLabel}</Label><Input id="subject" name="subject" required /></div>
-      <div className="space-y-2"><Label htmlFor="message">{messageLabel}</Label><textarea id="message" name="message" required rows={5} className="w-full rounded-lg border bg-background p-3 text-sm" /></div>
+      <div>
+        <label htmlFor="subject" className="am-label">{subjectLabel}</label>
+        <input id="subject" name="subject" required className="am-input" placeholder="Brief summary" />
+      </div>
+      <div>
+        <label htmlFor="message" className="am-label">{messageLabel}</label>
+        <textarea id="message" name="message" required rows={5} className="am-textarea" placeholder="Tell us a little about your project, goals or question." />
+      </div>
       <Submit label={submitLabel} />
     </form>
   );

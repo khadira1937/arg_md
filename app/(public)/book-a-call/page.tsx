@@ -44,14 +44,14 @@ export default function BookACallPage() {
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             <Card hover={false} style={{ padding: 26 }}>
-              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "0 0 18px", color: "#F4F7FC" }}>How it works</h2>
+              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "0 0 18px", color: "var(--argana-on-surface)" }}>How it works</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
                 {STEPS.map((s, i) => (
                   <div key={s.title} style={{ display: "flex", gap: 14 }}>
                     <span style={{ flexShrink: 0, display: "grid", placeItems: "center", width: 30, height: 30, borderRadius: 9, fontFamily: DISPLAY, fontWeight: 600, fontSize: 13, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}>{i + 1}</span>
                     <div>
-                      <p style={{ margin: 0, fontSize: 14.5, fontWeight: 600, color: "#EEF2F9" }}>{s.title}</p>
-                      <p style={{ margin: "3px 0 0", fontSize: 13.5, lineHeight: 1.5, color: "#8A93A6" }}>{s.body}</p>
+                      <p style={{ margin: 0, fontSize: 14.5, fontWeight: 600, color: "var(--argana-on-surface)" }}>{s.title}</p>
+                      <p style={{ margin: "3px 0 0", fontSize: 13.5, lineHeight: 1.5, color: "var(--argana-on-surface-muted)" }}>{s.body}</p>
                     </div>
                   </div>
                 ))}
@@ -59,10 +59,10 @@ export default function BookACallPage() {
             </Card>
 
             <Card hover={false} style={{ padding: 26 }}>
-              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "0 0 14px", color: "#F4F7FC" }}>What to expect</h2>
+              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 19, margin: "0 0 14px", color: "var(--argana-on-surface)" }}>What to expect</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
                 {EXPECT.map((e) => (
-                  <span key={e} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 14, color: "#C7CEDC" }}>
+                  <span key={e} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 14, color: "var(--argana-on-surface)" }}>
                     <Check size={17} strokeWidth={2.4} color="#34D399" style={{ flexShrink: 0, marginTop: 1 }} /> {e}
                   </span>
                 ))}
@@ -70,13 +70,13 @@ export default function BookACallPage() {
             </Card>
 
             <Card hover={false} style={{ padding: 22, display: "flex", flexDirection: "column", gap: 12 }}>
-              <a href={`mailto:${brand.email.hello}`} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#A7B0C2", textDecoration: "none" }}>
+              <a href={`mailto:${brand.email.hello}`} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "var(--argana-on-surface-muted)", textDecoration: "none" }}>
                 <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(53,224,232,0.1)", color: TEAL }}><Mail size={16} /></span>{brand.email.hello}
               </a>
-              <a href={`tel:${brand.phoneHref}`} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#A7B0C2", textDecoration: "none" }}>
+              <a href={`tel:${brand.phoneHref}`} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "var(--argana-on-surface-muted)", textDecoration: "none" }}>
                 <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(53,224,232,0.1)", color: TEAL }}><PhoneCall size={16} /></span>{brand.phone}
               </a>
-              <span style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#8A93A6" }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "var(--argana-on-surface-muted)" }}>
                 <span style={{ display: "grid", placeItems: "center", width: 36, height: 36, borderRadius: 10, background: "rgba(243,205,134,0.12)", color: "#F3CD86" }}><Clock size={16} /></span>Mon–Fri · 9am–6pm UK time
               </span>
             </Card>
@@ -85,17 +85,17 @@ export default function BookACallPage() {
           {/* Right: instant booking + form */}
           <Card hover={false} style={{ padding: "28px 26px" }}>
             <div style={{ marginBottom: 22, padding: 18, borderRadius: 14, border: "1px solid rgba(243,205,134,0.22)", background: "linear-gradient(135deg, rgba(243,205,134,0.08), rgba(53,224,232,0.05))" }}>
-              <p style={{ margin: "0 0 12px", fontSize: 14, lineHeight: 1.5, color: "#C7CEDC" }}>Already know when you&rsquo;re free? Pick a time that suits you and book instantly — no back-and-forth.</p>
+              <p style={{ margin: "0 0 12px", fontSize: 14, lineHeight: 1.5, color: "var(--argana-on-surface)" }}>Already know when you&rsquo;re free? Pick a time that suits you and book instantly — no back-and-forth.</p>
               <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", textDecoration: "none", color: "#0A0E18", fontWeight: 600, fontSize: 14.5, padding: "13px 20px", borderRadius: 11, background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}><PhoneCall size={16} /> Pick a time on Calendly</a>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "0 0 20px" }}>
               <span style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
-              <span style={{ fontSize: 12, color: "#7E8AA3" }}>or send us a message</span>
+              <span style={{ fontSize: 12, color: "var(--argana-outline)" }}>or send us a message</span>
               <span style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
               <MessageSquare size={20} color={TEAL} />
-              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: 0, color: "#F4F7FC" }}>Request your free call</h2>
+              <h2 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: 0, color: "var(--argana-on-surface)" }}>Request your free call</h2>
             </div>
             <ContactForm submitLabel="Request my call" subjectLabel="What do you need help with?" messageLabel="Tell us about your business & goals" />
           </Card>

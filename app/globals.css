@@ -9,7 +9,7 @@
      never a light flash and the theme is consistent on every page. */
   :root {
     --background: 222 48% 5%; /* #070B14 deep navy */
-    --foreground: 218 38% 95%; /* #EEF2F9 near-white */
+    --foreground: 218 38% 95%; /* near-white */
 
     --card: 222 40% 9%; /* raised navy surface */
     --card-foreground: 218 38% 95%;
@@ -27,7 +27,7 @@
     --accent-foreground: 222 47% 6%;
 
     --muted: 221 30% 13%; /* muted navy surface */
-    --muted-foreground: 220 14% 64%; /* #8A93A6 secondary text */
+    --muted-foreground: 220 14% 64%; /* secondary text */
 
     /* Semantic */
     --destructive: 0 72% 56%;
@@ -89,6 +89,9 @@
     --argana-surface: #fbf9f8;
     --argana-on-surface: #1b1c1c;
     --argana-on-surface-variant: #4c4546;
+    /* Semantic alias for `-variant` — used by migrated body copy that needs
+       a mid-grey readable on the warm light surface (>= 4.5:1 contrast). */
+    --argana-on-surface-muted: #4c4546;
     --argana-outline: #7e7576;
     --argana-outline-variant: #cfc4c5;
     --argana-ink: #000000;
@@ -527,16 +530,30 @@ html, body {
 }
 
 /* Form input — minimalist; focus state is allowed accent #4. */
-.am-input {
-  width: 100%; background: #ffffff;
-  border: 1px solid var(--argana-outline-variant);
-  border-radius: 4px; padding: 0.625rem 0.875rem;
-  font-size: 0.875rem; color: var(--argana-on-surface);
+.am-input,
+.am-textarea {
+  width: 100%; background: transparent;
+  border: 1px solid var(--argana-outline);
+  border-radius: 4px; padding: 12px 16px;
+  font-family: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px; line-height: 1.5; color: var(--argana-on-surface);
   outline: none; transition: border-color 160ms ease, box-shadow 160ms ease;
 }
-.am-input:focus {
+.am-input::placeholder,
+.am-textarea::placeholder { color: var(--argana-outline); opacity: 1; }
+.am-input:hover,
+.am-textarea:hover { border-color: var(--argana-on-surface); }
+.am-input:focus,
+.am-textarea:focus {
   border-color: var(--argana-burnt);
   box-shadow: 0 0 0 2px rgba(174, 50, 0, 0.18);
+}
+.am-textarea { min-height: 132px; resize: vertical; }
+.am-label {
+  display: block; margin-bottom: 6px;
+  font-family: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.01em;
+  color: var(--argana-on-surface);
 }
 .am-checkbox { accent-color: var(--argana-burnt); }
 

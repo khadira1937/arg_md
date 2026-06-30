@@ -47,23 +47,23 @@ export default function PricingPage() {
         <div style={{ marginTop: 44, display: "flex", flexDirection: "column", gap: 40 }}>
           {SERVICE_PACKAGES.map((group) => (
             <div key={group.key}>
-              <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 18px", color: "#F4F7FC", display: "flex", alignItems: "center", gap: 12 }}>
+              <h3 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 20, margin: "0 0 18px", color: "var(--argana-on-surface)", display: "flex", alignItems: "center", gap: 12 }}>
                 <span style={{ width: 22, height: 2, borderRadius: 2, background: `linear-gradient(90deg, ${TEAL}, ${GOLD})` }} />{group.label}
               </h3>
               <Grid min={250} gap={16}>
                 {group.packages.map((p) => (
                   <Card key={p.name} style={{ height: "100%", display: "flex", flexDirection: "column", border: p.popular ? "1px solid rgba(243,205,134,0.4)" : undefined }}>
                     {p.popular && <span style={{ alignSelf: "flex-start", fontSize: 10.5, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600, color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)", padding: "4px 10px", borderRadius: 100, marginBottom: 12 }}>Most popular</span>}
-                    <h4 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 18, margin: "0 0 4px", color: "#F4F7FC" }}>{p.name}</h4>
-                    <p style={{ margin: "0 0 16px", fontSize: 13, color: "#8A93A6" }}>{p.bestFor}</p>
+                    <h4 style={{ fontFamily: DISPLAY, fontWeight: 600, fontSize: 18, margin: "0 0 4px", color: "var(--argana-on-surface)" }}>{p.name}</h4>
+                    <p style={{ margin: "0 0 16px", fontSize: 13, color: "var(--argana-on-surface-muted)" }}>{p.bestFor}</p>
                     <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 22, flex: 1 }}>
                       {p.specs.map((s) => (
-                        <span key={s} style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 13.5, color: "#C7CEDC" }}>
+                        <span key={s} style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 13.5, color: "var(--argana-on-surface)" }}>
                           <Check size={16} strokeWidth={2.3} color={TEAL} style={{ flexShrink: 0, marginTop: 1 }} /> {s}
                         </span>
                       ))}
                     </div>
-                    <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={p.popular ? "amx-gold" : "amx-ghost"} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 7, textDecoration: "none", fontWeight: 600, fontSize: 14, padding: "12px 16px", borderRadius: 11, ...(p.popular ? { color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" } : { color: "#EEF2F9", border: "1px solid rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.02)" }) }}>
+                    <Link href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={p.popular ? "amx-gold" : "amx-ghost"} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 7, textDecoration: "none", fontWeight: 600, fontSize: 14, padding: "12px 16px", borderRadius: 11, ...(p.popular ? { color: "#0A0E18", background: "linear-gradient(135deg,#F6D79A,#E3A94E)" } : { color: "var(--argana-on-surface)", border: "1px solid rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.02)" }) }}>
                       Get a quote
                     </Link>
                   </Card>
@@ -72,7 +72,7 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
-        <p style={{ margin: "32px auto 0", maxWidth: 640, textAlign: "center", fontSize: 13.5, color: "#7E8AA3" }}>
+        <p style={{ margin: "32px auto 0", maxWidth: 640, textAlign: "center", fontSize: 13.5, color: "var(--argana-outline)" }}>
           We keep prices off the page on purpose — every project is unique, so every quote is too. Book a call for a clear, fixed price tailored to you.
         </p>
       </Band>

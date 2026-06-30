@@ -76,6 +76,20 @@ function CardMockupAgent() {
           backgroundSize: "30px 30px",
         }}
       />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--argana-outline) 1px, transparent 1px), linear-gradient(to bottom, var(--argana-outline) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          opacity: 0.08,
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",
+        }}
+      />
       <div className="relative w-full max-w-[200px] rounded-lg bg-white p-6 shadow-md">
         <div className="flex items-center gap-2">
           <div className="flex h-6 w-6 items-center justify-center rounded bg-[color:var(--argana-surface-container)]">
@@ -101,6 +115,20 @@ function CardMockupAgent() {
 function CardMockupHandover() {
   return (
     <div className="relative mb-6 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl border border-[color:var(--argana-outline-variant)] bg-[color:var(--argana-surface-container)] p-8">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--argana-outline) 1px, transparent 1px), linear-gradient(to bottom, var(--argana-outline) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          opacity: 0.08,
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",
+        }}
+      />
       <div className="relative w-full max-w-[240px]">
         <div className="mb-2 flex items-center gap-2 rounded border border-[color:var(--argana-outline-variant)] bg-white p-3">
           <span className="text-[10px] font-bold text-[color:var(--argana-outline)]">← Handover</span>
@@ -128,6 +156,20 @@ function CardMockupHandover() {
 function CardMockupNotify() {
   return (
     <div className="relative mb-6 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl border border-[color:var(--argana-outline-variant)] bg-[color:var(--argana-surface-container)] p-8">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--argana-outline) 1px, transparent 1px), linear-gradient(to bottom, var(--argana-outline) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          opacity: 0.08,
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",
+        }}
+      />
       <div className="w-full max-w-[220px] rounded-lg border border-[color:var(--argana-outline-variant)] bg-white p-4 shadow-sm">
         <div className="mb-2 flex items-center gap-2">
           <div className="flex h-5 w-5 items-center justify-center rounded-sm bg-[color:var(--argana-on-surface)]">

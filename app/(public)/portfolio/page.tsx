@@ -48,14 +48,14 @@ export default function PortfolioPage() {
                 <div style={{ position: "relative", height: 150, overflow: "hidden" }}>
                   <div className="amx-port-img" style={{ position: "absolute", inset: 0, background: `radial-gradient(120% 90% at 28% 12%, rgba(255,255,255,0.08), transparent 55%), radial-gradient(80% 120% at 100% 100%, rgba(53,224,232,0.10), transparent 60%), ${w.g}`, transition: "transform .5s cubic-bezier(.22,1,.36,1)" }} />
                   <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 60%)" }} />
-                  <span style={{ position: "absolute", left: 16, top: 16, display: "inline-flex", alignItems: "center", gap: 7, fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#F4F7FC", background: "rgba(7,11,20,0.5)", backdropFilter: "blur(6px)", padding: "6px 11px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)" }}>{w.cat}</span>
+                  <span style={{ position: "absolute", left: 16, top: 16, display: "inline-flex", alignItems: "center", gap: 7, fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--argana-on-surface)", background: "rgba(7,11,20,0.5)", backdropFilter: "blur(6px)", padding: "6px 11px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)" }}>{w.cat}</span>
                   <span style={{ position: "absolute", right: 16, bottom: 16, display: "grid", placeItems: "center", width: 38, height: 38, borderRadius: 12, background: "rgba(7,11,20,0.45)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.14)", color: "#fff" }}><w.icon size={18} strokeWidth={1.9} /></span>
                 </div>
                 <div style={{ padding: 22, display: "flex", flexDirection: "column", flex: 1 }}>
-                  <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 19, margin: "0 0 8px", color: "#EEF2F9" }}>{w.type}</h3>
-                  <p style={{ margin: "0 0 16px", fontSize: 13.5, lineHeight: 1.55, color: "#8A93A6", flex: 1 }}>{w.body}</p>
+                  <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 19, margin: "0 0 8px", color: "var(--argana-on-surface)" }}>{w.type}</h3>
+                  <p style={{ margin: "0 0 16px", fontSize: 13.5, lineHeight: 1.55, color: "var(--argana-on-surface-muted)", flex: 1 }}>{w.body}</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                    {w.tags.map((t) => <span key={t} style={{ fontSize: 12, color: "#9AA4B8", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", padding: "4px 11px", borderRadius: 100 }}>{t}</span>)}
+                    {w.tags.map((t) => <span key={t} style={{ fontSize: 12, color: "var(--argana-outline)", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", padding: "4px 11px", borderRadius: 100 }}>{t}</span>)}
                   </div>
                 </div>
               </div>
@@ -71,13 +71,13 @@ export default function PortfolioPage() {
             {APPROACH.map((a, i) => (
               <Card key={a.title}>
                 <span style={{ display: "grid", placeItems: "center", width: 40, height: 40, borderRadius: 12, background: "rgba(243,205,134,0.12)", color: "#F3CD86", fontFamily: DISPLAY, fontWeight: 600, marginBottom: 16 }}>0{i + 1}</span>
-                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "#EEF2F9" }}>{a.title}</h3>
-                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "#8A93A6" }}>{a.body}</p>
+                <h3 style={{ fontFamily: DISPLAY, fontWeight: 500, fontSize: 18, margin: "0 0 8px", color: "var(--argana-on-surface)" }}>{a.title}</h3>
+                <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: "var(--argana-on-surface-muted)" }}>{a.body}</p>
               </Card>
             ))}
           </Grid>
         </div>
-        <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, color: "#7E8AA3", fontSize: 13 }}>
+        <div style={{ marginTop: 36, display: "flex", justifyContent: "center", alignItems: "center", gap: 8, color: "var(--argana-outline)", fontSize: 13 }}>
           <ArrowUpRight size={15} /> Real case studies are shared on request — just ask on your call.
         </div>
       </Band>
