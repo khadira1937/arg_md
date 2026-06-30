@@ -3,24 +3,27 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Play, Star, ArrowUpRight } from "lucide-react";
-import { industries, serviceIntensive } from "@/data/home";
+import { serviceIntensive } from "@/data/home";
+import { industries } from "@/data/industries";
 import { FadeUp } from "./fade-up";
 
 /**
  * Light "Service-Intensive Software" band. Industry tab strip across the top
- * (active tab uses burnt-orange underline — accent #3), a hero video tile
- * with William Riley testimonial overlay, and four starred mini-reviews
- * below. The video poster image is loaded lazily and the play button is a
- * disclosure (no autoplay).
+ * (active tab uses burnt-orange underline — accent #3). Clicking a tab swaps
+ * both the hero image AND the testimonial overlay together. The four starred
+ * mini-reviews below stay static — they're cross-industry social proof.
  *
  * The stars are amber/ink (not burnt-orange) to keep the accent rationed.
  */
 export function ServiceIntensive() {
-  const initialActive = industries.findIndex((tab) => tab.active);
-  const [active, setActive] = useState(initialActive >= 0 ? initialActive : 0);
+  const [active, setActive] = useState(0);
+  const current = industries[active];
 
   return (
-    <section id="customers" className="am-band-light am-section border-t border-[color:var(--argana-outline-variant)]">
+    <section
+      id="customers"
+      className="am-band-light am-section border-t border-[color:var(--argana-outline-variant)]"
+    >
       <div className="am-container">
         <FadeUp className="mb-10 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end md:gap-12">
           <div className="flex items-center gap-3">
@@ -30,7 +33,7 @@ export function ServiceIntensive() {
             <ArrowUpRight className="h-7 w-7 text-[color:var(--argana-outline)]" aria-hidden />
           </div>
           <p className="am-body-md max-w-md text-[color:var(--argana-on-surface-variant)]">
-            {serviceIntensive.body}
+            {current.body}
           </p>
         </FadeUp>
 
@@ -42,10 +45,11 @@ export function ServiceIntensive() {
           >
             {industries.map((tab, i) => (
               <button
-                key={tab.label}
+                key={tab.id}
                 type="button"
                 role="tab"
                 aria-selected={active === i}
+                aria-controls="industry-panel"
                 onClick={() => setActive(i)}
                 className="am-tab am-label-caps cursor-pointer bg-transparent"
                 data-active={active === i ? "true" : "false"}
@@ -57,10 +61,16 @@ export function ServiceIntensive() {
         </FadeUp>
 
         <FadeUp index={2}>
-          <figure className="relative overflow-hidden rounded-lg">
+          <figure
+            id="industry-panel"
+            role="tabpanel"
+            aria-label={current.label}
+            className="relative overflow-hidden rounded-lg"
+          >
             <Image
-              src={serviceIntensive.testimonial.poster.src}
-              alt={serviceIntensive.testimonial.poster.alt}
+              key={current.id}
+              src={current.image.src}
+              alt={current.image.alt}
               width={1920}
               height={1080}
               sizes="(min-width: 1024px) 1100px, 100vw"
@@ -77,11 +87,11 @@ export function ServiceIntensive() {
             </button>
             <figcaption className="absolute bottom-8 left-8 right-8 max-w-2xl text-white sm:bottom-12 sm:left-12">
               <blockquote className="text-xl font-medium leading-snug sm:text-2xl">
-                &ldquo;{serviceIntensive.testimonial.quote}&rdquo;
+                &ldquo;{current.testimonial.quote}&rdquo;
               </blockquote>
               <div className="mt-5">
-                <p className="text-sm font-bold">{serviceIntensive.testimonial.name}</p>
-                <p className="text-xs text-white/75">{serviceIntensive.testimonial.role}</p>
+                <p className="text-sm font-bold">{current.testimonial.author}</p>
+                <p className="text-xs text-white/75">{current.testimonial.role}</p>
               </div>
             </figcaption>
           </figure>

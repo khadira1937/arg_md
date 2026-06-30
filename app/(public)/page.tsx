@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { DigiPlusHome } from "@/components/home/DigiPlusHome";
+import PlanhatInspiredHome from "@/components/marketing/planhat-inspired-home";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "DigiPlus | Your Vision, Our Digital Expertise",
+  title: "Deploy AI with confidence across the customer lifecycle",
   description:
-    "Award-winning digital agency specializing in web design, corporate websites, and digital marketing.",
+    "Argana Media provides B2B enterprises with forward-deployed software and services that deliver lifelong revenue growth.",
   path: "/",
 });
 
 export default function HomePage() {
-  return <DigiPlusHome />;
+  return <PlanhatInspiredHome />;
 }

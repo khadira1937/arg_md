@@ -1,126 +1,58 @@
-"use client";
-
-import { homepage } from "@/data/home";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { hero } from "@/data/home";
 
 /**
- * Hero section — dual-stacked headline (H1 Display XL + H2 Display L @ 60% opacity),
- * subheading, phone contact card, and CTA button. Background image with gradient overlay.
- * Implements DESIGN.md spacing and type scales.
+ * Hero — full-bleed dark band, exactly 100vh. Atmospheric workspace background
+ * on the left, fading to solid black on the right where the eyebrow + heading
+ * + body + CTA pair sit. Both CTAs are visible at rest (burnt-orange primary
+ * pill + outlined ghost pill); no hover-only reveal. Cookie consent is mounted
+ * separately as a fixed-bottom banner outside this section.
  */
-
 export function Hero() {
-  const h = homepage.hero;
+  const isExternal = (href: string) => /^https?:\/\//i.test(href);
 
   return (
-    <section
-      className="relative min-h-[90vh] flex items-center overflow-hidden"
-      style={{ backgroundColor: "var(--digiplus-background)" }}
-    >
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 z-10"
-          style={{
-            background: "linear-gradient(to right, var(--digiplus-background) via-transparent to-transparent)",
-          }}
+    <header className="relative isolate flex h-screen items-center overflow-hidden bg-black pt-20 text-white">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={hero.image.src}
+          alt={hero.image.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-60"
         />
-        <img
-          alt="Agency Workspace Hero Background"
-          className="w-full h-full object-cover"
-          src="https://lh3.googleusercontent.com/aida/AP1WRLsoI5XsQH6UIBOeAzXpUeAI4RJHGW6hGu2WKBDdeuIMzpB6QVvlfY5oeTbNpKHcoHVb5bLPiCGOskRcVfYvK6n37YXFTEKNoHKHDaXThGkHNaeuNDxJC6-rKpYeTItlQfjFWAISt0MWHjGy8hFZRpHTgxI3mk3272toDLcPmRHtNY3JKM0-SBrzcge7FpsxKpTGtnbyEDfR8sr8Fa4dWjesl-4IanQD8f95SQ_Q9yNwHz1yhuk-OC0mPrU"
-          loading="lazy"
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent"
         />
       </div>
 
-      {/* Content */}
-      <div
-        className="relative z-20 mx-auto px-8 w-full"
-        style={{ maxWidth: "var(--digiplus-container-max)" }}
-      >
-        <div className="max-w-2xl">
-          {/* Label */}
-          <span
-            className="digiplus-label-lg block mb-2 uppercase tracking-widest"
-            style={{ color: "var(--digiplus-primary-container)" }}
-          >
-            {h.label}
-          </span>
-
-          {/* Dual-stacked headline */}
-          <div className="mb-4">
-            <h1
-              className="digiplus-display-lg md:text-[72px] text-[40px]"
-              style={{ color: "var(--digiplus-on-surface)" }}
+      <div className="am-container relative w-full">
+        <div className="max-w-3xl">
+          <p className="am-label-caps text-white/60">{hero.eyebrow}</p>
+          <h1 className="am-display mt-6 text-white">{hero.heading}</h1>
+          <p className="am-body-lg mt-8 max-w-xl text-white/75">{hero.body}</p>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href={hero.cta.href}
+              className="am-cta"
+              {...(isExternal(hero.cta.href)
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
             >
-              {h.headline} <span style={{ color: "var(--digiplus-primary-container)" }}>{h.accentWord}</span>
-            </h1>
-          </div>
-
-          {/* Subheading */}
-          <p
-            className="digiplus-body-lg mb-6"
-            style={{ color: "var(--digiplus-on-surface-variant)" }}
-          >
-            {h.subheading}
-          </p>
-
-          {/* Contact Card + CTA */}
-          <div className="flex flex-wrap gap-6 items-center">
-            {/* Phone Card */}
-            <div
-              className="flex items-center gap-4 p-4 rounded-lg border"
-              style={{
-                backgroundColor: "rgba(40, 42, 47, 0.5)",
-                borderColor: "rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(4px)",
-              }}
-            >
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-on-primary-container"
-                style={{
-                  backgroundColor: "var(--digiplus-primary-container)",
-                  color: "var(--digiplus-on-primary-container)",
-                }}
-              >
-                📞
-              </div>
-              <div>
-                <p
-                  className="text-sm"
-                  style={{ color: "var(--digiplus-on-surface-variant)" }}
-                >
-                  {h.phoneLabel}
-                </p>
-                <p
-                  className="font-bold text-lg"
-                  style={{ color: "var(--digiplus-on-surface)" }}
-                >
-                  {h.phoneNumber}
-                </p>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <button
-              className="digiplus-button px-8 py-3 rounded-full text-white transition-all"
-              style={{
-                background: "linear-gradient(90deg, #ffaa17 0%, #ffcc33 100%)",
-                color: "var(--digiplus-on-primary)",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.05)";
-                (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 20px rgba(255, 170, 23, 0.4)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
-                (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-              }}
-            >
-              {h.cta}
-            </button>
+              {hero.cta.label}
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </a>
+            <Link href={hero.secondaryCta.href} className="am-cta-ghost-dark">
+              {hero.secondaryCta.label}
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
         </div>
       </div>
-    </section>
+    </header>
   );
 }

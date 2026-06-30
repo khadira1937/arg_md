@@ -13,8 +13,21 @@ import { FadeUp } from "./fade-up";
  */
 export function WorkflowDiagram() {
   return (
-    <section id="platform" className="am-band-dark am-section border-t border-white/10">
-      <div className="am-container">
+    <section id="platform" className="am-band-dark am-section relative isolate overflow-hidden border-t border-white/10">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 40%, #000 55%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 40%, #000 55%, transparent 100%)",
+        }}
+      />
+      <div className="am-container relative">
         <FadeUp className="mx-auto mb-20 max-w-3xl text-center">
           <p className="am-label-caps text-white/60">{workflow.eyebrow}</p>
           <h2 className="am-headline-md mt-5 text-white">{workflow.heading}</h2>

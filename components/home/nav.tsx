@@ -1,19 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { nav } from "@/data/home";
 
 /**
- * Argana homepage navigation (dark, fixed top). Mirrors the HTML structure:
- * brand wordmark + 5 nav links ("Solutions ▾"), LOG IN ghost, REQUEST A DEMO
- * accent CTA. The active link uses the burnt-orange indicator — one of the
- * five rationed accent uses (DESIGN.md).
+ * Argana homepage navigation (dark, fixed top). Flat 5-link bar + Client Portal
+ * (outlined) + Book a Call (burnt-orange — accent #1). Active link uses the
+ * burnt-orange underline indicator (accent #2). Mobile drawer mirrors desktop.
  */
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -28,6 +29,11 @@ export function Nav() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(`${href}/`);
+
+  const isExternal = (href: string) => /^https?:\/\//i.test(href);
 
   return (
     <nav
@@ -44,16 +50,15 @@ export function Nav() {
             {nav.brand}
           </Link>
           <ul className="hidden items-center gap-8 md:flex" role="menubar">
-            {nav.links.map((link, i) => (
+            {nav.links.map((link) => (
               <li key={link.label} role="none">
                 <Link
                   href={link.href}
-                  className="am-nav-link inline-flex items-center gap-1 text-sm font-medium"
-                  data-active={i === 0 ? "true" : "false"}
+                  className="am-nav-link inline-flex items-center text-sm font-medium"
+                  data-active={isActive(link.href) ? "true" : "false"}
                   role="menuitem"
                 >
                   {link.label}
-                  {link.hasMenu ? <ChevronDown className="h-3.5 w-3.5" aria-hidden /> : null}
                 </Link>
               </li>
             ))}
@@ -61,13 +66,19 @@ export function Nav() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link href={nav.login.href} className="am-cta-ghost-dark">
-            {nav.login.label}
+          <Link href={nav.portal.href} className="am-cta-ghost-dark">
+            {nav.portal.label}
           </Link>
-          <Link href={nav.cta.href} className="am-cta">
+          <a
+            href={nav.cta.href}
+            className="am-cta"
+            {...(isExternal(nav.cta.href)
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
             {nav.cta.label}
             <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </Link>
+          </a>
         </div>
 
         <button
@@ -88,21 +99,31 @@ export function Nav() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="flex items-center justify-between rounded-md px-3 py-3 text-sm font-medium text-white/85 hover:bg-white/5"
+                className="rounded-md px-3 py-3 text-sm font-medium text-white/85 hover:bg-white/5"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
-                {link.hasMenu ? <ChevronDown className="h-4 w-4" aria-hidden /> : null}
               </Link>
             ))}
             <div className="mt-2 flex flex-col gap-3">
-              <Link href={nav.login.href} className="am-cta-ghost-dark justify-center">
-                {nav.login.label}
+              <Link
+                href={nav.portal.href}
+                className="am-cta-ghost-dark justify-center"
+                onClick={() => setOpen(false)}
+              >
+                {nav.portal.label}
               </Link>
-              <Link href={nav.cta.href} className="am-cta justify-center">
+              <a
+                href={nav.cta.href}
+                className="am-cta justify-center"
+                {...(isExternal(nav.cta.href)
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                onClick={() => setOpen(false)}
+              >
                 {nav.cta.label}
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
