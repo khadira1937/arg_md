@@ -2,7 +2,7 @@ import { services } from "@/data/home";
 import { FadeUp } from "./fade-up";
 
 /**
- * "Drive real-world outcomes" — light band with a large dotted-grid hero mockup
+ * "Drive real-world outcomes" — light band with a large grid-lined hero mockup
  * + three illustrated feature cards. Card mockups are pure CSS/SVG (no images)
  * so the page never depends on a screenshot CDN. Burnt-orange appears only as
  * a tiny accent dot inside the mockups (decorative, not interactive).
@@ -15,8 +15,8 @@ function HeroMockup() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(circle, var(--argana-outline) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
+            "linear-gradient(to right, var(--argana-outline) 1px, transparent 1px), linear-gradient(to bottom, var(--argana-outline) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
           opacity: 0.08,
           WebkitMaskImage:
             "radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)",

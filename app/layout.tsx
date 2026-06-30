@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap"
         />
       </head>
-      <body className={`${jetbrainsMono.variable} ${hankenGrotesk.variable} font-sans`}>
+      <body className={`${jetbrainsMono.variable} ${hankenGrotesk.variable} font-hanken`}>
         <ThemeProvider>
           <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           {children}

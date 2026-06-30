@@ -7,6 +7,7 @@ import { SERVICES, PROCESS_STEPS, WHY_US } from "@/config/marketing";
 import {
   Hero, HeroActions, Band, Head, Card, Grid, Feature, Cta, DISPLAY, TEAL, GOLD,
 } from "@/components/marketing/amx-ui";
+import { ForwardDeployed } from "@/components/home/forward-deployed";
 
 export const metadata: Metadata = pageMetadata({
   title: "Services",
@@ -86,6 +87,8 @@ export default function ServicesPage() {
       </Band>
 
       <Cta />
+
+      <ForwardDeployed />
     </>
   );
 }

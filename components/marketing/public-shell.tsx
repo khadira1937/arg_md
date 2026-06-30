@@ -3,12 +3,10 @@
 import { usePathname } from "next/navigation";
 
 /**
- * Shared chrome wrapper for the public site.
- *
- * The homepage ("/") renders the self-contained ARGANA MEDIA landing page,
- * which ships its own fixed navbar and footer. We drop the shared banner +
- * navbar + footer there so the page does not render duplicate navbars/footers.
- * Every other public route keeps the standard chrome exactly as before.
+ * Shared chrome wrapper for the public site. Mounts the Argana nav + footer on
+ * every public route. The Nav is `fixed`, so non-homepage routes need 80px of
+ * top padding to clear it. The homepage opts out: its Hero is full-bleed and
+ * the transparent nav is meant to overlay its dark background.
  */
 export function PublicShell({
   navbar,
@@ -20,15 +18,12 @@ export function PublicShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-
-  if (pathname === "/") {
-    return <>{children}</>;
-  }
+  const isHome = pathname === "/";
 
   return (
     <div className="flex min-h-screen flex-col">
       {navbar}
-      <main className="flex-1">{children}</main>
+      <main className={`flex-1 ${isHome ? "" : "pt-20"}`}>{children}</main>
       {footer}
     </div>
   );
