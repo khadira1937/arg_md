@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DigiPlus | Your Vision, Our Digital Expertise</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#001f29",
+                      "inverse-surface": "#e2e2e9",
+                      "on-primary": "#462b00",
+                      "secondary-fixed-dim": "#cec2d5",
+                      "on-primary-fixed": "#2a1800",
+                      "error-container": "#93000a",
+                      "tertiary": "#9be1ff",
+                      "glass-border": "rgba(255, 255, 255, 0.1)",
+                      "on-surface-variant": "#d8c3ad",
+                      "tertiary-fixed": "#bbe9ff",
+                      "on-secondary-fixed-variant": "#4c4453",
+                      "primary-fixed": "#ffddb5",
+                      "on-primary-fixed-variant": "#643f00",
+                      "inverse-primary": "#835400",
+                      "surface-container-low": "#191c20",
+                      "on-tertiary-fixed-variant": "#004d63",
+                      "surface-container-lowest": "#0c0e13",
+                      "background": "#111318",
+                      "surface-container": "#1e2024",
+                      "on-tertiary-container": "#005268",
+                      "tertiary-container": "#00cbfe",
+                      "surface-variant": "#33353a",
+                      "on-error": "#690005",
+                      "on-surface": "#e2e2e9",
+                      "on-secondary-container": "#c0b4c7",
+                      "surface-tint": "#ffb956",
+                      "surface-container-high": "#282a2f",
+                      "secondary": "#cec2d5",
+                      "surface-dim": "#111318",
+                      "inverse-on-surface": "#2e3035",
+                      "surface-white": "#FFFFFF",
+                      "primary-container": "#ffaa17",
+                      "outline-variant": "#524433",
+                      "surface": "#111318",
+                      "surface-container-highest": "#33353a",
+                      "accent-gradient": "linear-gradient(90deg, #FFAA17 0%, #FFCC33 100%)",
+                      "tertiary-fixed-dim": "#5ed4ff",
+                      "secondary-container": "#4e4655",
+                      "primary": "#ffcf93",
+                      "on-tertiary": "#003545",
+                      "secondary-fixed": "#eadef2",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary": "#352e3c",
+                      "on-secondary-fixed": "#1f1926",
+                      "surface-bright": "#37393e",
+                      "outline": "#a08e79",
+                      "on-background": "#e2e2e9",
+                      "primary-fixed-dim": "#ffb956",
+                      "on-primary-container": "#6a4300",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "section-padding-desktop": "120px",
+                      "unit-sm": "8px",
+                      "container-max": "1240px",
+                      "unit-lg": "24px",
+                      "unit-xl": "48px",
+                      "unit-md": "16px",
+                      "section-padding-mobile": "60px",
+                      "gutter": "30px",
+                      "unit-xs": "4px"
+              },
+              "fontFamily": {
+                      "label-lg": ["Outfit"],
+                      "button": ["Outfit"],
+                      "body-lg": ["DM Sans"],
+                      "display-lg": ["Outfit"],
+                      "headline-lg": ["Outfit"],
+                      "display-lg-mobile": ["Outfit"],
+                      "body-md": ["DM Sans"],
+                      "headline-xl": ["Outfit"]
+              },
+              "fontSize": {
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "button": ["16px", {"lineHeight": "1", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "30px", "fontWeight": "400"}],
+                      "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                      "headline-xl": ["48px", {"lineHeight": "56px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .accent-btn {
+            background: linear-gradient(90deg, #FFAA17 0%, #FFCC33 100%);
+            transition: all 0.3s ease;
+        }
+        .accent-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 170, 23, 0.4);
+        }
+        .glass-card {
+            background: #222429;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #FFAA17 0%, #FFCC33 100%);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.1, 0, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header -->
+<header class="sticky top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-glass-border shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 max-w-container-max mx-auto">
+<a class="flex items-center" href="#">
+<img alt="DigiPlus Logo" class="h-10" src="https://lh3.googleusercontent.com/aida/AP1WRLuSlBEqCatrmyYQVwBJShQLHr44miib8eJM00QbTw8S6AcW5lIsFB52Bw1dXQwjimqMPhEt-tNuUp4z2TmYYvKcQuxqaP7YD7uOKG3eTK83q-HH--twfEVeCOPT3gG91UrbwAx_u92D6Cgen4uun0SLJqZZK5OgIWLigZciCKFr3sEPaQ1-mtlIK2sdmA_MEr9ToVw6ODTSs0FFEzFjp1UXyynMIo7Yn1g-C0zMVEnPLuKaQlv2mY5GB_8"/>
+</a>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-label-lg text-label-lg text-primary dark:text-primary-fixed border-b-2 border-primary" href="#">Home</a>
+<a class="font-label-lg text-label-lg text-on-surface dark:text-on-surface hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-label-lg text-label-lg text-on-surface dark:text-on-surface hover:text-primary transition-colors" href="#">Projects</a>
+<a class="font-label-lg text-label-lg text-on-surface dark:text-on-surface hover:text-primary transition-colors" href="#">Blog</a>
+<a class="font-label-lg text-label-lg text-on-surface dark:text-on-surface hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="accent-btn text-on-primary px-unit-lg py-unit-sm rounded-full font-button text-button">DISCOVER MORE</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10"></div>
+<img alt="Agency Workspace Hero Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLsoI5XsQH6UIBOeAzXpUeAI4RJHGW6hGu2WKBDdeuIMzpB6QVvlfY5oETbNpKHcoHVb5bLPiCGOskRcVfYvK6n37YXFTEKNoHKHDaXThGkHNaeuNDxJC6-rKpYeTItlQfjFWAISt0MWHjGy8hFZRpHTgxI3mk3272toDLcPmRHtNY3JKM0-SBrzcge7FpsxKpTGtnbyEDfR8sr8Fa4dWjesl-4IanQD8f95SQ_Q9yNwHz1yhuk-OC0mPrU"/>
+</div>
+<div class="relative z-20 max-w-container-max mx-auto px-8 w-full">
+<div class="max-w-2xl">
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest block mb-unit-sm">Solution for your Digital Products</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-unit-md">
+                        Your Vision, Our Digital Expertise <span class="text-primary">Future-Proof.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-unit-xl">
+                        An award-winning agency led by visionary CEO. Specializing in digital marketing design and website development understanding you.
+                    </p>
+<div class="flex flex-wrap gap-unit-lg items-center">
+<div class="flex items-center gap-unit-md bg-surface-container-high/50 backdrop-blur-sm p-unit-md rounded-xl border border-glass-border">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">call</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm font-label-lg">Feel free to Contact with us</p>
+<p class="text-on-surface font-bold text-lg">+012 345 6789</p>
+</div>
+</div>
+<button class="accent-btn text-on-primary px-unit-xl py-unit-md rounded-full font-button text-button">DISCOVER MORE</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="py-section-padding-desktop max-w-container-max mx-auto px-8">
+<div class="text-center mb-unit-xl">
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">Our Services</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mt-unit-sm">Services We’re Offering To Our Customers</h2>
+<p class="max-w-3xl mx-auto mt-unit-md text-on-surface-variant font-body-md">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit commodo hendrerit, morbi non at metus nisi condimentum cubilia nulla, netus nec consequat id iaculis.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Service 1 -->
+<div class="glass-card p-unit-lg rounded-xl group hover:border-primary/50 transition-all">
+<div class="relative overflow-hidden rounded-lg mb-unit-md">
+<img alt="Website Design (UI/UX)" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtM0MEzzuWwo9YmwmcjOo-yVOseqVgJkdZm9mOLHfLsUg27Ib9bAQ5UFxnssdmtunPRP6qKQDGFD6ugipZKloK_3lM-iL77tFMfn7uigrDqU6zomeUZxrn91QMlR7nTZdf8K1l3ktZJFrysecqnSnWk0gImLV7F1Nk4axMcioABHC3858Q4ciC1-3JA3BUAIwp-5mLd1jecI3dMKezBNa76R0l5ytB5rTxGUmXJbS1yJBi312Hnrv6-Cg"/>
+<div class="absolute top-4 right-4 bg-primary text-on-primary w-10 h-10 flex items-center justify-center font-bold rounded-lg">01</div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-unit-sm group-hover:text-primary transition-colors">Website Design (UI/UX)</h3>
+<p class="text-on-surface-variant font-body-md mb-unit-md">Creating intuitive and visually stunning user experiences tailored to your brand identity.</p>
+<a class="text-primary font-label-lg flex items-center gap-2 group/link" href="#">
+                        Learn More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Service 2 -->
+<div class="glass-card p-unit-lg rounded-xl group hover:border-primary/50 transition-all">
+<div class="relative overflow-hidden rounded-lg mb-unit-md">
+<img alt="Corporate/Portfolio Websites" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLvRYERHaJJxexLmIAJbvAjIlHYRnQnW7YUV4VbD-_BT1SYe3HU--3-R2WZjAuxUFUaGdq2TJSiy1ZHSfx67d9o4fK48BB3kMMI2DoCDaW86KztfUVO6R91Q4ou0oHJ_q1juFk0Q77OPGW43Dalf_swwj3wrNbAehV0nGn0WglVTSm5uhp8ae-4n1yKUKrPtr-LCzig2kw-iP502Kkgfph2TPIJF-UjKGKENec0VoRXsh8DUj01rT-vjTJg"/>
+<div class="absolute top-4 right-4 bg-primary text-on-primary w-10 h-10 flex items-center justify-center font-bold rounded-lg">02</div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-unit-sm group-hover:text-primary transition-colors">Corporate/Portfolio Websites</h3>
+<p class="text-on-surface-variant font-body-md mb-unit-md">High-performance corporate sites that establish authority and showcase your best work.</p>
+<a class="text-primary font-label-lg flex items-center gap-2 group/link" href="#">
+                        Learn More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Service 3 -->
+<div class="glass-card p-unit-lg rounded-xl group hover:border-primary/50 transition-all">
+<div class="relative overflow-hidden rounded-lg mb-unit-md">
+<img alt="Maintenance &amp; Support" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLttccS3B3f4u-WjEG11wMD20jzUf8ok7VooWbt8mTW0Fcu9Tny-CmX-0alhTJ4hqZNiga39rUdKsVE37kR7s51apqmXDQ_GSDMrbZKyy8eLBZIqLQQY9rB5gWp7GMimIt0-d7bGZm0V1Bno6hcG-Wxbn3LZvTwQ-Qe9vDa6_Yj3n_4lZCQucDvghe_AQ82xG9FcazR8oyaPYmWYibPgr3Es_JJUqBMJwOZq9mpUIaSjQLM_VsAM0Kk-I0E"/>
+<div class="absolute top-4 right-4 bg-primary text-on-primary w-10 h-10 flex items-center justify-center font-bold rounded-lg">03</div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-unit-sm group-hover:text-primary transition-colors">Maintenance &amp; Support</h3>
+<p class="text-on-surface-variant font-body-md mb-unit-md">Reliable ongoing support to ensure your digital assets stay secure and peak-performing.</p>
+<a class="text-primary font-label-lg flex items-center gap-2 group/link" href="#">
+                        Learn More <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section class="bg-surface-container-lowest py-section-padding-desktop">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-unit-xl items-center">
+<div class="relative">
+<div class="relative z-10 rounded-2xl overflow-hidden border-8 border-surface-container">
+<img alt="Smart Digital Agency Visual" class="w-full aspect-[4/5] object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLt0ifUbiCA3rlCm5I2ztUf0yuiQXZFOtN04A_QVaFZK_EgYx2VxUWm7zr4NgQ7Gvz17G0cbx4_RjRXl9q0Msz_EKlVpOQjq8rr92fKnZGMc1d_38P4IwIQlCnuflHkpT7Lr3t2EpxKKQMhVbUHHybScNyyv0G4wFAoTVUrXzw719jXh_FT3lFn38nzgco8Cskdqu31Kc93VIWOThJeJooRsNUUw9kPQZx1qm7xkZB1ldx1Dc0QUhWPFRg"/>
+</div>
+<div class="absolute -bottom-10 -right-10 z-20 glass-card p-unit-lg rounded-2xl max-w-[280px] shadow-2xl">
+<img alt="Satisfied Client Group" class="w-full rounded-lg mb-unit-sm" src="https://lh3.googleusercontent.com/aida/AP1WRLsBP2lAwEByKXFqCbrOZE11q35SGH0fUa73H-V_e42QhF0QqBGRBpdXJyNdGW_VkaD4xNiqRNGu2X0YdR081AUGCsl-4rOiD7V1ATPV6Vy5sMbLvjEYprWm5LTBBEpnYERqbv7DcXu8Plq9wIwfIRty6iM1UzgO6OeOPRWhE9M7NlkvHtDrA6CIpMUCChPUUGx1bdT55Fj9M9E07lSiAyhy8SQLhnlBJUu0OP44WtTrvCpnx3VOoPTBT7k"/>
+<p class="text-on-surface font-label-lg">Join our <span class="text-primary font-bold">5000+</span> satisfied clients worldwide</p>
+</div>
+<div class="absolute -top-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+<div class="space-y-unit-lg">
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">About Us</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Welcome to Our Smart Digital Agency</h2>
+<p class="text-on-surface-variant font-body-lg">
+                        We provide a diverse array of systems, each tailored to streamline your operations and enhance productivity. Whether you require assistance with data process automation or any other specialized need.
+                    </p>
+<ul class="space-y-unit-md">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-on-surface font-body-md">Deliver Perfect Solution for business</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-on-surface font-body-md">Readily Work With Global Brands solutions.</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-on-surface font-body-md">Residential Business Installation</span>
+</li>
+</ul>
+<div class="space-y-unit-sm">
+<div class="flex justify-between font-label-lg">
+<span class="text-on-surface">Digital Marketing</span>
+<span class="text-primary">85%</span>
+</div>
+<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="progress-bar-fill h-full rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<button class="accent-btn text-on-primary px-unit-xl py-unit-md rounded-full font-button text-button">DISCOVER MORE</button>
+</div>
+</div>
+</section>
+<!-- Fun Facts -->
+<section class="py-section-padding-desktop bg-background relative overflow-hidden">
+<div class="max-w-container-max mx-auto px-8 relative z-10">
+<div class="text-center mb-unit-xl">
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">Fun Facts</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface max-w-2xl mx-auto">We Are Dedicated To Creating High-Tech Web Experiences</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter text-center">
+<div class="glass-card p-unit-xl rounded-2xl">
+<h3 class="text-display-lg text-primary mb-unit-xs">1M</h3>
+<p class="text-on-surface-variant font-label-lg uppercase tracking-wider">Worldwide business Grow</p>
+</div>
+<div class="glass-card p-unit-xl rounded-2xl border-primary/30 bg-primary/5">
+<h3 class="text-display-lg text-primary mb-unit-xs">52+</h3>
+<p class="text-on-surface-variant font-label-lg uppercase tracking-wider">Best Business Awards</p>
+</div>
+<div class="glass-card p-unit-xl rounded-2xl">
+<h3 class="text-display-lg text-primary mb-unit-xs">6k+</h3>
+<p class="text-on-surface-variant font-label-lg uppercase tracking-wider">Satisfied Clients</p>
+</div>
+</div>
+</div>
+<img alt="Tech Floating Graphic" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none w-full max-w-4xl" src="https://lh3.googleusercontent.com/aida/AP1WRLscqD7E8IS5VdMJldt8yfmjg5-S2e3BxkJw_k1KO26tBcHb9pRskPCSGPeaLqh9UnZzeM0t0MRDpex2TxxH91NgNz_hGAG3mx9JTb8wnF333SmAebMEKxZuj5ySFG9CPIUXzRVE31-VvJnityExrD3AHgJzyysKKBg33EBYh_cjNaqktS244TaNfQEAndz1sjiYP1ZCnAEa8gS3N1pEbkVkFBB8emPaIUZwUMOgCR6XOWuhbmWJubv6Kds"/>
+</section>
+<!-- Why Choose Us -->
+<section class="py-section-padding-desktop bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-unit-xl items-center">
+<div>
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">WHY CHOOSE US</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mt-unit-sm mb-unit-xl">Why You Should Choose Our Agency</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-unit-lg">
+<div class="flex gap-unit-md">
+<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-1">Digital Growths</h4>
+<p class="text-on-surface-variant text-sm">Good knowledge because you done something many times.</p>
+</div>
+</div>
+<div class="flex gap-unit-md">
+<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">brush</span>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-1">Website Design</h4>
+<p class="text-on-surface-variant text-sm">Good knowledge because you done something many times.</p>
+</div>
+</div>
+<div class="flex gap-unit-md">
+<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">code</span>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-1">Expert Developers</h4>
+<p class="text-on-surface-variant text-sm">Good knowledge because you done something many times.</p>
+</div>
+</div>
+<div class="flex gap-unit-md">
+<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-1">Professional Experts</h4>
+<p class="text-on-surface-variant text-sm">Good knowledge because you done something many times.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<img alt="Project Selection Display" class="w-full rounded-2xl shadow-2xl border border-glass-border" src="https://lh3.googleusercontent.com/aida/AP1WRLvqHg4_sutNBL3jXZyzRZQupG2WhjVwyf3aT2c88uVzFK9jO7Pz8J97KqsO7W5UfyhMTHTGSuKv7lywPolXHIKiUfIDU14aZC6UcaPKNn-ksT6WuGNiJnVflzI2HT2EsiGJiVDDCLC6jAjbadbyH6cc9IP0itnmHox0Y3eXKNL9X0TwxcjJmvcLj1tEu5hBpVcefkLWSoHGRUOJfF_PpRlzoW8shaQM8TJjPZWGr7x9ICoD5RIFcXHd3D0"/>
+<div class="absolute inset-0 bg-primary/10 rounded-2xl mix-blend-overlay"></div>
+</div>
+</div>
+</section>
+<!-- Work Showcase -->
+<section class="py-section-padding-desktop">
+<div class="max-w-container-max mx-auto px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-unit-xl gap-unit-md">
+<div>
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">Work showcase</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Check Your Latest Work Showcase</h2>
+</div>
+<button class="text-primary font-label-lg flex items-center gap-2 hover:translate-x-2 transition-transform">
+                        VIEW ALL PROJECTS <span class="material-symbols-outlined">arrow_right_alt</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-unit-md auto-rows-[300px]">
+<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl">
+<img alt="Creative Branding Agency Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtuuXl_DbhEqcjbgYK64khhN-0glBsqGa3nQgCtWXcaSgKM0P1L6omEWCwE_KNumAZR3Y6L5M7nyWmFDKwjGxjUAZ93ZvNCXrOy-nW13FCtr5nLaXfasESBuG6xXlNUa2NWFKZduMmPS-i47nW7RxUBqyE5o1lbbfw9BTE9j-7iwInPOnucaJ93RfhCD9Mub9jIMmNm_rrAJdOI9N1eepXC6dd56eFPHEb3Rd4OV2EAPg2HBimOmHC08m4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-unit-lg">
+<p class="text-primary font-label-lg">BRANDING</p>
+<h4 class="text-on-surface font-headline-lg">Creative Branding Agency</h4>
+</div>
+</div>
+<div class="md:col-span-2 relative group overflow-hidden rounded-2xl">
+<img alt="SEO &amp; Marketing Tools Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLsnRmpGD8RR1Aeow6Nquwt-qsK_Pbyea3dfoeNQs2fjD9C5u_qYLc0-Kmqq9Vh1uJIt_e3-EDOmpzT9PkWsA6pYNmN2b2gczNaClDp10hmWJu79XfMGVKV1JSBsijbAPbqMkbbfb_PtGqkcsLpBe2MwX50Mo1VcPh_8qpV2gRKgrBJml1wMWfpqA8py_LF02Mc_rhzEGGEQllmka_WL2UO6LVmYFROr4plQvmA4EEWFUrPTMqD7pUfRPhI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-unit-lg">
+<p class="text-primary font-label-lg">MARKETING</p>
+<h4 class="text-on-surface font-headline-lg">SEO &amp; Marketing Tools</h4>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-2xl">
+<img alt="Video Production Project One" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLucVXcq2Vc9vjgVJNl5_Jg79KSu31I6X1q21XCBHxfEHaBMKAkC7dU56itEPdZQFGpgRPWWwikq9IY0O9cop4YzBCC5koZZzzierIOrLIqqCtJtwSNTiA1PordxCzPWycclf035lbjqUEVXg5zXb14i2TMAD5s9UC4zcqpY40yKQLGZbaEcOJiCGqtsqwjS0vgOy96wunoeopvjzH1yPVEFFxVycOa0GZd3J7oAr4TFdjyQXzt5Gku8tqc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-unit-md">
+<h4 class="text-on-surface font-bold">Content Strategy</h4>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-2xl">
+<img alt="Video Production Project Two" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtQIi8kst3xl7RCG8YdN9peeJxFb5akfWmfgEobUI5gruWzwcqYYlZ3F2lBtqlPmn8RypoQ7pH6zT2bVm8VUAoG-sO2cMXsElSEOUGCfaID7oMf_zzayhjW3D21-Xt9q2vPNhJEW4tjQcCdTcOF9E_xHOnzR3uVrsoSiTvX2v9BH2FNWzRd6_IMOdVir2kaZg8-duHbCg-CDontF_yrzZkdGZG9ofMXGHYVTba192cwvPKWWpb1dzw0xkc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-unit-md">
+<h4 class="text-on-surface font-bold">Video Production</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQs Section -->
+<section class="py-section-padding-desktop bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-unit-xl">
+<div>
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">our faqs</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-unit-lg">Leading The Best Digital Agency In Our Town</h2>
+<div class="space-y-unit-lg">
+<div class="flex gap-unit-md p-unit-md glass-card rounded-xl">
+<div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<div>
+<h4 class="text-on-surface font-bold text-lg">Quality Services</h4>
+<p class="text-on-surface-variant text-sm">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
+</div>
+</div>
+<div class="flex gap-unit-md p-unit-md glass-card rounded-xl border-primary/20">
+<div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">stars</span>
+</div>
+<div>
+<h4 class="text-on-surface font-bold text-lg">99% Success Rates</h4>
+<p class="text-on-surface-variant text-sm">Consistent high-impact results for global brands across all digital sectors.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<details class="group glass-card rounded-xl overflow-hidden" open="">
+<summary class="flex justify-between items-center p-unit-lg cursor-pointer font-bold text-on-surface list-none">
+                            How Can Business Consulting Benefit My Company?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-unit-lg pt-0 text-on-surface-variant border-t border-glass-border">
+                            Nam egestas suscipit magna, vel ultricies massa laoreet at. This is Vivamus leo massa, porttitor non vulputate non, rhoncus sed ex. Vestibulum tempor leo at ipsum Nam egestas suscipit magna.
+                        </div>
+</details>
+<details class="group glass-card rounded-xl overflow-hidden">
+<summary class="flex justify-between items-center p-unit-lg cursor-pointer font-bold text-on-surface list-none">
+                            What Are the Costs of Your Consulting Services?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-unit-lg pt-0 text-on-surface-variant border-t border-glass-border">
+                            Pricing is tailored to project scope and goals. We provide transparent, value-driven quotes after an initial consultation session.
+                        </div>
+</details>
+<details class="group glass-card rounded-xl overflow-hidden">
+<summary class="flex justify-between items-center p-unit-lg cursor-pointer font-bold text-on-surface list-none">
+                            Do You Provide Remote Consulting Services?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-unit-lg pt-0 text-on-surface-variant border-t border-glass-border">
+                            Yes, we work with clients worldwide using advanced collaboration tools to ensure seamless project execution regardless of location.
+                        </div>
+</details>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-20 bg-primary">
+<div class="max-w-container-max mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<h2 class="font-headline-xl text-on-primary max-w-xl text-center md:text-left">DigiPlus is ready to protect your Digital Agency</h2>
+<button class="bg-on-primary text-primary-fixed px-unit-xl py-unit-md rounded-full font-button text-button hover:bg-on-primary-fixed transition-colors">DISCOVER MORE</button>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-section-padding-desktop" id="contact">
+<div class="max-w-container-max mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-unit-xl">
+<div>
+<span class="text-primary font-label-lg text-label-lg uppercase tracking-widest">Contact us</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mt-unit-sm mb-unit-lg">Get in Touch</h2>
+<form class="space-y-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<input class="w-full bg-surface-container border-glass-border text-on-surface p-4 rounded-xl focus:ring-primary focus:border-primary" placeholder="Your Name" type="text"/>
+<input class="w-full bg-surface-container border-glass-border text-on-surface p-4 rounded-xl focus:ring-primary focus:border-primary" placeholder="Your Email" type="email"/>
+</div>
+<input class="w-full bg-surface-container border-glass-border text-on-surface p-4 rounded-xl focus:ring-primary focus:border-primary" placeholder="Subject" type="text"/>
+<textarea class="w-full bg-surface-container border-glass-border text-on-surface p-4 rounded-xl focus:ring-primary focus:border-primary" placeholder="Your Message" rows="4"></textarea>
+<button class="accent-btn text-on-primary w-full py-4 rounded-xl font-button">SEND MESSAGE</button>
+</form>
+</div>
+<div class="flex flex-col justify-center gap-unit-lg">
+<h3 class="font-headline-lg text-on-surface">Contact Info</h3>
+<div class="space-y-unit-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm">Address</p>
+<p class="text-on-surface font-bold">4517 Washington Ave. Newyork 39495</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm">Mail Us</p>
+<p class="text-on-surface font-bold">support@digiplus.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm">Phone</p>
+<p class="text-on-surface font-bold">(123) 456-7890</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-unit-xl border-t border-glass-border">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-8 max-w-container-max mx-auto">
+<div class="space-y-unit-md">
+<img alt="DigiPlus Footer Logo" class="h-8" src="https://lh3.googleusercontent.com/aida/AP1WRLuSlBEqCatrmyYQVwBJShQLHr44miib8eJM00QbTw8S6AcW5lIsFB52Bw1dXQwjimqMPhEt-tNuUp4z2TmYYvKcQuxqaP7YD7uOKG3eTK83q-HH--twfEVeCOPT3gG91UrbwAx_u92D6Cgen4uun0SLJqZZK5OgIWLigZciCKFr3sEPaQ1-mtlIK2sdmA_MEr9ToVw6ODTSs0FFEzFjp1UXyynMIo7Yn1g-C0zMVEnPLuKaQlv2mY5GB_8"/>
+<p class="text-on-surface-variant font-body-md">
+                    Welcome to our web design agency. High-performance solutions tailored to transform your digital presence.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary transition-colors text-on-surface-variant hover:text-on-primary" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary transition-colors text-on-surface-variant hover:text-on-primary" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary transition-colors text-on-surface-variant hover:text-on-primary" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">link</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-unit-md">Explore</h4>
+<ul class="space-y-2 text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">About</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Company</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Meet the Team</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">News &amp; Media</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-unit-md">Services</h4>
+<ul class="space-y-2 text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Web Development</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">UI/UX Design</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Mobile Application</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Cloud Service</a></li>
+<li><a class="hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Cyber Security</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-surface font-bold mb-unit-md">Newsletter</h4>
+<p class="text-on-surface-variant text-sm mb-4">Subscribe to our newsletter for weekly updates.</p>
+<div class="flex">
+<input class="bg-surface-container border-none text-on-surface rounded-l-lg w-full focus:ring-0" placeholder="Email Address" type="email"/>
+<button class="bg-primary text-on-primary px-4 rounded-r-lg hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-8 mt-unit-xl pt-unit-md border-t border-glass-border flex flex-col md:flex-row justify-between items-center text-sm text-on-surface-variant gap-4">
+<p>© 2024 DigiPlus Digital Agency. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Cookies</a>
+<a class="hover:text-primary" href="#">Privacy</a>
+<a class="hover:text-primary" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple animation trigger for progress bar
+        window.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.querySelector('.progress-bar-fill');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        progressBar.style.width = '85%';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (progressBar) observer.observe(progressBar);
+        });
+    </script>
+</body></html>

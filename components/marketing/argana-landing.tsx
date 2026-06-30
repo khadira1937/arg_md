@@ -15,6 +15,7 @@
  * dark mega-menu populated from the real service taxonomy (see config/nav.ts).
  */
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 // Every "Book a Call" CTA opens Calendly in a new tab (override with NEXT_PUBLIC_CALENDLY_URL).
@@ -773,7 +774,7 @@ export default function ArganaLanding() {
           <p style={{ maxWidth: 528, margin: "22px 0 0", fontSize: "clamp(15px,1.7vw,17.5px)", lineHeight: 1.62, color: "#C2CBDB" }}>ARGANA MEDIA helps growing businesses thrive online — content, marketing, websites, design, hosting support and IT, all from one trusted team across the UK and Europe.</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 13, justifyContent: "center", marginTop: 32 }}>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none", color: "#0A0E18", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 12, background: "linear-gradient(135deg,#F6D79A,#E3A94E)" }}>Book a Call</a>
-            <a href="/services" style={{ display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none", color: "#EEF2F9", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.03)" }}>View Services</a>
+            <Link href="/services" style={{ display: "inline-flex", alignItems: "center", gap: 9, textDecoration: "none", color: "#EEF2F9", fontSize: 15, fontWeight: 600, padding: "15px 28px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.03)" }}>View Services</Link>
           </div>
         </section>
       </div>

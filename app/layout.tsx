@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Hanken_Grotesk, Outfit, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { brand } from "@/config/brand";
@@ -11,6 +11,32 @@ import { ThemeProvider } from "@/components/theme-provider";
 // loaded globally via the Fontshare <link> below; the CSS variables are set in
 // globals.css. Monospace (JetBrains) is kept for technical data (prices/specs).
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+
+// Hanken Grotesk — single typeface for the new Argana homepage (DESIGN.md).
+// Exposed as --font-hanken (Tailwind `font-hanken`); scoped via class on the
+// homepage tree so site-wide General Sans / Clash Display are untouched.
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+// DESIGN.md fonts: Outfit for display/headlines, DM Sans for body.
+// These are scoped to the new homepage via a wrapper class.
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+  weight: ["400", "600", "700", "800"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+  weight: ["400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -48,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap"
         />
       </head>
-      <body className={`${jetbrainsMono.variable} font-sans`}>
+      <body className={`${jetbrainsMono.variable} ${hankenGrotesk.variable} ${outfit.variable} ${dmSans.variable} font-sans`}>
         <ThemeProvider>
           <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           {children}

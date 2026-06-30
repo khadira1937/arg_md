@@ -63,9 +63,108 @@
     --brand-gradient-soft: linear-gradient(135deg, hsl(183 74% 56% / 0.12) 0%, hsl(39 82% 74% / 0.12) 100%);
     --brand-glow: radial-gradient(60% 60% at 50% 0%, hsl(183 74% 56% / 0.16) 0%, transparent 100%);
 
+    /* ── planhat-inspired homepage palette (warm editorial) ─────────────────
+       Raw hex for non-Tailwind contexts (inline styles, SVG fills, gradients).
+       Mirrors the `canvas` / `ink` / `amber` colors in tailwind.config.ts. */
+    --canvas: #f5f4f0; /* warm off-white background */
+    --canvas-raised: #fbfaf7;
+    --canvas-sunk: #edebe4;
+    --ink: #0e0d0b; /* near-black */
+    --ink-soft: #2a2824;
+    --ink-muted: #6b675f;
+    --amber: #c4874a; /* warm amber accent */
+    --amber-soft: #d9a66e;
+    --amber-deep: #a66e36;
+    --amber-wash: #efe4d5;
+
     /* Fonts — match the landing page (loaded globally via <link> in the layout). */
     --font-sans: "General Sans", ui-sans-serif, system-ui, sans-serif;
     --font-display: "Clash Display", "General Sans", ui-sans-serif, sans-serif;
+    /* Hanken Grotesk fallback (the real font is injected by next/font in layout.tsx). */
+    --font-hanken: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+    /* ── Argana homepage tokens (DESIGN.md) ─────────────────────────────────
+       Raw hex for non-Tailwind contexts. Burnt-orange usage is rationed to
+       primary CTAs, active indicators, form focus, and ::selection. */
+    --argana-surface: #fbf9f8;
+    --argana-on-surface: #1b1c1c;
+    --argana-on-surface-variant: #4c4546;
+    --argana-outline: #7e7576;
+    --argana-outline-variant: #cfc4c5;
+    --argana-ink: #000000;
+    --argana-inverse: #303031;
+    --argana-burnt: #ae3200;
+    --argana-burnt-light: #fe6a3a;
+
+    /* ── DigiPlus DESIGN.md Dark System (New Homepage) ──────────────────────
+       Vibrant Enterprise theme: Deep Obsidian base + Vibrant Orange accent.
+       All raw hex here; Tailwind extensions in tailwind.config.ts map to these. */
+    --digiplus-surface: #111318;
+    --digiplus-surface-dim: #111318;
+    --digiplus-surface-bright: #37393e;
+    --digiplus-surface-container-lowest: #0c0e13;
+    --digiplus-surface-container-low: #191c20;
+    --digiplus-surface-container: #1e2024;
+    --digiplus-surface-container-high: #282a2f;
+    --digiplus-surface-container-highest: #33353a;
+    --digiplus-on-surface: #e2e2e9;
+    --digiplus-on-surface-variant: #d8c3ad;
+    --digiplus-inverse-surface: #e2e2e9;
+    --digiplus-inverse-on-surface: #2e3035;
+    --digiplus-outline: #a08e79;
+    --digiplus-outline-variant: #524433;
+    --digiplus-surface-tint: #ffb956;
+    --digiplus-primary: #ffcf93;
+    --digiplus-on-primary: #462b00;
+    --digiplus-primary-container: #ffaa17;
+    --digiplus-on-primary-container: #6a4300;
+    --digiplus-inverse-primary: #835400;
+    --digiplus-secondary: #cec2d5;
+    --digiplus-on-secondary: #352e3c;
+    --digiplus-secondary-container: #4e4655;
+    --digiplus-on-secondary-container: #c0b4c7;
+    --digiplus-tertiary: #9be1ff;
+    --digiplus-on-tertiary: #003545;
+    --digiplus-tertiary-container: #00cbfe;
+    --digiplus-on-tertiary-container: #005268;
+    --digiplus-error: #ffb4ab;
+    --digiplus-on-error: #690005;
+    --digiplus-error-container: #93000a;
+    --digiplus-on-error-container: #ffdad6;
+    --digiplus-primary-fixed: #ffddb5;
+    --digiplus-primary-fixed-dim: #ffb956;
+    --digiplus-on-primary-fixed: #2a1800;
+    --digiplus-on-primary-fixed-variant: #643f00;
+    --digiplus-secondary-fixed: #eadef2;
+    --digiplus-secondary-fixed-dim: #cec2d5;
+    --digiplus-on-secondary-fixed: #1f1926;
+    --digiplus-on-secondary-fixed-variant: #4c4453;
+    --digiplus-tertiary-fixed: #bbe9ff;
+    --digiplus-tertiary-fixed-dim: #5ed4ff;
+    --digiplus-on-tertiary-fixed: #001f29;
+    --digiplus-on-tertiary-fixed-variant: #004d63;
+    --digiplus-background: #111318;
+    --digiplus-on-background: #e2e2e9;
+    --digiplus-surface-variant: #33353a;
+    --digiplus-surface-white: #ffffff;
+    --digiplus-accent-gradient: linear-gradient(90deg, #ffaa17 0%, #ffcc33 100%);
+    --digiplus-glass-border: rgba(255, 255, 255, 0.1);
+
+    /* DESIGN.md Spacing Scale (modular 8px base) */
+    --digiplus-unit-xs: 4px;
+    --digiplus-unit-sm: 8px;
+    --digiplus-unit-md: 16px;
+    --digiplus-unit-lg: 24px;
+    --digiplus-unit-xl: 48px;
+    --digiplus-gutter: 30px;
+    --digiplus-section-padding-desktop: 120px;
+    --digiplus-section-padding-mobile: 60px;
+    --digiplus-container-max: 1240px;
+
+    /* Motion */
+    --digiplus-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --digiplus-transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --digiplus-transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.85rem; /* base for buttons/inputs; cards use 2xl */
   }
@@ -141,6 +240,87 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(220 18% 30%);
+  }
+
+  /* ── DESIGN.md Base Styles (DigiPlus New Homepage) ─────────────────────── */
+
+  /* Selection styling: primary-container bg, on-primary-container text */
+  .digiplus-page::selection {
+    background-color: var(--digiplus-primary-container);
+    color: var(--digiplus-on-primary-container);
+  }
+
+  /* Reduced motion guard: disable all animations when user prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .digiplus-page,
+    .digiplus-page *,
+    .digiplus-page *::before,
+    .digiplus-page *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* DESIGN.md Typography Base Classes */
+  .digiplus-display-lg {
+    font-family: var(--font-outfit);
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 80px;
+    letter-spacing: -0.02em;
+  }
+
+  .digiplus-display-lg-mobile {
+    font-family: var(--font-outfit);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: -0.01em;
+  }
+
+  .digiplus-headline-xl {
+    font-family: var(--font-outfit);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 56px;
+  }
+
+  .digiplus-headline-lg {
+    font-family: var(--font-outfit);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+  }
+
+  .digiplus-body-lg {
+    font-family: var(--font-dm-sans);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+
+  .digiplus-body-md {
+    font-family: var(--font-dm-sans);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+  }
+
+  .digiplus-label-lg {
+    font-family: var(--font-outfit);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .digiplus-button {
+    font-family: var(--font-outfit);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
   }
 }
 
@@ -333,4 +513,141 @@
 }
 @media (max-width: 520px) {
   .amx-footgrid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================================
+   ARGANA HOMEPAGE (DESIGN.md, Precision Minimalism)
+   ----------------------------------------------------------------------------
+   All rules below are scoped under `.am-home` so the rest of the site keeps
+   its forced-dark teal/gold palette and Clash Display / General Sans fonts.
+   The homepage tree wraps everything in `<div class="am-home">…`.
+   ========================================================================== */
+.am-home {
+  font-family: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  color: var(--argana-on-surface);
+  background: var(--argana-surface);
+  letter-spacing: -0.005em;
+}
+.am-home ::selection {
+  background: var(--argana-burnt);
+  color: #ffffff;
+}
+
+/* Typography ladder (DESIGN.md). */
+.am-home .am-display { font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; font-size: clamp(2.5rem, 6vw + 0.5rem, 4rem); }
+.am-home .am-headline-md { font-weight: 600; line-height: 1.3; font-size: clamp(1.75rem, 2.4vw + 0.5rem, 2.5rem); letter-spacing: -0.01em; }
+.am-home .am-headline-sm { font-weight: 600; line-height: 1.4; font-size: 1.5rem; }
+.am-home .am-body-lg { font-weight: 400; line-height: 1.6; font-size: 1.125rem; }
+.am-home .am-body-md { font-weight: 400; line-height: 1.6; font-size: 1rem; }
+.am-home .am-label-caps {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Sectional Polarity bands (DESIGN.md). */
+.am-home .am-band-light { background: var(--argana-surface); color: var(--argana-on-surface); }
+.am-home .am-band-dark { background: #000000; color: #ffffff; }
+
+/* Container + section rhythm (DESIGN.md: 1200px max, 24px gutters, 100px section padding). */
+.am-home .am-container { width: 100%; max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+.am-home .am-section { padding-top: 100px; padding-bottom: 100px; }
+@media (max-width: 768px) {
+  .am-home .am-section { padding-top: 64px; padding-bottom: 64px; }
+}
+
+/* Primary CTA — burnt orange (allowed accent #1). */
+.am-home .am-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--argana-burnt);
+  color: #ffffff;
+  font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 0.8125rem; padding: 0.875rem 1.5rem;
+  border-radius: 4px; border: 1px solid var(--argana-burnt);
+  transition: background 160ms ease, transform 160ms ease;
+}
+.am-home .am-cta:hover { background: var(--argana-burnt-light); border-color: var(--argana-burnt-light); }
+
+/* Secondary CTA — solid black (Buy outcomes hierarchy). */
+.am-home .am-cta-ink {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--argana-ink); color: #ffffff;
+  font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 0.8125rem; padding: 0.875rem 1.5rem;
+  border-radius: 4px; border: 1px solid var(--argana-ink);
+  transition: background 160ms ease;
+}
+.am-home .am-cta-ink:hover { background: #1f1f1f; }
+
+/* Ghost CTA — outlined on dark backgrounds. */
+.am-home .am-cta-ghost-dark {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 0.8125rem; padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.am-home .am-cta-ghost-dark:hover { background: rgba(255, 255, 255, 0.08); border-color: #ffffff; }
+
+/* Card — white surface with thin outline (DESIGN.md). */
+.am-home .am-card {
+  background: #ffffff;
+  border: 1px solid var(--argana-outline-variant);
+  border-radius: 0.5rem; /* 8px */
+}
+.am-home .am-card-sunken {
+  background: var(--argana-surface);
+  border: 1px solid var(--argana-outline-variant);
+  border-radius: 0.5rem;
+}
+
+/* Form input — minimalist; focus state is allowed accent #4. */
+.am-home .am-input {
+  width: 100%; background: #ffffff;
+  border: 1px solid var(--argana-outline-variant);
+  border-radius: 4px; padding: 0.625rem 0.875rem;
+  font-size: 0.875rem; color: var(--argana-on-surface);
+  outline: none; transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.am-home .am-input:focus {
+  border-color: var(--argana-burnt);
+  box-shadow: 0 0 0 2px rgba(174, 50, 0, 0.18);
+}
+.am-home .am-checkbox { accent-color: var(--argana-burnt); }
+
+/* Active navigation indicator — allowed accent #2. */
+.am-home .am-nav-link { position: relative; color: rgba(255,255,255,0.78); transition: color 160ms ease; }
+.am-home .am-nav-link:hover { color: #ffffff; }
+.am-home .am-nav-link[data-active="true"] { color: #ffffff; }
+.am-home .am-nav-link[data-active="true"]::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 2px; border-radius: 2px;
+  background: var(--argana-burnt);
+}
+
+/* Active tab underline — allowed accent #3 (industry tab strip). */
+.am-home .am-tab { color: var(--argana-outline); transition: color 160ms ease; }
+.am-home .am-tab:hover { color: var(--argana-on-surface); }
+.am-home .am-tab[data-active="true"] {
+  color: var(--argana-on-surface);
+  border-bottom: 2px solid var(--argana-burnt);
+  padding-bottom: 4px;
+}
+
+/* Workflow pulse — neutral ring (no accent). */
+.am-home .am-engine-pulse {
+  animation: am-pulse 2.6s ease-in-out infinite;
+}
+@keyframes am-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .am-home .am-engine-pulse { animation: none !important; }
 }

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import ArganaLanding from "@/components/marketing/argana-landing";
+import { DigiPlusHome } from "@/components/home/DigiPlusHome";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Digital Media, Marketing & Web Development Agency",
+  title: "DigiPlus | Your Vision, Our Digital Expertise",
   description:
-    "ARGANA MEDIA helps growing businesses build, grow and manage their online presence — content, marketing, websites, design, hosting support and business IT support, from one trusted team across the UK and Europe.",
+    "Award-winning digital agency specializing in web design, corporate websites, and digital marketing.",
   path: "/",
 });
 
 export default function HomePage() {
-  return <ArganaLanding />;
+  return <DigiPlusHome />;
 }
