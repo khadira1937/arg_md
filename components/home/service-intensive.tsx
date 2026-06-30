@@ -2,16 +2,18 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Play, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { serviceIntensive } from "@/data/home";
 import { industries } from "@/data/industries";
 import { FadeUp } from "./fade-up";
 
 /**
  * Light "Who we work with" band. Sector tab strip across the top (active tab
- * uses burnt-orange underline — accent #3). Clicking a tab swaps the hero
- * image and the headline overlay together. Below the figure sits a single
- * NDA disclaimer line — no fake testimonials, no fake stars.
+ * uses burnt-orange underline — accent #3). Clicking a tab swaps the editorial
+ * image and the headline overlay together with a 240ms crossfade. Below the
+ * figure sits a single NDA disclaimer line — no fake testimonials, no fake
+ * stars, no play button, no video.
  */
 export function ServiceIntensive() {
   const [active, setActive] = useState(0);
@@ -59,37 +61,35 @@ export function ServiceIntensive() {
         </FadeUp>
 
         <FadeUp index={2}>
-          <figure
+          <motion.figure
+            key={current.id}
             id="industry-panel"
             role="tabpanel"
             aria-label={current.label}
-            className="relative overflow-hidden rounded-lg"
+            className="relative aspect-[16/10] w-full overflow-hidden rounded-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.24, ease: "linear" }}
           >
             <Image
-              key={current.id}
               src={current.image.src}
               alt={current.image.alt}
-              width={1920}
-              height={1080}
+              fill
               sizes="(min-width: 1024px) 1100px, 100vw"
-              loading="lazy"
-              className="h-[420px] w-full object-cover sm:h-[500px]"
+              className="object-cover"
+              priority={false}
             />
-            <div aria-hidden className="absolute inset-0 bg-black/30" />
-            <button
-              type="button"
-              aria-label="Play sector intro"
-              className="absolute left-1/2 top-1/2 inline-flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-md transition hover:bg-white/25"
-            >
-              <Play className="ml-1 h-7 w-7 fill-white" aria-hidden />
-            </button>
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+            />
             <figcaption className="absolute bottom-8 left-8 right-8 max-w-2xl text-white sm:bottom-12 sm:left-12">
               <p className="am-label-caps text-white/70">{current.label}</p>
               <p className="mt-3 text-xl font-medium leading-snug sm:text-2xl">
                 {current.headline}
               </p>
             </figcaption>
-          </figure>
+          </motion.figure>
         </FadeUp>
 
         <FadeUp index={3} className="py-16 text-center">

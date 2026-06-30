@@ -4,25 +4,31 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { hero } from "@/data/home";
 
-const STORAGE_KEY = "argana-cookie-consent";
+// Key is versioned. Bumping the suffix invalidates any value left in a
+// visitor's localStorage from earlier iterations, so everyone sees the
+// banner once after a key change — exactly as if they had cleared storage.
+const STORAGE_KEY = "argana-cookie-consent-v2";
 
 /**
- * Fixed-bottom cookie consent banner. Visible while scrolling on every page
- * load until the visitor accepts or declines, at which point the decision is
- * persisted in localStorage so the banner stays dismissed.
+ * Bottom-right cookie consent panel. Compact card pinned to the viewport
+ * corner on desktop; expands to a full-width-with-margins strip below 640px.
  *
- * Lives outside the hero so it never overlaps the hero CTAs and is positioned
- * full-width across the bottom of the viewport.
+ * Render gate: emits nothing on the server / first client paint, then after
+ * the mount-time effect resolves either keeps emitting nothing (visitor has
+ * already chosen) or renders the panel. No animation — the element is
+ * visible at its natural CSS state, so it cannot get stuck invisible.
  */
 export function CookieBanner() {
-  const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [hasConsent, setHasConsent] = useState(true);
 
   useEffect(() => {
+    setMounted(true);
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (!stored) setVisible(true);
+      setHasConsent(stored === "accepted" || stored === "declined");
     } catch {
-      setVisible(true);
+      setHasConsent(false);
     }
   }, []);
 
@@ -30,21 +36,22 @@ export function CookieBanner() {
     try {
       window.localStorage.setItem(STORAGE_KEY, decision);
     } catch {
-      // localStorage may be unavailable (private mode); banner just won't persist.
+      // ignore — banner just won't persist this session.
     }
-    setVisible(false);
+    setHasConsent(true);
   };
 
-  if (!visible) return null;
+  if (!mounted || hasConsent) return null;
 
   return (
     <aside
       role="dialog"
       aria-live="polite"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-[60] border-t border-white/10 bg-black/95 text-white backdrop-blur-xl"
+      data-testid="cookie-banner"
+      className="fixed bottom-4 left-4 right-4 z-[100] rounded-lg border border-white/10 bg-black/95 text-white shadow-2xl backdrop-blur-xl sm:bottom-6 sm:left-auto sm:right-6 sm:max-w-[420px]"
     >
-      <div className="am-container flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+      <div className="flex flex-col gap-4 p-5">
         <p className="text-xs leading-relaxed text-white/75 sm:text-[13px]">
           {hero.cookies.body}{" "}
           <Link href={hero.cookies.policyHref} className="underline underline-offset-2 hover:text-white">
@@ -52,7 +59,7 @@ export function CookieBanner() {
           </Link>
           .
         </p>
-        <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap sm:justify-end">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
             className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/85 transition hover:bg-white/10"

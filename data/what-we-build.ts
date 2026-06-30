@@ -1,13 +1,10 @@
+// TODO: Replace placeholder Unsplash URLs with custom mini-mockup illustrations once design assets are commissioned. Target visual treatment: abstract UI mockups matching homepage AI Signals / Project live card aesthetic.
+
 /**
  * What We Build — content data for /what-we-build.
  *
  * Per-service imagery is centralised here so it can be swapped without touching
  * the page component.
- *
- * TODO: Replace the local `/what-we-build/*.webp` placeholders with licensed
- * Unsplash imagery (one image per service area). When swapping in Unsplash
- * URLs, remember to whitelist `images.unsplash.com` in `next.config.*` and
- * keep the `alt` text descriptive for accessibility.
  */
 
 import {
@@ -35,8 +32,8 @@ export const SOLUTIONS: Solution[] = [
   {
     icon: Building2,
     title: "Corporate Websites",
-    img: "/what-we-build/corporate-websites.webp",
-    alt: "A team reviewing a corporate website project around a laptop in a modern office",
+    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80&auto=format&fit=crop",
+    alt: "A modern corporate workspace seen through a glass partition",
     desc: "The website most established businesses actually need: a clear structure, fast pages, and content your team can keep current without calling a developer. We focus on the things that move the needle — credibility, findability and a confident first impression.",
     features: ["Clear information architecture", "A CMS your team can edit", "Accessible, standards-based markup", "On-page technical SEO", "Multilingual-ready when needed"],
     tech: ["Next.js", "TypeScript", "WordPress", "Tailwind CSS", "Vercel"],
@@ -44,8 +41,8 @@ export const SOLUTIONS: Solution[] = [
   {
     icon: ShoppingCart,
     title: "E-commerce",
-    img: "/what-we-build/ecommerce.webp",
-    alt: "An online store interface representing an e-commerce build",
+    img: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1600&q=80&auto=format&fit=crop",
+    alt: "Curated product flatlay with packaging on a neutral surface",
     desc: "Online stores built to sell and to scale — clean product journeys, dependable checkout, and the integrations your operations rely on. Whether you're on an established platform or need something bespoke, we build for conversion and for the people running the shop day to day.",
     features: ["Optimised product & checkout flows", "Payments, tax & shipping integrations", "Inventory and order workflows", "Performance at catalogue scale", "Analytics & conversion tracking"],
     tech: ["Shopify", "Next.js", "Stripe", "PostgreSQL", "Node.js"],
@@ -53,8 +50,8 @@ export const SOLUTIONS: Solution[] = [
   {
     icon: CalendarClock,
     title: "Booking Platforms",
-    img: "/what-we-build/booking-platforms.webp",
-    alt: "A consultation being scheduled on a calendar on a laptop",
+    img: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1600&q=80&auto=format&fit=crop",
+    alt: "An open planner and pen on a desk, capturing scheduling and bookings",
     desc: "Appointment and reservation systems that respect both sides of the calendar — your availability and your customer's time. We build scheduling that prevents double-bookings, sends the right reminders, and fits the way your business actually operates.",
     features: ["Real-time availability", "Automated reminders & confirmations", "Calendar and payment integrations", "Staff and resource management", "Timezone-aware logic"],
     tech: ["Next.js", "Node.js", "PostgreSQL", "TypeScript", "Stripe"],
@@ -62,8 +59,8 @@ export const SOLUTIONS: Solution[] = [
   {
     icon: Megaphone,
     title: "Marketing Websites",
-    img: "/what-we-build/marketing-websites.webp",
-    alt: "A creative team planning a marketing campaign website",
+    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80&auto=format&fit=crop",
+    alt: "Analytics dashboard glowing on a laptop screen in a dim workspace",
     desc: "Campaign and product sites designed to convert: a sharp narrative, fast load times, and measurement built in from day one. Made to launch quickly and to iterate on as you learn what genuinely works for your audience.",
     features: ["Conversion-focused layouts", "Built for A/B testing", "Fast LCP and Core Web Vitals", "A CMS for rapid updates", "Analytics & event tracking included"],
     tech: ["Next.js", "Tailwind CSS", "TypeScript", "Vercel", "Cloudflare"],
@@ -71,8 +68,8 @@ export const SOLUTIONS: Solution[] = [
   {
     icon: Boxes,
     title: "Custom Web Applications",
-    img: "/what-we-build/web-applications.webp",
-    alt: "A software developer's workspace with code on screen",
+    img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=80&auto=format&fit=crop",
+    alt: "Code editor open on a dark monitor with a typed function in view",
     desc: "When off-the-shelf won't do, we build software around your process — dashboards, client portals, internal tools and customer-facing apps. Typed end to end, tested, and documented so it stays maintainable long after launch.",
     features: ["Authentication, roles & permissions", "APIs and third-party integrations", "Real-time data and dashboards", "Type-safe, tested codebase", "Architected to scale"],
     tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Rust"],
@@ -80,8 +77,8 @@ export const SOLUTIONS: Solution[] = [
   {
     icon: BookOpenText,
     title: "Developer Documentation",
-    img: "/what-we-build/developer-docs.webp",
-    alt: "A polished developer documentation site with a sidebar, search and code references",
+    img: "https://images.unsplash.com/photo-1488272690691-50c93e64eee9?w=1600&q=80&auto=format&fit=crop",
+    alt: "An open book with crisp typography, editorial photography style for technical documentation",
     desc: "Docs that developers actually want to read — clear structure, working examples, and search that finds the right page. We treat documentation as a product: versioned, maintainable, and part of how good software gets adopted.",
     features: ["Structured navigation & search", "Versioned content", "Code samples & SDK references", "Fast, accessible reading experience", "Easy for the team to keep current"],
     tech: ["Next.js", "TypeScript", "MDX", "Rust", "Solana"],

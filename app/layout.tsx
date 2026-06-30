@@ -6,6 +6,7 @@ import { brand } from "@/config/brand";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CookieBanner } from "@/components/home/cookie-banner";
 
 // Sans (General Sans) + display (Clash Display) match the landing page and are
 // loaded globally via the Fontshare <link> below; the CSS variables are set in
@@ -22,24 +23,28 @@ const hankenGrotesk = Hanken_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
+const HOME_TITLE = "Argana Media · Digital agency for growing UK businesses";
+const HOME_DESCRIPTION =
+  "Argana Media is a boutique digital studio helping UK businesses ship sites that convert, brands that hold up, and content that earns attention. Strategy, design, and engineering under one roof.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${brand.name} — ${brand.tagline}`,
-    template: `%s | ${brand.name}`,
+    default: HOME_TITLE,
+    template: `%s · Argana Media`,
   },
-  description: siteConfig.description,
+  description: HOME_DESCRIPTION,
   keywords: [...siteConfig.keywords],
   authors: [{ name: brand.name }],
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_GB",
     url: siteConfig.url,
-    siteName: brand.name,
-    title: `${brand.name} — ${brand.tagline}`,
-    description: siteConfig.description,
+    siteName: "Argana Media",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
-  twitter: { card: "summary_large_image", title: `${brand.name} — ${brand.tagline}`, description: siteConfig.description },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESCRIPTION },
   // Favicon (app/icon.png) and social preview (app/opengraph-image.tsx) are
   // wired automatically via Next.js file-based metadata conventions.
 };
@@ -62,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           {children}
+          <CookieBanner />
         </ThemeProvider>
       </body>
     </html>

@@ -75,11 +75,44 @@ export const workflow = {
   heading: "From first call to live site.",
   body: "A short, honest process. No discovery deck theatre, no surprise scope creep — every phase has a deliverable you can review.",
   hubLabel: "ARGANA STUDIO",
-  nodes: ["DISCOVERY", "STRATEGY", "DESIGN", "BUILD", "LAUNCH", "GROW"] as const,
-  contextBox: {
-    label: "DISCOVERY",
-    body: "We start with a working session — your goals, your audience, the constraints we'll work inside. You leave with a one-page brief, a fixed timeline and a fixed quote before we write a line of code.",
-  },
+  steps: [
+    {
+      id: "discovery",
+      label: "DISCOVERY",
+      eyebrow: "DISCOVERY",
+      body: "We start with a working session — your goals, your audience, the constraints we'll work inside. You leave with a one-page brief, a fixed timeline and a fixed quote before we write a line of code.",
+    },
+    {
+      id: "strategy",
+      label: "STRATEGY",
+      eyebrow: "STRATEGY",
+      body: "Information architecture, content strategy, and the unfair-advantage angle that makes the brand worth visiting. You see two or three real directions, not a single fait accompli.",
+    },
+    {
+      id: "design",
+      label: "DESIGN",
+      eyebrow: "DESIGN",
+      body: "High-fidelity visual design grounded in the strategy. We design the key pages, the system, and the motion language together — so the build is a translation, not a guess.",
+    },
+    {
+      id: "build",
+      label: "BUILD",
+      eyebrow: "BUILD",
+      body: "Engineered in tight weekly loops with working demos. Nothing disappears into a black box for three months — you watch the site come together and steer as we go.",
+    },
+    {
+      id: "launch",
+      label: "LAUNCH",
+      eyebrow: "LAUNCH",
+      body: "We migrate, test, and ship. Analytics, tracking, search console, sitemap, redirects, performance budget — every detail handled before the site goes public.",
+    },
+    {
+      id: "grow",
+      label: "GROW",
+      eyebrow: "GROW",
+      body: "Launch is week one, not week last. SEO, content, paid, and CRO experiments roll out monthly. We report in plain English with the numbers that matter to your business.",
+    },
+  ],
 } as const;
 
 export const serviceIntensive = {
